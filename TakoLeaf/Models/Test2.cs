@@ -15,5 +15,9 @@ namespace TakoLeaf.Models
         {
 
         }
+        public int DonnerNombre()
+        {
+            return 1;
+        }
     }
 }
