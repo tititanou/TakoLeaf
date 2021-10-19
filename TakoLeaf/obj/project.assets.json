@@ -6836,19 +6836,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\abrat\\.nuget\\packages\\": {}
+    "C:\\Users\\putch\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Developpement\\WorkSpaceGit\\TakoLeaf\\TakoLeaf\\TakoLeaf.csproj",
+      "projectUniqueName": "C:\\Users\\putch\\WorkSpace - Projet 2\\TakoLeaf\\TakoLeaf\\TakoLeaf.csproj",
       "projectName": "TakoLeaf",
-      "projectPath": "C:\\Developpement\\WorkSpaceGit\\TakoLeaf\\TakoLeaf\\TakoLeaf.csproj",
-      "packagesPath": "C:\\Users\\abrat\\.nuget\\packages\\",
-      "outputPath": "C:\\Developpement\\WorkSpaceGit\\TakoLeaf\\TakoLeaf\\obj\\",
+      "projectPath": "C:\\Users\\putch\\WorkSpace - Projet 2\\TakoLeaf\\TakoLeaf\\TakoLeaf.csproj",
+      "packagesPath": "C:\\Users\\putch\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\putch\\WorkSpace - Projet 2\\TakoLeaf\\TakoLeaf\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\abrat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\putch\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
