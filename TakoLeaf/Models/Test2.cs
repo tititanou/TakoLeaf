@@ -8,6 +8,8 @@ namespace TakoLeaf.Models
     public class Test2
     {
         public string test2 { get; set; }
+
         public int Alexis { get; set; }
+
     }
 }
