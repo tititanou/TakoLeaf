@@ -11,5 +11,9 @@ namespace TakoLeaf.Models
 
         public int Alexis { get; set; }
 
+        public void Humerus(string crac, string douleur)
+        {
+
+        }
     }
 }
