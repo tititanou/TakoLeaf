@@ -13,7 +13,7 @@ namespace TakoLeaf.Models
         public DateTime Date { get; set; }
 
         [Required(ErrorMessage = "Le message est obligatoire")]
-        public string Corps_Post { get; set; }
+        public string CorpsPost { get; set; }
 
         public int IdAdherent { get; set; }
         public Adherent Adherent {get ; set;}
