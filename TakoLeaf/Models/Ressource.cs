@@ -10,4 +10,13 @@ namespace TakoLeaf.Models
         public double TarifJournalier { get; set; }
         public bool Disponible{ get; set; }
     }
+    public enum CateRessource
+    {
+        OUTIL,
+        OUTIL_SPECIALISE,
+        LOCAL_GARAGE,
+        TERRAIN,
+        REMORQUE,
+        PONT_ELEVATEUR
+    }
 }

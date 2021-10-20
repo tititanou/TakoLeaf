@@ -45,14 +45,11 @@ namespace TakoLeaf.Models
         public int IdDemande { get; set; }
         public DemandeDevis DemandeDevis { get; set; }
 
-
-
-
-
-
-
-
-
-
+    }
+    public enum EtatDevis
+    {
+        ACCEPTE,
+        EN_ATTENTE,
+        REFUSE
     }
 }

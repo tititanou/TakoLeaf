@@ -28,7 +28,7 @@ namespace TakoLeaf.Models
         public DbSet<Prestation> Prestations {get;set;}
         public DbSet<Avis> Avis { get; set; }
         public DbSet<DemandeDevis> DemandeDevis { get; set; }
-        public DbSet<Categorie> Categories { get; set; }
+        public DbSet<CateCompetence> CateCompetences { get; set; }
         public DbSet<SsCateCompetence> SsCateCompetences { get; set; }
         public DbSet<Facture> Factures { get; set; }
         public DbSet<Rib> Ribs {get;set;}
