@@ -16,11 +16,10 @@ namespace TakoLeaf.Models
         [Column(TypeName = "varchar(40)")]
         [Required(ErrorMessage = "Cette information est obligatoire")]
         public string MotDePasse { get; set; }
-        public byte Avatar {get; set;}
+        public byte[] Avatar {get; set;}
         [Column(TypeName = "varchar(30)")]
         [Required(ErrorMessage = "Cette information est obligatoire")]
         public string Description { get; set; }
-        public EtatProfil EtatDuProfil { get; set; }
         public string Amis { get; set; }
         public string UserBloques { get; set; }
         public EtatProfil EtatProfil { get; set; }

@@ -19,10 +19,10 @@ namespace TakoLeaf.Models
         public int RibId { get; set; }
         public Rib Rib { get; set; }
 
-        public List<Ressource> RessourceId { get; set; }
+        public List<Ressource> RessourceL { get; set; }
         public Ressource Ressource { get; set; }
         
-        public List<Competence> CompetenceId { get; set; } 
+        public List<Competence> CompetenceL { get; set; } 
         public Competence Competence { get; set; }
 
 

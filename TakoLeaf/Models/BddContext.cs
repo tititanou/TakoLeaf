@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,8 +39,13 @@ namespace TakoLeaf.Models
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=mysql;database=TakoLeaf");
+            IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
+            optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection")); 
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<HistoriquePresta>(entity =>
@@ -47,8 +53,10 @@ namespace TakoLeaf.Models
 
                 entity.HasKey(e => new { e.HistoriqueId, e.PrestationId });
             });
+            
         }
 
+      
     public void InitializeDb()
         {
             this.Database.EnsureDeleted();

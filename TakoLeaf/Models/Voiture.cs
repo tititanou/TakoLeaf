@@ -24,6 +24,8 @@ namespace TakoLeaf.Models
         public int Annee { get; set; } //string ou int ?
         [Required]
         public int ModeleId { get; set; }
+        public int ConsumerId { get; set; }
+        public Consumer Consumer { get; set; }
 
     }
 

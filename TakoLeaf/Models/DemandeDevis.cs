@@ -20,10 +20,10 @@ namespace TakoLeaf.Models
         public Provider Provider {get; set;}
         public int VoitureId { get; set; }
         public Voiture Voiture {get; set;}
-        public List<Competence> CompetenceId { get; set; }
+        public List<Competence> CompetenceL { get; set; }
         public Competence Competence {get; set;}
 
-        public List<Ressource> RessourceId { get; set; }
+        public List<Ressource> RessourceL { get; set; }
         public Ressource Ressource {get; set;}
 
 

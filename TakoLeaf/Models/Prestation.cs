@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace TakoLeaf.Models
         public int Id { get; set; }
 
         [Required]
-        public DateTime DateVoulu { get; set; }
+        public DateTime DateVoulue { get; set; }
 
         [Required]
         public int prix { get; set; }
@@ -28,8 +29,8 @@ namespace TakoLeaf.Models
         public int VoitureId { get; set; }
         public Voiture Voiture { get; set; }
 
-        
-        public int Numero_Devis { get; set; }
+        [Column(name: "NumeroDevis")]
+        public int NumeroDevis { get; set; }
         public Devis Devis { get; set; }
 
         
