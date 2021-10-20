@@ -23,7 +23,7 @@ namespace TakoLeaf.Models
         [RegularExpression(@"\d{4}$")] //Une année à 4 chiffres
         public int Annee { get; set; } //string ou int ?
         [Required]
-        public int IdModele { get; set; }
+        public int ModeleId { get; set; }
 
     }
 

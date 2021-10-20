@@ -21,11 +21,11 @@ namespace TakoLeaf.Models
         [Required(ErrorMessage = "Cette information est obligatoire")]
         public string Description { get; set; }
         public EtatProfil EtatDuProfil { get; set; }
-        public List<String> Amis { get; set; }
-        public List<String> UserBloques { get; set; }
+        public string Amis { get; set; }
+        public string UserBloques { get; set; }
         public EtatProfil EtatProfil { get; set; }
-        public int IdAdherent { get; set; }
-        public Adherant Adherant { get; set; }
+        public int AdherentId { get; set; }
+        public Adherent Adherent { get; set; }
 
     }
 

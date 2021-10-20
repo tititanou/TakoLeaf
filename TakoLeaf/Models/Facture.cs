@@ -13,9 +13,9 @@ namespace TakoLeaf.Models
         public string NumeroFacture { get; set; }
 
         public DateTime DateEmission { get; set; }
-        public int IdProvider { get; set; }
+        public int ProviderId { get; set; }
         public Provider Provider { get; set; }
-        public int IdConsumer { get; set; }
+        public int ConsumerId { get; set; }
         public Consumer Consumer {get; set;}
 
 

@@ -17,15 +17,15 @@ namespace TakoLeaf.Models
         public int prix { get; set; }
 
         
-        public int IdProvider { get; set; }
+        public int ProviderId { get; set; }
         public Provider Provider { get; set; }
 
         
-        public int IdConsumer { get; set; }
+        public int ConsumerId { get; set; }
         public Consumer Consumer { get; set; }
 
         
-        public int IdVoiture { get; set; }
+        public int VoitureId { get; set; }
         public Voiture Voiture { get; set; }
 
         

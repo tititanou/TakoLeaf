@@ -15,7 +15,7 @@ namespace TakoLeaf.Models
         public Adherent Adherent { get; set; }
        
 
-        public int VoitureId { get; set; }
+        public List<Voiture> VoitureId { get; set; }
         public Voiture Voiture { get; set; }
 
 

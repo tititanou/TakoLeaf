@@ -9,7 +9,7 @@ namespace TakoLeaf.Models
     public class Carte
     {
 
-        [Required]
+        
         public int Id { get; set; }
 
         [Required]

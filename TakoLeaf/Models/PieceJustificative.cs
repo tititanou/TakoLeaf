@@ -18,7 +18,7 @@ namespace TakoLeaf.Models
         [Required]
         public string Description { get; set; } 
 
-        public int IdAdherent { get; set; }
+        public int AdherentId { get; set; }
 
         public Adherent Adherant { get; set; }
 

@@ -34,3 +34,5 @@ msbuild.wrn
 *.v2
 
 *.editorconfig
+
+TakoLeaf/obj/

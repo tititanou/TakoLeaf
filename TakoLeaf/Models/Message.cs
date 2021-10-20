@@ -15,13 +15,13 @@ namespace TakoLeaf.Models
 
         [Display(Name = "Expéditeur")]
         [Column(name: "Expediteur")]
-        public int IdAdherentExp { get; set; }
+        public int AdherentExpId { get; set; }
         public Adherent AdherentExp { get; set; }
 
         [Required]
         [Display(Name = "Destinataire")]
         [Column(name:"Destinataire")]
-        public int IdAdherentDest { get; set; }
+        public int AdherentDestId { get; set; }
         public Adherent AdherentDest { get; set; }
     }
 }

@@ -33,18 +33,27 @@ namespace TakoLeaf.Models
         public DbSet<Facture> Factures { get; set; }
         public DbSet<Rib> Ribs {get;set;}
         public DbSet<Post> Posts{get;set;}
+        public DbSet<HistoriquePresta> HistoriquePrestas { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(connectionString : "Database");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=mysql;database=TakoLeaf");
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<HistoriquePresta>(entity =>
+            {
+
+                entity.HasKey(e => new { e.HistoriqueId, e.PrestationId });
+            });
         }
 
     public void InitializeDb()
         {
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
-
+            
         }
     }
 }

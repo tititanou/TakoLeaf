@@ -13,16 +13,16 @@ namespace TakoLeaf.Models
         [Range(0.0, 5)]
         public double Note { get; set; }
 
-        public int IdAdherent { get; set; }
+        public int AdherentId { get; set; }
         public Adherent Adherent { get; set; }
 
-        public int IdRib { get; set; }
+        public int RibId { get; set; }
         public Rib Rib { get; set; }
 
-        public int IdRessource { get; set; }
+        public List<Ressource> RessourceId { get; set; }
         public Ressource Ressource { get; set; }
         
-        public int IdCompetence { get; set; } 
+        public List<Competence> CompetenceId { get; set; } 
         public Competence Competence { get; set; }
 
 

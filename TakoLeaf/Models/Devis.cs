@@ -27,22 +27,22 @@ namespace TakoLeaf.Models
         public EtatDevis EtatDevis { get; set; }
 
         
-        public int IdProvider { get; set; }
+        public int ProviderId { get; set; }
         public Provider Provider { get; set; }
 
-        public int IdConsumer { get; set; }
+        public int ConsumerId { get; set; }
         public Consumer Consumer { get; set; }
 
-        public int IdVoiture { get; set; }
+        public int VoitureId { get; set; }
         public Voiture Voiture { get; set; }
 
-        public List<int> IdCompetence { get; set; }
-        public List<Competence> Competence { get; set; }
+        public List<Competence> CompetenceId { get; set; }
+        public Competence Competence { get; set; }
 
-        public List<int> IdRessource { get; set; }
-        public List<Ressource> Ressource { get; set; }
+        public List<Ressource> RessourceId { get; set; }
+        public Ressource Ressource { get; set; }
 
-        public int IdDemande { get; set; }
+        public int DemandeId { get; set; }
         public DemandeDevis DemandeDevis { get; set; }
 
     }

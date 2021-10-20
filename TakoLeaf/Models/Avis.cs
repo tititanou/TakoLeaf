@@ -8,10 +8,10 @@ namespace TakoLeaf.Models
         public double Note { get; set; }
         public string Contenu { get; set; }
 
-        public int IdConsumer { get; set; }
+        public int ConsumerId { get; set; }
         public Consumer Consumer { get; set; }
 
-        public int IdProvider { get; set; }
+        public int ProviderId { get; set; }
         public Provider Provider { get; set; }
     }
 }

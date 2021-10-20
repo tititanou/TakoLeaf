@@ -15,7 +15,7 @@ namespace TakoLeaf.Models
         [Required(ErrorMessage = "Le message est obligatoire")]
         public string CorpsPost { get; set; }
 
-        public int IdAdherent { get; set; }
+        public int AdherentId { get; set; }
         public Adherent Adherent {get ; set;}
 
     }
