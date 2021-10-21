@@ -1,0 +1,84 @@
+﻿@model List<TakoLeaf.ViewModels.UtilisateurViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Dashboard</title>
+    <style type="text/css">
+
+        table, th, td {
+            border: solid, 1px;
+            border-color: #96D4D4;
+        }
+    </style>
+
+</head>
+<body>
+    <div style="text-align:center">
+        <h1> Welcome to the DashBoard Biâtch !</h1>
+    </div>
+    <h3>Tiens regarde, un p'tit tableau de tous tes adhérants, la classe hein ?</h3>
+
+
+    <div>Nombre d'adhérent actuel : @Model.Count</div> <br />
+
+    <table style="text-align:center">
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Description</th>
+            <th>Mail</th>
+            <th>Etat du profil</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Adherent.Nom</td>
+                <td>@item.Adherent.Prenom</td>
+                <td>@item.CompteUser.Description</td>
+                <td>@item.CompteUser.Mail</td>
+                <td>@item.CompteUser.EtatProfil</td>
+            </tr>
+        }
+
+    </table>
+
+    <h3>Comptes nécessitant une validation de profil</h3>
+
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Description</th>
+            <th>Mail</th>
+            <th>Etat du profil</th>
+        </tr>
+
+         
+
+        @foreach (var item in Model)
+        {
+
+            if (item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.NON_VALIDE || item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
+            {
+                <tr>
+                    <td>@item.Adherent.Nom</td>
+                    <td>@item.Adherent.Prenom</td>
+                    <td>@item.CompteUser.Description</td>
+                    <td>@item.CompteUser.Mail</td>
+                    <td>@item.CompteUser.EtatProfil</td>
+                </tr>
+
+            }
+        }
+
+    </table>
+
+</body>
+</html>
