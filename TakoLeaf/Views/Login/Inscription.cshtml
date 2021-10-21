@@ -69,6 +69,16 @@
                 @Html.ValidationMessageFor(model => model.CompteUser.Description)
             </div>
 
+            <div class="form-floating mb-3">
+                <fieldset style="resize">
+                    <legend>Quel type utilisateur voulez vous être ?</legend>
+                    <input type="radio" id="Provider" name="Type1" value="Provider" />
+                    <label for="Provider">Provider</label>
+                    <input type="radio" id="Consumer" name="Type2" value="Consumer" />
+                    <label for="Consumer">Consumer</label>
+                </fieldset>
+            </div>
+
 
             <!-- Submit Button-->
             <button class="btn btn-primary btn-xl" type="submit">Créer</button>
