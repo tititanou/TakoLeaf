@@ -151,6 +151,59 @@ namespace TakoLeaf.Models
 
             this.SaveChanges();
 
+            this.Sujets.AddRange(
+                new Sujet
+                {
+                    Id = 1,
+                    Date = new DateTime(2021, 07, 26, 14, 51, 03),
+                    Titre = "Problème Essuie-Glaces Citroën C4 Picasso"
+                },
+                new Sujet
+                {
+                    Id = 2,
+                    Date = new DateTime(2021, 08, 05, 23, 22, 58),
+                    Titre = "Peinture Chrysler Grand Voyageur"
+                });
+            this.Posts.AddRange(
+                new Post
+                {
+                    Id = 1,
+                    Date = new DateTime(2021, 07, 26, 14, 51, 03),
+                    CorpsPost = "Salut, j'ai un pb avec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus efficitur fermentum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec volutpat nunc quis tellus lacinia.",
+                    SujetId = 1,
+                    AdherentId = 1
+                },
+                new Post
+                {
+                    Id = 2,
+                    Date = new DateTime(2021, 07, 26, 21, 35, 35),
+                    CorpsPost = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor ipsum et lectus convallis venenatis. Morbi ex sapien, cursus sed.",
+                    SujetId = 1,
+                    AdherentId = 3
+                },
+                new Post
+                {
+                    Id = 3,
+                    Date = new DateTime(2021, 08, 05, 18, 14, 02),
+                    CorpsPost = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent consequat dolor sed imperdiet consectetur. Pellentesque sed ante eu dolor vulputate lacinia. Praesent vitae lorem ultrices, cursus justo vestibulum, bibendum sem. Etiam sit amet magna libero. Fusce in ex quam. Aenean.",
+                    SujetId = 2,
+                    AdherentId = 2
+                }, new Post
+                {
+                    Id = 4,
+                    Date = new DateTime(2021, 08, 06, 19, 01, 55),
+                    CorpsPost = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis lobortis vehicula. Proin sollicitudin suscipit augue, fermentum dictum lacus pharetra eu. Mauris ac massa at ipsum laoreet dapibus. Donec volutpat urna vitae accumsan fermentum. Interdum.",
+                    SujetId = 1,
+                    AdherentId = 2
+                }, new Post
+                {
+                    Id = 5,
+                    Date = new DateTime(2021, 08, 15, 08, 05, 27),
+                    CorpsPost = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu ante vitae nunc aliquam ornare.",
+                    SujetId = 2,
+                    AdherentId = 1
+                }
+                );
         }
     }
 }

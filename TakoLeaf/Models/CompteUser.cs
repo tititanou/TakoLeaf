@@ -34,6 +34,7 @@ namespace TakoLeaf.Models
         VALIDE,
         NON_VALIDE,
         ATTENTE_VALIDATION,
+        COMPTE_BLOQUE
 
     }
 

@@ -20,13 +20,9 @@
 </head>
 <body>
     <div style="text-align:center">
-        <h1> Welcome to the DashBoard Biâtch !</h1>
+        <h1>Welcome to the DashBoard</h1>
     </div>
-    <h3>Tiens regarde, un p'tit tableau de tous tes adhérants, la classe hein ?</h3>
-
-
-    <div>Nombre d'adhérent actuel : @Model.Count</div> <br />
-
+    <h3>Tableau de bord Adhérents</h3>
     <table style="text-align:center">
         <tr>
             <th>Nom</th>
@@ -49,7 +45,9 @@
 
     </table>
 
-    <h3>Comptes nécessitant une validation de profil</h3>
+    <h3>Nombre d'adhérent actuel : @Model.Count</h3> <br />
+
+    <br />
 
     <table>
         <tr>
@@ -60,25 +58,36 @@
             <th>Etat du profil</th>
         </tr>
 
-         
+        @{ int count = 0;}
+
 
         @foreach (var item in Model)
         {
 
+
             if (item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.NON_VALIDE || item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
             {
+
+                string editLink = "/Admin/ValiderProfil?id=" + item.CompteUser.AdherentId;
+
                 <tr>
                     <td>@item.Adherent.Nom</td>
                     <td>@item.Adherent.Prenom</td>
                     <td>@item.CompteUser.Description</td>
                     <td>@item.CompteUser.Mail</td>
                     <td>@item.CompteUser.EtatProfil</td>
+                    @*<td>@Html.ActionLink("Valider Profil", "ValiderProfil", "Admin", new { id = item.CompteUser.AdherentId })  </td>*@
+                    <td><a href ="@editLink">Valider le profil</a></td>
                 </tr>
 
+                count++;
             }
         }
 
     </table>
+
+    <h3>Comptes nécessitant une validation de profil : @count</h3>
+
 
 </body>
 </html>
