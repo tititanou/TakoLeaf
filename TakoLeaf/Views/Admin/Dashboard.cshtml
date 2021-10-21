@@ -45,7 +45,7 @@
 
     </table>
 
-    <div>Nombre d'adhérent actuel : @Model.Count</div> <br />
+    <h3>Nombre d'adhérent actuel : @Model.Count</h3> <br />
 
     <br />
 
@@ -64,14 +64,20 @@
         @foreach (var item in Model)
         {
 
+
             if (item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.NON_VALIDE || item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
             {
+
+                string editLink = "/Admin/ValiderProfil?id=" + item.CompteUser.AdherentId;
+
                 <tr>
                     <td>@item.Adherent.Nom</td>
                     <td>@item.Adherent.Prenom</td>
                     <td>@item.CompteUser.Description</td>
                     <td>@item.CompteUser.Mail</td>
                     <td>@item.CompteUser.EtatProfil</td>
+                    @*<td>@Html.ActionLink("Valider Profil", "ValiderProfil", "Admin", new { id = item.CompteUser.AdherentId })  </td>*@
+                    <td><a href ="@editLink">Valider le profil</a></td>
                 </tr>
 
                 count++;

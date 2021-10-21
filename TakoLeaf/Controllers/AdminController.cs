@@ -42,6 +42,19 @@ namespace TakoLeaf.Controllers
             return View(liste);
         }
 
+        public IActionResult ValiderProfil(int id)
+        {
+            dal.ValidationProfil(id);
+            return RedirectToAction("Dashboard");
+        }
+
+        //[HttpPost]
+        //public IActionResult DashBoard()
+        //{
+
+        //}
+
+
         // TODO Faire l'authentification
 
         //[HttpPost]

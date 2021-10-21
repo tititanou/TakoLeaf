@@ -22,6 +22,6 @@ namespace TakoLeaf.Data
 
         List<CompteUser> ObtenirTousLesComptesUser();
 
-        void ValiderProfil(int id);
+        void ValidationProfil(int id);
     }
 }
