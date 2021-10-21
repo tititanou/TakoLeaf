@@ -1,0 +1,46 @@
+﻿@model TakoLeaf.Models.CompteUser
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Connexion</title>
+</head>
+<body>
+    <h1 style="text-align : center"> Veuillez entrer votre identifiant et mot de passe pour vous connecter</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            @using (Html.BeginForm())
+            {
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(model => model.Mail, new { @class = "form-control", placeholder = "Mail" })
+                    @Html.LabelFor(model => model.Mail)
+                    @Html.ValidationMessageFor(model => model.Mail)
+                </div>
+
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(model => model.MotDePasse, new { @type = "password", @class = "form-control", placeholder = "Mot de passe" })
+                    @Html.LabelFor(model => model.MotDePasse)
+                    @Html.ValidationMessageFor(model => model.MotDePasse)
+                </div>
+
+                <button class="btn btn-primary btn-xl" type="submit">Se Connecter</button>
+            }
+
+
+
+
+        </div>
+    </div>
+
+    <div>
+        <h2> Si vous n'avez pas de compte il faut en creer un</h2>
+        <a href="http://localhost:5000/Login/Inscription">Creer un compte</a>
+    </div>
+
+</body>
+</html>

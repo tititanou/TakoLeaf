@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TakoLeaf.Data;
 
 namespace TakoLeaf.Models
 {
@@ -61,6 +62,28 @@ namespace TakoLeaf.Models
         {
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
+            this.Adherents.AddRange(
+                new Adherent
+                {
+                    Nom = "Abrate",
+                    Prenom = "Alexis",
+                    Date_naissance = new DateTime(1993,03,07),
+                    Adresse = "124 Rue Hoche, 93100, Montreuil",
+                    Telephone = "0610592002"
+                    
+                }
+                );
+            DalLogin lg = new DalLogin();
+            this.CompteUsers.AddRange(
+                new CompteUser
+                {
+                    Mail = "abrate@gmail.com",
+                    MotDePasse = lg.EncodeMD5("1234"),
+                    Description = "Yolo",
+                    AdherentId = 1
+                }
+                );
+            this.SaveChanges();
             
         }
     }
