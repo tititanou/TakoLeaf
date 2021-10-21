@@ -1,0 +1,40 @@
+﻿@model TakoLeaf.ViewModels.AdminViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Connexion</title>
+</head>
+<body>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            @using (Html.BeginForm())
+            {
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(model => model.Admin.Id, new { @class = "form-control", placeholder = "Entrez votre identifiant" })
+                    @Html.LabelFor(model => model.Admin.Id)
+                    @Html.ValidationMessageFor(model => model.Admin.Id)
+                </div>
+
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(model => model.Admin.Pwd, new { @type = "password", @class = "form-control", placeholder = "Entrez votre mot de passe" })
+                    @Html.LabelFor(model => model.Admin.Pwd, new { @Name = "Mot de passe" })
+                    @Html.ValidationMessageFor(model => model.Admin.Pwd)
+                </div>
+
+
+                <!-- Submit Button-->
+                <button class="btn btn-primary btn-xl" type="submit">Se Connecter</button>
+            }
+        </div>
+    </div>
+
+
+</body>
+</html>
