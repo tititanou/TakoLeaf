@@ -44,49 +44,18 @@ namespace TakoLeaf.Controllers
 
         public IActionResult ValiderProfil(int id)
         {
-            dal.ValidationProfil(id);
+            dal.ChangerEtatProfil(id, 0);
             return RedirectToAction("Dashboard");
         }
 
-        //[HttpPost]
-        //public IActionResult DashBoard()
-        //{
-
-        //}
-
-
-        // TODO Faire l'authentification
-
-        //[HttpPost]
-        //public ActionResult Index(AdminViewModel viewModel, string returnUrl)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        Admin admin = dal.Authentifier(viewModel.Utilisateur.Prenom, viewModel.Utilisateur.Password);
-        //        if (utilisateur != null)
-        //        {
-        //            var userClaims = new List<Claim>()
-        //            {
-        //                new Claim(ClaimTypes.Name, utilisateur.Prenom),
-        //                new Claim(ClaimTypes.NameIdentifier, utilisateur.Id.ToString()),
-        //                new Claim(ClaimTypes.Role, utilisateur.Role),
-        //            };
-
-        //            var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
-
-        //            var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
-        //            HttpContext.SignInAsync(userPrincipal);
+        public IActionResult BloquerProfil(int id)
+        {
+            dal.ChangerEtatProfil(id, 1);
+            return RedirectToAction("Dashboard")
+;
+        }
 
 
-
-        //            if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
-        //                return Redirect(returnUrl);
-        //            return Redirect("/");
-        //        }
-        //        ModelState.AddModelError("Utilisateur.Prenom", "Prénom et/ou mot de passe incorrect(s)");
-        //    }
-        //    return View(viewModel);
-        //}
 
 
     }
