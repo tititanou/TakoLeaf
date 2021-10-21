@@ -38,5 +38,12 @@ namespace TakoLeaf.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult ModifInfosAdherent(Adherent adherent)
+        {
+            return View();
+        }
+
+
     }   
 }

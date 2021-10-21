@@ -69,6 +69,7 @@ namespace TakoLeaf.Models
                     Pwd = "toto"
                 });
 
+            DalLogin dal = new DalLogin();
             this.Adherents.AddRange(
                 new Adherent
                 {
@@ -114,7 +115,7 @@ namespace TakoLeaf.Models
                  new CompteUser
                  {
                      Mail = "Alexis.Abrate@gmail.com",
-                     MotDePasse = "LeTruantDuCSharp",
+                     MotDePasse = dal.EncodeMD5("LeTruantDuCSharp"),
                      Description = "Hello",
                      EtatProfil = EtatProfil.VALIDE,
                      AdherentId = 1
@@ -124,7 +125,7 @@ namespace TakoLeaf.Models
                   new CompteUser
                   {
                       Mail = "Rojas.Tania@gmail.com",
-                      MotDePasse = "LaMama",
+                      MotDePasse = dal.EncodeMD5("LaMama"),
                       Description = "MacPowa",
                       EtatProfil = EtatProfil.ATTENTE_VALIDATION,
                       AdherentId = 2
@@ -133,7 +134,7 @@ namespace TakoLeaf.Models
                   new CompteUser
                   {
                       Mail = "Zawartoski.Valentin@gmail.com",
-                      MotDePasse = "ZeFrontiste",
+                      MotDePasse = dal.EncodeMD5("ZeFrontiste"),
                       Description = "Ma RAM rame...",
                       EtatProfil = EtatProfil.ATTENTE_VALIDATION,
                       AdherentId = 3
@@ -141,7 +142,7 @@ namespace TakoLeaf.Models
                    new CompteUser
                    {
                        Mail = "Anthony.Dauphin@gmail.com",
-                       MotDePasse = "ElBrutos",
+                       MotDePasse = dal.EncodeMD5("ElBrutos"),
                        Description = "I HAVE NO IDEA WHAT I'M DOING",
                        EtatProfil = EtatProfil.ATTENTE_VALIDATION,
                        AdherentId = 4

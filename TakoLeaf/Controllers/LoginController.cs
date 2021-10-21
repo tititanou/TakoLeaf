@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,16 +67,17 @@ namespace TakoLeaf.Controllers
             {
                 int id = user.AdherentId;
                 return Redirect("/ProfilUser/Profil?id="+id);
-                
-                
-                
+                               
             }
-
-
             return View();
         }
 
-       
-        
+        public ActionResult Deconnexion()
+        {
+            HttpContext.SignOutAsync();
+            return Redirect("/Login/Connexion");
+        }
+
+
     }
 }
