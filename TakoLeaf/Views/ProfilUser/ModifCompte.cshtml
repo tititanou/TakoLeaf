@@ -1,0 +1,41 @@
+﻿@model TakoLeaf.Models.CompteUser
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ModifCompte</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.MotDePasse, new { @type = "password", @class = "form-control", placeholder = "Mot de Passe" })
+                @Html.LabelFor(model => model.MotDePasse)
+                @Html.ValidationMessageFor(model => model.MotDePasse)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Avatar, new { @class = "form-control", placeholder = "Avatar" })
+                @Html.LabelFor(model => model.Avatar)
+                @Html.ValidationMessageFor(model => model.Avatar)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Description, new { @class = "form-control", placeholder = "Description" })
+                @Html.LabelFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+
+            <!-- Submit Button-->
+            <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
+        }
+    </div>
+  
+</body>
+</html>

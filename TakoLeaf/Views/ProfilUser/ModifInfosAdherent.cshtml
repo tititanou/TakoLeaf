@@ -1,4 +1,4 @@
-﻿
+﻿@model TakoLeaf.Models.Adherent
 @{
     Layout = null;
 }
@@ -11,5 +11,42 @@
     <title>ModifInfosAdherent</title>
 </head>
 <body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Prenom, new { @class = "form-control", placeholder = "Prenom" })
+                @Html.LabelFor(model => model.Prenom)
+                @Html.ValidationMessageFor(model => model.Prenom)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Nom, new { @class = "form-control", placeholder = "Nom" })
+                @Html.LabelFor(model => model.Nom)
+                @Html.ValidationMessageFor(model => model.Nom)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Date_naissance, new { @type = "date", @class = "form-control" })
+                @Html.LabelFor(model => model.Date_naissance)
+                @Html.ValidationMessageFor(model => model.Date_naissance)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Adresse, new { @class = "form-control", placeholder = "Adresse" })
+                @Html.LabelFor(model => model.Adresse)
+                @Html.ValidationMessageFor(model => model.Adresse)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Telephone, new { @type = "tel", @class = "form-control", placeholder = "Téléphone" })
+                @Html.LabelFor(model => model.Telephone)
+                @Html.ValidationMessageFor(model => model.Telephone)
+            </div>
+
+            <!-- Submit Button-->
+            <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
+        }
+    </div>
 </body>
 </html>
