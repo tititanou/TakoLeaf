@@ -35,13 +35,20 @@ namespace TakoLeaf.Controllers
                 int idAdherent = aderent.Id;
                 CompteUser compteUser = dal.CreationCompte(uvm.CompteUser.Mail, uvm.CompteUser.MotDePasse, uvm.CompteUser.Avatar, uvm.CompteUser.Description, idAdherent);
 
-                // TODO A voir pour le TOKEN
-                //var userClaims = new List<Claim>()
-                //{
-                //    new Claim(Claim)
-                //}
 
-                return View("InscriptionReussie");
+                var userClaims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, uvm.Adherent.Nom),
+                    new Claim(ClaimTypes.NameIdentifier, uvm.Adherent.Id.ToString()),
+                    new Claim(ClaimTypes.Email, uvm.CompteUser.Mail)
+                };
+
+                var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
+
+                var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
+                HttpContext.SignInAsync(userPrincipal);
+
+                return Redirect("/ProfilUser/Profil?id=" + idAdherent);
 
             }
 
