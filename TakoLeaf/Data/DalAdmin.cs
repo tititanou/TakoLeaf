@@ -68,17 +68,26 @@ namespace TakoLeaf.Data
             return liste;
         }
 
-        public void ValidationProfil(int id)
+        public void ChangerEtatProfil(int id, int option)
         {
             CompteUser profil = this._bddContext.CompteUsers.Where(c => c.AdherentId == id).FirstOrDefault();
 
-            if(profil != null)
+
+            switch (option)
             {
-                profil.EtatProfil = EtatProfil.VALIDE;
-                this._bddContext.SaveChanges();
+                case 1:
+                    profil.EtatProfil = EtatProfil.VALIDE;
+                    this._bddContext.SaveChanges();
+                    break;
+                case 2:
+                    profil.EtatProfil = EtatProfil.COMPTE_BLOQUE;
+                    this._bddContext.SaveChanges();
+                    break;
             }
-            
+
+
         }
+
 
 
 

@@ -69,6 +69,7 @@
             {
 
                 string editLink = "/Admin/ValiderProfil?id=" + item.CompteUser.AdherentId;
+                string editLink1 = "/Admin/BloquerProfil?id=" + item.CompteUser.AdherentId;
 
                 <tr>
                     <td>@item.Adherent.Nom</td>
@@ -77,7 +78,8 @@
                     <td>@item.CompteUser.Mail</td>
                     <td>@item.CompteUser.EtatProfil</td>
                     @*<td>@Html.ActionLink("Valider Profil", "ValiderProfil", "Admin", new { id = item.CompteUser.AdherentId })  </td>*@
-                    <td><a href ="@editLink">Valider le profil</a></td>
+                    <td><a href="@editLink">Valider le profil</a></td>
+                    <td><a href="@editLink1">Bloquer le compte</a></td>
                 </tr>
 
                 count++;
