@@ -20,13 +20,9 @@
 </head>
 <body>
     <div style="text-align:center">
-        <h1> Welcome to the DashBoard Biâtch !</h1>
+        <h1>Welcome to the DashBoard</h1>
     </div>
-    <h3>Tiens regarde, un p'tit tableau de tous tes adhérants, la classe hein ?</h3>
-
-
-    <div>Nombre d'adhérent actuel : @Model.Count</div> <br />
-
+    <h3>Tableau de bord Adhérents</h3>
     <table style="text-align:center">
         <tr>
             <th>Nom</th>
@@ -49,7 +45,9 @@
 
     </table>
 
-    <h3>Comptes nécessitant une validation de profil</h3>
+    <div>Nombre d'adhérent actuel : @Model.Count</div> <br />
+
+    <br />
 
     <table>
         <tr>
@@ -60,7 +58,8 @@
             <th>Etat du profil</th>
         </tr>
 
-         
+        @{ int count = 0;}
+
 
         @foreach (var item in Model)
         {
@@ -75,10 +74,14 @@
                     <td>@item.CompteUser.EtatProfil</td>
                 </tr>
 
+                count++;
             }
         }
 
     </table>
+
+    <h3>Comptes nécessitant une validation de profil : @count</h3>
+
 
 </body>
 </html>
