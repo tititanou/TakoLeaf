@@ -1,0 +1,24 @@
+@model TakoLeaf.ViewModels.ForumViewModel
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sujet</title>
+</head>
+<body>
+    <h3>@Model.Sujet.Titre</h3>
+    @foreach (var item in Model.Posts)
+    {
+<div class="post">
+    <p>@item.CorpsPost</p>
+    <div class="ftr">
+        <em>@item.Adherent.Prenom @item.Adherent.Nom</em>
+        <em>@item.Date</em>
+    </div>
+</div>
+                <hr />}
+</body>
+</html>

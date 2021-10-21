@@ -18,5 +18,8 @@ namespace TakoLeaf.Models
         public int AdherentId { get; set; }
         public Adherent Adherent {get ; set;}
 
+        public int SujetId { get; set; }
+        public Sujet Sujet { get; set; }
+
     }
 }

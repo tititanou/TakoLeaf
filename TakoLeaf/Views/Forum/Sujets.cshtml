@@ -1,0 +1,23 @@
+@model List<TakoLeaf.Models.Sujet>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sujets</title>
+</head>
+<body>
+    <h3> Tous les sujets</h3>
+    @foreach(var item in Model)
+            {
+                <h6>@item.Titre</h6>
+                <em>@item.Date</em>
+                @Html.ActionLink(item.Titre, "Sujet", "Forum", new { id = item.Id })
+                <hr />
+            }
+</body>
+</html>
