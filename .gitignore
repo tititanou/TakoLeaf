@@ -36,3 +36,5 @@ msbuild.wrn
 *.editorconfig
 
 TakoLeaf/obj/
+
+TakoLeaf/appsettings.json
