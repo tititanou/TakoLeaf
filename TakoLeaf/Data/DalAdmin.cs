@@ -75,12 +75,16 @@ namespace TakoLeaf.Data
 
             switch (option)
             {
-                case 1:
+                case 0:
                     profil.EtatProfil = EtatProfil.VALIDE;
                     this._bddContext.SaveChanges();
                     break;
-                case 2:
+                case 1:
                     profil.EtatProfil = EtatProfil.COMPTE_BLOQUE;
+                    this._bddContext.SaveChanges();
+                    break;
+                case 2:
+                    profil.EtatProfil = EtatProfil.ATTENTE_VALIDATION;
                     this._bddContext.SaveChanges();
                     break;
             }
