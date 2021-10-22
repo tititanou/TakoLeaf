@@ -27,8 +27,13 @@ namespace TakoLeaf.Controllers
         {
             Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
             CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == id);
-
-            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser };
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == id);
+            Voiture voiture = dal.ObtenirVoiture().FirstOrDefault(v => v.ConsumerId == consumer.Id);
+            int idcarte = consumer.CarteId;
+            Carte carte = dal.ObtenirCartes().FirstOrDefault(c => c.Id == idcarte);
+            int idmodele = voiture.ModeleId;
+            Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voiture = voiture, Carte = carte, Consumer = consumer, Modele = modele };
 
             return View(uvm);
         }

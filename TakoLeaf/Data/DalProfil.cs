@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,6 +29,36 @@ namespace TakoLeaf.Data
         public List<CompteUser> ObtenirCompteUser()
         {
             List<CompteUser> liste = _bddContext.CompteUsers.ToList();
+            return liste;
+        }
+
+        public List<Voiture> ObtenirVoiture()
+        {
+            List<Voiture> liste = _bddContext.Voitures.ToList();
+            return liste;
+        }
+
+        public List<Marque> ObtenirMarques()
+        {
+            List<Marque> liste = _bddContext.Marques.ToList();
+            return liste;
+        }
+
+        public List<Consumer> ObtenirConsumers()
+        {
+            List<Consumer> liste = _bddContext.Consumers.ToList();
+            return liste;
+        }
+
+        public List<Carte> ObtenirCartes()
+        {
+            List<Carte> liste = _bddContext.Cartes.ToList();
+            return liste;
+        }
+
+        public List<Modele> ObtenirModeles()
+        {
+            List<Modele> liste = _bddContext.Modeles.Include(m => m.Marque).ToList();
             return liste;
         }
 

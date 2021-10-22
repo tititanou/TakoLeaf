@@ -1,0 +1,72 @@
+﻿@model TakoLeaf.ViewModels.ProviderViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1 style="text-align:center; font-family:sans-serif;">Bienvenue sur la page d'inscription pour Provider</h1>
+
+    <h3 style="text-align:left; font-family:sans-serif;">Prêt à gagner du flouze ?</h3><br />
+
+    <div>Nous allons avoir besoin de quelques informations ceci dit...</div>
+
+
+
+    @using (Html.BeginForm())
+    {
+
+        <fieldset>
+            <legend>Quels sont vos Talents ?</legend>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Competences, new { @class = "form-control", placeholder = "Quel Catégorie de compétence ?" })
+                @Html.LabelFor(model => model.Competences)
+                @Html.ValidationMessageFor(model => model.Competences)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.SsCateCompetences, new { @class = "form-control", placeholder = "Quelle sous-catégorie ?" })
+                @Html.LabelFor(model => model.SsCateCompetences)
+                @Html.ValidationMessageFor(model => model.SsCateCompetences)
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Un peu de flouze ?</legend>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Rib.Banque, new { @class = "form-control", placeholder = "Indiquez votre banque" })
+                @Html.LabelFor(model => model.Rib.Banque)
+                @Html.ValidationMessageFor(model => model.Rib.Banque)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Rib.Titulaire, new { @class = "form-control", placeholder = "Indiquez votre banque" })
+                @Html.LabelFor(model => model.Rib.Titulaire)
+                @Html.ValidationMessageFor(model => model.Rib.Titulaire)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Rib.Iban, new { @class = "form-control", placeholder = "Indiquez votre Iban" })
+                @Html.LabelFor(model => model.Rib.Iban)
+                @Html.ValidationMessageFor(model => model.Rib.Iban)
+            </div>
+
+        </fieldset>
+
+        <!-- Submit Button-->
+        <button class="btn btn-primary btn-xl" type="submit">Let's gooo !</button>
+    }
+
+
+
+</body>
+</html>

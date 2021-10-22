@@ -10,13 +10,11 @@ namespace TakoLeaf.Models
     {
         public int Id { get; set; }
         [Required]
-        [RegularExpression(@"^[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}$)", ErrorMessage = "L'immatriculation doit suivre la forme suivante AA-123-AA")]
+        //[RegularExpression(@"^[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}$)", ErrorMessage = "L'immatriculation doit suivre la forme suivante AA-123-AA")]
         public string Immatriculation { get; set; }
         [Required]
         [MaxLength(40)]
         public string Titulaire { get; set; }
-        [Required]
-        public Marque Marque { get; set; }
         [Required]
         public Carburant Carburant { get; set; }
         [Required]
@@ -24,6 +22,7 @@ namespace TakoLeaf.Models
         public int Annee { get; set; } //string ou int ?
         [Required]
         public int ModeleId { get; set; }
+        public Modele Modele { get; set; }
         public int ConsumerId { get; set; }
         public Consumer Consumer { get; set; }
 

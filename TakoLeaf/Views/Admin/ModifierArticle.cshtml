@@ -1,0 +1,44 @@
+﻿@model TakoLeaf.Models.Article
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ModifierArticle</title>
+</head>
+<body>
+
+    @using (Html.BeginForm())
+    {
+        <fieldset style="display:inline-block">
+            <legend>Vous êtes inspirés ?</legend>
+
+            <div class="form-floating mb-3">
+                @Html.LabelFor(model => model.Titre)
+                @Html.TextBoxFor(m => m.Titre)
+                @Html.ValidationMessageFor(model => model.Titre)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.LabelFor(model => model.Texte)
+                @Html.TextAreaFor(m => m.Texte, new { rows = 20, cols = 150, placeholder = "Votre article ici" })
+                @Html.ValidationMessageFor(model => model.Texte)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.LabelFor(model => model.Image)
+                @Html.TextBoxFor(model => model.Image)
+                @Html.ValidationMessageFor(model => model.Image)
+            </div>
+            <button class="btn btn-primary btn-xl" type="submit">Publier</button>
+
+        </fieldset>
+
+    }
+
+</body>
+</html>

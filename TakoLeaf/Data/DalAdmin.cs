@@ -88,10 +88,51 @@ namespace TakoLeaf.Data
                     this._bddContext.SaveChanges();
                     break;
             }
-
-
         }
 
+        public void SupprimerProfil(int id)
+        {
+            Adherent adherent = ObtenirAdherent(id);
+            this._bddContext.Adherents.Remove(adherent);
+            this._bddContext.SaveChanges();
+        }
+
+        public void AjouterArticle(string titre, string texte)
+        {
+            DateTime DateDuJour = DateTime.Now;
+            Article Article = new Article { Titre = titre, Texte = texte, Date = DateDuJour, Public = false, Image = null };
+            // TODO Penser à ajouter l'ID de l'adhérent et image
+            this._bddContext.Articles.Add(Article);
+            this._bddContext.SaveChanges();
+        }
+
+        public List<Article> ObtenirTousLesArticles()
+        {
+            List<Article> liste = this._bddContext.Articles.ToList();
+            return liste;
+        }
+
+        public Article ObtenirArticle(int id)
+        {
+            Article article = this._bddContext.Articles.Find(id);
+            return article;
+        }
+        public Article ModifierArticle(int id, string titre, string texte)
+        {
+            Article article = ObtenirArticle(id);
+            article.Titre = titre;
+            article.Texte = texte;
+            this._bddContext.Articles.Update(article);
+            this._bddContext.SaveChanges();
+            return article;
+        }
+
+        public void SupprimerArticle(int id)
+        {
+            Article article = this._bddContext.Articles.Find(id);
+            this._bddContext.Articles.Remove(article);
+            this._bddContext.SaveChanges();
+        }
 
 
 

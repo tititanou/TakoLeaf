@@ -10,6 +10,10 @@ namespace TakoLeaf.Models
     {
         public int Id { get; set; }
         [MaxLength(30)]
+        [Display(Name = "Nom Modele")]
         public string Nom { get; set; }
+
+        public int MarqueId { get; set; }
+        public Marque Marque { get; set; }
     }
 }

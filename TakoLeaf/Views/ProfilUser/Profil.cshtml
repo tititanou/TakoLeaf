@@ -23,7 +23,7 @@
             <li>Avatar : @Model.CompteUser.Avatar</li>
             <li>Nom : @Model.Adherent.Nom</li>
             <li>Prenom : @Model.Adherent.Prenom</li>
-            <li>Date de Naissance : @Model.Adherent.Date_naissance/li>
+            <li>Date de Naissance : @Model.Adherent.Date_naissance</li>
             <li>Adresse : @Model.Adherent.Adresse</li>
             <li>Telephone : @Model.Adherent.Telephone</li>
         </ul>
@@ -41,6 +41,17 @@
 
 
         @Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })
+
+
+        <h2>Information Voiture</h2>
+        <ul>
+            <li>Marque : @Model.Modele.Marque.Nom</li>
+            <li>Modele : @Model.Modele.Nom</li>
+            <li>Immatriculation : @Model.Voiture.Immatriculation</li>
+            <li>Titulaire : @Model.Voiture.Titulaire</li>
+            <li>Carburant : @Model.Voiture.Carburant</li>
+            <li>Annee : @Model.Voiture.Annee</li>
+        </ul>
 
     </div>
 </body>
