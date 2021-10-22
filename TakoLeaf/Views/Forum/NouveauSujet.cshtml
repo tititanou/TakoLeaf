@@ -13,14 +13,27 @@
 <body>
     @using (Html.BeginForm())
             {
-                @Html.TextBoxFor(model => model.Sujet.Titre, new { placeholder = "Sujet"})
-                @Html.LabelFor(model => model.Sujet.Titre)
-                @Html.ValidationMessageFor(model => model.Sujet.Titre)
-                <input type="submit"/>
+    @Html.TextBoxFor(model => model.Sujet.Titre, new { placeholder = "Sujet"})
+    @Html.LabelFor(model => model.Sujet.Titre)
+    @Html.ValidationMessageFor(model => model.Sujet.Titre)
+    <input type="submit" />
 
-                @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message"})
-                @Html.LabelFor(model => model.Post.CorpsPost)
-                @Html.ValidationMessageFor(model => model.Post.CorpsPost)
+    @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message"})
+    @Html.LabelFor(model => model.Post.CorpsPost)
+    @Html.ValidationMessageFor(model => model.Post.CorpsPost)
             }
+    <img src="test.png" id="testImg">
+    <div id="testText" style="display:none">Hello world</div>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script>
+ $(function() {
+  $("#testImg").mouseenter(function() {
+      $("#testText").stop().fadeIn(300);
+    }).mouseleave(function() {
+      $("#testText").stop().fadeOut(100);
+    });
+});
+    </script>
 </body>
 </html>

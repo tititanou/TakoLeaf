@@ -11,7 +11,7 @@ namespace TakoLeaf.Models
         public int Id { get; set; }
 
         public DateTime Date { get; set; }
-
+        [Display(Name = "Message")]
         [Required(ErrorMessage = "Le message est obligatoire")]
         public string CorpsPost { get; set; }
 
