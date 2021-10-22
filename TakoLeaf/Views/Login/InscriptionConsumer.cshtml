@@ -13,40 +13,88 @@
 <body>
 
     <div>
-        <h1> Informations concernant vos information Adherent</h1>
-        <ul>
-            <li>Nom : @Model.Adherent.Nom</li>
-            <li>Prenom : @Model.Adherent.Prenom</li>
-            <li>Date de Naissance : @Model.Adherent.Date_naissance/li>
-            <li>Adresse : @Model.Adherent.Adresse</li>
-            <li>Telephone : @Model.Adherent.Telephone</li>
-        </ul>
-
-        <h1> Informations concernant vos information Compte</h1>
-        <ul>
-            <li>Mail : @Model.CompteUser.Mail</li>
-            <li>Description : @Model.CompteUser.Description</li>
-        </ul>
-
-    </div>
-
-
-
-    <div>
+        <h2>Information sur votre voiture</h2>
         @using (Html.BeginForm())
         {
+            <h1> Informations concernant vos information Adherent</h1>
+            <ul>
+                <li>Nom : @Model.Adherent.Nom</li>
+                <li>Prenom : @Model.Adherent.Prenom</li>
+                <li>Date de Naissance : @Model.Adherent.Date_naissance</li>
+                <li>Adresse : @Model.Adherent.Adresse</li>
+                <li>Telephone : @Model.Adherent.Telephone</li>
+            </ul>
+
+            <h1> Informations concernant vos information Compte</h1>
+            <ul>
+                <li>Mail : @Model.CompteUser.Mail</li>
+                <li>Description : @Model.CompteUser.Description</li>
+            </ul>
+
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.Adherent.Prenom, new { @class = "form-control", placeholder = "Prenom" })
-                @Html.LabelFor(model => model.Adherent.Prenom)
-                @Html.ValidationMessageFor(model => model.Adherent.Prenom)
+                @Html.TextBoxFor(model => model.Voiture.Immatriculation, new { @class = "form-control", placeholder = "Plaque Immatriculation" })
+                @Html.LabelFor(model => model.Voiture.Immatriculation)
+                @Html.ValidationMessageFor(model => model.Voiture.Immatriculation)
             </div>
 
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.Adherent.Nom, new { @class = "form-control", placeholder = "Nom" })
-                @Html.LabelFor(model => model.Adherent.Nom)
-                @Html.ValidationMessageFor(model => model.Adherent.Nom)
+                @Html.TextBoxFor(model => model.Voiture.Titulaire, new { @class = "form-control", placeholder = "Titulaire" })
+                @Html.LabelFor(model => model.Voiture.Titulaire)
+                @Html.ValidationMessageFor(model => model.Voiture.Titulaire)
             </div>
-         }
+
+            <div>
+                @Html.DropDownListFor(model => model.Voiture.Carburant, (SelectList)ViewBag.SelectList)
+                @Html.LabelFor(model => model.Voiture.Carburant)
+            </div>
+
+            <div>
+                @Html.TextBoxFor(model => model.Voiture.Annee, new { @class = "form-control", placeholder = "Annee" })
+                @Html.LabelFor(model => model.Voiture.Annee)
+                @Html.ValidationMessageFor(model => model.Voiture.Annee)
+            </div>
+
+            <div>
+                @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques)
+                @Html.LabelFor(model => model.Marque.Nom)
+            </div>
+
+            <div>
+                @Html.DropDownListFor(model => model.Modele.Nom, (SelectList)ViewBag.Modele)
+                @Html.LabelFor(model => model.Modele.Nom)
+            </div>
+
+
+
+            <h2>Information sur votre carte</h2>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Carte.Titulaire, new { @class = "form-control", placeholder = "Titulaire carte bleu" })
+                @Html.LabelFor(model => model.Carte.Titulaire)
+                @Html.ValidationMessageFor(model => model.Carte.Titulaire)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Carte.NumeroCarte, new { @class = "form-control", placeholder = "Titulaire" })
+                @Html.LabelFor(model => model.Carte.NumeroCarte)
+                @Html.ValidationMessageFor(model => model.Carte.NumeroCarte)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Carte.ExpirDate, new { @class = "form-control", placeholder = "Date d'Expiration" })
+                @Html.LabelFor(model => model.Carte.ExpirDate)
+                @Html.ValidationMessageFor(model => model.Carte.ExpirDate)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Carte.Crypto, new { @class = "form-control", placeholder = "Titulaire" })
+                @Html.LabelFor(model => model.Carte.Crypto)
+                @Html.ValidationMessageFor(model => model.Carte.Crypto)
+            </div>
+
+            <!-- Submit Button-->
+            <button class="btn btn-primary btn-xl" type="submit">Créer</button>
+        }
     </div>
 </body>
 </html>

@@ -39,6 +39,28 @@ namespace TakoLeaf.Data
             return compteUser;
         }
 
+        public Voiture CreationVoiture(string imma, string titulaire, Carburant carburant, int annee, int idmodele, int consumerid)
+        {
+            Voiture voiture = new Voiture { Immatriculation = imma, Titulaire = titulaire, Carburant = carburant, Annee = annee, ModeleId = idmodele, ConsumerId = consumerid };
+            this._bddContext.Voitures.Add(voiture);
+            this._bddContext.SaveChanges();
+            return voiture;
+        }
+
+        public Carte CreationCarte(string titulaire, string numeroCarte, string date, int crypto)
+        {
+            Carte carte = new Carte { NumeroCarte = numeroCarte, Crypto = crypto, ExpirDate = date, Titulaire = titulaire };
+            this._bddContext.Add(carte);
+            this._bddContext.SaveChanges();
+            return carte;
+        }
+        public Consumer CreationConsumer(int idAdherent, int idcarte)
+        {
+            Consumer consumer = new Consumer { AdherentId = idAdherent, CarteId = idcarte };
+            this._bddContext.Add(consumer);
+            this._bddContext.SaveChanges();
+            return consumer;
+        }
 
         public CompteUser Authentifier(string mail, string mdp)
         {

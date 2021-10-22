@@ -17,7 +17,7 @@ namespace TakoLeaf.Models
         [Required(ErrorMessage = "Cette information est obligatoire")]
         public string MotDePasse { get; set; }
         public byte[] Avatar {get; set;}
-        [Column(TypeName = "varchar(30)")]
+        [Column(TypeName = "longtext")]
         [Required(ErrorMessage = "Cette information est obligatoire")]
         public string Description { get; set; }
         public string Amis { get; set; }

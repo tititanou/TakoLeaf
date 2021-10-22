@@ -203,6 +203,21 @@ namespace TakoLeaf.Models
                 }
                 );
 
+            this.Marques.AddRange(
+                new Marque { Nom = "Volkswagen" },
+                new Marque { Nom = "Peugeot" },
+                new Marque { Nom = "Audi"}
+                );
+
+            this.Modeles.AddRange(
+                new Modele { Nom = "Polo", MarqueId = 1 },
+                new Modele { Nom = "Golf", MarqueId = 1 },
+                new Modele { Nom = "206", MarqueId = 2 },
+                new Modele { Nom = "607", MarqueId = 2 },
+                new Modele { Nom = "A2", MarqueId = 3 },
+                new Modele { Nom = "A4", MarqueId = 3}
+                );
+
             this.SaveChanges();
         }
     }
