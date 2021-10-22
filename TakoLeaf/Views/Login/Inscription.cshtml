@@ -52,21 +52,31 @@
             </div>
 
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.CompteUser.MotDePasse, new { @type = "password", @class = "form-control", placeholder = "Email" })
+                @Html.TextBoxFor(model => model.CompteUser.MotDePasse, new { @type = "password", @class = "form-control", placeholder = "Mot de Passe" })
                 @Html.LabelFor(model => model.CompteUser.MotDePasse)
                 @Html.ValidationMessageFor(model => model.CompteUser.MotDePasse)
             </div>
             
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.CompteUser.Avatar, new { @class = "form-control", placeholder = "Email" })
+                @Html.TextBoxFor(model => model.CompteUser.Avatar, new { @class = "form-control", placeholder = "Avatar" })
                 @Html.LabelFor(model => model.CompteUser.Avatar)
                 @Html.ValidationMessageFor(model => model.CompteUser.Avatar)
             </div>
 
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.CompteUser.Description, new { @class = "form-control", placeholder = "Description rapide" })
+                @Html.TextBoxFor(model => model.CompteUser.Description, new { @class = "form-control", placeholder = "Description" })
                 @Html.LabelFor(model => model.CompteUser.Description)
                 @Html.ValidationMessageFor(model => model.CompteUser.Description)
+            </div>
+
+            <div class="form-floating mb-3">
+                <fieldset style="resize">
+                    <legend>Quel type utilisateur voulez vous être ?</legend>
+                    <input type="radio" id="Provider" name="Type1" value="Provider" />
+                    <label for="Provider">Provider</label>
+                    <input type="radio" id="Consumer" name="Type2" value="Consumer" />
+                    <label for="Consumer">Consumer</label>
+                </fieldset>
             </div>
 
 

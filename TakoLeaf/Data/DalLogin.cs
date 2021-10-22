@@ -32,18 +32,29 @@ namespace TakoLeaf.Data
 
         public CompteUser CreationCompte(string mail, string mdp, byte[] avatar, string description, int adherentId)
         {
-            //string password = EncodeMD5(mdp); TODO Voir probleme avec l'encodage
-            CompteUser compteUser = new CompteUser { Mail = mail, MotDePasse = mdp, Avatar = avatar, Description = description, EtatProfil = EtatProfil.NON_VALIDE, AdherentId = adherentId };
+            string password = EncodeMD5(mdp); // TODO Voir probleme avec l'encodage
+            CompteUser compteUser = new CompteUser { Mail = mail, MotDePasse = password, Avatar = avatar, Description = description, EtatProfil = EtatProfil.NON_VALIDE, AdherentId = adherentId };
             this._bddContext.Add(compteUser);
             this._bddContext.SaveChanges();
             return compteUser;
         }
 
 
-        private string EncodeMD5(string motDePasse)
+        public CompteUser Authentifier(string mail, string mdp)
         {
-            string motDePasseSel = "ChoixResto" + motDePasse + "ASP.NET MVC";
+            string password = EncodeMD5(mdp);
+            CompteUser user = _bddContext.CompteUsers.FirstOrDefault(c => c.Mail == mail && c.MotDePasse == password);
+            return user;
+        }
+
+
+
+        public string EncodeMD5(string motDePasse)
+        {
+            string motDePasseSel = "TakoLeaf" + motDePasse + "ASP.NET MVC";
             return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
         }
+
+        
     }
 }

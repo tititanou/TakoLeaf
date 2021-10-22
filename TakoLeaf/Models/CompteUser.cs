@@ -13,7 +13,7 @@ namespace TakoLeaf.Models
         [Column(TypeName = "varchar(40)")]
         [Required(ErrorMessage = "Cette information est obligatoire")]
         public string Mail { get; set; }
-        [Column(TypeName = "varchar(40)")]
+        [Column(TypeName = "varchar(100)")]
         [Required(ErrorMessage = "Cette information est obligatoire")]
         public string MotDePasse { get; set; }
         public byte[] Avatar {get; set;}
@@ -34,6 +34,7 @@ namespace TakoLeaf.Models
         VALIDE,
         NON_VALIDE,
         ATTENTE_VALIDATION,
+        COMPTE_BLOQUE
 
     }
 

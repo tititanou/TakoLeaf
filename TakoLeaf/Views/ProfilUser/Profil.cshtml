@@ -1,0 +1,47 @@
+﻿@model TakoLeaf.ViewModels.UtilisateurViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Profil</title>
+</head>
+<body>
+    <h1> Bienvenue sur votre profil</h1>
+
+    <div>
+        <a href ="/Login/Deconnexion">Se deconnecter</a>
+    </div>
+    <div>
+        <h1>Informations du profil</h1>
+        <h2>Information Adherent</h2>
+        <ul>
+            <li>Avatar : @Model.CompteUser.Avatar</li>
+            <li>Nom : @Model.Adherent.Nom</li>
+            <li>Prenom : @Model.Adherent.Prenom</li>
+            <li>Date de Naissance : @Model.Adherent.Date_naissance/li>
+            <li>Adresse : @Model.Adherent.Adresse</li>
+            <li>Telephone : @Model.Adherent.Telephone</li>
+        </ul>
+
+        @Html.ActionLink("Modifier information adherent", "ModifInfosAdherent", "ProfilUser", new { id = Model.Adherent.Id })
+
+        <h2>Information Compte</h2>
+        <ul>
+            <li>Adresse mail : @Model.CompteUser.Mail</li>
+            <li>Description : @Model.CompteUser.Description</li>
+            <li>Liste d'amis: @Model.CompteUser.Amis</li>
+            <li>Liste Compte Bloqués : @Model.CompteUser.UserBloques</li>
+            <li>Etat Profil : @Model.CompteUser.EtatProfil</li>
+        </ul>
+
+
+        @Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })
+
+    </div>
+</body>
+</html>
