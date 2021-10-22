@@ -1,4 +1,4 @@
-﻿
+﻿@model TakoLeaf.ViewModels.ProviderViewModel
 @{
     Layout = null;
 }
@@ -11,5 +11,29 @@
     <title>InscriptionProvider</title>
 </head>
 <body>
+    div>
+    <h2>Information sur votre voiture</h2>
+    @using (Html.BeginForm())
+    {
+        <h1> Informations concernant vos information Adherent</h1>
+        <ul>
+            <li>Nom : @Model.Adherent.Nom</li>
+            <li>Prenom : @Model.Adherent.Prenom</li>
+            <li>Date de Naissance : @Model.Adherent.Date_naissance</li>
+            <li>Adresse : @Model.Adherent.Adresse</li>
+            <li>Telephone : @Model.Adherent.Telephone</li>
+        </ul>
+
+        <h1> Informations concernant vos information Compte</h1>
+        <ul>
+            <li>Mail : @Model.CompteUser.Mail</li>
+            <li>Description : @Model.CompteUser.Description</li>
+        </ul>
+
+        
+        <!-- Submit Button-->
+        <button class="btn btn-primary btn-xl" type="submit">Créer</button>
+    }
+    </div>
 </body>
 </html>

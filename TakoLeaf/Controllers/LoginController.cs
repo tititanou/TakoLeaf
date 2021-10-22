@@ -52,13 +52,21 @@ namespace TakoLeaf.Controllers
                 //UtilisateurViewModel uvm2 = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser };
                 if (uvm.Adherent.IsProvider == true)
                 {
+                    dal.IsProviderChecked(adherent);
                     return View("InscriptionProvider");
                 }
 
                 else if (uvm.Adherent.IsConsumer == true)
                 {
+                    dal.IsConsumerChecked(adherent);
                     return Redirect("/Login/InscriptionConsumer");
                     //return RedirectToAction("InscriptionConsumer", "Login", new { uvm = uvm2 });
+                }
+
+                else if (uvm.Adherent.IsConsumer == true && uvm.Adherent.IsProvider == true)
+                {
+
+
                 }
 
             }

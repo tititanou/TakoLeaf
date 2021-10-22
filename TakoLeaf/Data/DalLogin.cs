@@ -69,7 +69,17 @@ namespace TakoLeaf.Data
             return user;
         }
 
+        public void IsProviderChecked(Adherent adherent)
+        {
+            adherent.IsProvider = true;
+            _bddContext.SaveChanges();
+        }
 
+        public void IsConsumerChecked(Adherent adherent)
+        {
+            adherent.IsConsumer = true;
+            _bddContext.SaveChanges();
+        }
 
         public string EncodeMD5(string motDePasse)
         {
