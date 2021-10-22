@@ -16,6 +16,7 @@
                 @Html.TextBoxFor(model => model.Sujet.Titre, new { placeholder = "Sujet"})
                 @Html.LabelFor(model => model.Sujet.Titre)
                 @Html.ValidationMessageFor(model => model.Sujet.Titre)
+                <input type="submit"/>
 
                 @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message"})
                 @Html.LabelFor(model => model.Post.CorpsPost)
