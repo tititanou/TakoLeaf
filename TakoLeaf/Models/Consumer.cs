@@ -17,13 +17,7 @@ namespace TakoLeaf.Models
         public int CarteId { get; set; }
         public Carte Carte { get; set; }
 
-        public Etat etatProfil { get; set; }
-        public enum Etat
-        {
-            Valide,
-            Non_Valide,
-            En_Attente_De_Validation
-        }
+      
 
 
 

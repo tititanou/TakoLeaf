@@ -13,5 +13,22 @@ namespace TakoLeaf.Data
 
         void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string adresse, string telephone);
         void ModifierCompteUser(string mail, string mdp, byte[] avatar, string description);
+
+
+        List<Voiture> ObtenirVoiture();
+
+
+        List<Marque> ObtenirMarques();
+
+
+        List<Carte> ObtenirCartes();
+
+
+        List<Modele> ObtenirModeles();
+
+        List<Consumer> ObtenirConsumers();
+       
+
+      
     }
 }
