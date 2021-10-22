@@ -84,6 +84,15 @@ namespace TakoLeaf.Controllers
             return Redirect("/Login/Connexion");
         }
 
+        public ActionResult InscriptionConsumer(UtilisateurViewModel uvm)
+        {
+            return View(uvm);
+        }
+
+        public ActionResult InscriptionProvider(UtilisateurViewModel uvm)
+        {
+            return View(uvm);
+        }
 
     }
 }
