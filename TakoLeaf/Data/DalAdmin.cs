@@ -88,8 +88,13 @@ namespace TakoLeaf.Data
                     this._bddContext.SaveChanges();
                     break;
             }
+        }
 
-
+        public void SupprimerProfil(int id)
+        {
+            Adherent adherent = ObtenirAdherent(id);
+            this._bddContext.Adherents.Remove(adherent);
+            this._bddContext.SaveChanges();
         }
 
 

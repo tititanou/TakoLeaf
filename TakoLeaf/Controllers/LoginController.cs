@@ -35,7 +35,7 @@ namespace TakoLeaf.Controllers
                 int idAdherent = aderent.Id;
                 CompteUser compteUser = dal.CreationCompte(uvm.CompteUser.Mail, uvm.CompteUser.MotDePasse, uvm.CompteUser.Avatar, uvm.CompteUser.Description, idAdherent);
 
-                var radioButton1 = $('input[name=')
+                //var radioButton1 = $('input[name=')
                 var userClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, uvm.Adherent.Nom),

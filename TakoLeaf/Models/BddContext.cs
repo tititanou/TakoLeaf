@@ -12,6 +12,7 @@ namespace TakoLeaf.Models
     {
 
         public DbSet<Adherent> Adherents { get; set; }
+        public DbSet<Article> Articles { get; set; }
         public DbSet<Provider> Providers { get; set; }
         public DbSet<Devis> Devis { get; set; }
         public DbSet<CompteUser> CompteUsers { get; set; }

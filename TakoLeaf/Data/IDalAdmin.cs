@@ -23,5 +23,7 @@ namespace TakoLeaf.Data
         List<CompteUser> ObtenirTousLesComptesUser();
 
         void ChangerEtatProfil(int id, int option);
+
+        void SupprimerProfil(int id);
     }
 }

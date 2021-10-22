@@ -35,10 +35,11 @@ namespace TakoLeaf.Controllers
 
         }
 
+        // Pages relatives à la gestion de compte
+
         public ActionResult Dashboard()
         {
             List<UtilisateurViewModel> liste = dal.ObtenirTousLesAdherentsEtComptes();
-
             return View(liste);
         }
 
@@ -47,17 +48,27 @@ namespace TakoLeaf.Controllers
             dal.ChangerEtatProfil(id, 0);
             return RedirectToAction("Dashboard");
         }
-
         public ActionResult BloquerProfil(int id)
         {
             dal.ChangerEtatProfil(id, 1);
             return RedirectToAction("Dashboard");
         }
-
         public ActionResult DebloquerProfil(int id)
         {
             dal.ChangerEtatProfil(id, 2);
             return RedirectToAction("Dashboard");
+        }
+        public ActionResult SupprimerCompte(int id)
+        {
+            dal.SupprimerProfil(id);
+            return RedirectToAction("Dashboard");
+        }
+
+        // Pages relatives à la publication d'article
+
+        public ActionResult PublicationArticle()
+        {
+            return View();
         }
 
 
