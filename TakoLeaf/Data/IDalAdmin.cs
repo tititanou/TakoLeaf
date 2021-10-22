@@ -25,5 +25,16 @@ namespace TakoLeaf.Data
         void ChangerEtatProfil(int id, int option);
 
         void SupprimerProfil(int id);
+
+        void AjouterArticle(string titre, string texte);
+
+        List<Article> ObtenirTousLesArticles();
+
+        Article ObtenirArticle(int id);
+
+        Article ModifierArticle(int id, string titre, string texte);
+
+        void SupprimerArticle(int id);
+
     }
 }

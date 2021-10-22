@@ -8,11 +8,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>PublicationArticle</title>
+    <title>ModifierArticle</title>
 </head>
 <body>
-
-    <h1 style="text-align:center; font-family:sans-serif;">Bienvenue sur la page de publication d'article</h1>
 
     @using (Html.BeginForm())
     {
@@ -21,7 +19,7 @@
 
             <div class="form-floating mb-3">
                 @Html.LabelFor(model => model.Titre)
-                @Html.TextBoxFor(m => m.Titre, new { placeholder = "Votre titre ici" })
+                @Html.TextBoxFor(m => m.Titre)
                 @Html.ValidationMessageFor(model => model.Titre)
             </div>
 
@@ -36,15 +34,11 @@
                 @Html.TextBoxFor(model => model.Image)
                 @Html.ValidationMessageFor(model => model.Image)
             </div>
-
             <button class="btn btn-primary btn-xl" type="submit">Publier</button>
 
         </fieldset>
 
     }
-
-
-
 
 </body>
 </html>

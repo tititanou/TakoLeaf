@@ -71,6 +71,42 @@ namespace TakoLeaf.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult PublicationArticle(Article article)
+        {
+            dal.AjouterArticle(article.Titre, article.Texte);
+            return View();
+        }
+
+        public ActionResult Articles()
+        {
+            List<Article> liste = dal.ObtenirTousLesArticles();
+            return View(liste);
+        }
+
+        public ActionResult ModifierArticle(int id)
+        {
+            Article article = dal.ObtenirArticle(id);
+
+            return View(article);
+        }
+        [HttpPost]
+        public ActionResult ModifierArticle(Article article)
+        {
+            dal.ModifierArticle(article.Id, article.Titre, article.Texte);
+
+            return RedirectToAction("Articles");
+        }
+
+        public ActionResult SuppressionArticle(int id)
+        {
+            dal.SupprimerArticle(id);
+
+            return RedirectToAction("Articles");
+
+        }
+
+
 
     }
 }

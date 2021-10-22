@@ -19,6 +19,7 @@ namespace TakoLeaf.Models
         [Required(ErrorMessage = "Attention votre article est vide")]
         public string Texte { get; set; }
         public byte[] Image { get; set; }
+        public bool Public { get; set; }
 
 
 
