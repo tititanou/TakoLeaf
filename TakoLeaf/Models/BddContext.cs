@@ -149,8 +149,6 @@ namespace TakoLeaf.Models
 
                    });
 
-            this.SaveChanges();
-
             this.Sujets.AddRange(
                 new Sujet
                 {
@@ -204,6 +202,8 @@ namespace TakoLeaf.Models
                     AdherentId = 1
                 }
                 );
+
+            this.SaveChanges();
         }
     }
 }
