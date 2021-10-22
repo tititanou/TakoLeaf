@@ -31,11 +31,11 @@ namespace TakoLeaf.Controllers
         {
             if (ModelState.IsValid) //TODO a voir pour le modelState et les Regex
             {
-                Adherent aderent = dal.CreationAdherent(uvm.Adherent.Nom, uvm.Adherent.Prenom, uvm.Adherent.Date_naissance, uvm.Adherent.Adresse, uvm.Adherent.Telephone);
-                int idAdherent = aderent.Id;
+                Adherent adherent = dal.CreationAdherent(uvm.Adherent.Nom, uvm.Adherent.Prenom, uvm.Adherent.Date_naissance, uvm.Adherent.Adresse, uvm.Adherent.Telephone);
+                int idAdherent = adherent.Id;
                 CompteUser compteUser = dal.CreationCompte(uvm.CompteUser.Mail, uvm.CompteUser.MotDePasse, uvm.CompteUser.Avatar, uvm.CompteUser.Description, idAdherent);
 
-                var radioButton1 = $('input[name=')
+             
                 var userClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, uvm.Adherent.Nom),
@@ -48,7 +48,17 @@ namespace TakoLeaf.Controllers
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
                 HttpContext.SignInAsync(userPrincipal);
 
-                return Redirect("/ProfilUser/Profil?id=" + idAdherent);
+                UtilisateurViewModel uvm2 = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser };
+                if(uvm.Adherent.IsProvider==true)
+                {
+                    return View("InscriptionProvider", uvm2);
+                }
+
+                else if(uvm.Adherent.IsConsumer==true)
+                {
+                    return View("InscriptionConsumer", uvm2);
+                }
+                
 
             }
 
@@ -85,6 +95,16 @@ namespace TakoLeaf.Controllers
             return Redirect("/Login/Connexion");
         }
 
+
+        public ActionResult InscriptionConsumer(UtilisateurViewModel uvm)
+        {
+            return View(uvm);
+        }
+
+        public ActionResult InscriptionProvider(UtilisateurViewModel uvm)
+        {
+            return View(uvm);
+        }
 
     }
 }
