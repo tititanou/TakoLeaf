@@ -15,11 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< Updated upstream
     <Folder Include="wwwroot\" />
-=======
-    <Folder Include="ViewModels\" />
->>>>>>> Stashed changes
   </ItemGroup>
 
 </Project>
