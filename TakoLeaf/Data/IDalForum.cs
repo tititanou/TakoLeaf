@@ -10,5 +10,6 @@ namespace TakoLeaf.Data
         void CreationPost(Post post);
         List<Post> GetPosts(int id);
         Sujet GetSujet(int id);
+        List<Sujet> GetAllSujets();
     }
 }

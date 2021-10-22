@@ -1,0 +1,52 @@
+﻿@model TakoLeaf.ViewModels.UtilisateurViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InscriptionConsumer</title>
+</head>
+<body>
+
+    <div>
+        <h1> Informations concernant vos information Adherent</h1>
+        <ul>
+            <li>Nom : @Model.Adherent.Nom</li>
+            <li>Prenom : @Model.Adherent.Prenom</li>
+            <li>Date de Naissance : @Model.Adherent.Date_naissance/li>
+            <li>Adresse : @Model.Adherent.Adresse</li>
+            <li>Telephone : @Model.Adherent.Telephone</li>
+        </ul>
+
+        <h1> Informations concernant vos information Compte</h1>
+        <ul>
+            <li>Mail : @Model.CompteUser.Mail</li>
+            <li>Description : @Model.CompteUser.Description</li>
+        </ul>
+
+    </div>
+
+
+
+    <div>
+        @using (Html.BeginForm())
+        {
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Adherent.Prenom, new { @class = "form-control", placeholder = "Prenom" })
+                @Html.LabelFor(model => model.Adherent.Prenom)
+                @Html.ValidationMessageFor(model => model.Adherent.Prenom)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Adherent.Nom, new { @class = "form-control", placeholder = "Nom" })
+                @Html.LabelFor(model => model.Adherent.Nom)
+                @Html.ValidationMessageFor(model => model.Adherent.Nom)
+            </div>
+         }
+    </div>
+</body>
+</html>

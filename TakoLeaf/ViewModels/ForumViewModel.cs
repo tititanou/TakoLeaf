@@ -8,5 +8,7 @@ namespace TakoLeaf.ViewModels
     {
         public Sujet Sujet { get; set; }
         public List<Post> Posts { get; set; }
+        public Adherent Adherent { get; set; }
+        public Post Post { get; set; }
     }
 }

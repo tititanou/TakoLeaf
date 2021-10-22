@@ -3,6 +3,7 @@
     Layout = null;
 }
 
+
 <!DOCTYPE html>
 
 <html>
@@ -56,7 +57,7 @@
                 @Html.LabelFor(model => model.CompteUser.MotDePasse)
                 @Html.ValidationMessageFor(model => model.CompteUser.MotDePasse)
             </div>
-            
+
             <div class="form-floating mb-3">
                 @Html.TextBoxFor(model => model.CompteUser.Avatar, new { @class = "form-control", placeholder = "Avatar" })
                 @Html.LabelFor(model => model.CompteUser.Avatar)
@@ -69,20 +70,19 @@
                 @Html.ValidationMessageFor(model => model.CompteUser.Description)
             </div>
 
-            <div class="form-floating mb-3">
-                <fieldset style="resize">
-                    <legend>Quel type utilisateur voulez vous être ?</legend>
-                    <input type="radio" id="Provider" name="Type1" value="Provider" />
-                    <label for="Provider">Provider</label>
-                    <input type="radio" id="Consumer" name="Type2" value="Consumer" />
-                    <label for="Consumer">Consumer</label>
-                </fieldset>
+            <div>
+                @Html.CheckBoxFor(model => model.Adherent.IsConsumer)
+                @Html.LabelFor(model => model.Adherent.IsConsumer)
+                @Html.CheckBoxFor(model => model.Adherent.IsProvider)
+                @Html.LabelFor(model => model.Adherent.IsProvider)
             </div>
-
 
             <!-- Submit Button-->
             <button class="btn btn-primary btn-xl" type="submit">Créer</button>
         }
+
+
+       
     </div>
 </body>
 </html>

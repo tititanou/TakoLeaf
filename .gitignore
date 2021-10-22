@@ -38,3 +38,13 @@ msbuild.wrn
 TakoLeaf/obj/
 
 TakoLeaf/appsettings.json
+
+*.json
+
+*.dll
+
+*.pdb
+
+*.sln
+
+*.props

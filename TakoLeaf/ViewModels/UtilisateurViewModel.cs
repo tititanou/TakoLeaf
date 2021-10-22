@@ -10,5 +10,7 @@ namespace TakoLeaf.ViewModels
     {
         public Adherent Adherent { get; set; }
         public CompteUser CompteUser { get; set; }
+        public Consumer Consumer { get; set; }
+        public Provider Provider { get; set; }
     }
 }

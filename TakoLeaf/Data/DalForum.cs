@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using TakoLeaf.Models;
 
 namespace TakoLeaf.Data
@@ -45,7 +46,7 @@ namespace TakoLeaf.Data
             return sujet;
         }
 
-        public List<Sujet> GetAllSujet()
+        public List<Sujet> GetAllSujets()
         {
             return this._bddContext.Sujets.ToList();
         }
@@ -53,7 +54,7 @@ namespace TakoLeaf.Data
         public List<Post> GetPosts(int id)
         {
             List<Post> posts = new List<Post>();
-            List<Post> allPosts = this._bddContext.Posts.ToList();
+            List<Post> allPosts = this._bddContext.Posts.Include(p => p.Adherent).ToList();
             for(int i = 0; i < allPosts.Count(); i++)
             {
                 if (allPosts[i].SujetId == id)
