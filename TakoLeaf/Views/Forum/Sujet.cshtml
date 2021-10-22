@@ -15,10 +15,11 @@
 <div class="post">
     <p>@item.CorpsPost</p>
     <div class="ftr">
-        <em>@item.Adherent.Prenom @item.Adherent.Nom</em>
+        <em>@item.Adherent.Prenom</em>
         <em>@item.Date</em>
     </div>
+    @Html.ActionLink("R?pondre", "R?pondre", "Forum", new { id = item.Id })
 </div>
-                <hr />}
+    <hr />}
 </body>
 </html>

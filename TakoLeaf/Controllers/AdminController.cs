@@ -21,7 +21,7 @@ namespace TakoLeaf.Controllers
             this.dal = new DalAdmin();
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
 
             AdminViewModel viewModel = new AdminViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
@@ -35,27 +35,30 @@ namespace TakoLeaf.Controllers
 
         }
 
-        public IActionResult Dashboard()
+        public ActionResult Dashboard()
         {
             List<UtilisateurViewModel> liste = dal.ObtenirTousLesAdherentsEtComptes();
 
             return View(liste);
         }
 
-        public IActionResult ValiderProfil(int id)
+        public ActionResult ValiderProfil(int id)
         {
             dal.ChangerEtatProfil(id, 0);
             return RedirectToAction("Dashboard");
         }
 
-        public IActionResult BloquerProfil(int id)
+        public ActionResult BloquerProfil(int id)
         {
             dal.ChangerEtatProfil(id, 1);
-            return RedirectToAction("Dashboard")
-;
+            return RedirectToAction("Dashboard");
         }
 
-
+        public ActionResult DebloquerProfil(int id)
+        {
+            dal.ChangerEtatProfil(id, 2);
+            return RedirectToAction("Dashboard");
+        }
 
 
     }

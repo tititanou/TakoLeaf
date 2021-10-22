@@ -22,73 +22,126 @@
     <div style="text-align:center">
         <h1>Welcome to the DashBoard</h1>
     </div>
-    <h3>Tableau de bord Adhérents</h3>
-    <table style="text-align:center">
-        <tr>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Description</th>
-            <th>Mail</th>
-            <th>Etat du profil</th>
-        </tr>
 
-        @foreach (var item in Model)
-        {
+    <h2 style="text-align:center; font-family:sans-serif">Vue d'ensemble adhérent</h2>
+
+    <div style="position:center">
+        <table>
             <tr>
-                <td>@item.Adherent.Nom</td>
-                <td>@item.Adherent.Prenom</td>
-                <td>@item.CompteUser.Description</td>
-                <td>@item.CompteUser.Mail</td>
-                <td>@item.CompteUser.EtatProfil</td>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Description</th>
+                <th>Mail</th>
+                <th>Etat du profil</th>
             </tr>
-        }
 
-    </table>
-
-    <h3>Nombre d'adhérent actuel : @Model.Count</h3> <br />
-
-    <br />
-
-    <table>
-        <tr>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Description</th>
-            <th>Mail</th>
-            <th>Etat du profil</th>
-        </tr>
-
-        @{ int count = 0;}
-
-
-        @foreach (var item in Model)
-        {
-
-
-            if (item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.NON_VALIDE || item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
+            @foreach (var item in Model)
             {
-
-                string editLink = "/Admin/ValiderProfil?id=" + item.CompteUser.AdherentId;
-                string editLink1 = "/Admin/BloquerProfil?id=" + item.CompteUser.AdherentId;
-
                 <tr>
                     <td>@item.Adherent.Nom</td>
                     <td>@item.Adherent.Prenom</td>
                     <td>@item.CompteUser.Description</td>
                     <td>@item.CompteUser.Mail</td>
                     <td>@item.CompteUser.EtatProfil</td>
-                    @*<td>@Html.ActionLink("Valider Profil", "ValiderProfil", "Admin", new { id = item.CompteUser.AdherentId })  </td>*@
-                    <td><a href="@editLink">Valider le profil</a></td>
-                    <td><a href="@editLink1">Bloquer le compte</a></td>
                 </tr>
-
-                count++;
             }
-        }
 
-    </table>
+        </table>
+    </div>
 
-    <h3>Comptes nécessitant une validation de profil : @count</h3>
+    <h3>Nombre d'adhérent actuel : <p style="color:crimson">@Model.Count</p></h3> <br />
+
+    <br />
+
+    <h2 style="text-align:center; font-family:sans-serif;"> Comptes en attente de validation</h2>
+
+    <div style="position:center">
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Description</th>
+                <th>Mail</th>
+                <th>Etat du profil</th>
+            </tr>
+
+            @{ int count = 0;}
+
+
+            @foreach (var item in Model)
+            {
+
+
+                if (item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.NON_VALIDE || item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
+                {
+
+                    string editLink = "/Admin/ValiderProfil?id=" + item.CompteUser.AdherentId;
+                    string editLink1 = "/Admin/BloquerProfil?id=" + item.CompteUser.AdherentId;
+
+                    <tr>
+                        <td>@item.Adherent.Nom</td>
+                        <td>@item.Adherent.Prenom</td>
+                        <td>@item.CompteUser.Description</td>
+                        <td>@item.CompteUser.Mail</td>
+                        <td>@item.CompteUser.EtatProfil</td>
+                        @*<td>@Html.ActionLink("Valider Profil", "ValiderProfil", "Admin", new { id = item.CompteUser.AdherentId })  </td>*@
+                        <td><a href="@editLink">Valider le profil</a></td>
+                        <td><a href="@editLink1">Bloquer le compte</a></td>
+                    </tr>
+
+                    count++;
+                }
+            }
+
+        </table>
+    </div>
+
+    <h3>Comptes nécessitant une validation de profil : <p style="color:crimson">@count</p></h3><br />
+
+    <h2 style="text-align:center; font-family:sans-serif;">Comptes bloqués</h2>
+
+    @{count = 0;}
+
+    <div style="position:center">
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Description</th>
+                <th>Mail</th>
+                <th>Etat du profil</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+
+
+                if (item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.COMPTE_BLOQUE)
+                {
+
+
+                    string editLink3 = "/Admin/DebloquerProfil?id=" + item.CompteUser.AdherentId;
+
+                    <tr>
+                        <td>@item.Adherent.Nom</td>
+                        <td>@item.Adherent.Prenom</td>
+                        <td>@item.CompteUser.Description</td>
+                        <td>@item.CompteUser.Mail</td>
+                        <td>@item.CompteUser.EtatProfil</td>
+                        <td>@Html.ActionLink("Débloquer Profil", "DebloquerProfil", "Admin", new { id = item.CompteUser.AdherentId })</td>
+
+                    </tr>
+
+                    count++;
+
+                }
+            }
+
+
+        </table>
+    </div>
+    <h3>Nombre de comptes bloqués : <p style="color:crimson">@count</p></h3><br />
+
 
 
 </body>
