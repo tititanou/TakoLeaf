@@ -100,15 +100,38 @@ namespace TakoLeaf.Data
         public void AjouterArticle(string titre, string texte)
         {
             DateTime DateDuJour = DateTime.Now;
-            Article Article = new Article { Titre = titre, Texte = texte, Date = DateDuJour, Public = false, Image = null };
+            Article Article = new Article { Titre = titre, Texte = texte, DateRedaction = DateDuJour, Public = false, Image = null };
             // TODO Penser à ajouter l'ID de l'adhérent et image
             this._bddContext.Articles.Add(Article);
             this._bddContext.SaveChanges();
         }
 
+        public void PublierArticle(Article article)
+        {
+            this.AjouterArticle(article.Titre, article.Texte);
+            
+            article.DatePublication = DateTime.Now;
+            article.Public = true;
+
+            this._bddContext.Articles.Update(article);
+            this._bddContext.SaveChanges();
+  
+        }
+
+
         public List<Article> ObtenirTousLesArticles()
         {
-            List<Article> liste = this._bddContext.Articles.ToList();
+            List<Article> liste = this._bddContext.Articles.OrderBy(a => a.Id).ToList();
+            return liste;
+        }
+
+        public List<Article> ObtenirTousLesArticlesPublic()
+        {
+
+            // Attention, les articles sont récupérés par
+            // ordre décroissant en date pour être affiché
+            // dans l'ordre dans le fil d'actualité
+            List<Article> liste = this._bddContext.Articles.OrderByDescending(a => a.DatePublication).Where(a => a.Public == true).ToList();
             return liste;
         }
 
@@ -133,6 +156,30 @@ namespace TakoLeaf.Data
             this._bddContext.Articles.Remove(article);
             this._bddContext.SaveChanges();
         }
+
+        public void ModifierVisibiliteArticle(int id)
+        {
+            Article article = this._bddContext.Articles.Where(a => a.Id == id).FirstOrDefault();
+
+            if (article.Public)
+            {
+                article.Public = false;
+
+            } else
+            {
+                if (article.DatePublication != null)
+                {
+                    article.DatePublication = DateTime.Now;
+                }
+                article.Public = true;
+            }
+            
+            this._bddContext.Articles.Update(article);
+            this._bddContext.SaveChanges();
+        }
+
+
+
 
 
 

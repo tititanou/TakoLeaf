@@ -47,7 +47,7 @@
             <article class="browser">
                 <h3>@item.Titre</h3>
                 <p>@item.Texte</p>
-                <p>Publié le : @item.Date</p>>
+                <p>Publié le : @item.DatePublication</p>
             </article>
             <button>@Html.ActionLink("Modifier Article", "ModifierArticle", "Admin", new { id = item.Id })</button>
             <button>@Html.ActionLink("Supprimer Article", "SuppressionArticle", "Admin", new { id = item.Id })</button>

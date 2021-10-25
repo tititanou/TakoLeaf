@@ -15,7 +15,8 @@ namespace TakoLeaf.Models
         [Required(ErrorMessage = "Merci d'indiquer un titre")]
         [StringLength(100)]
         public string Titre { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime DateRedaction { get; set; }
+        public DateTime DatePublication { get; set; }
         [Required(ErrorMessage = "Attention votre article est vide")]
         public string Texte { get; set; }
         public byte[] Image { get; set; }
