@@ -11,7 +11,7 @@ namespace TakoLeaf.Models
         [Display(Name = "Identifiant")]
         public string Id { get; set; }
         [Required]
-        [Column(TypeName = "varchar(40)")]
+        [Column(TypeName = "varchar(50)")]
         [Display(Name ="Mot de passe")]
         public string Pwd { get; set; }
     }
