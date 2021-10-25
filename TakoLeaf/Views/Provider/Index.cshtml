@@ -26,15 +26,15 @@
             <legend>Quels sont vos Talents ?</legend>
 
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.Competences, new { @class = "form-control", placeholder = "Quel Catégorie de compétence ?" })
-                @Html.LabelFor(model => model.Competences)
-                @Html.ValidationMessageFor(model => model.Competences)
+                @Html.TextBoxFor(model => model.Competence, new { @class = "form-control", placeholder = "Quel Catégorie de compétence ?" })
+                @Html.LabelFor(model => model.Competence)
+                @Html.ValidationMessageFor(model => model.Competence)
             </div>
 
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.SsCateCompetences, new { @class = "form-control", placeholder = "Quelle sous-catégorie ?" })
-                @Html.LabelFor(model => model.SsCateCompetences)
-                @Html.ValidationMessageFor(model => model.SsCateCompetences)
+                @Html.TextBoxFor(model => model.SsCateCompetence, new { @class = "form-control", placeholder = "Quelle sous-catégorie ?" })
+                @Html.LabelFor(model => model.SsCateCompetence)
+                @Html.ValidationMessageFor(model => model.SsCateCompetence)
             </div>
 
         </fieldset>

@@ -9,16 +9,15 @@ namespace TakoLeaf.ViewModels
     public class ProviderViewModel
     {
         public Adherent Adherent { get; set; }
-        public CompteUser CompteUser { get; set; }
 
         public Provider Provider { get; set; }
 
+        public CompteUser CompteUser { get; set; }
+
+        public Competence Competence { get; set; }
+        public CateCompetence CateCompetence { get; set; }
+        public SsCateCompetence SsCateCompetence { get; set; }
+        public List<ProviderCheckBoxViewModel> ListSSC { get; set; }
         public Rib Rib { get; set; }
-
-        public List<Ressource> Ressources { get; set; }
-
-        public List<Competence> Competences { get; set; }
-        public List<SsCateCompetence> SsCateCompetences { get; set; }
-
     }
 }

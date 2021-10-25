@@ -219,6 +219,20 @@ namespace TakoLeaf.Models
                 new Modele { Nom = "A4", MarqueId = 3}
                 );
 
+            this.CateCompetences.AddRange(
+                new CateCompetence { Intitule = "Pneu" },
+                new CateCompetence { Intitule = "Moteur"}
+                );
+
+            this.SsCateCompetences.AddRange(
+                new SsCateCompetence { Intitule = "Changer Roue", CateCompetenceId = 1 },
+                new SsCateCompetence { Intitule = "Changer Pneu", CateCompetenceId = 1 },
+                new SsCateCompetence { Intitule = "Changer la distribution", CateCompetenceId = 2 },
+                new SsCateCompetence { Intitule = "Changer les viblequins", CateCompetenceId = 2 }
+                ); ;
+
+
+
             this.Articles.AddRange(
                 new Article
                 {
