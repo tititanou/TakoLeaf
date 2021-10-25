@@ -37,7 +37,7 @@ namespace TakoLeaf.Controllers
 
         // Pages relatives à la gestion de compte
 
-        public ActionResult Dashboard()
+        public ActionResult GestionComptes()
         {
             List<UtilisateurViewModel> liste = dal.ObtenirTousLesAdherentsEtComptes();
             return View(liste);
@@ -46,22 +46,22 @@ namespace TakoLeaf.Controllers
         public ActionResult ValiderProfil(int id)
         {
             dal.ChangerEtatProfil(id, 0);
-            return RedirectToAction("Dashboard");
+            return RedirectToAction("GestionComptes");
         }
         public ActionResult BloquerProfil(int id)
         {
             dal.ChangerEtatProfil(id, 1);
-            return RedirectToAction("Dashboard");
+            return RedirectToAction("GestionComptes");
         }
         public ActionResult DebloquerProfil(int id)
         {
             dal.ChangerEtatProfil(id, 2);
-            return RedirectToAction("Dashboard");
+            return RedirectToAction("GestionComptes");
         }
         public ActionResult SupprimerCompte(int id)
         {
             dal.SupprimerProfil(id);
-            return RedirectToAction("Dashboard");
+            return RedirectToAction("GestionComptes");
         }
 
         // Pages relatives à la publication d'article
