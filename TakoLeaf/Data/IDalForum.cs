@@ -11,5 +11,11 @@ namespace TakoLeaf.Data
         List<Post> GetPosts(int id);
         Sujet GetSujet(int id);
         List<Sujet> GetAllSujets();
+        void ModificationSujet(Sujet sujet);
+        void ModificationPost(Post post);
+        void SuppressionSujet(Sujet sujet);
+        void SuppressionPost(Post post);
+        Post Get1Post(int id);
+        Sujet RechercheSujetParTitre(string titre);
     }
 }

@@ -1,0 +1,24 @@
+@model TakoLeaf.ViewModels.ForumViewModel
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Repondre</title>
+</head>
+<body>
+    <div class="post">
+        <p>@Model.Post.CorpsPost</p>
+        <div class="ftr">
+            <em>@Model.Post.Adherent.Prenom</em>
+            <em>@Model.Post.Date</em>
+        </div>
+        @using (Html.BeginForm())
+        {
+@Html.LabelFor(model => model.Post.CorpsPost)
+                @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" })
+                                @Html.ValidationMessageFor(model => model.Post.CorpsPost)}
+</body>
+</html>

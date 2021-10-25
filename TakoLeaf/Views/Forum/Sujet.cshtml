@@ -18,8 +18,28 @@
         <em>@item.Adherent.Prenom</em>
         <em>@item.Date</em>
     </div>
-    @Html.ActionLink("R?pondre", "R?pondre", "Forum", new { id = item.Id })
+    <button type="button" onclick="OuvrirPostForm()">Répondre</button>
+    <button type="button" onclick="location.href='@Url.Action("Citer", "Forum", new { id = item.Id })'">Citer</button>
+    <button type="button" onclick="location.href='@Url.Action("Supprimer", "Forum", new { id = item.Id })'">Supprimer</button>
+    <button type="button" onclick="location.href='@Url.Action("ModifierPost", "Forum", new { id = item.Id })'">Modifier</button>
 </div>
-    <hr />}
+                <br />
+                                <div style="visibility:hidden" id="postForm">
+                                    @using (Html.BeginForm())
+                                    {
+                    @Html.LabelFor(model => model.Post.CorpsPost)
+                                        @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" })
+                                                            @Html.ValidationMessageFor(model => model.Post.CorpsPost)
+                                                                                <button onclick="location.href='@Url.Action("Repondre", "Forum", new { id = item.Id })'">Valider</button>}
+                                </div>
+                                                <hr />}
+
+    <script>function OuvrirPostForm() {
+            if (document.getElementById("sujetForm").value) {
+                document.getElementById("postForm").style.visibility = "visible";
+            }
+            //document.getElementById("time").innerHTML = currDate;
+        }</script>
+
 </body>
 </html>

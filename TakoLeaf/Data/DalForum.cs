@@ -22,8 +22,25 @@ namespace TakoLeaf.Data
 
         public void CreationSujet(Sujet sujet)
         {
-            this._bddContext.Sujets.Add(sujet);
-            this._bddContext.SaveChanges();
+            bool ok = false;
+            List<Sujet> sujets = this._bddContext.Sujets.ToList();
+            for (int i = 0; i < sujets.Count(); i++)
+            {
+                if (sujets[i].Titre.ToLower().Equals(sujet.Titre.ToLower()))
+                {
+                    ok = false;
+                    return;
+                }
+                else
+                {
+                    ok = true;
+                }
+            }
+            if (ok)
+            {
+                this._bddContext.Sujets.Add(sujet);
+                this._bddContext.SaveChanges();
+            }
         }
 
         public void CreationPost(Post post)
@@ -46,6 +63,20 @@ namespace TakoLeaf.Data
             return sujet;
         }
 
+        public Post Get1Post(int id)
+        {
+            Post post = null;
+            List<Post> posts = this._bddContext.Posts.ToList();
+            for (int i = 0; i < posts.Count(); i++)
+            {
+                if (posts[i].Id == id)
+                {
+                    post = posts[i];
+                }
+            }
+            return post;
+        }
+
         public List<Sujet> GetAllSujets()
         {
             return this._bddContext.Sujets.ToList();
@@ -63,6 +94,44 @@ namespace TakoLeaf.Data
                 }
             }
             return posts;
+        }
+
+        public void SuppressionSujet(Sujet sujet)
+        {
+            this._bddContext.Remove(sujet);
+            this._bddContext.SaveChanges();
+        }
+
+        public void SuppressionPost(Post post)
+        {
+            this._bddContext.Remove(post);
+            this._bddContext.SaveChanges();
+        }
+
+        public void ModificationSujet(Sujet sujet)
+        {
+            this._bddContext.Update(sujet);
+            this._bddContext.SaveChanges();
+        }
+
+        public void ModificationPost(Post post)
+        {
+            this._bddContext.Update(post);
+            this._bddContext.SaveChanges();
+        }
+
+        public Sujet RechercheSujetParTitre(string titre)
+        {
+            List<Sujet> sujets = this._bddContext.Sujets.ToList();
+            Sujet sujet = null;
+            for(int i = 0; i < sujets.Count(); i++)
+            {
+                if (sujets[i].Titre.Equals(titre))
+                {
+                    sujet = sujets[i];
+                }
+            }
+            return sujet;
         }
     }
 }
