@@ -53,7 +53,7 @@
                 @Html.LabelFor(model => model.Voiture.Annee)
                 @Html.ValidationMessageFor(model => model.Voiture.Annee)
             </div>
-
+            // TODO mettre un lien pour ajouter des Marque et des Modeles si non présent dans la base de données
             <div>
                 @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques)
                 @Html.LabelFor(model => model.Marque.Nom)

@@ -62,6 +62,22 @@ namespace TakoLeaf.Data
             return liste;
         }
 
+        public List<Competence> ObtenirCompetences()
+        {
+            List<Competence> liste = _bddContext.Competences.ToList();
+            return liste;
+        }
+        public List<SsCateCompetence> ObtenirSSCompetences()
+        {
+            List<SsCateCompetence> liste = _bddContext.SsCateCompetences.ToList();
+            return liste;
+        }
+        public List<CateCompetence> ObtenirCateCompetences()
+        {
+            List<CateCompetence> liste = _bddContext.CateCompetences.ToList();
+            return liste;
+        }
+
         public void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string adresse, string telephone)
         {
             Adherent adherent = _bddContext.Adherents.Find(id);

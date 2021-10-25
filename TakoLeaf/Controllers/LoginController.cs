@@ -53,7 +53,7 @@ namespace TakoLeaf.Controllers
                 if (uvm.Adherent.IsProvider == true)
                 {
                     dal.IsProviderChecked(adherent);
-                    return View("InscriptionProvider");
+                    return Redirect("/Login/InscriptionProvider");
                 }
 
                 else if (uvm.Adherent.IsConsumer == true)
@@ -158,10 +158,24 @@ namespace TakoLeaf.Controllers
 
 
         
-        //public ActionResult InscriptionProvider(UtilisateurViewModel uvm)
-        //{
-        //    return View(uvm);
-        //}
+        public ActionResult InscriptionProvider()
+        {
+            DalProfil dal = new DalProfil();
+            Adherent adherent = dal.ObtenirAdherents().Last();
+            CompteUser compteUser = dal.ObtenirCompteUser().Where(c => c.AdherentId == adherent.Id).FirstOrDefault();
+
+            //UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser };
+
+            List<ProviderCheckBoxViewModel> listeSS = new List<ProviderCheckBoxViewModel>();
+            foreach(SsCateCompetence item in dal.ObtenirSSCompetences().ToList().OrderBy(c => c.Id))
+            {
+                listeSS.Add(new ProviderCheckBoxViewModel { Intitule = item.Intitule, EstSelectione = false });
+            }
+            
+            ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, ListSSC = listeSS };
+
+            return View(pvm);
+        }
 
     }
 }

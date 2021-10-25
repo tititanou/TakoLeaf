@@ -11,7 +11,7 @@
     <title>InscriptionProvider</title>
 </head>
 <body>
-    div>
+    <div>
     <h2>Information sur votre voiture</h2>
     @using (Html.BeginForm())
     {
@@ -30,7 +30,55 @@
             <li>Description : @Model.CompteUser.Description</li>
         </ul>
 
-        
+        <h1>Quelles sont vos compétences en tant que Provider</h1>
+            <div>
+               @for (int i = 0; i < Model.ListSSC.Count; i++)
+               {
+                    @Html.CheckBoxFor(m => m.ListSSC[i].EstSelectione)
+                   // TODO a voir pourquoi ca sort Intitule en toute lettre et pas le nom de la competecnce
+                    @Html.LabelFor(m => m.ListSSC[i].Intitule)
+                }
+            </div>
+
+            @*<div>
+                @Html.TextBoxFor(model => model.Voiture.Annee, new { @class = "form-control", placeholder = "Annee" })
+                @Html.LabelFor(model => model.Voiture.Annee)
+                @Html.ValidationMessageFor(model => model.Voiture.Annee)
+            </div>
+
+            <div>
+                @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques)
+                @Html.LabelFor(model => model.Marque.Nom)
+            </div>
+
+            <div>
+                @Html.DropDownListFor(model => model.Modele.Nom, (SelectList)ViewBag.Modele)
+                @Html.LabelFor(model => model.Modele.Nom)
+            </div>*@
+
+
+
+            <h2>Information sur votre RIB</h2>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Rib.Titulaire, new { @class = "form-control", placeholder = "Titulaire" })
+                @Html.LabelFor(model => model.Rib.Titulaire)
+                @Html.ValidationMessageFor(model => model.Rib.Titulaire)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Rib.Iban, new { @class = "form-control", placeholder = "IBAN" })
+                @Html.LabelFor(model => model.Rib.Iban)
+                @Html.ValidationMessageFor(model => model.Rib.Iban)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Rib.Banque, new { @class = "form-control", placeholder = "Date d'Expiration" })
+                @Html.LabelFor(model => model.Rib.Banque)
+                @Html.ValidationMessageFor(model => model.Rib.Banque)
+            </div>
+
+            
         <!-- Submit Button-->
         <button class="btn btn-primary btn-xl" type="submit">Créer</button>
     }
