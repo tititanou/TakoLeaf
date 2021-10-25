@@ -14,7 +14,7 @@ namespace TakoLeaf.ViewModels
 
         public CompteUser CompteUser { get; set; }
 
-        public Competence Competence { get; set; }
+        public List<Competence> Competence { get; set; }
         public CateCompetence CateCompetence { get; set; }
         public SsCateCompetence SsCateCompetence { get; set; }
         public List<ProviderCheckBoxViewModel> ListSSC { get; set; }

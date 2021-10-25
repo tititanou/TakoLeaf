@@ -23,7 +23,7 @@ namespace TakoLeaf.Controllers
             return View();
         }
 
-        public IActionResult Profil(int id)
+        public IActionResult ProfilConsumer(int id)
         {
             Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
             CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == id);
@@ -38,6 +38,19 @@ namespace TakoLeaf.Controllers
             return View(uvm);
         }
 
+        public IActionResult ProfilProvider(int id)
+        {
+            Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
+            CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == id);
+            Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.AdherentId == id);
+            List<Competence> competence = dal.ObtenirCompetences().Where(c => c.ProviderId == provider.Id).ToList();
+
+
+            ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, Competence = competence, Provider = provider };
+
+            return View(pvm);
+        }    
+
         public IActionResult ModifInfosAdherent(int id)
         {
             Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
@@ -51,7 +64,18 @@ namespace TakoLeaf.Controllers
             {
                 dal.ModifierInfosAdherent(adherent.Id, adherent.Nom, adherent.Prenom, adherent.Date_naissance, adherent.Adresse, adherent.Telephone);
                 int id = adherent.Id;
-                return Redirect("/ProfilUser/Profil?id="+ id);
+                if(adherent.IsConsumer == true)
+                {
+                    return Redirect("/ProfilUser/ProfilConsumer?id=" + id);
+                }
+                
+                else if (adherent.IsProvider == true)
+                {
+                    return Redirect("/ProfilUser/ProfilProvider?id=" + id);
+                }
+
+                return View();
+               
             }
             
         }
@@ -69,7 +93,18 @@ namespace TakoLeaf.Controllers
             {
                 dal.ModifierCompteUser(compteUser.Mail, compteUser.MotDePasse, compteUser.Avatar, compteUser.Description);
                 int id = compteUser.AdherentId;
-                return View("/ProfilUser/Profil?id=" + id);
+                Adherent adherent = dal.ObtenirAdherents().Where(a => a.Id == id).FirstOrDefault();
+                if (adherent.IsConsumer == true)
+                {
+                    return Redirect("/ProfilUser/ProfilConsumer?id=" + id);
+                }
+
+                else if (adherent.IsProvider == true)
+                {
+                    return Redirect("/ProfilUser/ProfilProvider?id=" + id);
+                }
+
+                return View();
             }
             
         }

@@ -17,6 +17,9 @@ namespace TakoLeaf.Data
         Voiture CreationVoiture(string imma, string titulaire, Carburant carburant, int annee, int idmodele, int consumerid);
         Carte CreationCarte(string titulaire, string numeroCarte, string date, int crypto);
         Consumer CreationConsumer(int idAdherent, int idcarte);
+        Rib CreationRib(string titulaire, string iban, string banque);
+        Provider CreationProvider(int idAdherant, int idrib);
+        Competence CreationCompetence(double tarifhoraire, int idsscomp,int providerid,string nomssc);
         public void IsConsumerChecked(Adherent adherent);
         public void IsProviderChecked(Adherent adherent);
         string EncodeMD5(string motDePasse);

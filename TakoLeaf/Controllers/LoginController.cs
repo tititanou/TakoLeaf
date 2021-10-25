@@ -16,6 +16,7 @@ namespace TakoLeaf.Controllers
     public class LoginController : Controller
     {
         private IdalLogin dal;
+        private IdalProfil dalP;
 
         public LoginController()
         {
@@ -92,8 +93,13 @@ namespace TakoLeaf.Controllers
             if(user != null)
             {
                 int id = user.AdherentId;
-                return Redirect("/ProfilUser/Profil?id="+id);
-                               
+                Adherent adherent = dalP.ObtenirAdherents().Where(a => a.Id == id).FirstOrDefault();
+
+                if(adherent.IsConsumer == true)
+                return Redirect("/ProfilUser/ProfilConsumer?id="+id);
+                else if(adherent.IsProvider == true)
+                return Redirect("/ProfilUser/ProfilProvider?id=" + id);
+
             }
             return View();
         }
@@ -153,7 +159,7 @@ namespace TakoLeaf.Controllers
             Consumer consumer = dal.CreationConsumer(idadherent, idcarte);
             int idmodele = dalProfil.ObtenirModeles().Where(v => v.Nom == uvm.Modele.Nom).FirstOrDefault().Id;
             Voiture voiture = dal.CreationVoiture(uvm.Voiture.Immatriculation, uvm.Voiture.Titulaire, uvm.Voiture.Carburant, uvm.Voiture.Annee, idmodele, consumer.Id);
-            return Redirect("/ProfilUser/Profil?id=" + idadherent);
+            return Redirect("/ProfilUser/ProfilConsumer?id=" + idadherent);
         }
 
 
@@ -169,7 +175,7 @@ namespace TakoLeaf.Controllers
             List<ProviderCheckBoxViewModel> listeSS = new List<ProviderCheckBoxViewModel>();
             foreach(SsCateCompetence item in dal.ObtenirSSCompetences().ToList().OrderBy(c => c.Id))
             {
-                listeSS.Add(new ProviderCheckBoxViewModel { Intitule = item.Intitule, EstSelectione = false });
+                listeSS.Add(new ProviderCheckBoxViewModel { Intitule = item.Intitule, EstSelectione = false, SsCateCompetenceId = item.Id });
             }
             
             ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, ListSSC = listeSS };
@@ -177,5 +183,37 @@ namespace TakoLeaf.Controllers
             return View(pvm);
         }
 
+
+        [HttpPost]
+        public ActionResult InscriptionProvider(ProviderViewModel pvm)
+        {
+
+            Rib rib = dal.CreationRib(pvm.Rib.Titulaire, pvm.Rib.Iban, pvm.Rib.Banque);
+            DalProfil dalProfil = new DalProfil();
+            int idadherent = dalProfil.ObtenirAdherents().Last().Id;
+            Provider provider = dal.CreationProvider(idadherent, rib.Id);
+            
+            List<int> listeId = new List<int>();
+            List<double> listeT = new List<double>();
+            List<string> listeN = new List<string>();
+
+            for(int i = 0; i < pvm.ListSSC.Count; i++)
+            {
+                if(pvm.ListSSC[i].EstSelectione == true)
+                {
+                    listeId.Add(pvm.ListSSC[i].SsCateCompetenceId);
+                    listeT.Add(pvm.ListSSC[i].TarifHoraire);
+                    listeN.Add(pvm.ListSSC[i].Intitule);
+                }
+            }
+
+            List<Competence> listeC = new List<Competence>();
+            for(int i = 0; i < listeId.Count; i++)
+            {
+                listeC[i] = dal.CreationCompetence(listeT[i], listeId[i], provider.Id, listeN[i]);
+            }
+
+            return Redirect("/ProfilUser/ProfilProvider?id=" + provider.AdherentId);
+        }
     }
 }

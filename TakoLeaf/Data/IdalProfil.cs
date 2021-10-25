@@ -29,6 +29,7 @@ namespace TakoLeaf.Data
         List<Consumer> ObtenirConsumers();
 
         List<Competence> ObtenirCompetences();
+        List<Provider> ObtenirProviders();
         List<SsCateCompetence> ObtenirSSCompetences();
         List<CateCompetence> ObtenirCateCompetences();
        
