@@ -31,14 +31,23 @@
         </ul>
 
         <h1>Quelles sont vos compétences en tant que Provider</h1>
-            <div>
-               @for (int i = 0; i < Model.ListSSC.Count; i++)
-               {
-                    @Html.CheckBoxFor(m => m.ListSSC[i].EstSelectione)
-                   // TODO a voir pourquoi ca sort Intitule en toute lettre et pas le nom de la competecnce
-                    @Html.LabelFor(m => m.ListSSC[i].Intitule)
-                }
-            </div>
+        <div>
+            @for (int i = 0; i < Model.ListSSC.Count; i++)
+            {
+                @Html.Label(Model.ListSSC[i].Intitule)
+                @Html.CheckBoxFor(m => m.ListSSC[i].EstSelectione)
+
+                @Html.LabelFor(m => m.ListSSC[i].TarifHoraire)
+                @Html.TextBoxFor(m => m.ListSSC[i].TarifHoraire)
+                @Html.HiddenFor(m => m.ListSSC[i].SsCateCompetenceId)
+                @Html.HiddenFor(m => m.ListSSC[i].Intitule)
+
+
+            }
+        </div>
+
+        <h1> Quelles sont vos ressources a proposer</h1>
+           
 
             @*<div>
                 @Html.TextBoxFor(model => model.Voiture.Annee, new { @class = "form-control", placeholder = "Annee" })

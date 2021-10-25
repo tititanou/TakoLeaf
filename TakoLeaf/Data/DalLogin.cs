@@ -54,12 +54,36 @@ namespace TakoLeaf.Data
             this._bddContext.SaveChanges();
             return carte;
         }
+
+        public Rib CreationRib(string titulaire, string iban, string banque)
+        {
+            Rib rib = new Rib { Titulaire = titulaire, Iban = iban, Banque = banque };
+            _bddContext.Ribs.Add(rib);
+            _bddContext.SaveChanges();
+            return rib;
+        }
         public Consumer CreationConsumer(int idAdherent, int idcarte)
         {
             Consumer consumer = new Consumer { AdherentId = idAdherent, CarteId = idcarte };
             this._bddContext.Add(consumer);
             this._bddContext.SaveChanges();
             return consumer;
+        }
+
+        public Provider CreationProvider(int idAdherant, int idrib)
+        {
+            Provider provider = new Provider { Note = 0, AdherentId = idAdherant, RibId = idrib };
+            _bddContext.Providers.Add(provider);
+            _bddContext.SaveChanges();
+            return provider;
+        }
+
+        public Competence CreationCompetence(double tarifhoraire, int idsscomp,int providerid, string nomssc)
+        {
+            Competence competence = new Competence { TarifHoraire = tarifhoraire, SsCateCompetenceId = idsscomp, ProviderId = providerid, NomSsCate = nomssc };
+            _bddContext.Competences.Add(competence);
+            _bddContext.SaveChanges();
+            return competence;
         }
 
         public CompteUser Authentifier(string mail, string mdp)
@@ -69,17 +93,26 @@ namespace TakoLeaf.Data
             return user;
         }
 
-        public void IsProviderChecked(Adherent adherent)
+
+        public void RoleIsProvider(CompteUser compteUser)
         {
-            adherent.IsProvider = true;
+            compteUser.Role = "Provider";
             _bddContext.SaveChanges();
         }
 
-        public void IsConsumerChecked(Adherent adherent)
+        public void RoleIsConsumer(CompteUser compteUser)
         {
-            adherent.IsConsumer = true;
+            compteUser.Role = "Consumer";
             _bddContext.SaveChanges();
         }
+
+        public void RoleIsHybride(CompteUser compteUser)
+        {
+            compteUser.Role = "Hybride";
+            _bddContext.SaveChanges();
+        }
+
+    
 
         public string EncodeMD5(string motDePasse)
         {

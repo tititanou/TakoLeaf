@@ -32,6 +32,11 @@
                 @Html.ValidationMessageFor(model => model.Description)
             </div>
 
+            <div>
+                @Html.HiddenFor(m => m.AdherentId)
+                @Html.HiddenFor(m => m.Role)
+            </div>
+
             <!-- Submit Button-->
             <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
         }

@@ -13,9 +13,13 @@ namespace TakoLeaf.Models
         
         [Required]
         public double TarifHoraire { get; set; }
+        public string NomSsCate { get; set; }
 
         public int SsCateCompetenceId { get; set; }
         public SsCateCompetence SsCateCompetence { get; set; }
+
+        public int ProviderId { get; set; }
+        public Provider Provider { get; set; }
 
 
     }

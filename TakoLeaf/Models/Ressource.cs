@@ -9,6 +9,9 @@ namespace TakoLeaf.Models
         public string Adresse { get; set; }
         public double TarifJournalier { get; set; }
         public bool Disponible{ get; set; }
+
+        public int ProviderId { get; set; }
+        public Provider Provider { get; set; }
     }
     public enum CateRessource
     {

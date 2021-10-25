@@ -80,6 +80,7 @@ namespace TakoLeaf.Models
                     Date_naissance = new DateTime(1990, 10, 23),
                     Adresse = "Ripas",
                     Telephone = "0658423947"
+                    
                 },
 
                  new Adherent
@@ -110,7 +111,21 @@ namespace TakoLeaf.Models
                     Date_naissance = new DateTime(1993, 08, 10),
                     Adresse = "Nayto",
                     Telephone = "0626576356"
-                });
+                },
+                
+                
+                
+                new Adherent
+                {
+                    Id = 5,
+                    Nom = "Guillaume",
+                    Prenom = "Levy",
+                    Date_naissance = new DateTime(1990,07,18),
+                    Adresse = "Lyon",
+                    Telephone = "0618525231",
+                    
+                }
+                );
 
             this.CompteUsers.AddRange(
                  new CompteUser
@@ -148,8 +163,44 @@ namespace TakoLeaf.Models
                        EtatProfil = EtatProfil.ATTENTE_VALIDATION,
                        AdherentId = 4
 
-                   });
+                   },
+                   
+                   new CompteUser
+                   {
+                       Mail = "provider@gmail.com",
+                       MotDePasse = dal.EncodeMD5("123"),
+                       Description = "C'est moi le Provider Test",
+                       EtatProfil = EtatProfil.VALIDE,
+                       AdherentId = 5,
+                       Role = "Provider"
+                       
+                   }             
+                   
+                   );
 
+            this.Providers.AddRange(
+                new Provider
+                {
+                    Id = 1,
+                    Note = 0,
+                    RibId = 1,
+                    AdherentId = 5
+                }
+                );
+
+            this.Ribs.Add(
+                new Rib 
+                { 
+                    Id = 1,
+                    Titulaire = "Guillaume Levy",
+                    Iban = "1245 1245 1245 1245",
+                    Banque = "Boursorama"                                      
+                
+                }
+                
+
+                
+                );
             this.Sujets.AddRange(
                 new Sujet
                 {
@@ -229,7 +280,14 @@ namespace TakoLeaf.Models
                 new SsCateCompetence { Intitule = "Changer Pneu", CateCompetenceId = 1 },
                 new SsCateCompetence { Intitule = "Changer la distribution", CateCompetenceId = 2 },
                 new SsCateCompetence { Intitule = "Changer les viblequins", CateCompetenceId = 2 }
-                ); ;
+                );
+            this.Competences.AddRange(
+                new Competence { Id = 1, ProviderId = 1, SsCateCompetenceId = 1, NomSsCate = "Changer Roue", TarifHoraire = 28 },
+                new Competence { Id = 2, ProviderId = 1, SsCateCompetenceId = 3, NomSsCate = "Changer la distribution", TarifHoraire = 47 }
+
+                );
+
+            
 
 
 

@@ -16,14 +16,18 @@ namespace TakoLeaf.Controllers
     public class LoginController : Controller
     {
         private IdalLogin dal;
+        private IdalProfil dalP;
 
         public LoginController()
         {
             this.dal = new DalLogin();
+            this.dalP = new DalProfil();
         }
 
         public ActionResult Inscription()
         {
+            List<string> roles = new List<string> { "Consumer", "Provider", "Hybride" };
+            ViewBag.Roles = new SelectList(roles);
             return View();
         }
 
@@ -41,7 +45,7 @@ namespace TakoLeaf.Controllers
                 {
                     new Claim(ClaimTypes.Name, uvm.Adherent.Nom),
                     new Claim(ClaimTypes.NameIdentifier, uvm.Adherent.Id.ToString()),
-                    new Claim(ClaimTypes.Email, uvm.CompteUser.Mail)
+                    new Claim(ClaimTypes.Role, uvm.CompteUser.Role)
                 };
 
                 var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
@@ -50,22 +54,22 @@ namespace TakoLeaf.Controllers
                 HttpContext.SignInAsync(userPrincipal);
 
                 //UtilisateurViewModel uvm2 = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser };
-                if (uvm.Adherent.IsProvider == true)
+                if (uvm.CompteUser.Role.Equals("Provider"))
                 {
-                    dal.IsProviderChecked(adherent);
+                    dal.RoleIsProvider(compteUser);
                     return Redirect("/Login/InscriptionProvider");
                 }
 
-                else if (uvm.Adherent.IsConsumer == true)
+                else if (uvm.CompteUser.Role.Equals("Consumer"))
                 {
-                    dal.IsConsumerChecked(adherent);
+                    dal.RoleIsConsumer(compteUser);
                     return Redirect("/Login/InscriptionConsumer");
                     //return RedirectToAction("InscriptionConsumer", "Login", new { uvm = uvm2 });
                 }
 
-                else if (uvm.Adherent.IsConsumer == true && uvm.Adherent.IsProvider == true)
+                else if (uvm.CompteUser.Role.Equals("Provider et Consumer"))
                 {
-
+                    dal.RoleIsHybride(compteUser);
 
                 }
 
@@ -92,8 +96,13 @@ namespace TakoLeaf.Controllers
             if(user != null)
             {
                 int id = user.AdherentId;
-                return Redirect("/ProfilUser/Profil?id="+id);
-                               
+                Adherent adherent = dalP.ObtenirAdherents().Where(a => a.Id == id).FirstOrDefault();
+
+                if(user.Role.Equals("Consumer"))
+                return Redirect("/ProfilUser/ProfilConsumer?id="+id);
+                else if(user.Role.Equals("Provider"))
+                return Redirect("/ProfilUser/ProfilProvider?id=" + id);
+
             }
             return View();
         }
@@ -153,7 +162,7 @@ namespace TakoLeaf.Controllers
             Consumer consumer = dal.CreationConsumer(idadherent, idcarte);
             int idmodele = dalProfil.ObtenirModeles().Where(v => v.Nom == uvm.Modele.Nom).FirstOrDefault().Id;
             Voiture voiture = dal.CreationVoiture(uvm.Voiture.Immatriculation, uvm.Voiture.Titulaire, uvm.Voiture.Carburant, uvm.Voiture.Annee, idmodele, consumer.Id);
-            return Redirect("/ProfilUser/Profil?id=" + idadherent);
+            return Redirect("/ProfilUser/ProfilConsumer?id=" + idadherent);
         }
 
 
@@ -169,7 +178,7 @@ namespace TakoLeaf.Controllers
             List<ProviderCheckBoxViewModel> listeSS = new List<ProviderCheckBoxViewModel>();
             foreach(SsCateCompetence item in dal.ObtenirSSCompetences().ToList().OrderBy(c => c.Id))
             {
-                listeSS.Add(new ProviderCheckBoxViewModel { Intitule = item.Intitule, EstSelectione = false });
+                listeSS.Add(new ProviderCheckBoxViewModel { Intitule = item.Intitule, EstSelectione = false, SsCateCompetenceId = item.Id });
             }
             
             ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, ListSSC = listeSS };
@@ -177,5 +186,38 @@ namespace TakoLeaf.Controllers
             return View(pvm);
         }
 
+
+        [HttpPost]
+        public ActionResult InscriptionProvider(ProviderViewModel pvm)
+        {
+
+            Rib rib = dal.CreationRib(pvm.Rib.Titulaire, pvm.Rib.Iban, pvm.Rib.Banque);
+            DalProfil dalProfil = new DalProfil();
+            int idadherent = dalProfil.ObtenirAdherents().Last().Id;
+            Provider provider = dal.CreationProvider(idadherent, rib.Id);
+            
+            List<int> listeId = new List<int>();
+            List<double> listeT = new List<double>();
+            List<string> listeN = new List<string>();
+
+            for(int i = 0; i < pvm.ListSSC.Count; i++)
+            {
+                if(pvm.ListSSC[i].EstSelectione == true)
+                {
+                    listeId.Add(pvm.ListSSC[i].SsCateCompetenceId);
+                    listeT.Add(pvm.ListSSC[i].TarifHoraire);
+                    listeN.Add(pvm.ListSSC[i].Intitule);
+                }
+            }
+
+            List<Competence> listeC = new List<Competence>();
+            for(int i = 0; i < listeId.Count; i++)
+            {
+                Competence competence = dal.CreationCompetence(listeT[i], listeId[i], provider.Id, listeN[i]);
+                listeC.Add(competence);
+            }
+
+            return Redirect("/ProfilUser/ProfilProvider?id=" + provider.AdherentId);
+        }
     }
 }

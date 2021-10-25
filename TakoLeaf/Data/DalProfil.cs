@@ -78,6 +78,11 @@ namespace TakoLeaf.Data
             return liste;
         }
 
+        public List<Provider> ObtenirProviders()
+        {
+            List<Provider> liste = _bddContext.Providers.ToList();
+            return liste;
+        }
         public void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string adresse, string telephone)
         {
             Adherent adherent = _bddContext.Adherents.Find(id);
