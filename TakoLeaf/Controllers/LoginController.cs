@@ -100,8 +100,8 @@ namespace TakoLeaf.Controllers
 
                 var userClaims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, user.Adherent.Nom),
-                    new Claim(ClaimTypes.NameIdentifier, user.Adherent.Id.ToString()),
+                    new Claim(ClaimTypes.Name, adherent.Nom),
+                    new Claim(ClaimTypes.NameIdentifier, adherent.Id.ToString()),
                     new Claim(ClaimTypes.Role, user.Role)
                 };
 
