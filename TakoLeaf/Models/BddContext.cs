@@ -219,6 +219,36 @@ namespace TakoLeaf.Models
                 new Modele { Nom = "A4", MarqueId = 3}
                 );
 
+            this.Articles.AddRange(
+                new Article
+                {
+                    AdminId = "Admin",
+                    Titre = "Lancement d'une plateforme révolutionnaire en TakoLeaf' !",
+                    DateRedaction = new DateTime(2021, 10, 19),
+                    Texte = "Marre de payer trop cher pour votre voiture adorée ? Alors vous êtes tombé au bon endroit ! Bon vous allez payer quand même certes... mais sur HTML codé main !",
+                    Public = true
+                },
+
+                 new Article
+                 {
+                     AdminId = "Admin",
+                     Titre = "Flash Spécial !",
+                     DateRedaction = new DateTime(2021, 10, 22),           
+                     Texte = "M.ABRATE Alexis, codeur de son état aurait été aperçu chez lui, tenant des propos choquants sur la bonne moralité de la maman de sa DropDownList !",
+                     Public = true
+                 },
+
+                  new Article
+                  {
+                      AdminId = "Admin",
+                      Titre = "Bientôt un peu moins moche ?",
+                      DateRedaction = new DateTime(2021,10,20),
+                      DatePublication = new DateTime(2021,10,21),
+                      Texte = "Les dernières rumeurs suggèrent que notre spécialiste du Front, M.ZAWARTOSKI Valentin serai sur le point de révolutionner le CSS !",
+                      Public = false
+                  }
+                ); 
+
             this.SaveChanges();
         }
     }

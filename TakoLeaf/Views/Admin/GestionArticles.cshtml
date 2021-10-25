@@ -1,0 +1,171 @@
+﻿@model List<TakoLeaf.Models.Article>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GestionArticles</title>
+    <script src="https://kit.fontawesome.com/1cc7c2dd80.js" crossorigin="anonymous"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+
+        .visible {
+            background-color: green;
+        }
+
+        .invisible {
+            background-color: red;
+        }
+
+     /*   body{
+            margin:0;
+            padding:0;
+            background: #e84118;
+        }*/
+        .search-box{
+            position: absolute;
+            top: 10%;
+            right: 50%;
+            /*transform: translate(-50%, -50%);*/
+            background : #2f3640;
+            height: 40px;
+            border-radius: 40px;
+            padding: 10px;
+        }
+        .search-box:hover > .search-txt{
+            width: 240px;
+            padding: 0 6px;
+        }
+
+        .search-box:hover > .search-btn{
+            background: white;
+        }
+
+        .search-btn{
+            color: #e84118;
+            float:right;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2f3640;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition:0.4s;
+        }
+
+        .search-txt{
+            border:none;
+            background:none;
+            outline:none;
+            float:left;
+            padding: 0;
+            color: white;
+            font-size: 16px;
+            transition: 0.4s;
+            line-height: 40px;
+            width: 0px;
+
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align:center; font-family:sans-serif">Gestion des articles</h1>
+
+
+    <div class="search-box">
+        <input class="search-txt" name="" placeholder="Type to search" />
+        <a class="search-btn" href="#">
+            <i class="fas fa-search"></i>
+        </a>
+    </div>
+
+
+
+
+    @{int count = Model.Count();}
+<div>
+    <fieldset style="display:inline-block">
+        <legend>Nombre d'article : @count</legend>
+
+        <table>
+
+            <tr>
+                <th>Titre</th>
+                <th>Date</th>
+                <th>Public</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td><button>@Html.ActionLink(item.Titre, "ModifierArticle", "Admin", new { id = item.Id })</button></td>
+
+
+                    @if (item.Public)
+                    {
+                        <td>Publié le : @item.DatePublication</td>
+                        <td class="visible"><button>@Html.ActionLink("Visible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
+                    }
+                    else
+                    {
+                        <td>Rédigé le : @item.DateRedaction</td>
+                        <td class="invisible"><button>@Html.ActionLink("Invisible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
+                    }
+                    <td><button>@Html.ActionLink("Supprimer Article", "SuppressionArticle", "Admin", new { id = item.Id })</button></td>
+                </tr>
+            }
+        </table>
+    </fieldset>
+</div>
+
+    <fieldset style="display:inline-block">
+        <legend>Mes articles invisibles</legend>
+
+        @{ count = 0; }
+        
+        <table>
+            <tr>
+                <th>Titre</th>
+                <th>Date</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (!item.Public)
+                {
+
+                    <tr>
+                        <td><button>@Html.ActionLink(item.Titre, "ModifierArticle", "Admin", new { id = item.Id })</button></td>
+                        <td>Redigé le : @item.DateRedaction</td>
+                        <td class="invisible"><button>@Html.ActionLink("Invisible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
+                        <td><button>@Html.ActionLink("Supprimer Article", "SuppressionArticle", "Admin", new { id = item.Id })</button></td>
+                    </tr>
+                    count++;
+                }
+            }
+        </table>
+
+        <h2>Articles non publics : @count</h2>
+
+    </fieldset>
+
+
+
+
+
+
+</body>
+</html>

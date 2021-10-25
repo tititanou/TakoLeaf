@@ -75,12 +75,12 @@ namespace TakoLeaf.Controllers
         public ActionResult PublicationArticle(Article article)
         {
             dal.AjouterArticle(article.Titre, article.Texte);
-            return View();
+            return RedirectToAction();
         }
 
         public ActionResult Articles()
         {
-            List<Article> liste = dal.ObtenirTousLesArticles();
+            List<Article> liste = dal.ObtenirTousLesArticlesPublic();
             return View(liste);
         }
 
@@ -106,6 +106,17 @@ namespace TakoLeaf.Controllers
 
         }
 
+        public ActionResult GestionArticles()
+        {
+            List<Article> list = dal.ObtenirTousLesArticles();
+            return View(list);
+        }
+
+        public ActionResult ModificationVisibilite(int id)
+        {
+            dal.ModifierVisibiliteArticle(id);
+            return RedirectToAction("GestionArticles");
+        }
 
 
     }

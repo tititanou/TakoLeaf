@@ -8,12 +8,17 @@ namespace TakoLeaf.ViewModels
 {
     public class ProviderViewModel
     {
-        public Adherent Adherent;
+        public Adherent Adherent { get; set; }
+        public CompteUser CompteUser { get; set; }
 
         public Provider Provider { get; set; }
 
-        public CompteUser CompteUser;
+        public Rib Rib { get; set; }
 
+        public List<Ressource> Ressources { get; set; }
+
+        public List<Competence> Competences { get; set; }
+        public List<SsCateCompetence> SsCateCompetences { get; set; }
 
     }
 }

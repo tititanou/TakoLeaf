@@ -29,12 +29,16 @@ namespace TakoLeaf.Data
         void AjouterArticle(string titre, string texte);
 
         List<Article> ObtenirTousLesArticles();
+        List<Article> ObtenirTousLesArticlesPublic();
 
         Article ObtenirArticle(int id);
-
         Article ModifierArticle(int id, string titre, string texte);
 
         void SupprimerArticle(int id);
+
+        void ModifierVisibiliteArticle(int id);
+
+        void PublierArticle(Article article);
 
     }
 }
