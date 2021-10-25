@@ -64,12 +64,13 @@ namespace TakoLeaf.Controllers
             {
                 dal.ModifierInfosAdherent(adherent.Id, adherent.Nom, adherent.Prenom, adherent.Date_naissance, adherent.Adresse, adherent.Telephone);
                 int id = adherent.Id;
-                if(adherent.IsConsumer == true)
+                CompteUser compteUser = dal.ObtenirCompteUser().Where(c => c.AdherentId == id).FirstOrDefault();
+                if(compteUser.Role.Equals("Consumer"))
                 {
                     return Redirect("/ProfilUser/ProfilConsumer?id=" + id);
                 }
                 
-                else if (adherent.IsProvider == true)
+                else if (compteUser.Role.Equals("Provider"))
                 {
                     return Redirect("/ProfilUser/ProfilProvider?id=" + id);
                 }
@@ -94,12 +95,12 @@ namespace TakoLeaf.Controllers
                 dal.ModifierCompteUser(compteUser.Mail, compteUser.MotDePasse, compteUser.Avatar, compteUser.Description);
                 int id = compteUser.AdherentId;
                 Adherent adherent = dal.ObtenirAdherents().Where(a => a.Id == id).FirstOrDefault();
-                if (adherent.IsConsumer == true)
+                if (compteUser.Role.Equals("Consumer"))
                 {
                     return Redirect("/ProfilUser/ProfilConsumer?id=" + id);
                 }
 
-                else if (adherent.IsProvider == true)
+                else if (compteUser.Role.Equals("Provider"))
                 {
                     return Redirect("/ProfilUser/ProfilProvider?id=" + id);
                 }
@@ -109,9 +110,7 @@ namespace TakoLeaf.Controllers
             
         }
 
-        //public IActionResult Historique()
-        //{ 
-        //}
+        //TODO faire la methode et voir sur la vue InscriptionProvider pour ajouter les Competences
 
     }   
 }

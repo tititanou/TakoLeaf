@@ -25,6 +25,8 @@ namespace TakoLeaf.Models
         public EtatProfil EtatProfil { get; set; }
         public int AdherentId { get; set; }
         public Adherent Adherent { get; set; }
+        public string Role { get; set; }
+
 
     }
 
@@ -37,5 +39,7 @@ namespace TakoLeaf.Models
         COMPTE_BLOQUE
 
     }
+
+   
 
 }

@@ -93,17 +93,26 @@ namespace TakoLeaf.Data
             return user;
         }
 
-        public void IsProviderChecked(Adherent adherent)
+
+        public void RoleIsProvider(CompteUser compteUser)
         {
-            adherent.IsProvider = true;
+            compteUser.Role = "Provider";
             _bddContext.SaveChanges();
         }
 
-        public void IsConsumerChecked(Adherent adherent)
+        public void RoleIsConsumer(CompteUser compteUser)
         {
-            adherent.IsConsumer = true;
+            compteUser.Role = "Consumer";
             _bddContext.SaveChanges();
         }
+
+        public void RoleIsHybride(CompteUser compteUser)
+        {
+            compteUser.Role = "Hybride";
+            _bddContext.SaveChanges();
+        }
+
+    
 
         public string EncodeMD5(string motDePasse)
         {

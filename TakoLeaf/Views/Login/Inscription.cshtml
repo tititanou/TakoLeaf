@@ -71,10 +71,10 @@
             </div>
 
             <div>
-                @Html.CheckBoxFor(model => model.Adherent.IsConsumer)
-                @Html.LabelFor(model => model.Adherent.IsConsumer)
-                @Html.CheckBoxFor(model => model.Adherent.IsProvider)
-                @Html.LabelFor(model => model.Adherent.IsProvider)
+              
+                @Html.DropDownListFor(model => model.CompteUser.Role, (SelectList)ViewBag.Roles)
+                @Html.LabelFor(model => model.CompteUser.Role)
+                
             </div>
 
             <!-- Submit Button-->

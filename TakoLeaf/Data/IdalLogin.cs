@@ -20,8 +20,12 @@ namespace TakoLeaf.Data
         Rib CreationRib(string titulaire, string iban, string banque);
         Provider CreationProvider(int idAdherant, int idrib);
         Competence CreationCompetence(double tarifhoraire, int idsscomp,int providerid,string nomssc);
-        public void IsConsumerChecked(Adherent adherent);
-        public void IsProviderChecked(Adherent adherent);
+        //public void IsConsumerChecked(Adherent adherent);
+        //public void IsProviderChecked(Adherent adherent);
         string EncodeMD5(string motDePasse);
+
+        void RoleIsConsumer(CompteUser compteUser);
+        void RoleIsProvider(CompteUser compteUser);
+        public void RoleIsHybride(CompteUser compteUser);
     }
 }

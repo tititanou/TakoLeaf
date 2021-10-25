@@ -21,10 +21,13 @@ namespace TakoLeaf.Controllers
         public LoginController()
         {
             this.dal = new DalLogin();
+            this.dalP = new DalProfil();
         }
 
         public ActionResult Inscription()
         {
+            List<string> roles = new List<string> { "Consumer", "Provider", "Hybride" };
+            ViewBag.Roles = new SelectList(roles);
             return View();
         }
 
@@ -42,7 +45,7 @@ namespace TakoLeaf.Controllers
                 {
                     new Claim(ClaimTypes.Name, uvm.Adherent.Nom),
                     new Claim(ClaimTypes.NameIdentifier, uvm.Adherent.Id.ToString()),
-                    new Claim(ClaimTypes.Email, uvm.CompteUser.Mail)
+                    new Claim(ClaimTypes.Role, uvm.CompteUser.Role)
                 };
 
                 var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
@@ -51,22 +54,22 @@ namespace TakoLeaf.Controllers
                 HttpContext.SignInAsync(userPrincipal);
 
                 //UtilisateurViewModel uvm2 = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser };
-                if (uvm.Adherent.IsProvider == true)
+                if (uvm.CompteUser.Role.Equals("Provider"))
                 {
-                    dal.IsProviderChecked(adherent);
+                    dal.RoleIsProvider(compteUser);
                     return Redirect("/Login/InscriptionProvider");
                 }
 
-                else if (uvm.Adherent.IsConsumer == true)
+                else if (uvm.CompteUser.Role.Equals("Consumer"))
                 {
-                    dal.IsConsumerChecked(adherent);
+                    dal.RoleIsConsumer(compteUser);
                     return Redirect("/Login/InscriptionConsumer");
                     //return RedirectToAction("InscriptionConsumer", "Login", new { uvm = uvm2 });
                 }
 
-                else if (uvm.Adherent.IsConsumer == true && uvm.Adherent.IsProvider == true)
+                else if (uvm.CompteUser.Role.Equals("Provider et Consumer"))
                 {
-
+                    dal.RoleIsHybride(compteUser);
 
                 }
 
@@ -95,9 +98,9 @@ namespace TakoLeaf.Controllers
                 int id = user.AdherentId;
                 Adherent adherent = dalP.ObtenirAdherents().Where(a => a.Id == id).FirstOrDefault();
 
-                if(adherent.IsConsumer == true)
+                if(user.Role.Equals("Consumer"))
                 return Redirect("/ProfilUser/ProfilConsumer?id="+id);
-                else if(adherent.IsProvider == true)
+                else if(user.Role.Equals("Provider"))
                 return Redirect("/ProfilUser/ProfilProvider?id=" + id);
 
             }
@@ -210,7 +213,8 @@ namespace TakoLeaf.Controllers
             List<Competence> listeC = new List<Competence>();
             for(int i = 0; i < listeId.Count; i++)
             {
-                listeC[i] = dal.CreationCompetence(listeT[i], listeId[i], provider.Id, listeN[i]);
+                Competence competence = dal.CreationCompetence(listeT[i], listeId[i], provider.Id, listeN[i]);
+                listeC.Add(competence);
             }
 
             return Redirect("/ProfilUser/ProfilProvider?id=" + provider.AdherentId);
