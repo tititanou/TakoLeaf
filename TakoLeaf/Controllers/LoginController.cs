@@ -98,7 +98,19 @@ namespace TakoLeaf.Controllers
                 int id = user.AdherentId;
                 Adherent adherent = dalP.ObtenirAdherents().Where(a => a.Id == id).FirstOrDefault();
 
-                if(user.Role.Equals("Consumer"))
+                var userClaims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, user.Adherent.Nom),
+                    new Claim(ClaimTypes.NameIdentifier, user.Adherent.Id.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role)
+                };
+
+                var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
+
+                var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
+                HttpContext.SignInAsync(userPrincipal);
+
+                if (user.Role.Equals("Consumer"))
                 return Redirect("/ProfilUser/ProfilConsumer?id="+id);
                 else if(user.Role.Equals("Provider"))
                 return Redirect("/ProfilUser/ProfilProvider?id=" + id);

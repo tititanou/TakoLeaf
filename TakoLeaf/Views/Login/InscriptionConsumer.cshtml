@@ -54,6 +54,7 @@
                 @Html.ValidationMessageFor(model => model.Voiture.Annee)
             </div>
             // TODO mettre un lien pour ajouter des Marque et des Modeles si non présent dans la base de données
+            // TODO Voir en fin de semaine pour ajouter du JavaScript sur les dropdown list
             <div>
                 @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques)
                 @Html.LabelFor(model => model.Marque.Nom)
