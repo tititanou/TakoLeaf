@@ -5,6 +5,7 @@
 
 <html>
 <head>
+    <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <meta name="viewport" content="width=device-width" />
     <title>Sujet</title>
 </head>
@@ -12,34 +13,50 @@
     <h3>@Model.Sujet.Titre</h3>
     @foreach (var item in Model.Posts)
     {
+
 <div class="post">
     <p>@item.CorpsPost</p>
     <div class="ftr">
         <em>@item.Adherent.Prenom</em>
         <em>@item.Date</em>
     </div>
-    <button type="button" onclick="OuvrirPostForm()">Répondre</button>
-    <button type="button" onclick="location.href='@Url.Action("Citer", "Forum", new { id = item.Id })'">Citer</button>
+    <button type="button" onclick="OuvrirPostForm(@item.Id)">Répondre</button>
+    <button type="button" onclick="OuvrirPostForm('citation')">Citer</button>
     <button type="button" onclick="location.href='@Url.Action("Supprimer", "Forum", new { id = item.Id })'">Supprimer</button>
     <button type="button" onclick="location.href='@Url.Action("ModifierPost", "Forum", new { id = item.Id })'">Modifier</button>
 </div>
                 <br />
-                                <div style="visibility:hidden" id="postForm">
+                                <div style="display:none" id=@item.Id>
                                     @using (Html.BeginForm())
                                     {
-                    @Html.LabelFor(model => model.Post.CorpsPost)
-                                        @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" })
-                                                            @Html.ValidationMessageFor(model => model.Post.CorpsPost)
-                                                                                <button onclick="location.href='@Url.Action("Repondre", "Forum", new { id = item.Id })'">Valider</button>}
+                    @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" , @class = "mytextarea" })
+                                        @Html.ValidationMessageFor(model => model.Post.CorpsPost)
+                                                            <button onclick="location.href='@Url.Action("Repondre", "Forum", new { id = item.Id })'">Valider</button>}
                                 </div>
                                                 <hr />}
+    <div style="display:none" id="citation">
+        @using (Html.BeginForm())
+        {
+@Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" , @class = "mytextarea" })
+                @Html.ValidationMessageFor(model => model.Post.CorpsPost)
+                                <button onclick="location.href='@Url.Action()'">Valider</button>}
+    </div>
 
-    <script>function OuvrirPostForm() {
-            if (document.getElementById("sujetForm").value) {
-                document.getElementById("postForm").style.visibility = "visible";
-            }
-            //document.getElementById("time").innerHTML = currDate;
+    <div>
+
+        <textarea class="mytextarea">
+</textarea>
+
+    </div>
+
+
+    <script>function OuvrirPostForm(id) {
+            document.getElementById(id).style.display = "block";
         }</script>
-
+    <script>tinymce.init({
+    selector: '.mytextarea',
+    plugins: 'image',
+    a11y_advanced_options: true
+        });</script>
 </body>
 </html>

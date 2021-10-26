@@ -19,9 +19,10 @@
     <div style="visibility:hidden" id="postForm">
         @using (Html.BeginForm())
         {
-            @Html.LabelFor(model => model.Post.CorpsPost)
-            @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" })
-            @Html.ValidationMessageFor(model => model.Post.CorpsPost)}
+    @Html.LabelFor(model => model.Post.CorpsPost)
+                    @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" })
+                                    @Html.ValidationMessageFor(model => model.Post.CorpsPost)
+                                                    <button id="validBtn" type="submit">Montrer</button>}
     </div>
     
 
