@@ -32,7 +32,7 @@ namespace TakoLeaf.Data
 
         public CompteUser CreationCompte(string mail, string mdp, byte[] avatar, string description, int adherentId)
         {
-            string password = EncodeMD5(mdp); // TODO Voir probleme avec l'encodage
+            string password = EncodeMD5(mdp);
             CompteUser compteUser = new CompteUser { Mail = mail, MotDePasse = password, Avatar = avatar, Description = description, EtatProfil = EtatProfil.NON_VALIDE, AdherentId = adherentId };
             this._bddContext.Add(compteUser);
             this._bddContext.SaveChanges();

@@ -42,6 +42,17 @@
 
         @Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })
 
+
+
+        <h2> Information Ressources</h2>
+
+
+
+
+
+
+
+
         <h2> Information Competences</h2>
         <table border="1">
             <tr>
@@ -57,8 +68,9 @@
                 </tr>
             }
         </table>
-        
-        @Html.ActionLink("Modifier Competences", "ModifCompetence", "ProfilUser", new { id = Model.Adherent.Id })
+
+        @Html.ActionLink("Modifier Competences", "ModifCompetence", "ProfilUser", new { id = Model.Provider.Id })
+        @Html.ActionLink("Ajouter Competences", "AjoutCompetence", "ProfilUser", new { id = Model.Provider.Id })
     </div>
 </body>
 </html>

@@ -112,5 +112,18 @@ namespace TakoLeaf.Data
 
         }
 
+        public void ModifierCompetence(int id, double tarif)
+        {
+            Competence competence = _bddContext.Competences.Find(id);
+            competence.TarifHoraire = tarif;
+            _bddContext.SaveChanges();
+
+        }
+
+        // TODO ajouter la methode SUPPRIMER
+
+
+        //public void AjouterRessource
+
     }
 }

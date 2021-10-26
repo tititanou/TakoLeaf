@@ -12,10 +12,12 @@ namespace TakoLeaf.Controllers
     public class ProfilUserController : Controller
     {
         private IdalProfil dal;
+     
 
         public ProfilUserController()
         {
             this.dal = new DalProfil();
+            
         }
 
         public IActionResult Index()
@@ -84,6 +86,7 @@ namespace TakoLeaf.Controllers
         public IActionResult ModifCompte(int id)
         {
             CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == id);
+
             return View(compteUser);
         }
 
@@ -111,6 +114,113 @@ namespace TakoLeaf.Controllers
         }
 
         //TODO faire la methode et voir sur la vue InscriptionProvider pour ajouter les Competences
+        
+        public IActionResult ModifCompetence (int id)
+        {
+            List<Competence> competence = dal.ObtenirCompetences().Where(c => c.ProviderId == id).ToList();
+            return View(competence);
+        }
+
+
+        [HttpPost]
+        public IActionResult ModifCompetence (List<Competence> competence)
+        {
+            int idP = competence[0].ProviderId;
+            Provider provider = dal.ObtenirProviders().Where(p => p.Id == idP).FirstOrDefault();
+            int idA = provider.AdherentId;
+            using(DalProfil dal = new DalProfil())
+            {
+                for(int i = 0; i<competence.Count;i++)
+                {
+                    int id = competence[i].Id;
+                    double tarif = competence[i].TarifHoraire;
+                    dal.ModifierCompetence(id, tarif);
+                }
+            }
+
+
+            return Redirect("/ProfilUser/ProfilProvider?id=" + idA);
+        }
+
+
+        public IActionResult AjoutCompetence(int id)
+        {
+            DalProfil dal = new DalProfil();
+            Provider provider = dal.ObtenirProviders().Where(p => p.Id == id).FirstOrDefault();
+            List<Competence> competence = dal.ObtenirCompetences().Where(c => c.ProviderId == provider.Id).ToList();
+            bool res = false;
+
+            //UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser };
+
+            List<ProviderCheckBoxViewModel> listeSS = new List<ProviderCheckBoxViewModel>();
+            foreach (SsCateCompetence item in dal.ObtenirSSCompetences().ToList().OrderBy(c => c.Id))
+            {
+                foreach(Competence item2 in competence)
+                {
+                    if (item2.SsCateCompetenceId == item.Id)
+                    {
+                        res = true;
+                        break;
+                    }
+                    else
+                        res = false;                       
+                }
+                
+                if(res != true)
+                {
+                listeSS.Add(new ProviderCheckBoxViewModel { Intitule = item.Intitule, EstSelectione = false, SsCateCompetenceId = item.Id });
+                }
+               
+            }
+
+            
+            ProviderViewModel pvm = new ProviderViewModel { Provider = provider, ListSSC = listeSS };
+            return View(pvm);
+        }
+
+        [HttpPost]
+        public IActionResult AjoutCompetence (ProviderViewModel pvm)
+        {
+            DalProfil dalProfil = new DalProfil();
+            DalLogin dalLogin = new DalLogin();
+            int idP = pvm.Provider.Id;
+            Provider provider = dal.ObtenirProviders().Where(p => p.Id == idP).FirstOrDefault();
+            
+
+
+            List<int> listeId = new List<int>();
+            List<double> listeT = new List<double>();
+            List<string> listeN = new List<string>();
+
+            for (int i = 0; i < pvm.ListSSC.Count; i++)
+            {
+                if (pvm.ListSSC[i].EstSelectione == true)
+                {
+                    listeId.Add(pvm.ListSSC[i].SsCateCompetenceId);
+                    listeT.Add(pvm.ListSSC[i].TarifHoraire);
+                    listeN.Add(pvm.ListSSC[i].Intitule);
+                }
+            }
+
+            List<Competence> listeC = new List<Competence>();
+            for (int i = 0; i < listeId.Count; i++)
+            {
+                Competence competence = dalLogin.CreationCompetence(listeT[i], listeId[i], idP, listeN[i]);
+                listeC.Add(competence);
+            }
+
+            return Redirect("/ProfilUser/ProfilProvider?id=" + provider.AdherentId);
+        }
+
+        public IActionResult AjoutRessource(int id)
+        {
+            Provider provider = dal.ObtenirProviders().Where(p => p.Id == id).FirstOrDefault();
+            List<Ressource> ressource = new List<Ressource>();
+
+            ProviderViewModel pvm = new ProviderViewModel { Provider = provider, Ressources = ressource };
+
+            return View(pvm);
+        }
 
     }   
 }

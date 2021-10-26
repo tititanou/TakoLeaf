@@ -70,6 +70,8 @@ namespace TakoLeaf.Models
                     Pwd = "toto"
                 });
 
+            // TODO Voir pour mettre le DELETE ON CASCADE sur certaines clés etrangeres
+
             DalLogin dal = new DalLogin();
             this.Adherents.AddRange(
                 new Adherent

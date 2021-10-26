@@ -14,6 +14,7 @@ namespace TakoLeaf.Data
         void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string adresse, string telephone);
         void ModifierCompteUser(string mail, string mdp, byte[] avatar, string description);
 
+        void ModifierCompetence(int id, double tarif);
 
         List<Voiture> ObtenirVoiture();
 
