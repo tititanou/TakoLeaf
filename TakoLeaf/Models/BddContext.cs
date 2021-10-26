@@ -153,7 +153,8 @@ namespace TakoLeaf.Models
                       MotDePasse = dal.EncodeMD5("ZeFrontiste"),
                       Description = "Ma RAM rame...",
                       EtatProfil = EtatProfil.ATTENTE_VALIDATION,
-                      AdherentId = 3
+                      AdherentId = 3,
+                      Role="Consumer"
                   },
                    new CompteUser
                    {
@@ -161,7 +162,8 @@ namespace TakoLeaf.Models
                        MotDePasse = dal.EncodeMD5("ElBrutos"),
                        Description = "I HAVE NO IDEA WHAT I'M DOING",
                        EtatProfil = EtatProfil.ATTENTE_VALIDATION,
-                       AdherentId = 4
+                       AdherentId = 4,
+                       Role="Admin"
 
                    },
                    
@@ -297,6 +299,7 @@ namespace TakoLeaf.Models
                     AdminId = "Admin",
                     Titre = "Lancement d'une plateforme révolutionnaire en TakoLeaf' !",
                     DateRedaction = new DateTime(2021, 10, 19),
+                    DatePublication = new DateTime(2021, 10, 24),
                     Texte = "Marre de payer trop cher pour votre voiture adorée ? Alors vous êtes tombé au bon endroit ! Bon vous allez payer quand même certes... mais sur HTML codé main !",
                     Public = true
                 },
@@ -305,7 +308,8 @@ namespace TakoLeaf.Models
                  {
                      AdminId = "Admin",
                      Titre = "Flash Spécial !",
-                     DateRedaction = new DateTime(2021, 10, 22),           
+                     DateRedaction = new DateTime(2021, 10, 22),
+                     DatePublication = new DateTime(2021, 10, 23),
                      Texte = "M.ABRATE Alexis, codeur de son état aurait été aperçu chez lui, tenant des propos choquants sur la bonne moralité de la maman de sa DropDownList !",
                      Public = true
                  },

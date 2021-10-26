@@ -111,9 +111,11 @@ namespace TakoLeaf.Controllers
                 HttpContext.SignInAsync(userPrincipal);
 
                 if (user.Role.Equals("Consumer"))
-                return Redirect("/ProfilUser/ProfilConsumer?id="+id);
-                else if(user.Role.Equals("Provider"))
-                return Redirect("/ProfilUser/ProfilProvider?id=" + id);
+                    return Redirect("/ProfilUser/ProfilConsumer?id=" + id);
+                else if (user.Role.Equals("Provider"))
+                    return Redirect("/ProfilUser/ProfilProvider?id=" + id);
+                else if (user.Role.Equals("Admin"))
+                    return Redirect("/Admin/GestionComptes?id=" + id);
 
             }
             return View();
