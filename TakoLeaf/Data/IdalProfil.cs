@@ -16,6 +16,7 @@ namespace TakoLeaf.Data
 
         void ModifierCompetence(int id, double tarif);
 
+        Ressource AjouterRessource(int providerId,string intitule, CateRessource categorie, double tafif, string adresse);
         List<Voiture> ObtenirVoiture();
 
 
@@ -33,8 +34,9 @@ namespace TakoLeaf.Data
         List<Provider> ObtenirProviders();
         List<SsCateCompetence> ObtenirSSCompetences();
         List<CateCompetence> ObtenirCateCompetences();
-       
+        List<Ressource> ObtenirRessources();
 
-      
+
+
     }
 }

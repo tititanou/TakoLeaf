@@ -78,6 +78,14 @@ namespace TakoLeaf.Data
             return liste;
         }
 
+        public List<Ressource> ObtenirRessources()
+        {
+            List<Ressource> liste = _bddContext.Ressources.ToList();
+            return liste;
+
+        }
+           
+
         public List<Provider> ObtenirProviders()
         {
             List<Provider> liste = _bddContext.Providers.ToList();
@@ -123,7 +131,14 @@ namespace TakoLeaf.Data
         // TODO ajouter la methode SUPPRIMER
 
 
-        //public void AjouterRessource
+        public Ressource AjouterRessource(int providerId,string intitule, CateRessource categorie, double tarif, string adresse)
+        {
+            Ressource ressource = new Ressource { Intitule = intitule, Adresse = adresse, Categorie = categorie, Disponible = true, ProviderId = providerId, TarifJournalier = tarif };
+            _bddContext.Ressources.Add(ressource);
+            _bddContext.SaveChanges();
+            return ressource;
+        }
+
 
     }
 }

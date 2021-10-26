@@ -13,10 +13,28 @@
 <body>
 
     <h2> Veuillez indiquer les indiquer les ressources</h2>
-    @using(Html.BeginForm())
-            {
-                @Html.LabelFor(m => m)
-            }
+    @using (Html.BeginForm())
+    {
+
+        <div>
+            @Html.LabelFor(m => m.Ressource.Intitule)
+            @Html.TextBoxFor(m => m.Ressource.Intitule)
+
+            @Html.LabelFor(m => m.Ressource.Adresse)
+            @Html.TextBoxFor(m => m.Ressource.Adresse)
+
+            @Html.LabelFor(m => m.Ressource.TarifJournalier)
+            @Html.TextBoxFor(m => m.Ressource.TarifJournalier)
+
+            @Html.LabelFor(m => m.Ressource.Categorie)
+            @Html.DropDownListFor(m => m.Ressource.Categorie, (SelectList)ViewBag.Cate)
+        </div>
+
+        <button id="ajouter" type="submit">Ajouter</button>
+
+        @Html.HiddenFor(m => m.Provider.Id)
+        @Html.HiddenFor(m => m.Provider.AdherentId)
+    }
 
 </body>
 </html>

@@ -73,7 +73,7 @@ namespace TakoLeaf.Data
 
         public Provider CreationProvider(int idAdherant, int idrib)
         {
-            Provider provider = new Provider { Note = 0, AdherentId = idAdherant, RibId = idrib };
+            Provider provider = new Provider { Note = 0, AdherentId = idAdherant, RibId = idrib, Rang = Rang.POULPE_AMATEUR };
             _bddContext.Providers.Add(provider);
             _bddContext.SaveChanges();
             return provider;

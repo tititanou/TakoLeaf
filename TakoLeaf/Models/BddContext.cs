@@ -82,7 +82,7 @@ namespace TakoLeaf.Models
                     Date_naissance = new DateTime(1990, 10, 23),
                     Adresse = "Ripas",
                     Telephone = "0658423947"
-                    
+
                 },
 
                  new Adherent
@@ -114,18 +114,29 @@ namespace TakoLeaf.Models
                     Adresse = "Nayto",
                     Telephone = "0626576356"
                 },
-                
-                
-                
+
+
+
                 new Adherent
                 {
                     Id = 5,
                     Nom = "Guillaume",
                     Prenom = "Levy",
-                    Date_naissance = new DateTime(1990,07,18),
+                    Date_naissance = new DateTime(1990, 07, 18),
                     Adresse = "Lyon",
                     Telephone = "0618525231",
-                    
+
+                },
+
+                new Adherent
+                {
+                    Id = 6,
+                    Nom = "Andre",
+                    Prenom = "Soulard",
+                    Date_naissance = new DateTime(1955, 12, 12),
+                    Adresse = "Paris",
+                    Telephone = "0699885544"
+
                 }
                 );
 
@@ -157,7 +168,7 @@ namespace TakoLeaf.Models
                       Description = "Ma RAM rame...",
                       EtatProfil = EtatProfil.ATTENTE_VALIDATION,
                       AdherentId = 3,
-                      Role="Consumer"
+                      Role = "Consumer"
                   },
                    new CompteUser
                    {
@@ -166,10 +177,10 @@ namespace TakoLeaf.Models
                        Description = "I HAVE NO IDEA WHAT I'M DOING",
                        EtatProfil = EtatProfil.ATTENTE_VALIDATION,
                        AdherentId = 4,
-                       Role="Admin"
+                       Role = "Admin"
 
                    },
-                   
+
                    new CompteUser
                    {
                        Mail = "provider@gmail.com",
@@ -178,10 +189,44 @@ namespace TakoLeaf.Models
                        EtatProfil = EtatProfil.VALIDE,
                        AdherentId = 5,
                        Role = "Provider"
-                       
-                   }             
-                   
+
+                   },
+
+                   new CompteUser
+                   {
+                       Mail = "consumer@gmail.com",
+                       MotDePasse = dal.EncodeMD5("123"),
+                       Description = "C'est moi le consumer Test",
+                       EtatProfil = EtatProfil.VALIDE,
+                       AdherentId = 6,
+                       Role = "Consumer"
+                   }
+
                    );
+
+            this.Consumers.AddRange(
+
+                new Consumer
+                {
+                    Id = 1,
+                    AdherentId = 6,
+                    CarteId = 1
+                    
+                }
+
+
+
+                );
+            this.Cartes.AddRange(
+                new Carte
+                {
+                    Id=1,
+                    Titulaire = "MR SOULARD",
+                    NumeroCarte = "1578323524729856",
+                    ExpirDate = "08/2023",
+                    Crypto = 458
+                }
+                );
 
             this.Providers.AddRange(
                 new Provider
@@ -194,15 +239,29 @@ namespace TakoLeaf.Models
                 );
 
             this.Ribs.Add(
-                new Rib 
-                { 
+                new Rib
+                {
                     Id = 1,
                     Titulaire = "Guillaume Levy",
                     Iban = "1245 1245 1245 1245",
-                    Banque = "Boursorama"                                      
-                
+                    Banque = "Boursorama"
+
                 }
+                );
                 
+            this.Voitures.AddRange(
+
+                new Voiture
+                {
+                    Id = 1,
+                    Annee = 2004,
+                    Carburant = Carburant.DIESEL,
+                    ConsumerId = 1,
+                    Immatriculation = "CA-175-AA",
+                    Titulaire = "MR SOULARD",
+                    ModeleId = 2
+                    
+                }
 
                 
                 );

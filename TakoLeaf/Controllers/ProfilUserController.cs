@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,12 +31,27 @@ namespace TakoLeaf.Controllers
             Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
             CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == id);
             Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == id);
-            Voiture voiture = dal.ObtenirVoiture().FirstOrDefault(v => v.ConsumerId == consumer.Id);
+            List<Voiture> voitures = dal.ObtenirVoiture().Where(v => v.ConsumerId == consumer.Id).ToList();
             int idcarte = consumer.CarteId;
             Carte carte = dal.ObtenirCartes().FirstOrDefault(c => c.Id == idcarte);
-            int idmodele = voiture.ModeleId;
-            Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
-            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voiture = voiture, Carte = carte, Consumer = consumer, Modele = modele };
+            
+            List<string> modeles = new List<string>();
+            for(int i =0; i<voitures.Count; i++)
+            {
+                int idMo = voitures[i].ModeleId;
+                modeles.Add(dal.ObtenirModeles().FirstOrDefault(m => m.Id == idMo).Nom);
+            }
+
+            List<string> marques = new List<string>();
+            for(int i=0; i< modeles.Count;i++)
+            {
+                int idM = dal.ObtenirModeles().Where(m => m.Nom.Equals(modeles[i])).FirstOrDefault().MarqueId;
+                marques.Add(dal.ObtenirMarques().Where(m => m.Id == idM).FirstOrDefault().Nom);
+            }
+
+            //int idmodele = voiture.ModeleId;
+            //Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voitures = voitures, Carte = carte, Consumer = consumer, Modeles = modeles , Marques = marques };
 
             return View(uvm);
         }
@@ -46,9 +62,9 @@ namespace TakoLeaf.Controllers
             CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == id);
             Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.AdherentId == id);
             List<Competence> competence = dal.ObtenirCompetences().Where(c => c.ProviderId == provider.Id).ToList();
+            List<Ressource> ressources = dal.ObtenirRessources().Where(r => r.ProviderId == provider.Id).ToList();
 
-
-            ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, Competence = competence, Provider = provider };
+            ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, Competence = competence, Provider = provider, Ressources = ressources };
 
             return View(pvm);
         }    
@@ -215,11 +231,63 @@ namespace TakoLeaf.Controllers
         public IActionResult AjoutRessource(int id)
         {
             Provider provider = dal.ObtenirProviders().Where(p => p.Id == id).FirstOrDefault();
-            List<Ressource> ressource = new List<Ressource>();
-
-            ProviderViewModel pvm = new ProviderViewModel { Provider = provider, Ressources = ressource };
+            List<CateRessource> cateRessources = new List<CateRessource> { CateRessource.OUTIL, CateRessource.OUTIL_SPECIALISE, CateRessource.LOCAL_GARAGE, CateRessource.TERRAIN, CateRessource.REMORQUE, CateRessource.PONT_ELEVATEUR };
+            ViewBag.Cate = new SelectList(cateRessources);
+            ProviderViewModel pvm = new ProviderViewModel { Provider = provider };
 
             return View(pvm);
+        }
+
+        [HttpPost]
+        public IActionResult AjoutRessource(ProviderViewModel pvm)
+        {
+            Ressource ressource = dal.AjouterRessource(pvm.Provider.Id, pvm.Ressource.Intitule, pvm.Ressource.Categorie, pvm.Ressource.TarifJournalier, pvm.Ressource.Adresse);
+            return Redirect("/ProfilUser/ProfilProvider?id=" + pvm.Provider.AdherentId);
+        }
+
+        public IActionResult AjoutVehicule(int id)
+        {
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == id);
+
+            // Liste de carburants
+            List<Carburant> carburants = new List<Carburant>();
+            foreach (Carburant item in Enum.GetValues(typeof(Carburant)))
+            {
+                carburants.Add(item);
+            }
+            ViewBag.SelectList = new SelectList(carburants);
+
+            // Liste de modeles
+            List<string> modeles = new List<string>();
+            foreach (Modele item in dal.ObtenirModeles().ToList().OrderBy(p => p.Nom))
+            {
+
+                modeles.Add(item.Nom);
+            }
+            ViewBag.Modele = new SelectList(modeles);
+
+            // Liste de marques
+            List<string> marques = new List<string>();
+            foreach (Marque item in dal.ObtenirMarques().ToList().OrderBy(p => p.Nom))
+            {
+                marques.Add(item.Nom);
+            }
+            ViewBag.Marques = new SelectList(marques);
+
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Consumer = consumer };
+
+            return View(uvm);
+        }
+
+        [HttpPost]
+        public IActionResult AjoutVehicule(UtilisateurViewModel uvm)
+        {
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == uvm.Consumer.Id);
+            DalLogin dalL = new DalLogin();
+            int idmodele = dal.ObtenirModeles().Where(v => v.Nom == uvm.Modele.Nom).FirstOrDefault().Id;
+            Voiture voiture = dalL.CreationVoiture(uvm.Voiture.Immatriculation, uvm.Voiture.Titulaire, uvm.Voiture.Carburant, uvm.Voiture.Annee, idmodele , consumer.Id);
+
+            return Redirect("/ProfilUser/ProfilConsumer?id=" + consumer.AdherentId);
         }
 
     }   
