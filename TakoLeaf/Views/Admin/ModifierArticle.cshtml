@@ -11,34 +11,62 @@
     <title>ModifierArticle</title>
 </head>
 <body>
+    <center>
+        @using (Html.BeginForm())
+        {
+            <fieldset style="display:inline-block">
+                <legend>Vous êtes inspirés ?</legend>
 
-    @using (Html.BeginForm())
-    {
-        <fieldset style="display:inline-block">
-            <legend>Vous êtes inspirés ?</legend>
+                <div class="form-floating mb-3">
+                    @Html.LabelFor(model => model.Titre)
+                    @Html.TextBoxFor(m => m.Titre, new { size = "50" })
+                    @Html.ValidationMessageFor(model => model.Titre)
+                </div>
 
-            <div class="form-floating mb-3">
-                @Html.LabelFor(model => model.Titre)
-                @Html.TextBoxFor(m => m.Titre)
-                @Html.ValidationMessageFor(model => model.Titre)
+                <div class="form-floating mb-3">
+                    @Html.LabelFor(model => model.Texte)
+                    @Html.TextAreaFor(m => m.Texte, new { rows = 20, cols = 150, placeholder = "Votre article ici" })
+                    @Html.ValidationMessageFor(model => model.Texte)
+                </div>
+
+                <div class="form-floating mb-3">
+                    @Html.LabelFor(model => model.Image)
+                    @Html.TextBoxFor(model => model.Image)
+                    @Html.ValidationMessageFor(model => model.Image)
+                </div>
+                <button class="btn btn-primary btn-xl" type="button" onclick="OuvrirPostForm()">Publier</button>
+            </fieldset>
+
+            <div id="postForm" style="visibility:hidden">
+                test
+                <button type="submit">Valider</button>
             </div>
 
-            <div class="form-floating mb-3">
-                @Html.LabelFor(model => model.Texte)
-                @Html.TextAreaFor(m => m.Texte, new { rows = 20, cols = 150, placeholder = "Votre article ici" })
-                @Html.ValidationMessageFor(model => model.Texte)
-            </div>
+        }
 
-            <div class="form-floating mb-3">
-                @Html.LabelFor(model => model.Image)
-                @Html.TextBoxFor(model => model.Image)
-                @Html.ValidationMessageFor(model => model.Image)
-            </div>
-            <button class="btn btn-primary btn-xl" type="submit">Publier</button>
 
-        </fieldset>
+    </center>
 
-    }
+
+    <script>
+        function OuvrirPostForm() {
+
+            document.getElementById("postForm").style.visibility = "visible";
+
+
+        }</script>
+
+
+
+    @*@if (ViewBag.Message != null)
+            {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+
+        </script>
+            }*@
 
 </body>
 </html>

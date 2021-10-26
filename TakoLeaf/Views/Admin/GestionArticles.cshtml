@@ -116,12 +116,12 @@
 
                     @if (item.Public)
                     {
-                        <td>Publié le : @item.DatePublication</td>
+                        <td>Publié le : @item.DatePublication.ToShortDateString() à @item.DatePublication.ToShortTimeString()</td>
                         <td class="visible"><button>@Html.ActionLink("Visible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
                     }
                     else
                     {
-                        <td>Rédigé le : @item.DateRedaction</td>
+                        <td>Rédigé le : @item.DateRedaction.ToShortDateString() à @item.DateRedaction.ToShortTimeString()</td>
                         <td class="invisible"><button>@Html.ActionLink("Invisible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
                     }
                     <td><button>@Html.ActionLink("Supprimer Article", "SuppressionArticle", "Admin", new { id = item.Id })</button></td>
@@ -149,7 +149,7 @@
 
                     <tr>
                         <td><button>@Html.ActionLink(item.Titre, "ModifierArticle", "Admin", new { id = item.Id })</button></td>
-                        <td>Redigé le : @item.DateRedaction</td>
+                        <td>Redigé le : @item.DateRedaction.ToShortDateString() à @item.DateRedaction.ToShortTimeString()</td>
                         <td class="invisible"><button>@Html.ActionLink("Invisible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
                         <td><button>@Html.ActionLink("Supprimer Article", "SuppressionArticle", "Admin", new { id = item.Id })</button></td>
                     </tr>

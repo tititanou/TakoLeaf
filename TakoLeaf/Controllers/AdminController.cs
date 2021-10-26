@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using TakoLeaf.ViewModels;
 
 namespace TakoLeaf.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IDalAdmin dal;
@@ -29,7 +31,7 @@ namespace TakoLeaf.Controllers
             {
                 var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
                 viewModel.Admin = dal.ObtenirAdmin(userId);
-                return Redirect("/home/index");
+                return Redirect("/Home/Index");
             }
             return View(viewModel);
 
@@ -39,27 +41,47 @@ namespace TakoLeaf.Controllers
 
         public ActionResult GestionComptes()
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             List<UtilisateurViewModel> liste = dal.ObtenirTousLesAdherentsEtComptes();
             return View(liste);
         }
 
         public ActionResult ValiderProfil(int id)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             dal.ChangerEtatProfil(id, 0);
             return RedirectToAction("GestionComptes");
         }
         public ActionResult BloquerProfil(int id)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             dal.ChangerEtatProfil(id, 1);
             return RedirectToAction("GestionComptes");
         }
         public ActionResult DebloquerProfil(int id)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             dal.ChangerEtatProfil(id, 2);
             return RedirectToAction("GestionComptes");
         }
         public ActionResult SupprimerCompte(int id)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             dal.SupprimerProfil(id);
             return RedirectToAction("GestionComptes");
         }
@@ -68,24 +90,30 @@ namespace TakoLeaf.Controllers
 
         public ActionResult PublicationArticle()
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult PublicationArticle(Article article)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             dal.AjouterArticle(article.Titre, article.Texte);
             return RedirectToAction();
         }
 
-        public ActionResult Articles()
-        {
-            List<Article> liste = dal.ObtenirTousLesArticlesPublic();
-            return View(liste);
-        }
-
         public ActionResult ModifierArticle(int id)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             Article article = dal.ObtenirArticle(id);
 
             return View(article);
@@ -94,12 +122,17 @@ namespace TakoLeaf.Controllers
         public ActionResult ModifierArticle(Article article)
         {
             dal.ModifierArticle(article.Id, article.Titre, article.Texte);
+            ViewBag.Message = "L'article a été mis à jour";
 
-            return RedirectToAction("Articles");
+            return Redirect("/Home/Actualites");
         }
 
         public ActionResult SuppressionArticle(int id)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             dal.SupprimerArticle(id);
 
             return RedirectToAction("Articles");
@@ -108,12 +141,20 @@ namespace TakoLeaf.Controllers
 
         public ActionResult GestionArticles()
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             List<Article> list = dal.ObtenirTousLesArticles();
             return View(list);
         }
 
         public ActionResult ModificationVisibilite(int id)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             dal.ModifierVisibiliteArticle(id);
             return RedirectToAction("GestionArticles");
         }

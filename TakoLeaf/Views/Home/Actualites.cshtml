@@ -20,9 +20,11 @@
                 margin: 10px;
                 padding: 5px;
             }
-            h2{
-                color:white;
-            }
+
+        h2 {
+            color: white;
+        }
+
         .browser {
             background: #FFFFFF;
             border-radius: 3em;
@@ -47,10 +49,15 @@
             <article class="browser">
                 <h3>@item.Titre</h3>
                 <p>@item.Texte</p>
-                <p>Publié le : @item.DatePublication</p>
+                <p>Publié le : @item.DatePublication.ToShortDateString()</p>
             </article>
-            <button>@Html.ActionLink("Modifier Article", "ModifierArticle", "Admin", new { id = item.Id })</button>
-            <button>@Html.ActionLink("Supprimer Article", "SuppressionArticle", "Admin", new { id = item.Id })</button>
+
+            if (User.IsInRole("Admin"))
+            {
+
+                <button>@Html.ActionLink("Modifier Article", "ModifierArticle", "Admin", new { id = item.Id })</button>
+                <button>@Html.ActionLink("Supprimer Article", "SuppressionArticle", "Admin", new { id = item.Id })</button>
+            }
         }
 
 
