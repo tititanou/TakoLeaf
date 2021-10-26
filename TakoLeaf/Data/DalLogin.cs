@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TakoLeaf.Models;
 
 namespace TakoLeaf.Data
@@ -89,7 +90,7 @@ namespace TakoLeaf.Data
         public CompteUser Authentifier(string mail, string mdp)
         {
             string password = EncodeMD5(mdp);
-            CompteUser user = _bddContext.CompteUsers.FirstOrDefault(c => c.Mail == mail && c.MotDePasse == password);
+            CompteUser user = _bddContext.CompteUsers.Include(c => c.Adherent).FirstOrDefault(c => c.Mail == mail && c.MotDePasse == password);
             return user;
         }
 

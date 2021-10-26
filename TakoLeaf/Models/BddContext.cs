@@ -144,7 +144,8 @@ namespace TakoLeaf.Models
                       MotDePasse = dal.EncodeMD5("LaMama"),
                       Description = "MacPowa",
                       EtatProfil = EtatProfil.ATTENTE_VALIDATION,
-                      AdherentId = 2
+                      AdherentId = 2,
+                      Role = "Consumer"
 
                   },
                   new CompteUser
