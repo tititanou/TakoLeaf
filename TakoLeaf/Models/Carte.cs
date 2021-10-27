@@ -29,5 +29,8 @@ namespace TakoLeaf.Models
         [Required(ErrorMessage = "Le cryptogramme est obligatoire")]
         [RegularExpression(@"\d{3}", ErrorMessage = "Le Cryptogramme est de 3 chiffres")]
         public int Crypto { get; set; }
+
+        public int ConsumerId { get; set;}
+        public Consumer Consumer { get; set; }
     }
 }

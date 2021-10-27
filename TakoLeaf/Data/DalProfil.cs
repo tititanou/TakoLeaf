@@ -156,6 +156,16 @@ namespace TakoLeaf.Data
             _bddContext.SaveChanges();
 
         }
+
+        public void ModifierCarte (int id, string titulaire, string numeroCarte, string date, int crypto)
+        {
+            Carte carte = _bddContext.Cartes.Find(id);
+            carte.Titulaire = titulaire;
+            carte.NumeroCarte = numeroCarte;
+            carte.ExpirDate = date;
+            carte.Crypto = crypto;
+            _bddContext.SaveChanges();
+        }
         // AJOUT
 
         public Ressource AjouterRessource(int providerId, string intitule, CateRessource categorie, double tarif, string adresse)
@@ -166,6 +176,7 @@ namespace TakoLeaf.Data
             return ressource;
         }
 
+       
 
         // SUPPRESSION
 
@@ -191,6 +202,10 @@ namespace TakoLeaf.Data
             _bddContext.SaveChanges();
         }
 
-
+        public void SupprimerCarte(Carte carte)
+        {
+            _bddContext.Cartes.Remove(carte);
+            _bddContext.SaveChanges();
+        }
     }
 }

@@ -210,8 +210,7 @@ namespace TakoLeaf.Models
                 {
                     Id = 1,
                     AdherentId = 6,
-                    CarteId = 1
-                    
+                                        
                 }
 
 
@@ -224,7 +223,9 @@ namespace TakoLeaf.Models
                     Titulaire = "MR SOULARD",
                     NumeroCarte = "1578323524729856",
                     ExpirDate = "08/2023",
-                    Crypto = 458
+                    Crypto = 458,
+                    ConsumerId = 1
+                    
                 }
                 );
 
@@ -334,7 +335,10 @@ namespace TakoLeaf.Models
             this.Marques.AddRange(
                 new Marque { Nom = "Volkswagen" },
                 new Marque { Nom = "Peugeot" },
-                new Marque { Nom = "Audi"}
+                new Marque { Nom = "Audi"},
+                new Marque { Nom = "Nissan"},
+                new Marque { Nom = "Citroen"},
+                new Marque { Nom = "Seat"}
                 );
 
             this.Modeles.AddRange(
@@ -343,7 +347,12 @@ namespace TakoLeaf.Models
                 new Modele { Nom = "206", MarqueId = 2 },
                 new Modele { Nom = "607", MarqueId = 2 },
                 new Modele { Nom = "A2", MarqueId = 3 },
-                new Modele { Nom = "A4", MarqueId = 3}
+                new Modele { Nom = "A4", MarqueId = 3},
+                new Modele { Nom = "Qashquai", MarqueId = 4},
+                new Modele { Nom = "Picasso", MarqueId = 5},
+                new Modele { Nom = "C4", MarqueId = 5 },
+                new Modele { Nom = "Ibiza", MarqueId = 6},
+                new Modele { Nom = "Leon", MarqueId =6}
                 );
 
             this.CateCompetences.AddRange(

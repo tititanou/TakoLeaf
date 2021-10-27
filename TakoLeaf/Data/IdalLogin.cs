@@ -15,8 +15,8 @@ namespace TakoLeaf.Data
         Adherent CreationAdherent(string nom, string prenom, DateTime dateNaissance, string adresse, string telephone);
         CompteUser CreationCompte(string mail, string mdp, byte[] avatar, string description, int adherentId);
         Voiture CreationVoiture(string imma, string titulaire, Carburant carburant, int annee, int idmodele, int consumerid);
-        Carte CreationCarte(string titulaire, string numeroCarte, string date, int crypto);
-        Consumer CreationConsumer(int idAdherent, int idcarte);
+        Carte CreationCarte(int idconsumer,string titulaire, string numeroCarte, string date, int crypto);
+        Consumer CreationConsumer(int idAdherent);
         Rib CreationRib(string titulaire, string iban, string banque);
         Provider CreationProvider(int idAdherant, int idrib);
         Competence CreationCompetence(double tarifhoraire, int idsscomp,int providerid,string nomssc);

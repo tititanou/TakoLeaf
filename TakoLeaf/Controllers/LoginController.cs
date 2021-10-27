@@ -169,11 +169,13 @@ namespace TakoLeaf.Controllers
         [HttpPost]
         public ActionResult InscriptionConsumer(UtilisateurViewModel uvm)
         {
-            Carte carte = dal.CreationCarte(uvm.Carte.Titulaire, uvm.Carte.NumeroCarte, uvm.Carte.ExpirDate, uvm.Carte.Crypto);
-            int idcarte = carte.Id;
             DalProfil dalProfil = new DalProfil();
-            int idadherent = dalProfil.ObtenirAdherents().Last().Id; 
-            Consumer consumer = dal.CreationConsumer(idadherent, idcarte);
+            int idadherent = dalProfil.ObtenirAdherents().Last().Id;
+            Consumer consumer = dal.CreationConsumer(idadherent);
+            Carte carte = dal.CreationCarte(consumer.Id,uvm.Carte.Titulaire, uvm.Carte.NumeroCarte, uvm.Carte.ExpirDate, uvm.Carte.Crypto);
+            int idcarte = carte.Id;
+            
+            
             int idmodele = dalProfil.ObtenirModeles().Where(v => v.Nom == uvm.Modele.Nom).FirstOrDefault().Id;
             Voiture voiture = dal.CreationVoiture(uvm.Voiture.Immatriculation, uvm.Voiture.Titulaire, uvm.Voiture.Carburant, uvm.Voiture.Annee, idmodele, consumer.Id);
             return Redirect("/ProfilUser/ProfilConsumer?id=" + idadherent);

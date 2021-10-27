@@ -1,0 +1,66 @@
+﻿@model TakoLeaf.ViewModels.UtilisateurViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ModifierCarte</title>
+</head>
+<body>
+    <h1> Indiquer les informations des cartes à modifier </h1>
+    @using (Html.BeginForm())
+    {
+
+
+        <table>
+
+            <tr>
+                <th>Titulaire</th>
+                <th>Numero de Carte</th>
+                <th>Date Expiration</th>
+                <th>Cryptogramme</th>
+                <th>Action</th>
+            </tr>
+
+
+            @for (int i = 0; i < Model.Cartes.Count; i++)
+            {
+
+                <tr>
+                    <td>@Html.TextBoxFor(model => model.Cartes[i].Titulaire, new { @class = "form-control" })</td>
+                    <td>@Html.TextBoxFor(model => model.Cartes[i].NumeroCarte, new { @class = "form-control" })</td>
+                    <td>@Html.TextBoxFor(model => model.Cartes[i].ExpirDate, new { @class = "form-control" })</td>
+                    <td>@Html.TextBoxFor(model => model.Cartes[i].Crypto, new { @class = "form-control" })</td>
+                    <td><button>@Html.ActionLink("Supprimer la carte", "SupprimerCarte", "ProfilUser", new { id = Model.Cartes[i].Id })</button></td>
+                </tr>
+
+
+                @Html.HiddenFor(m => m.Consumer.Id)
+                @Html.HiddenFor(m => m.Cartes[i].Id)
+            }
+
+
+
+        </table>
+        <br />
+        <button>@Html.ActionLink("Ajouter une carte", "AjouterCarte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+
+        <br />
+        <button class="btn btn-primary btn-xl" type="submit">Modifier Cartes</button>
+
+        <br />
+        <button>@Html.ActionLink("Retour au modification de compte", "ModifCompte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+
+
+
+
+    }
+
+
+
+</body>
+</html>

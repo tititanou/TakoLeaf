@@ -34,8 +34,8 @@ namespace TakoLeaf.Controllers
             CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == id);
             Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == id);
             List<Voiture> voitures = dal.ObtenirVoiture().Where(v => v.ConsumerId == consumer.Id).OrderBy(v => v.Id).ToList();
-            int idcarte = consumer.CarteId;
-            Carte carte = dal.ObtenirCartes().FirstOrDefault(c => c.Id == idcarte);
+            //int idcarte = consumer.CarteId;
+            //Carte carte = dal.ObtenirCartes().FirstOrDefault(c => c.Id == idcarte);
             
             List<string> modeles = new List<string>();
             for(int i =0; i<voitures.Count; i++)
@@ -53,7 +53,7 @@ namespace TakoLeaf.Controllers
 
             //int idmodele = voiture.ModeleId;
             //Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
-            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voitures = voitures, Carte = carte, Consumer = consumer, Modeles = modeles , Marques = marques };
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voitures = voitures, Consumer = consumer, Modeles = modeles , Marques = marques };
 
             return View(uvm);
         }
@@ -422,6 +422,59 @@ namespace TakoLeaf.Controllers
             Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == idC);
             return Redirect("/ProfilUser/ProfilConsumer?id=" + consumer.AdherentId);
 
+        }
+
+        // CARTE 
+        public IActionResult AjouterCarte(int id)
+        {
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == id);
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Consumer = consumer };
+            return View(uvm);
+        }
+
+        [HttpPost]
+        public IActionResult AjouterCarte(UtilisateurViewModel uvm)
+        {
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == uvm.Consumer.Id);
+            DalLogin dalL = new DalLogin();
+            Carte carte = dalL.CreationCarte(consumer.Id, uvm.Carte.Titulaire, uvm.Carte.NumeroCarte, uvm.Carte.ExpirDate, uvm.Carte.Crypto);
+
+            return Redirect("/ProfilUser/ModifierCarte?id=" + consumer.AdherentId);
+        }
+
+
+
+        public IActionResult ModifierCarte(int id)
+        {
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == id);
+            List<Carte> cartes = dal.ObtenirCartes().Where(c => c.ConsumerId == consumer.Id).ToList();
+
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Consumer = consumer, Cartes = cartes };
+
+
+            return View(uvm);
+        }
+
+        [HttpPost]
+        public IActionResult ModifierCarte(UtilisateurViewModel uvm)
+        {
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == uvm.Consumer.Id);
+            for(int i =0; i<uvm.Cartes.Count;i++) 
+            {
+                dal.ModifierCarte(uvm.Cartes[i].Id, uvm.Cartes[i].Titulaire, uvm.Cartes[i].NumeroCarte, uvm.Cartes[i].ExpirDate, uvm.Cartes[i].Crypto);
+            }
+
+            return Redirect("/ProfilUser/ModifierCarte?id=" + consumer.AdherentId);
+        }
+
+        public IActionResult SupprimerCarte(int id)
+        {
+
+            Carte carte = dal.ObtenirCartes().FirstOrDefault(c => c.Id == id);
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == carte.ConsumerId);
+            dal.SupprimerCarte(carte);
+
+            return Redirect("/ProfilUser/ModifierCarte?id=" + consumer.AdherentId);
         }
     }   
 }
