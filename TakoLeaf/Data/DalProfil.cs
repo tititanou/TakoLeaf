@@ -139,6 +139,23 @@ namespace TakoLeaf.Data
             return ressource;
         }
 
+        public void ModifierVoiture(int id, string imma, string titulaire, Carburant carburant, int annee, int idmodele)
+        {
+            Voiture voiture = _bddContext.Voitures.Find(id);
+            voiture.Immatriculation = imma;
+            voiture.Titulaire = titulaire;
+            voiture.Carburant = carburant;
+            voiture.Annee = annee;
+            voiture.ModeleId = idmodele;
+            _bddContext.SaveChanges();
+
+        }
+
+        public void SupprimerVoiture()
+        {
+
+        }
+
 
     }
 }

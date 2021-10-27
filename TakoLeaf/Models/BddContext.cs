@@ -248,7 +248,7 @@ namespace TakoLeaf.Models
 
                 }
                 );
-                
+
             this.Voitures.AddRange(
 
                 new Voiture
@@ -260,11 +260,23 @@ namespace TakoLeaf.Models
                     Immatriculation = "CA-175-AA",
                     Titulaire = "MR SOULARD",
                     ModeleId = 2
-                    
+
+                },
+
+                new Voiture
+                {
+                    Id = 2,
+                    Annee = 2017,
+                    Carburant = Carburant.SP98,
+                    ConsumerId = 1,
+                    Immatriculation = "BB-585-DF",
+                    Titulaire = "MME SOULARD",
+                    ModeleId = 5
                 }
 
-                
+
                 );
+
             this.Sujets.AddRange(
                 new Sujet
                 {

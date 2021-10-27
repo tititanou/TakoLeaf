@@ -31,7 +31,7 @@ namespace TakoLeaf.Controllers
             Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
             CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == id);
             Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == id);
-            List<Voiture> voitures = dal.ObtenirVoiture().Where(v => v.ConsumerId == consumer.Id).ToList();
+            List<Voiture> voitures = dal.ObtenirVoiture().Where(v => v.ConsumerId == consumer.Id).OrderBy(v => v.Id).ToList();
             int idcarte = consumer.CarteId;
             Carte carte = dal.ObtenirCartes().FirstOrDefault(c => c.Id == idcarte);
             
@@ -290,5 +290,73 @@ namespace TakoLeaf.Controllers
             return Redirect("/ProfilUser/ProfilConsumer?id=" + consumer.AdherentId);
         }
 
+
+        public IActionResult ModifVoiture(int id)
+        {
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == id);
+            List<Voiture> voitures = dal.ObtenirVoiture().Where(v => v.ConsumerId == consumer.Id).OrderBy(v => v.Id).ToList();
+            
+
+            // Liste de carburants
+            List<Carburant> carburants = new List<Carburant>();
+            foreach (Carburant item in Enum.GetValues(typeof(Carburant)))
+            {
+                carburants.Add(item);
+            }
+            ViewBag.SelectList = new SelectList(carburants);
+
+            // Liste de modeles
+            List<string> modeles = new List<string>();
+            foreach (Modele item in dal.ObtenirModeles().ToList().OrderBy(p => p.Nom))
+            {
+
+                modeles.Add(item.Nom);
+            }
+            ViewBag.Modele = new SelectList(modeles);
+
+            // Liste de marques
+            List<string> marques = new List<string>();
+            foreach (Marque item in dal.ObtenirMarques().ToList().OrderBy(p => p.Nom))
+            {
+                marques.Add(item.Nom);
+            }
+            ViewBag.Marques = new SelectList(marques);
+
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Consumer = consumer, Voitures = voitures, Modeles = modeles, Marques = marques };
+
+            return View(uvm);
+
+        }
+
+        [HttpPost]
+
+        public IActionResult ModifVoiture (UtilisateurViewModel uvm)
+        {
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == uvm.Consumer.Id);
+            List<Voiture> voitures = uvm.Voitures;
+            using(DalProfil dalProfil = new DalProfil())
+            {
+                
+                for (int i=0; i<voitures.Count; i++)
+                {
+                    int idmodele = dal.ObtenirModeles().Where(v => v.Nom == uvm.Modeles[i]).FirstOrDefault().Id;
+                    dal.ModifierVoiture(uvm.Voitures[i].Id, uvm.Voitures[i].Immatriculation, uvm.Voitures[i].Titulaire, uvm.Voitures[i].Carburant, uvm.Voitures[i].Annee, idmodele);
+
+                }
+            }
+
+            return Redirect("/ProfilUser/ProfilConsumer?id=" + consumer.AdherentId);
+
+
+        }
+
+
+
+        
+        public IActionResult SuppressionVoiture(int id)
+        {
+
+            return View();
+        }
     }   
 }

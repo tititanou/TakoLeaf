@@ -18,7 +18,7 @@
     </div>
     <div>
         <h1>Informations du profil</h1>
-        <h2>Information Adherent</h2>
+        <h2>Informations Adherent</h2>
         <ul>
             <li>Avatar : @Model.CompteUser.Avatar</li>
             <li>Nom : @Model.Adherent.Nom</li>
@@ -30,7 +30,7 @@
 
         @Html.ActionLink("Modifier information adherent", "ModifInfosAdherent", "ProfilUser", new { id = Model.Adherent.Id })
 
-        <h2>Information Compte</h2>
+        <h2>Informations Compte</h2>
         <ul>
             <li>Adresse mail : @Model.CompteUser.Mail</li>
             <li>Description : @Model.CompteUser.Description</li>
@@ -43,7 +43,7 @@
         @Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })
 
 
-        <h2>Information Voiture</h2>
+        <h2>Informations Voiture</h2>
 
         @for (int i = 0; i < Model.Voitures.Count; i++)
         {
@@ -55,11 +55,13 @@
                 <li>Carburant : @Model.Voitures[i].Carburant</li>
                 <li>Annee : @Model.Voitures[i].Annee</li>
             </ul>
+
+            @*@Html.ActionLink("Modifier le véhicule", "ModifVoiture", "ProfilUser", new  { id = Model.Voitures[i].Id })*@
         }
 
 
         @Html.ActionLink("Ajouter un vehicule", "AjoutVehicule", "ProfilUser", new { id = Model.Consumer.Id })
-
+        @Html.ActionLink("Modifier le véhicule", "ModifVoiture", "ProfilUser", new { id = Model.Consumer.Id }) 
 
     </div>
 </body>
