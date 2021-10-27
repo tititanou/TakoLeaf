@@ -24,33 +24,34 @@
             background-color: red;
         }
 
-     /*   body{
+        /*   body{
             margin:0;
             padding:0;
             background: #e84118;
         }*/
-        .search-box{
+        .search-box {
             position: absolute;
             top: 10%;
             right: 50%;
             /*transform: translate(-50%, -50%);*/
-            background : #2f3640;
+            background: #2f3640;
             height: 40px;
             border-radius: 40px;
             padding: 10px;
         }
-        .search-box:hover > .search-txt{
-            width: 240px;
-            padding: 0 6px;
-        }
 
-        .search-box:hover > .search-btn{
-            background: white;
-        }
+            .search-box:hover > .search-txt {
+                width: 240px;
+                padding: 0 6px;
+            }
 
-        .search-btn{
+            .search-box:hover > .search-btn {
+                background: white;
+            }
+
+        .search-btn {
             color: #e84118;
-            float:right;
+            float: right;
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -58,25 +59,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition:0.4s;
+            transition: 0.4s;
         }
 
-        .search-txt{
-            border:none;
-            background:none;
-            outline:none;
-            float:left;
+        .search-txt {
+            border: none;
+            background: none;
+            outline: none;
+            float: left;
             padding: 0;
             color: white;
             font-size: 16px;
             transition: 0.4s;
             line-height: 40px;
             width: 0px;
-
         }
-
-
-
     </style>
 </head>
 <body>
@@ -95,47 +92,47 @@
 
 
     @{int count = Model.Count();}
-<div>
-    <fieldset style="display:inline-block">
-        <legend>Nombre d'article : @count</legend>
+    <div>
+        <fieldset style="display:inline-block">
+            <legend>Nombre d'article : @count</legend>
 
-        <table>
-
-            <tr>
-                <th>Titre</th>
-                <th>Date</th>
-                <th>Public</th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+            <table>
 
                 <tr>
-                    <td><button>@Html.ActionLink(item.Titre, "ModifierArticle", "Admin", new { id = item.Id })</button></td>
-
-
-                    @if (item.Public)
-                    {
-                        <td>Publié le : @item.DatePublication.ToShortDateString() à @item.DatePublication.ToShortTimeString()</td>
-                        <td class="visible"><button>@Html.ActionLink("Visible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
-                    }
-                    else
-                    {
-                        <td>Rédigé le : @item.DateRedaction.ToShortDateString() à @item.DateRedaction.ToShortTimeString()</td>
-                        <td class="invisible"><button>@Html.ActionLink("Invisible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
-                    }
-                    <td><button>@Html.ActionLink("Supprimer Article", "SuppressionArticle", "Admin", new { id = item.Id })</button></td>
+                    <th>Titre</th>
+                    <th>Date</th>
+                    <th>Public</th>
                 </tr>
-            }
-        </table>
-    </fieldset>
-</div>
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td><button>@Html.ActionLink(item.Titre, "ModifierArticle", "Admin", new { id = item.Id })</button></td>
+
+
+                        @if (item.Public)
+                        {
+                            <td>Publié le : @item.DatePublication.ToShortDateString() à @item.DatePublication.ToShortTimeString()</td>
+                            <td class="visible"><button>@Html.ActionLink("Visible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
+                        }
+                        else
+                        {
+                            <td>Rédigé le : @item.DateRedaction.ToShortDateString() à @item.DateRedaction.ToShortTimeString()</td>
+                            <td class="invisible"><button>@Html.ActionLink("Invisible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
+                        }
+                        <td><button>@Html.ActionLink("Supprimer Article", "SuppressionArticle", "Admin", new { id = item.Id })</button></td>
+                    </tr>
+                }
+            </table>
+        </fieldset>
+    </div>
 
     <fieldset style="display:inline-block">
         <legend>Mes articles invisibles</legend>
 
         @{ count = 0; }
-        
+
         <table>
             <tr>
                 <th>Titre</th>

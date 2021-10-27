@@ -37,6 +37,11 @@ namespace TakoLeaf.Controllers
 
         }
 
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+
         // Pages relatives à la gestion de compte
 
         public ActionResult GestionComptes()
@@ -104,8 +109,19 @@ namespace TakoLeaf.Controllers
             {
                 return Redirect("/Home/Index");
             }
-            dal.AjouterArticle(article.Titre, article.Texte);
+            dal.PublierArticle(article);
             return RedirectToAction();
+        }
+
+        [HttpPost]
+        public ActionResult StockerArticle(Article article)
+        {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
+            dal.AjouterArticle(article.Titre, article.Texte, false);
+            return RedirectToAction("Admin", "GestionActualites");
         }
 
         public ActionResult ModifierArticle(int id)

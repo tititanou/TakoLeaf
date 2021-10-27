@@ -97,21 +97,31 @@ namespace TakoLeaf.Data
             this._bddContext.SaveChanges();
         }
 
-        public void AjouterArticle(string titre, string texte)
+        public void AjouterArticle(string titre, string texte, bool visibilite)
         {
             DateTime DateDuJour = DateTime.Now;
-            Article Article = new Article { Titre = titre, Texte = texte, DateRedaction = DateDuJour, Public = false, Image = null };
+            Article article = new Article { Titre = titre, Texte = texte, DateRedaction = DateDuJour, Image = null };
+
+            if (visibilite)
+            {
+                article.Public = true;
+            }
+            else
+            {
+                article.DatePublication = DateDuJour;
+                article.Public = false;
+            }
+            
             // TODO Penser à ajouter l'ID de l'adhérent et image
-            this._bddContext.Articles.Add(Article);
+            this._bddContext.Articles.Add(article);
             this._bddContext.SaveChanges();
         }
 
         public void PublierArticle(Article article)
         {
-            this.AjouterArticle(article.Titre, article.Texte);
+            this.AjouterArticle(article.Titre, article.Texte, article.Public=true);
             
             article.DatePublication = DateTime.Now;
-            article.Public = true;
 
             this._bddContext.Articles.Update(article);
             this._bddContext.SaveChanges();
@@ -178,8 +188,17 @@ namespace TakoLeaf.Data
             this._bddContext.SaveChanges();
         }
 
+        public List<Prestation> ObtenirToutesLesPrestations()
+        {
+            List<Prestation> prestations = this._bddContext.Prestations.ToList();
+            return prestations;
+        }
 
-
+        public List<Prestation> ObtenirPrestationsParProvider(int providerId)
+        {
+            List<Prestation> prestations = this._bddContext.Prestations.Where(p => p.ProviderId == providerId).ToList();
+            return prestations;
+        }
 
 
 

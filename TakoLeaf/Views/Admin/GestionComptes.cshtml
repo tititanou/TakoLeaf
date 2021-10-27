@@ -37,14 +37,14 @@
 
             @foreach (var item in Model)
             {
-        <tr>
-            <td>@item.Adherent.Nom</td>
-            <td>@item.Adherent.Prenom</td>
-            <td>@item.CompteUser.Description</td>
-            <td>@item.CompteUser.Mail</td>
-            <td>@item.CompteUser.EtatProfil</td>
-            <td>@Html.ActionLink("Supprimer Profil", "SupprimerCompte", "Admin", new { id = item.CompteUser.AdherentId })</td>
-        </tr>
+                <tr>
+                    <td>@item.Adherent.Nom</td>
+                    <td>@item.Adherent.Prenom</td>
+                    <td>@item.CompteUser.Description</td>
+                    <td>@item.CompteUser.Mail</td>
+                    <td>@item.CompteUser.EtatProfil</td>
+                    <td>@Html.ActionLink("Supprimer Profil", "SupprimerCompte", "Admin", new { id = item.CompteUser.AdherentId })</td>
+                </tr>
             }
 
         </table>
@@ -55,6 +55,16 @@
     <br />
 
     <h2 style="text-align:center; font-family:sans-serif;">Comptes en attente de validation</h2>
+
+    <form>
+        <div>
+            <input type="search" id="maRecherche" name="q"
+                   placeholder="Recherchez un adhérent" required>
+            <button>Rechercher</button>
+            <span class="validity"></span>
+        </div>
+    </form>
+
 
     <div style="position:center">
         <table>
@@ -123,14 +133,14 @@
 
                     string editLink3 = "/Admin/DebloquerProfil?id=" + item.CompteUser.AdherentId;
 
-        <tr>
-            <td>@item.Adherent.Nom</td>
-            <td>@item.Adherent.Prenom</td>
-            <td>@item.CompteUser.Description</td>
-            <td>@item.CompteUser.Mail</td>
-            <td>@item.CompteUser.EtatProfil</td>
-            <td>@Html.ActionLink("Débloquer Profil", "DebloquerProfil", "Admin", new { id = item.CompteUser.AdherentId })</td>
-        </tr>
+                    <tr>
+                        <td>@item.Adherent.Nom</td>
+                        <td>@item.Adherent.Prenom</td>
+                        <td>@item.CompteUser.Description</td>
+                        <td>@item.CompteUser.Mail</td>
+                        <td>@item.CompteUser.EtatProfil</td>
+                        <td>@Html.ActionLink("Débloquer Profil", "DebloquerProfil", "Admin", new { id = item.CompteUser.AdherentId })</td>
+                    </tr>
 
                     count++;
 
@@ -143,6 +153,6 @@
     <h3>Nombre de comptes bloqués : <p style="color:crimson">@count</p></h3><br />
 
 
-
 </body>
+
 </html>
