@@ -7,6 +7,7 @@
 
 <html>
 <head>
+    <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <meta name="viewport" content="width=device-width" />
     <title>ModifierArticle</title>
 </head>
@@ -25,7 +26,7 @@
 
                 <div class="form-floating mb-3">
                     @Html.LabelFor(model => model.Texte)
-                    @Html.TextAreaFor(m => m.Texte, new { rows = 20, cols = 150, placeholder = "Votre article ici" })
+                    @Html.TextAreaFor(m => m.Texte, new { rows = 20, cols = 150, @class = "mytextarea" })
                     @Html.ValidationMessageFor(model => model.Texte)
                 </div>
 
@@ -47,6 +48,16 @@
 
     </center>
 
+    <script>
+    function OuvrirPostForm(id) {
+            document.getElementById(id).style.display = "block";
+        }</script>
+    <script>
+    tinymce.init({
+            selector: '.mytextarea',
+            plugins: 'image',
+            a11y_advanced_options: true
+        });</script>
 
     <script>
         function OuvrirPostForm() {

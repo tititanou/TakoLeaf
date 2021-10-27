@@ -15,7 +15,7 @@ namespace TakoLeaf.Models
         public DateTime DateVoulue { get; set; }
 
         [Required]
-        public int prix { get; set; }
+        public int Prix { get; set; }
 
         
         public int ProviderId { get; set; }
@@ -30,11 +30,11 @@ namespace TakoLeaf.Models
         public Voiture Voiture { get; set; }
 
         [Column(name: "NumeroDevis")]
-        public int NumeroDevis { get; set; }
-        public Devis Devis { get; set; }
+        public string NumeroDevis { get; set; }
+        //public Devis Devis { get; set; }
 
         
-        public Etat etatPresta { get; set; }
+        public Etat EtatPresta { get; set; }
         public enum Etat
         {
             Refuse,

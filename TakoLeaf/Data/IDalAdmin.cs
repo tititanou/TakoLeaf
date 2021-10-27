@@ -26,7 +26,7 @@ namespace TakoLeaf.Data
 
         void SupprimerProfil(int id);
 
-        void AjouterArticle(string titre, string texte);
+        void AjouterArticle(string titre, string texte, bool visibilite);
 
         List<Article> ObtenirTousLesArticles();
         List<Article> ObtenirTousLesArticlesPublic();
@@ -39,6 +39,9 @@ namespace TakoLeaf.Data
         void ModifierVisibiliteArticle(int id);
 
         void PublierArticle(Article article);
+
+        List<Prestation> ObtenirToutesLesPrestations();
+        List<Prestation> ObtenirPrestationsParProvider(int providerId);
 
     }
 }
