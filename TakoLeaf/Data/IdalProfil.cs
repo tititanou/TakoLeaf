@@ -15,6 +15,10 @@ namespace TakoLeaf.Data
         void ModifierCompetence(int id, double tarif);
         Ressource AjouterRessource(int providerId,string intitule, CateRessource categorie, double tafif, string adresse);
         void ModifierVoiture(int id, string imma, string titulaire, Carburant carburant, int annee, int idmodele);
+        void ModifierRessource(int id, string intitule, CateRessource categorie, double tarif, string adresse);
+        void SupprimerVoiture(Voiture voiture);
+        void SupprimerCompetence(Competence competence);
+        void SupprimerRessource(Ressource ressource);
         List<Voiture> ObtenirVoiture();
         List<Marque> ObtenirMarques();
         List<Carte> ObtenirCartes();

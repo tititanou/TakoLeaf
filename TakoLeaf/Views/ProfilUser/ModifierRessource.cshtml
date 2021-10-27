@@ -1,0 +1,75 @@
+﻿@model TakoLeaf.ViewModels.ProviderViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ModifierRessource</title>
+</head>
+<body>
+    <h2> Modification des Ressources</h2>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <table>
+                <tr>
+                    <th>Intitule</th>
+                    <th>Adresse</th>
+                    <th>Tarif Journalier</th>
+                    <th>Categorie</th>
+                    <th>Action</th>
+                </tr>
+
+                @for (int i = 0; i < Model.Ressources.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.TextBoxFor(m => m.Ressources[i].Intitule)</td>
+                        <td>@Html.TextBoxFor(m => m.Ressources[i].Adresse)</td>
+                        <td>@Html.TextBoxFor(m => m.Ressources[i].TarifJournalier) </td>
+                        <td>@Html.DropDownListFor(m => m.Ressources[i].Categorie, (SelectList)ViewBag.Cate)</td>
+                        <td><button>@Html.ActionLink("Supprimer la ressource", "SupprimerRessource", "ProfilUser", new { id = Model.Ressources[i].Id })</button></td>
+
+                    </tr>
+
+
+                    @Html.HiddenFor(m => m.Ressources[i].Id)
+                    @Html.HiddenFor(m => m.Ressources[i].Disponible)
+                }
+
+            </table>
+
+
+            @*@for (int i = 0; i < Model.Ressources.Count; i++)
+            {
+                <div>
+                    @Html.LabelFor(m => m.Ressources[i].Intitule)
+                    @Html.TextBoxFor(m => m.Ressources[i].Intitule)
+
+                    @Html.LabelFor(m => m.Ressources[i].Adresse)
+                    @Html.TextBoxFor(m => m.Ressources[i].Adresse)
+
+                    @Html.LabelFor(m => m.Ressources[i].TarifJournalier)
+                    @Html.TextBoxFor(m => m.Ressources[i].TarifJournalier)
+
+                    @Html.LabelFor(m => m.Ressources[i].Categorie)
+                    @Html.DropDownListFor(m => m.Ressources[i].Categorie, (SelectList)ViewBag.Cate)
+                </div>
+
+                @Html.HiddenFor(m => m.Ressources[i].Id)
+                @Html.HiddenFor(m => m.Ressources[i].Disponible)
+            }*@
+
+            @Html.HiddenFor(m => m.Provider.Id)
+
+
+            <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
+
+        }
+
+    </div>
+</body>
+</html>

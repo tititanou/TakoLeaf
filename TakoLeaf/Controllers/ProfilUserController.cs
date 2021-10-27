@@ -26,6 +26,8 @@ namespace TakoLeaf.Controllers
             return View();
         }
 
+        // PROFILS
+
         public IActionResult ProfilConsumer(int id)
         {
             Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
@@ -68,6 +70,8 @@ namespace TakoLeaf.Controllers
 
             return View(pvm);
         }    
+
+        // MODIFICATION INFORMATIONS ADHERANT / COMPTE
 
         public IActionResult ModifInfosAdherent(int id)
         {
@@ -131,6 +135,9 @@ namespace TakoLeaf.Controllers
 
         //TODO faire la methode et voir sur la vue InscriptionProvider pour ajouter les Competences
         
+
+        // COMPETENCES
+
         public IActionResult ModifCompetence (int id)
         {
             List<Competence> competence = dal.ObtenirCompetences().Where(c => c.ProviderId == id).ToList();
@@ -228,6 +235,22 @@ namespace TakoLeaf.Controllers
             return Redirect("/ProfilUser/ProfilProvider?id=" + provider.AdherentId);
         }
 
+
+        public IActionResult SupprimerCompetence(int id)
+        {
+            Competence competence = dal.ObtenirCompetences().FirstOrDefault(c => c.Id == id);
+            int idP = competence.ProviderId;
+            Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.Id == idP);
+            DalProfil dalProfil = new DalProfil();
+            dalProfil.SupprimerCompetence(competence);
+
+            return Redirect("/ProfilUser/ProfilProvider?id=" + provider.AdherentId);
+        }
+
+
+
+        // RESSOURCES
+
         public IActionResult AjoutRessource(int id)
         {
             Provider provider = dal.ObtenirProviders().Where(p => p.Id == id).FirstOrDefault();
@@ -238,12 +261,51 @@ namespace TakoLeaf.Controllers
             return View(pvm);
         }
 
+
         [HttpPost]
         public IActionResult AjoutRessource(ProviderViewModel pvm)
         {
             Ressource ressource = dal.AjouterRessource(pvm.Provider.Id, pvm.Ressource.Intitule, pvm.Ressource.Categorie, pvm.Ressource.TarifJournalier, pvm.Ressource.Adresse);
             return Redirect("/ProfilUser/ProfilProvider?id=" + pvm.Provider.AdherentId);
         }
+
+        public IActionResult ModifierRessource(int id)
+        {
+            List<Ressource> ressources = dal.ObtenirRessources().Where(r => r.ProviderId == id).ToList();
+            List<CateRessource> cateRessources = new List<CateRessource> { CateRessource.OUTIL, CateRessource.OUTIL_SPECIALISE, CateRessource.LOCAL_GARAGE, CateRessource.TERRAIN, CateRessource.REMORQUE, CateRessource.PONT_ELEVATEUR };
+            Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.Id == id);
+            ViewBag.Cate = new SelectList(cateRessources);
+
+            ProviderViewModel pvm = new ProviderViewModel { Provider = provider, Ressources = ressources };
+            return View(pvm);
+        }
+
+        [HttpPost]
+        public IActionResult ModifierRessource(ProviderViewModel pvm)
+        {
+            Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.Id == pvm.Provider.Id);
+
+            for(int i =0; i < pvm.Ressources.Count; i++)
+            {
+                dal.ModifierRessource(pvm.Ressources[i].Id, pvm.Ressources[i].Intitule, pvm.Ressources[i].Categorie, pvm.Ressources[i].TarifJournalier, pvm.Ressources[i].Adresse);
+            }
+
+
+            return Redirect("/ProfilUser/ProfilProvider?id=" + provider.AdherentId);
+        }
+
+
+        public IActionResult SupprimerRessource(int id)
+        {
+            Ressource ressource = dal.ObtenirRessources().FirstOrDefault(r => r.Id == id);
+            Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.Id == ressource.ProviderId);
+            dal.SupprimerRessource(ressource);
+
+
+            return Redirect("/ProfilUser/ProfilProvider?id=" + provider.AdherentId);
+        }
+
+        // VEHICULES 
 
         public IActionResult AjoutVehicule(int id)
         {
@@ -350,13 +412,16 @@ namespace TakoLeaf.Controllers
 
         }
 
-
-
         
         public IActionResult SuppressionVoiture(int id)
         {
+            Voiture voiture = dal.ObtenirVoiture().FirstOrDefault(v => v.Id == id);
+            int idC = voiture.ConsumerId;
+            DalProfil dalProfil = new DalProfil();
+            dalProfil.SupprimerVoiture(voiture);
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == idC);
+            return Redirect("/ProfilUser/ProfilConsumer?id=" + consumer.AdherentId);
 
-            return View();
         }
     }   
 }
