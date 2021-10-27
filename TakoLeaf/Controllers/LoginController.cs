@@ -53,7 +53,7 @@ namespace TakoLeaf.Controllers
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
                 HttpContext.SignInAsync(userPrincipal);
 
-                //UtilisateurViewModel uvm2 = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser };
+                
                 if (uvm.CompteUser.Role.Equals("Provider"))
                 {
                     dal.RoleIsProvider(compteUser);

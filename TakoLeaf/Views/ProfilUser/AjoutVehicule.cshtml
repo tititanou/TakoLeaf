@@ -1,0 +1,57 @@
+﻿@model TakoLeaf.ViewModels.UtilisateurViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AjoutVehicule</title>
+</head>
+<body>
+
+    <h1> Indiquer les informations du véhicule à ajouter </h1>
+    @using (Html.BeginForm())
+    {
+        <div class="form-floating mb-3">
+            @Html.TextBoxFor(model => model.Voiture.Immatriculation, new { @class = "form-control", placeholder = "Plaque Immatriculation" })
+            @Html.LabelFor(model => model.Voiture.Immatriculation)
+            @Html.ValidationMessageFor(model => model.Voiture.Immatriculation)
+        </div>
+
+        <div class="form-floating mb-3">
+            @Html.TextBoxFor(model => model.Voiture.Titulaire, new { @class = "form-control", placeholder = "Titulaire" })
+            @Html.LabelFor(model => model.Voiture.Titulaire)
+            @Html.ValidationMessageFor(model => model.Voiture.Titulaire)
+        </div>
+
+        <div>
+            @Html.DropDownListFor(model => model.Voiture.Carburant, (SelectList)ViewBag.SelectList)
+            @Html.LabelFor(model => model.Voiture.Carburant)
+        </div>
+
+        <div>
+            @Html.TextBoxFor(model => model.Voiture.Annee, new { @class = "form-control", placeholder = "Annee" })
+            @Html.LabelFor(model => model.Voiture.Annee)
+            @Html.ValidationMessageFor(model => model.Voiture.Annee)
+        </div>
+
+        <div>
+            @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques)
+            @Html.LabelFor(model => model.Marque.Nom)
+        </div>
+
+        <div>
+            @Html.DropDownListFor(model => model.Modele.Nom, (SelectList)ViewBag.Modele)
+            @Html.LabelFor(model => model.Modele.Nom)
+        </div>
+
+        @Html.HiddenFor(m => m.Consumer.Id)
+
+        <button class="btn btn-primary btn-xl" type="submit">Ajouter véhicule</button>
+    }
+
+</body>
+</html>

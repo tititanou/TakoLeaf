@@ -13,9 +13,13 @@ namespace TakoLeaf.ViewModels
         public Consumer Consumer { get; set; }
         public Provider Provider { get; set; }
         public Voiture Voiture { get; set; }
+        public List<Voiture> Voitures { get; set; }
         public Carte Carte { get; set; }
         public Marque Marque { get; set; }
         public Modele Modele { get; set; }
+        public List<string> Modeles { get; set; }
+        public List<string> Marques { get; set; }
+
         
     }
 }

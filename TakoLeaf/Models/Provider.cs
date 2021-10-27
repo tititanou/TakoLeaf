@@ -19,5 +19,18 @@ namespace TakoLeaf.Models
         public int RibId { get; set; }
         public Rib Rib { get; set; }
 
+        public Rang Rang { get; set; }
+
+    }
+
+    public enum Rang
+    {
+        POULPE_AMATEUR,
+        POULPE_BRICOLEUR,
+        PIEUVRE_HABILE,
+        PIEUVRE_RAFISTOLEUR,
+        CALAMAR_RAVALEUR,
+        MAITRE_KRAKEN
+
     }
 }

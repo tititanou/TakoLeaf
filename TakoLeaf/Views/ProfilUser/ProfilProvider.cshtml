@@ -23,7 +23,7 @@
             <li>Avatar : @Model.CompteUser.Avatar</li>
             <li>Nom : @Model.Adherent.Nom</li>
             <li>Prenom : @Model.Adherent.Prenom</li>
-            <li>Date de Naissance : @Model.Adherent.Date_naissance</li>
+            <li>Date de Naissance : @Model.Adherent.Date_naissance.ToShortDateString()</li>
             <li>Adresse : @Model.Adherent.Adresse</li>
             <li>Telephone : @Model.Adherent.Telephone</li>
         </ul>
@@ -36,17 +36,58 @@
             <li>Description : @Model.CompteUser.Description</li>
             <li>Liste d'amis: @Model.CompteUser.Amis</li>
             <li>Liste Compte Bloqués : @Model.CompteUser.UserBloques</li>
+            <li>Rang : @Model.Provider.Rang</li>
             <li>Etat Profil : @Model.CompteUser.EtatProfil</li>
         </ul>
 
 
         @Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })
 
+
+
+        <h2> Information Ressources</h2>
+
+        @if (Model.Ressources != null)
+        {
+        <table border="1">
+            <tr>
+                <th>Intitule</th>
+                <th>Adresse</th>
+                <th>Categorie</th>
+                <th>Tarif journalier</th>
+                <th>Disponible</th>
+            </tr>
+
+            @for (int i = 0; i < Model.Ressources.Count; i++)
+            {
+        <tr>
+            <td>@Model.Ressources[i].Intitule</td>
+            <td>@Model.Ressources[i].Adresse</td>
+            <td>@Model.Ressources[i].Categorie</td>
+            <td>@Model.Ressources[i].TarifJournalier</td>
+            @if (@Model.Ressources[i].Disponible)
+            {
+                <td>Oui</td>
+            }
+            else
+            {
+                <td>Non</td>
+}
+
+        </tr>
+            }
+        </table>
+        }
+
+        @Html.ActionLink("Ajouter Ressources", "AjoutRessource", "ProfilUser", new { id = Model.Provider.Id })
+
+
+
         <h2> Information Competences</h2>
         <table border="1">
             <tr>
                 <th>Competence</th>
-                <th>Tarif Horaires</th>
+                <th>Tarif Horaire</th>
             </tr>
 
             @for (int i = 0; i < Model.Competence.Count; i++)
@@ -57,8 +98,9 @@
                 </tr>
             }
         </table>
-        
-        @Html.ActionLink("Modifier Competences", "ModifCompetence", "ProfilUser", new { id = Model.Adherent.Id })
+
+        @Html.ActionLink("Modifier Competences", "ModifCompetence", "ProfilUser", new { id = Model.Provider.Id })
+        @Html.ActionLink("Ajouter Competences", "AjoutCompetence", "ProfilUser", new { id = Model.Provider.Id })
     </div>
 </body>
 </html>

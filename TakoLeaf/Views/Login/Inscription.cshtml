@@ -59,9 +59,8 @@
             </div>
 
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.CompteUser.Avatar, new { @class = "form-control", placeholder = "Avatar" })
+                @Html.TextBoxFor(model => model.CompteUser.Avatar, new { @type = "file", @name = "file" })
                 @Html.LabelFor(model => model.CompteUser.Avatar)
-                @Html.ValidationMessageFor(model => model.CompteUser.Avatar)
             </div>
 
             <div class="form-floating mb-3">
@@ -71,18 +70,15 @@
             </div>
 
             <div>
-              
+
                 @Html.DropDownListFor(model => model.CompteUser.Role, (SelectList)ViewBag.Roles)
                 @Html.LabelFor(model => model.CompteUser.Role)
-                
+
             </div>
 
             <!-- Submit Button-->
             <button class="btn btn-primary btn-xl" type="submit">Créer</button>
         }
-
-
-       
-    </div>
+    
 </body>
 </html>
