@@ -17,5 +17,12 @@ namespace TakoLeaf.Data
         void SuppressionPost(Post post);
         Post Get1Post(int id);
         Sujet RechercheSujetParTitre(string titre);
+        List<PostSignale> GetAllPostSignales();
+        PostSignale GetPostSignale(int id);
+        List<PostSignale> GetPostSignalesFromAdh(int idAdh);
+        void AjoutPostSignale(PostSignale post);
+        void SuppressionPostSignale(PostSignale post);
+        void SuppressionAllPostSignaleFromAdh(int idAdh);
+        void SuppressionAllPostFromAdh(int idAdh);
     }
 }

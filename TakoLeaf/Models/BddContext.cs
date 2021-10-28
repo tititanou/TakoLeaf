@@ -37,6 +37,7 @@ namespace TakoLeaf.Models
         public DbSet<Rib> Ribs { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<HistoriquePresta> HistoriquePrestas { get; set; }
+        public DbSet<PostSignale> PostSignales { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -307,7 +308,7 @@ namespace TakoLeaf.Models
                 {
                     Id = 1,
                     Date = new DateTime(2021, 07, 26, 14, 51, 03),
-                    CorpsPost = "Salut, j'ai un pb avec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus efficitur fermentum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec volutpat nunc quis tellus lacinia.",
+                    CorpsPost = "Salut, jai un pb avec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus efficitur fermentum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec volutpat nunc quis tellus lacinia.",
                     SujetId = 1,
                     AdherentId = 1
                 },

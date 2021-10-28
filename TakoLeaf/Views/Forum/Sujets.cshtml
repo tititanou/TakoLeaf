@@ -19,6 +19,6 @@
                 @Html.ActionLink(item.Titre, "Sujet", "Forum", new { id = item.Id })
                 <hr />
             }
-    @Html.ActionLink("Nouveau sujet", "NouveauSujet", "Forum")
+<button onclick="location.href='@Url.Action("NouveauSujet", "Forum")'">Nouveau sujet</button>
 </body>
 </html>
