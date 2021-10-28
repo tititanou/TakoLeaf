@@ -1,45 +1,189 @@
-﻿
+﻿@model TakoLeaf.ViewModels.DashViewModel
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
 
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <title>
-        Material Dashboard by Creative Tim
-    </title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- CSS Files -->
-    <link id="pagestyle" href="../assets/css/material-dashboard.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Dashboard</title>
+    <style>
+
+        th {
+            text-align: left;
+            background-color: #2F4858;
+            color: white;
+            border-radius: 10px;
+        }
+
+
+        table, th, td {
+            text-align:center;
+            font-family: sans-serif;
+            padding:10px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #A1E1AF;
+            border-radius: 10px;
+            color: white;
+        }
+
+        #text {
+            text-align: center;
+        }
+
+        .boite {
+            padding-left: 200px;
+            padding-bottom: 100px;
+            padding-top: 50px;
+            display: inline-block; 
+            float: left; 
+        }
+
+        .box {
+            padding-left: 200px;
+            padding-bottom: 100px;
+            padding-top: 50px;
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 50px; 
+            display: inline-block;
+            float: left;
+            clear: right;
+        }
+
+        .conteneur{
+            padding: 10px;
+            clear:left;
+        }
+
+        fieldset {
+            padding: 30px;
+            display: inline-block;
+            border: 5px solid #FFF8ED;
+            background-color: #FFF8ED;
+            border-radius: 10px;
+            box-shadow: 10px 5px 5px grey;
+        }
+
+        legend {
+            font-family: sans-serif;
+            font-size: 30px;
+            font-weight:bolder;
+            font-style:italic;
+            background-color: #A1E1AF;
+            color:white;
+            padding: 50px;
+            border-radius: 10px 100px / 120px;
+        }
+    </style>
 </head>
+<body>
 
-<body class="g-sidenav-show bg-gray-100">
+    <h1 style="text-align:center; font-family:sans-serif">-- Dashboard --</h1>
 
-    <h1>Hello, world!</h1>
 
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
 
-    <!-- Plugin for the charts, full documentation here: https://www.chartjs.org/ -->
-    <script src="../assets/js/plugins/chartjs.min.js"></script>
-    <script src="../assets/js/plugins/Chart.extension.js"></script>
+    <div class="boite">
+        <fieldset>
+            <legend>Vos dernières transactions</legend>
+            <table>
+                <tr>
+                    <th>Consumer</th>
+                    <th>Provider</th>
+                    <th>Date</th>
+                    <th>Etat de la prestation</th>
+                    <th>Prix</th>
+                </tr>
 
-    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../assets/js/material-dashboard.min.js"></script>
+                @foreach (var item in Model.ListePrestations)
+                {
+                    <tr>
+                        <td>@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
+                        <td>@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
+                        <td>@item.DateVoulue.ToShortDateString()</td>
+
+                        @if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Refuse)
+                        {
+                            <td text="text" style="background-color:darkred; color:white">Annulé</td>
+                        }
+                        else if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.En_cours)
+                        {
+                            <td text="text" style="background-color:orange; color:white">En cours</td>
+                        }
+                        else
+                        {
+                            <td text="text" style="background-color:green; color:white">Terminée</td>
+                        }
+
+                        <td>@item.Prix €</td>
+
+                    </tr>
+                }
+
+            </table>
+        </fieldset>
+    </div>
+    <br />
+
+    <div class="box">
+        <fieldset>
+            <legend>Vos gains</legend>
+
+            @{int count = 0; }
+
+            @foreach (var item in Model.ListePrestations)
+            {
+                if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Valide)
+                {
+                    count += item.Prix;
+                }
+            }
+
+            <div>@count €</div>
+
+        </fieldset>
+    </div>
+
+
+    <div class="boite">
+        <fieldset>
+            <legend>Vos derniers adhérants</legend>
+            <table>
+                <tr>
+                    <th>Adhérent</th>
+                    <th>Mail</th>
+                    <th>role</th>
+                </tr>
+
+                @foreach (var item in Model.ListeCompte)
+                {
+                    <tr>
+                        <td>@item.Adherent.Nom @item.Adherent.Prenom</td>
+                        <td>@item.Mail</td>
+                        <td>@item.Role</td>
+
+                    </tr>
+                }
+
+            </table>
+        </fieldset>
+    </div>
+
+
+    <div class="box">
+        <fieldset>
+            <legend>Total Adhérents</legend>
+
+            @{int count2 = Model.ListeAdherents.Count;}
+
+            <div>@count2</div>
+
+        </fieldset>
+    </div>
+
 </body>
 </html>

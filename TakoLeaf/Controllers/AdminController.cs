@@ -39,13 +39,23 @@ namespace TakoLeaf.Controllers
 
         public ActionResult Dashboard()
         {
-            return View();
+            
+            DashViewModel dash = new DashViewModel();
+            dash.ListePrestations = dal.ObtenirToutesLesPrestations();
+            dash.ListeAdherents = dal.ObtenirTousLesAdherents();
+            dash.ListeCompte = dal.ObtenirAdherentsEtComptes();
+
+            return View(dash);
         }
 
         // Pages relatives à la gestion de compte
 
         public ActionResult GestionComptes()
         {
+
+            //User.FindFirst(ClaimTypes.NameIdentifier).Value
+
+
             if (!User.IsInRole("Admin"))
             {
                 return Redirect("/Home/Index");

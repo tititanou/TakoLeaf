@@ -14,22 +14,22 @@
             <h3>@Model.Sujet.Titre</h3>
             @foreach (var item in Model.Posts)
             {
-                string idrep = "rep" + item.Id;
+                /*string idrep = "rep" + item.Id;
                 string postmod = "postmod" + item.Id;
                 string idmod = "mod" + item.Id;
                 var cite = "<div contenteditable='false'><blockquote> Le " + item.Date.ToShortDateString() + " à " + item.Date.ToShortTimeString() + ", " + item.Adherent.Prenom + " a dit:</blockquote><cite>" + item.CorpsPost + "</cite></div> html";
-                cttn.CorpsPost = cite;
+                cttn.CorpsPost = cite;*/
                 <div class="post">
-                    <p>@item.CorpsPost</p>
+                    <div>@Html.Raw(@item.CorpsPost)</div>
                     <div class="ftr">
                         <em>@item.Adherent.Prenom</em>
                         <em>@item.Date</em>
                     </div>
                     <button type="button" onclick="Citer('@item.Date.ToShortDateString()', '@item.Date.ToShortTimeString()', '@item.Adherent.Prenom', '@item.CorpsPost')">Citer</button>
-                    <button type="button" onclick="OuvrirPostForm('@idmod')">Signaler</button>
+                    <button type="submit" onclick="">Signaler</button>
                 </div>
                 <br />
-                <div style="display:none" id=@idrep>
+                /*<div style="display:none" id=@idrep>
                     <button type="button" onclick="Close('@idrep')">x</button>
                     
                 </div>
@@ -41,13 +41,14 @@
                             @Html.ValidationMessageFor(model => model.Post.CorpsPost)
                             <button onclick="location.href='@Url.Action("ModifierPost", "Forum", new { id = item.Id })'">Valider</button>
                         }
-                </div>
+                </div>*/
                 <hr />
              }
              @using (Html.BeginForm())
               {
+                    @Html.HiddenFor(model=>model.Sujet.Id)
                     @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message", @class = "mytextarea", id = "repTA" })
-                        <button onclick="location.href='@Url.Action("Repondre", "Forum")'">Valider</button>
+                        <button type="submit">Valider</button>
               }
             }
     <script>function OuvrirPostForm(id) {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -190,7 +191,7 @@ namespace TakoLeaf.Data
 
         public List<Prestation> ObtenirToutesLesPrestations()
         {
-            List<Prestation> prestations = this._bddContext.Prestations.ToList();
+            List<Prestation> prestations = this._bddContext.Prestations.Include(p => p.Consumer.Adherent).Include(p => p.Provider.Adherent).OrderByDescending(p => p.DateVoulue).ToList();
             return prestations;
         }
 
@@ -200,6 +201,13 @@ namespace TakoLeaf.Data
             return prestations;
         }
 
+        public List<CompteUser> ObtenirAdherentsEtComptes()
+        {
+            List<CompteUser> liste = this._bddContext.CompteUsers.Include(p => p.Adherent).ToList();
+            return liste;
+        }
+
+       
 
 
     }

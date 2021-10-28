@@ -43,5 +43,7 @@ namespace TakoLeaf.Data
         List<Prestation> ObtenirToutesLesPrestations();
         List<Prestation> ObtenirPrestationsParProvider(int providerId);
 
+        List<CompteUser> ObtenirAdherentsEtComptes();
+
     }
 }
