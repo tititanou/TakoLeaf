@@ -4,80 +4,275 @@
 }
 
 <!DOCTYPE html>
-
-<html>
+<html lang="fr">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tako Leaf</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="~/CSS/Home.css"/>
-    
-</head>
+    <link rel="stylesheet" href="css/Homestyles.css">
 
+
+    <link rel="stylesheet" href="~/js/Homescript.js">
+    <!-- BOOSTRAP CSS-->
+    <link rel="stylesheet" href="site/css/bootstrap.css">
+
+</head>
 <body>
     <!--Début Section du Header-->
-    <header>
-        <nav class="navbar">
-            <div class="logo"><a href="home/index"><img src="~/IMG/Header/TAKO ECO new.png"></a></div>
-            <h1>Tako Leaf</h1>
-            <ul class="nav-ul">
-                <li><a href="login/inscription">Inscription</a></li>
-                <li><a href="login/connexion">Connexion</a></li>
-                <li><a href="FAQ">FAQ</a></li>
+    <section>
+        <header>
+            <button class="hamburger">&#9776;</button>
+            <button class="cross">&#735;</button>
+            <div class="logo"><img src="IMG/TAKO ECO new.png"></div>
+            <h1 class="titremidheader">Tako Leaf</h1>
+        </header>
+
+        <div class="menu">
+            <ul>
+                <li>@Html.ActionLink("Inscription","Inscription","Login",new {@class= "actionlink" })</li>
+                <li>@Html.ActionLink("Connexion", "Connexion", "Login", new { @class = "actionlink" })</li>
+                <li class="actionlink"><a href="#">FAQ</a></li>
             </ul>
-        </nav>
-    </header>
-    <!--FIn Section du Header-->
-
-
-    <!--Section de la page principale-->
-    <section class="home">
-        <div class="content">
-            <h1>l'espoir c'est la vie</h1>
-
-            <article>
-                <p class="article1"> Amet minim mollit non deserunt ullamco est sit aliqua dolor  <br />do amet sint. Velit officia consequat  <br />duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
-                <p class="article2"> Takeleaf est le prmier site ehzoighgoihg righorighorehz <br />zeoighzeogihzegoizg gozeghoiehfozihefzofnzog <br /><br /><br />zoghzggizhgziehgz zoghgoihgzoeihezgggei</p>
-                <p class="article3"> Takeleaf est le prmier site ehzoighgoihg righorighorehz <br />zeoighzeogihzegoizg gozeghoiehfozihefzofnzog <br /><br /><br />zoghzggizhgziehgz zoghgoihgzoeihezgggei</p>
-                <p class="article4"> Takeleaf est le prmier site ehzoighgoihg righorighorehz <br />zeoighzeogihzegoizg gozeghoiehfozihefzofnzog <br />zoghzggizhgziehgz zoghgoihgzoeihezgggei<br />zeoighzeogihzegoizg gozeghoiehfozihefzofnzog</p>
-            </article>
         </div>
-        <div class="imagefoot">
-            <img src="~/IMG/Footimg/Vector 1.png"/>
-        </div>
-       
-        
 
     </section>
 
+
+    <!--FIn Section du Header-->
+    <!--Section de la page principale-->
+
+    <section class="home" id="section-home">
+        <div class="content">
+            <div id="slider">
+                <figure>
+                    <img src="IMG/SLIDER/1.png">
+                    <img src="IMG/SLIDER/3.png">
+                    <img src="IMG/SLIDER/2.png">
+                    <img src="IMG/SLIDER/5.png">
+                    <img src="IMG/SLIDER/1.png">
+                </figure>
+            </div>
+        </div>
+
+
+            <div class="articles">
+                <div class="textgauche">
+                    <p class="articles"> Amet minim mollit non deserunt ullamco est sit aliqua do<br />eoighzeogihzegoizg gozeghoiehfozihefzofnzog <br />gizhgziehgz zoghgoihgzoeihezgggei</p>
+                </div>
+                <div class="textegauchemid">
+                    <p class="articles"> Takeleaf est le prmier site ehzoighgoihg righorighorehz <br />zeoighzeogihzegoizg gozeghoiehfozihefzofnzog <br />zoghzggizhgziehgz zoghgoihgzoeihezgggei</p>
+                    <p class="articles"> Takeleaf est le prmier site ehzoighgoihg righorighorehz <br />zeoighzeogihzegoizg gozeghoiehfozihefzofnzog <br />zoghzggizhgziehgz zoghgoihgzoeihezgggei</p>
+                </div>
+                <div class="textedroitmid">
+                    <p class="articles"> Takeleaf est le prmier site ehzoighgoihg righorighorehz <br />zeoighzeogihzegoizg gozeghoiehfozihefzofnzog <br />gizhgziehgz zoghgoihgzoeihezgggei</p>
+                    <p class="articles"> Takeleaf est le prmier site ehzoighgoihg righorighorehz <br />zeoighzeogihzegoizg gozeghoiehfozihefzofnzog <br />zoghzggizhgziehgz zoghgoihgzoeihezgggei</p>
+                </div>
+                <div class="textedroit">
+                    <p class="articles"> Takeleaf est le prmier site ehzoighgoihg righorighorehz <br />zeoighzeogihzegoizg gozeghoiehfozihefzofnzog <br />zoghzggizhgziehgz zoghgoihgzoeihezgggei</p>
+                </div>
+            </div>
+    </section>
+
     <!--FIN Section de la page principale-->
+    <!--Section de la page d'information-->
+
+    <section class="information" id="section-information">
+        <div class="titre">
+            <h1 class="titreDessous">Tako</h1>
+            <h2 class="titreDessus">Leaf</h2>
+        </div>
+
+        <div class="question">
+            <h1>Comment ça marche ?</h1>
+        </div>
+
+        <div class="imageP2">
+
+            <div class="iconeP2">
+                <img src="IMG/1erpage (2).png" alt="profilpicture1">
+                <p class="firsttext">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="firsttext">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+            </div>
+
+            <div class="iconeP2">
+                <img src="IMG/1erpage (3).png" alt="profilpicture2">
+                <p class="secondtext">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="secondtext">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="secondtext">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+            </div>
+
+            <div class="iconeP2">
+                <img src="IMG/1erpage (4).png" alt="profilpicture3">
+                <p class="thirdtext">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="thirdtext">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="thirdtext">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+            </div>
+
+            <div class="iconeP2">
+                <img src="IMG/1erpage (1).png" alt="profilpicture4">
+                <p class="fourtext">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="fourtext">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+            </div>
+        </div>
+    </section>
 
 
 
 
 
+    <!--FIN Section de la page d'information-->
+    <!-- DEBUT PAGE ADHRANT AVANTAGE-->
+
+
+
+    <section class="adhrant">
+        <div class="titreadherant">
+            <h1 class="titreDessusP1">Tako</h1>
+            <h2 class="titreDessOusP2">Leaf</h2>
+        </div>
+        <div class="avantage">
+            <h1>Avantage d'être adhérent</h1>
+        </div>
+
+
+        <div class="imageP3">
+            <div class="iconeP3">
+                <img src="IMG/Deuxiemepage (1).png" alt="profilpicture1">
+                <p class="firsttextP3">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="firsttextP3">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+            </div>
+
+            <div class="iconeP3">
+                <img src="IMG/Deuxiemepage (3).png" alt="profilpicture2">
+                <p class="secondtextP3">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="secondtextP3">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="secondtextP3">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+            </div>
+
+            <div class="iconeP3">
+                <img src="IMG/Deuxiemepage (4).png" alt="profilpicture3">
+                <p class="thirdtextP3">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="thirdtextP3">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="thirdtextP3">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+            </div>
+
+            <div class="iconeP3">
+                <img src="IMG/Deuxiemepage (2).png" alt="profilpicture4">
+                <p class="fourtextP3">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+                <p class="fourtextP3">Amet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. <br> Velit officia consequat duis enim velit mollit. <br> Exercitation veniam consequat sunt <br> nostrud amet.</p>
+            </div>
+        </div>
+        
+
+    </section>
+    <!-- FIN SECTION ADHERANT  -->
+    <!-- DEBUT SECTION RECHERCHE  -->
+    <section class="recherche">
+        <div class="titresearch">
+            <h1 class="recherchezvous">
+                Que recherchez
+            </h1>
+            <h2 class="vous">
+                vous ?
+            </h2>
+        </div>
+
+        <div class="Recherche-grid">
+            <a href="" class="recherche-box1"><img src="IMG/ICONESECTION/BATTERIE TEXT.png" alt=""></a>
+            <a href="" class="recherche-box2"><img src="IMG/ICONESECTION/PENU.png" alt=""></a>
+            <a href="" class="recherche-box3"><img src="IMG/ICONESECTION/ECHPAMENT.png" alt=""></a>
+            <a href="" class="recherche-box4"><img src="IMG/ICONESECTION/CARROSSERIE.png" alt=""></a>
+            <a href="" class="recherche-box5"><img src="IMG/ICONESECTION/PAREBRISE.png" alt=""></a>
+            <a href="" class="recherche-box6"><img src="IMG/ICONESECTION/FREIN.png" alt=""></a>
+            <a href="" class="recherche-box7"><img src="IMG/ICONESECTION/MOTEUR.png" alt=""></a>
+            <a href="" class="recherche-box8"><img src="IMG/ICONESECTION/CONSOMABLE.png" alt=""></a>
+            <a href="" class="recherche-box9"><img src="IMG/ICONESECTION/Tunning.png" alt=""></a>
+        </div>
+        
+    </section>
+
+
+
+    <!-- FIN SECTION RECHERCHE-->
+    <!--Section footer-->
+    <section class="footerBot">
+        <footer class="footer-items">
+            <div class="container">
+                <div class="footer-contact">
+                    <h3> Nous rencontrer</h3>
+                    <ul>
+                        <li>Adresse</li>
+                        <li>Adresse</li>
+                        <li>Adresse</li>
+                        <li>Telephone: XX.XX.XX.XX.XX</li>
+                    </ul>
+                </div>
+                <div class="footer-infos">
+                    <h3> Tako Leaf</h3>
+                    <ul>
+                        <li><a href="#section-home">Notre Projet</a></li>
+                        <li><a href="#section-information">Comment ça marche ?</a></li>
+                    </ul>
+                </div>
+                <div class="footer-questions">
+                    <h3> Besoin d'aide ?</h3>
+                    <ul>
+                        <li id="testjs"><a href="#">FAQ</a></li>
+                        <li><a href="#">Forum</a></li>
+                        <li><a href="#">Contacter Administrateur</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="imageRS">
+
+                <a href=""><img src="IMG/RS/entypo-social_instagram-with-circle.png" alt="" class="instagram"></a>
+                <a href=""><img src="IMG/RS/Vector-1.png" alt="" class="twitter"></a>
+                <a href=""><img src="IMG/RS/Vector.png" alt="" class="facebook"></a>
+            </div>
+            <div class="copirate">
+                <h4 class="copyratetext">
+                    © 2021 Tako’Leaf. ALL RIGHTS RESERVED.
+                </h4>
+            </div>
+        </footer>
+    </section>
 
 
 
 
+    <!--FIN Section footer-->
+
+    <script src="jquery-3.6.0.js"></script>
+
+
+
+    <!-- Puis on vas mettre boostrap.JS-->
+    <script src="./site/js/bootstrap.bundle.js"></script>
+
+
+    <script src="js/Homescript.js"></script>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
