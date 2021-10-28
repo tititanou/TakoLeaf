@@ -52,6 +52,10 @@ namespace TakoLeaf.Controllers
 
         public ActionResult GestionComptes()
         {
+
+            //User.FindFirst(ClaimTypes.NameIdentifier).Value
+
+
             if (!User.IsInRole("Admin"))
             {
                 return Redirect("/Home/Index");

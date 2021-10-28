@@ -274,27 +274,27 @@ namespace TakoLeaf.Models
                     Id = 1,
                     AdherentId = 6,
                                         
-                }
+                },
 
                  new Consumer
                  {
                      Id = 2,
                      AdherentId = 9,
-                     CarteId = 2
+                     
                  },
 
                   new Consumer
                   {
                       Id = 3,
                       AdherentId = 8,
-                      CarteId = 3
+                   
                   },
 
                    new Consumer
                    {
                        Id = 4,
                        AdherentId = 3,
-                       CarteId = 4
+                       
                    }
 
 
@@ -304,15 +304,13 @@ namespace TakoLeaf.Models
             this.Cartes.AddRange(
                 new Carte
                 {
-                    Id=1,
+                    Id = 1,
                     Titulaire = "MR SOULARD",
                     NumeroCarte = "1578323524729856",
                     ExpirDate = "08/2023",
                     Crypto = 458,
                     ConsumerId = 1
-                    
-                }
-                    Crypto = 458
+
                 },
 
                 new Carte
@@ -321,7 +319,8 @@ namespace TakoLeaf.Models
                     Titulaire = "MR DEMAIZIEUX",
                     NumeroCarte = "1234567891012023",
                     ExpirDate = "10/2023",
-                    Crypto = 246
+                    Crypto = 246,
+                    ConsumerId = 2
                 },
 
                 new Carte
@@ -330,7 +329,8 @@ namespace TakoLeaf.Models
                     Titulaire = "MR NAYMAR",
                     NumeroCarte = "1415242536359695",
                     ExpirDate = "01/2024",
-                    Crypto = 666
+                    Crypto = 666,
+                    ConsumerId = 3
                 },
 
                  new Carte
@@ -339,9 +339,9 @@ namespace TakoLeaf.Models
                      Titulaire = "MR ZAWARTOSKI",
                      NumeroCarte = "878596832361412",
                      ExpirDate = "05/2022",
-                     Crypto = 789
+                     Crypto = 789,
+                     ConsumerId = 4
                  }
-
 
                 );
 
