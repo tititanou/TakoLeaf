@@ -42,6 +42,23 @@
             <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
         }
     </div>
-  
+    <br />
+
+    <h3>Coordonnées banquaires</h3>
+    <button>@Html.ActionLink("Modifier les coordonnées banquaire", "ModifierCarte", "ProfilUser", new { id = Model.AdherentId })</button>
+
+    <br />
+    @if (Model.Role.Equals("Consumer"))
+    {
+        <button>@Html.ActionLink("Retour au profil", "ProfilConsumer", "ProfilUser", new { id = Model.AdherentId })</button>
+    }
+    else
+    {
+        <button>@Html.ActionLink("Retour au profil", "ProfilProvider", "ProfilUser", new { id = Model.AdherentId })</button>
+    }
+
+
+
+
 </body>
 </html>

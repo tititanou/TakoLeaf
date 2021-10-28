@@ -18,6 +18,7 @@
                 <tr>
                     <th>Competence</th>
                     <th>Tarif Horaires</th>
+                    <th>Supprimer</th>
 
                 </tr>
 
@@ -26,6 +27,7 @@
                     <tr>
                         <td>@Model[i].NomSsCate </td>
                         <td>@Html.TextBoxFor(m => m[i].TarifHoraire) </td>
+                        <td><button>@Html.ActionLink("Supprimer la competence", "SupprimerCompetence", "ProfilUser", new { id = Model[i].Id })</button></td>
                     </tr>
 
                     <div>
@@ -42,6 +44,8 @@
             <br />
             <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
         }
+
+        
 
     </div>
    

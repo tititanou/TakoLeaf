@@ -20,6 +20,10 @@ namespace TakoLeaf.Data
         {
             this._bddContext.Dispose();
         }
+
+
+        // OBTENTION 
+
         public List<Adherent> ObtenirAdherents()
         {
             List<Adherent> liste = _bddContext.Adherents.ToList();
@@ -85,12 +89,14 @@ namespace TakoLeaf.Data
 
         }
            
-
         public List<Provider> ObtenirProviders()
         {
             List<Provider> liste = _bddContext.Providers.ToList();
             return liste;
         }
+
+        // MODIFICATION
+
         public void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string adresse, string telephone)
         {
             Adherent adherent = _bddContext.Adherents.Find(id);
@@ -128,17 +134,6 @@ namespace TakoLeaf.Data
 
         }
 
-        // TODO ajouter la methode SUPPRIMER
-
-
-        public Ressource AjouterRessource(int providerId,string intitule, CateRessource categorie, double tarif, string adresse)
-        {
-            Ressource ressource = new Ressource { Intitule = intitule, Adresse = adresse, Categorie = categorie, Disponible = true, ProviderId = providerId, TarifJournalier = tarif };
-            _bddContext.Ressources.Add(ressource);
-            _bddContext.SaveChanges();
-            return ressource;
-        }
-
         public void ModifierVoiture(int id, string imma, string titulaire, Carburant carburant, int annee, int idmodele)
         {
             Voiture voiture = _bddContext.Voitures.Find(id);
@@ -151,11 +146,66 @@ namespace TakoLeaf.Data
 
         }
 
-        public void SupprimerVoiture()
+        public void ModifierRessource (int id, string intitule, CateRessource categorie, double tarif, string adresse)
         {
+            Ressource ressource = _bddContext.Ressources.Find(id);
+            ressource.Intitule = intitule;
+            ressource.Adresse = adresse;
+            ressource.Categorie = categorie;
+            ressource.TarifJournalier = tarif;
+            _bddContext.SaveChanges();
 
         }
 
+        public void ModifierCarte (int id, string titulaire, string numeroCarte, string date, int crypto)
+        {
+            Carte carte = _bddContext.Cartes.Find(id);
+            carte.Titulaire = titulaire;
+            carte.NumeroCarte = numeroCarte;
+            carte.ExpirDate = date;
+            carte.Crypto = crypto;
+            _bddContext.SaveChanges();
+        }
+        // AJOUT
 
+        public Ressource AjouterRessource(int providerId, string intitule, CateRessource categorie, double tarif, string adresse)
+        {
+            Ressource ressource = new Ressource { Intitule = intitule, Adresse = adresse, Categorie = categorie, Disponible = true, ProviderId = providerId, TarifJournalier = tarif };
+            _bddContext.Ressources.Add(ressource);
+            _bddContext.SaveChanges();
+            return ressource;
+        }
+
+       
+
+        // SUPPRESSION
+
+        public void SupprimerCompetence(Competence competence)
+        {
+            _bddContext.Competences.Remove(competence);
+            _bddContext.SaveChanges();
+
+        }
+        // TODO ajouter la methode SUPPRIMER         
+
+        
+        public void SupprimerVoiture(Voiture voiture)
+        {
+
+            _bddContext.Voitures.Remove(voiture);
+            _bddContext.SaveChanges();
+        }
+
+        public void SupprimerRessource(Ressource ressource)
+        {
+            _bddContext.Ressources.Remove(ressource);
+            _bddContext.SaveChanges();
+        }
+
+        public void SupprimerCarte(Carte carte)
+        {
+            _bddContext.Cartes.Remove(carte);
+            _bddContext.SaveChanges();
+        }
     }
 }

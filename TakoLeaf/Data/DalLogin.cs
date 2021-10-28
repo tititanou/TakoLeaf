@@ -48,9 +48,9 @@ namespace TakoLeaf.Data
             return voiture;
         }
 
-        public Carte CreationCarte(string titulaire, string numeroCarte, string date, int crypto)
+        public Carte CreationCarte(int idconsumer,string titulaire, string numeroCarte, string date, int crypto)
         {
-            Carte carte = new Carte { NumeroCarte = numeroCarte, Crypto = crypto, ExpirDate = date, Titulaire = titulaire };
+            Carte carte = new Carte { ConsumerId = idconsumer, NumeroCarte = numeroCarte, Crypto = crypto, ExpirDate = date, Titulaire = titulaire };
             this._bddContext.Add(carte);
             this._bddContext.SaveChanges();
             return carte;
@@ -63,9 +63,9 @@ namespace TakoLeaf.Data
             _bddContext.SaveChanges();
             return rib;
         }
-        public Consumer CreationConsumer(int idAdherent, int idcarte)
+        public Consumer CreationConsumer(int idAdherent)
         {
-            Consumer consumer = new Consumer { AdherentId = idAdherent, CarteId = idcarte };
+            Consumer consumer = new Consumer { AdherentId = idAdherent };
             this._bddContext.Add(consumer);
             this._bddContext.SaveChanges();
             return consumer;

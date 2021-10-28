@@ -35,6 +35,7 @@
         @Html.HiddenFor(m => m.Provider.Id)
         @Html.HiddenFor(m => m.Provider.AdherentId)
     }
-
+    <br />
+    <button>@Html.ActionLink("Retour au profil", "ProfilProvider", "ProfilUser", new { id = Model.Provider.AdherentId })</button>
 </body>
 </html>
