@@ -43,13 +43,8 @@ namespace TakoLeaf.Controllers
             return View(fvm);
         }
 
-        public ActionResult Repondre()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public ActionResult Repondre(ForumViewModel fvm)
+        public ActionResult Sujet(ForumViewModel fvm)
         {
             userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             DateTime now = DateTime.Now;

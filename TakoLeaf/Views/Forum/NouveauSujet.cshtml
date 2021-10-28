@@ -4,36 +4,48 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>NouveauSujet</title>
-    </head>
-    <body>
-        @using (Html.BeginForm())
-         {
-            @Html.LabelFor(model => model.Sujet.Titre)
-            @Html.TextBoxFor(model => model.Sujet.Titre, new { placeholder = "Sujet", id = "sujetForm" })
-            @Html.ValidationMessageFor(model => model.Sujet.Titre)
-             <button id="validBtn" type="button" onclick="OuvrirPostForm()">Valider</button>
-      
-        <br />
-        <div style="visibility:hidden" id="postForm">
-           
-                @Html.LabelFor(model => model.Post.CorpsPost)
-                @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" })
-                @Html.ValidationMessageFor(model => model.Post.CorpsPost)
-                <button id="validBtn" type="submit">Valider</button>
-             
-        </div>
-        }
-    
+<head>
+    <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>NouveauSujet</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+@Html.LabelFor(model => model.Sujet.Titre)
+                @Html.TextBoxFor(model => model.Sujet.Titre, new { placeholder = "Sujet", id = "sujetForm" })
+                                @Html.ValidationMessageFor(model => model.Sujet.Titre)
+                                                <button id="validBtn" type="button" onclick="OuvrirPostForm()">Valider</button>
 
-        <script>
-            function OuvrirPostForm() {
-                if (document.getElementById("sujetForm").value) {
-                    document.getElementById("postForm").style.visibility = "visible";
-                }
+                                                                <br />
+                                                                                <div style="visibility:hidden" id="postForm">
+
+                                                                                    @Html.LabelFor(model => model.Post.CorpsPost)
+                                                                                    @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" , @class = "mytextarea"})
+                                                                                    @Html.ValidationMessageFor(model => model.Post.CorpsPost)
+                                                                                    <button id="validBtn" type="submit">Valider</button>
+
+                                                                                </div>}
+
+
+    <script>
+        function OuvrirPostForm() {
+            if (document.getElementById("sujetForm").value) {
+                document.getElementById("postForm").style.visibility = "visible";
             }
-        </script>
-    </body>
+        }
+    </script>
+    <script>
+        tinymce.init({
+            selector: '.mytextarea',
+            plugins: ['image', 'lists code emoticons'],
+            toolbar: 'undo redo | styleselect | bold italic | ' +
+                'alignleft aligncenter alignright alignjustify | ' +
+                'outdent indent | numlist bullist | emoticons',
+            a11y_advanced_options: true,
+            min_height: 300,
+            statusbar: false
+        });
+    </script>
+</body>
 </html>
