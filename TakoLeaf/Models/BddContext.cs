@@ -79,7 +79,7 @@ namespace TakoLeaf.Models
             this.Adresses.AddRange(
                 new Adresse
                 {
-                    Id = 1,                   
+                    Id = 1,
                     Rue = "124 Rue Hoche",
                     CodePostal = 93100,
                     Ville = "Montreuil"
@@ -87,35 +87,35 @@ namespace TakoLeaf.Models
 
                 new Adresse
                 {
-                  
-                     Id = 2,
-                     Rue = "205 Rue de Perrin",
-                     CodePostal = 43142,
-                     Ville = "Hoareau sur Mer"
+
+                    Id = 2,
+                    Rue = "205 Rue de Perrin",
+                    CodePostal = 43142,
+                    Ville = "Hoareau sur Mer"
                 },
 
                 new Adresse
                 {
-                      Id = 3,
-                      Rue = "74 Rue General de Gaulle",
-                      CodePostal = 92250,
-                      Ville = "La Garenne Colombes"
+                    Id = 3,
+                    Rue = "74 Rue General de Gaulle",
+                    CodePostal = 92250,
+                    Ville = "La Garenne Colombes"
                 },
 
                 new Adresse
                 {
-                       Id = 4,
-                       Rue = "14 Rue de la Victoire",
-                       CodePostal = 57100,
-                       Ville = "Thionville"
+                    Id = 4,
+                    Rue = "14 Rue de la Victoire",
+                    CodePostal = 57100,
+                    Ville = "Thionville"
                 },
 
                 new Adresse
                 {
-                        Id = 5,
-                        Rue = "1 Rue Boucher",
-                        CodePostal = 30364,
-                        Ville = "Guibert"
+                    Id = 5,
+                    Rue = "1 Rue Boucher",
+                    CodePostal = 30364,
+                    Ville = "Guibert"
                 },
 
                 new Adresse
@@ -129,10 +129,28 @@ namespace TakoLeaf.Models
 
                 new Adresse
                 {
-                     Id = 7,
-                     Rue = "13 Rue de Pottier",
-                     CodePostal = 64127,
-                     Ville = "Descamps"
+                    Id = 7,
+                    Rue = "13 Rue de Pottier",
+                    CodePostal = 64127,
+                    Ville = "Descamps"
+
+                },
+
+                new Adresse
+                {
+                    Id = 8,
+                    Rue = "40 Rue des Coteaux",
+                    CodePostal = 64127,
+                    Ville = "Tonnay"
+
+                },
+
+                new Adresse
+                {
+                    Id = 9,
+                    Rue = "13 Avenue de la république",
+                    CodePostal = 64127,
+                    Ville = "Lyon"
 
                 }
                 );
@@ -188,7 +206,7 @@ namespace TakoLeaf.Models
                     Prenom = "Levy",
                     Date_naissance = new DateTime(1990, 07, 18),
                     AdresseId = 5,
-                    Telephone = "0618525231",
+                    Telephone = "0618525231"
 
                 },
 
@@ -203,16 +221,15 @@ namespace TakoLeaf.Models
 
                 },
 
-                 new Adherent
-                 {
-                     Id = 7,
-                     Nom = "Gaston",
-                     Prenom = "Lagaffe",
-                     Date_naissance = new DateTime(1965, 03, 15),
-                     Adresse = "Paris",
-                     Telephone = "0699885544"
-
-                 },
+                new Adherent
+                {
+                    Id = 7,
+                    Nom = "Haroun",
+                    Prenom = "Humo",
+                    Date_naissance = new DateTime(1990, 07, 05),
+                    AdresseId = 7,
+                    Telephone = "0699885544"
+                },
 
                   new Adherent
                   {
@@ -220,7 +237,7 @@ namespace TakoLeaf.Models
                       Nom = "Jean",
                       Prenom = "Neymar",
                       Date_naissance = new DateTime(1967, 10, 09),
-                      Adresse = "Paris",
+                      AdresseId = 8,
                       Telephone = "0699885544"
 
                   },
@@ -231,21 +248,12 @@ namespace TakoLeaf.Models
                       Nom = "Prunelle",
                       Prenom = "Demaizieux",
                       Date_naissance = new DateTime(1980, 04, 22),
-                      Adresse = "Paris",
+                      AdresseId = 9,
                       Telephone = "0699885544"
 
-                  }
-                },
 
-                new Adherent
-                {
-                    Id = 7,
-                    Nom = "Haroun",
-                    Prenom = "Humo",
-                    Date_naissance = new DateTime(1990, 07, 05),
-                    AdresseId = 7,
-                    Telephone = "0699885544"
-                }
+                  }
+
                 );
 
             this.CompteUsers.AddRange(
@@ -330,7 +338,6 @@ namespace TakoLeaf.Models
                 {
                     Id = 1,
                     AdherentId = 2
-                                        
                 },
 
                 new Consumer
@@ -373,11 +380,11 @@ namespace TakoLeaf.Models
                 );
 
 
-               
+
             this.Cartes.AddRange(
                 new Carte
                 {
-                    Id=1,
+                    Id = 1,
                     Titulaire = "MME ROJAS",
                     NumeroCarte = "1578323524729856",
                     ExpirDate = "08/2023",
@@ -404,21 +411,11 @@ namespace TakoLeaf.Models
                     ExpirDate = "01/2024",
                     Crypto = 666,
                     ConsumerId = 3
-                },
-
-                 new Carte
-                 {
-                     Id = 4,
-                     Titulaire = "MR ZAWARTOSKI",
-                     NumeroCarte = "878596832361412",
-                     ExpirDate = "05/2022",
-                     Crypto = 789,
-                     ConsumerId = 4
-                 }
-
+                }
+                 
                 );
 
-            
+
 
             this.Ribs.AddRange(
                  new Rib
@@ -441,10 +438,10 @@ namespace TakoLeaf.Models
 
                 new Rib
                 {
-                     Id = 3,
-                     Titulaire = "Haroun",
-                     Iban = "1245 1245 7722 1245",
-                     Banque = "Boursorama"
+                    Id = 3,
+                    Titulaire = "Haroun",
+                    Iban = "1245 1245 7722 1245",
+                    Banque = "Boursorama"
 
                 }
 
@@ -557,10 +554,10 @@ namespace TakoLeaf.Models
             this.Marques.AddRange(
                 new Marque { Nom = "Volkswagen" },
                 new Marque { Nom = "Peugeot" },
-                new Marque { Nom = "Audi"},
-                new Marque { Nom = "Nissan"},
-                new Marque { Nom = "Citroen"},
-                new Marque { Nom = "Seat"}
+                new Marque { Nom = "Audi" },
+                new Marque { Nom = "Nissan" },
+                new Marque { Nom = "Citroen" },
+                new Marque { Nom = "Seat" }
                 );
 
             this.Modeles.AddRange(
@@ -569,12 +566,12 @@ namespace TakoLeaf.Models
                 new Modele { Nom = "206", MarqueId = 2 },
                 new Modele { Nom = "607", MarqueId = 2 },
                 new Modele { Nom = "A2", MarqueId = 3 },
-                new Modele { Nom = "A4", MarqueId = 3},
-                new Modele { Nom = "Qashquai", MarqueId = 4},
-                new Modele { Nom = "Picasso", MarqueId = 5},
+                new Modele { Nom = "A4", MarqueId = 3 },
+                new Modele { Nom = "Qashquai", MarqueId = 4 },
+                new Modele { Nom = "Picasso", MarqueId = 5 },
                 new Modele { Nom = "C4", MarqueId = 5 },
-                new Modele { Nom = "Ibiza", MarqueId = 6},
-                new Modele { Nom = "Leon", MarqueId =6}
+                new Modele { Nom = "Ibiza", MarqueId = 6 },
+                new Modele { Nom = "Leon", MarqueId = 6 }
                 );
 
             this.CateCompetences.AddRange(
@@ -587,12 +584,12 @@ namespace TakoLeaf.Models
                 new CateCompetence { Intitule = "Embrayage" },
                 new CateCompetence { Intitule = "Freinage" },
                 new CateCompetence { Intitule = "Moteur" },
-                new CateCompetence { Intitule = "Pneu" }              
-                
+                new CateCompetence { Intitule = "Pneu" }
+
                 );
 
             this.SsCateCompetences.AddRange(
-                new SsCateCompetence { Intitule ="Remplacement alternateur", CateCompetenceId = 1 },
+                new SsCateCompetence { Intitule = "Remplacement alternateur", CateCompetenceId = 1 },
                 new SsCateCompetence { Intitule = "Remplacement demarreur", CateCompetenceId = 1 },
                 new SsCateCompetence { Intitule = "Remplacement de la batterie", CateCompetenceId = 1 },
 
@@ -620,7 +617,7 @@ namespace TakoLeaf.Models
                 new SsCateCompetence { Intitule = "Remplacement volant moteur", CateCompetenceId = 7 },
 
                 new SsCateCompetence { Intitule = "Remplacement de cable", CateCompetenceId = 8 },
-                new SsCateCompetence { Intitule = "Remplacement du liquide de frein", CateCompetenceId = 8},
+                new SsCateCompetence { Intitule = "Remplacement du liquide de frein", CateCompetenceId = 8 },
 
 
                 new SsCateCompetence { Intitule = "Remplacement des injecteurs", CateCompetenceId = 9 },
@@ -632,15 +629,15 @@ namespace TakoLeaf.Models
 
                 new SsCateCompetence { Intitule = "Equilibrage", CateCompetenceId = 10 },
                 new SsCateCompetence { Intitule = "Changer Roue", CateCompetenceId = 10 },
-                new SsCateCompetence { Intitule = "Changer Pneu", CateCompetenceId = 10}
+                new SsCateCompetence { Intitule = "Changer Pneu", CateCompetenceId = 10 }
 
-              
+
                 );
             this.Competences.AddRange(
                 new Competence { Id = 1, ProviderId = 1, SsCateCompetenceId = 6, NomSsCate = "Changer Roue", TarifHoraire = 40 },
                 new Competence { Id = 2, ProviderId = 1, SsCateCompetenceId = 3, NomSsCate = "Changer la distribution", TarifHoraire = 50 },
                 new Competence { Id = 3, ProviderId = 1, SsCateCompetenceId = 2, NomSsCate = "Changer la distribution", TarifHoraire = 17 },
-                new Competence { Id = 4, ProviderId = 1, SsCateCompetenceId = 14, NomSsCate = "Changer la distribution", TarifHoraire = 44},
+                new Competence { Id = 4, ProviderId = 1, SsCateCompetenceId = 14, NomSsCate = "Changer la distribution", TarifHoraire = 44 },
 
                 new Competence { Id = 5, ProviderId = 2, SsCateCompetenceId = 1, NomSsCate = "Changer la distribution", TarifHoraire = 42 },
                 new Competence { Id = 6, ProviderId = 2, SsCateCompetenceId = 3, NomSsCate = "Changer la distribution", TarifHoraire = 46 },
@@ -679,7 +676,7 @@ namespace TakoLeaf.Models
                       TarifJournalier = 40,
                       ProviderId = 2
                   },
-                  
+
                   new Ressource
 
                   {
@@ -689,8 +686,8 @@ namespace TakoLeaf.Models
                       Disponible = true,
                       TarifJournalier = 100,
                       ProviderId = 2
-                  },  
-                  
+                  },
+
                   new Ressource
                   {
                       Intitule = "Remorque 3m^3",
@@ -706,7 +703,7 @@ namespace TakoLeaf.Models
 
                 );
 
-            
+
 
 
 
@@ -735,8 +732,8 @@ namespace TakoLeaf.Models
                   {
                       AdminId = "Admin",
                       Titre = "Bientôt un peu moins moche ?",
-                      DateRedaction = new DateTime(2021,10,20),
-                      DatePublication = new DateTime(2021,10,21),
+                      DateRedaction = new DateTime(2021, 10, 20),
+                      DatePublication = new DateTime(2021, 10, 21),
                       Texte = "Les dernières rumeurs suggèrent que notre spécialiste du Front, M.ZAWARTOSKI Valentin serai sur le point de révolutionner le CSS !",
                       Public = false
                   }
@@ -787,6 +784,26 @@ namespace TakoLeaf.Models
                      NumeroDevis = "84868785",
                      EtatPresta = Prestation.Etat.En_cours
                  }
+
+                );
+
+            this.Devis.AddRange(
+
+                //new Devis
+                //{
+                //    NumeroDevis="azerty12345",
+                //    DateEmission= new DateTime(2021,10,15),
+                //    Tarif=150,
+                //    DateDebut= new DateTime(2021,11,10),
+                //    DateFin= new DateTime(2021,11,16),
+                //    DescriptionPresta = " blablablablabla",
+                //    LieuPresta="Paris",
+                //    EtatDevis= EtatDevis.EN_ATTENTE,
+                //    ProviderId = 1,
+                //    ConsumerId = 2,
+                //    VoitureId = 1,                   
+
+                //}
 
                 );
 

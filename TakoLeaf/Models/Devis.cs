@@ -14,7 +14,7 @@ namespace TakoLeaf.Models
         public string NumeroDevis { get; set; }
         public DateTime DateEmission { get; set; }
         [Required]
-        public int Tarif { get; set; }
+        public decimal Tarif { get; set; }
         public byte[] Fichier { get; set; }
 
         [Required]

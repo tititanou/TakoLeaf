@@ -48,7 +48,7 @@
         {
             <article class="browser">
                 <h3>@item.Titre</h3>
-                <p>@item.Texte</p>
+                <p>@Html.Raw(@item.Texte)</p>
                 <p>Publié le : @item.DatePublication.ToShortDateString()</p>
             </article>
 
