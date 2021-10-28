@@ -37,6 +37,7 @@ namespace TakoLeaf.Models
         public DbSet<Rib> Ribs { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<HistoriquePresta> HistoriquePrestas { get; set; }
+        public DbSet<Adresse> Adresses { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -73,6 +74,68 @@ namespace TakoLeaf.Models
             // TODO Voir pour mettre le DELETE ON CASCADE sur certaines clés etrangeres
 
             DalLogin dal = new DalLogin();
+
+            this.Adresses.AddRange(
+                new Adresse
+                {
+                    Id = 1,                   
+                    Rue = "124 Rue Hoche",
+                    CodePostal = 93100,
+                    Ville = "Montreuil"
+                },
+
+                new Adresse
+                {
+                  
+                     Id = 2,
+                     Rue = "205 Rue de Perrin",
+                     CodePostal = 43142,
+                     Ville = "Hoareau sur Mer"
+                },
+
+                new Adresse
+                {
+                      Id = 3,
+                      Rue = "74 Rue General de Gaulle",
+                      CodePostal = 92250,
+                      Ville = "La Garenne Colombes"
+                },
+
+                new Adresse
+                {
+                       Id = 4,
+                       Rue = "14 Rue de la Victoire",
+                       CodePostal = 57100,
+                       Ville = "Thionville"
+                },
+
+                new Adresse
+                {
+                        Id = 5,
+                        Rue = "1 Rue Boucher",
+                        CodePostal = 30364,
+                        Ville = "Guibert"
+                },
+
+                new Adresse
+                {
+                    Id = 6,
+                    Rue = "5 Chemin Susanne Joseph",
+                    CodePostal = 13177,
+                    Ville = "Leroux"
+
+                },
+
+                new Adresse
+                {
+                     Id = 7,
+                     Rue = "13 Rue de Pottier",
+                     CodePostal = 64127,
+                     Ville = "Descamps"
+
+                }
+                );
+
             this.Adherents.AddRange(
                 new Adherent
                 {
@@ -80,7 +143,7 @@ namespace TakoLeaf.Models
                     Nom = "ABRATE",
                     Prenom = "Alexis",
                     Date_naissance = new DateTime(1990, 10, 23),
-                    Adresse = "124 Rue Hoche, 93100, Montreuil",
+                    AdresseId = 1,
                     Telephone = "0658423947"
 
                 },
@@ -91,7 +154,7 @@ namespace TakoLeaf.Models
                      Nom = "ROJAS",
                      Prenom = "Tania",
                      Date_naissance = new DateTime(1980, 02, 10),
-                     Adresse = "205 Rue de Perrin, 43142, Hoareau sur Mer",
+                     AdresseId = 2,
                      Telephone = "0693562410"
                  },
 
@@ -101,7 +164,7 @@ namespace TakoLeaf.Models
                      Nom = "ZAWARTOSKI",
                      Prenom = "Valentin",
                      Date_naissance = new DateTime(1994, 12, 01),
-                     Adresse = "Ripas",
+                     AdresseId = 3,
                      Telephone = "0652471230"
                  },
 
@@ -111,7 +174,7 @@ namespace TakoLeaf.Models
                     Nom = "DAUPHIN",
                     Prenom = "Anthony",
                     Date_naissance = new DateTime(1993, 08, 10),
-                    Adresse = "Nayto",
+                    AdresseId = 4,
                     Telephone = "0626576356"
                 },
 
@@ -123,7 +186,7 @@ namespace TakoLeaf.Models
                     Nom = "Guillaume",
                     Prenom = "Levy",
                     Date_naissance = new DateTime(1990, 07, 18),
-                    Adresse = "Lyon",
+                    AdresseId = 5,
                     Telephone = "0618525231",
 
                 },
@@ -134,7 +197,7 @@ namespace TakoLeaf.Models
                     Nom = "Andre",
                     Prenom = "Soulard",
                     Date_naissance = new DateTime(1955, 12, 12),
-                    Adresse = "Paris",
+                    AdresseId = 6,
                     Telephone = "0699885544"
 
                 },
@@ -145,7 +208,7 @@ namespace TakoLeaf.Models
                     Nom = "Haroun",
                     Prenom = "Humo",
                     Date_naissance = new DateTime(1990, 07, 05),
-                    Adresse = "Paris",
+                    AdresseId = 7,
                     Telephone = "0699885544"
                 }
                 );
@@ -208,10 +271,21 @@ namespace TakoLeaf.Models
                        Mail = "consumer@gmail.com",
                        MotDePasse = dal.EncodeMD5("123"),
                        Description = "C'est moi le consumer Test",
-                       EtatProfil = EtatProfil.VALIDE,
+                       EtatProfil = EtatProfil.NON_VALIDE,
                        AdherentId = 6,
                        Role = "Consumer"
+                   },
+
+                   new CompteUser
+                   {
+                       Mail = "haroun@gmail.com",
+                       MotDePasse = dal.EncodeMD5("123"),
+                       Description = "Je suis drole",
+                       EtatProfil = EtatProfil.VALIDE,
+                       AdherentId = 7,
+                       Role = "Provider"
                    }
+
 
                    );
 
@@ -220,23 +294,20 @@ namespace TakoLeaf.Models
                 new Consumer
                 {
                     Id = 1,
-                    AdherentId = 6,
+                    AdherentId = 2
                                         
-                }
+                },
 
-
-
-                );
-            this.Cartes.AddRange(
-                new Carte
+                new Consumer
                 {
-                    Id=1,
-                    Titulaire = "MR SOULARD",
-                    NumeroCarte = "1578323524729856",
-                    ExpirDate = "08/2023",
-                    Crypto = 458,
-                    ConsumerId = 1
-                    
+                    Id = 2,
+                    AdherentId = 3
+                },
+
+                new Consumer
+                {
+                    Id = 3,
+                    AdherentId = 6
                 }
                 );
 
@@ -246,19 +317,71 @@ namespace TakoLeaf.Models
                     Id = 1,
                     Note = 0,
                     RibId = 1,
+                    AdherentId = 1
+                },
+
+                new Provider
+                {
+                    Id = 2,
+                    Note = 0,
+                    RibId = 2,
                     AdherentId = 5
+                },
+
+                new Provider
+                {
+                    Id = 3,
+                    Note = 0,
+                    RibId = 3,
+                    AdherentId = 7
                 }
                 );
 
-            this.Ribs.Add(
+
+               
+            this.Cartes.AddRange(
+                new Carte
+                {
+                    Id=1,
+                    Titulaire = "MME ROJAS",
+                    NumeroCarte = "1578323524729856",
+                    ExpirDate = "08/2023",
+                    Crypto = 458,
+                    ConsumerId = 1
+                    
+                }
+                );
+
+            
+
+            this.Ribs.AddRange(
+                 new Rib
+                 {
+                     Id = 1,
+                     Titulaire = "Alexis Abrate",
+                     Iban = "1245 1245 7777 1245",
+                     Banque = "Boursorama"
+
+                 },
+
                 new Rib
                 {
-                    Id = 1,
+                    Id = 2,
                     Titulaire = "Guillaume Levy",
                     Iban = "1245 1245 1245 1245",
                     Banque = "Boursorama"
 
+                },
+
+                new Rib
+                {
+                     Id = 3,
+                     Titulaire = "Haroun",
+                     Iban = "1245 1245 7722 1245",
+                     Banque = "Boursorama"
+
                 }
+
                 );
 
             this.Voitures.AddRange(
@@ -367,19 +490,131 @@ namespace TakoLeaf.Models
                 );
 
             this.CateCompetences.AddRange(
-                new CateCompetence { Intitule = "Pneu" },
-                new CateCompetence { Intitule = "Moteur"}
+                new CateCompetence { Intitule = "Batterie" },
+                new CateCompetence { Intitule = "Carrosserie" },
+                new CateCompetence { Intitule = "Climatisation & chauffage" },
+                new CateCompetence { Intitule = "Diagnostic" },
+                new CateCompetence { Intitule = "Direction" },
+                new CateCompetence { Intitule = "Echappement" },
+                new CateCompetence { Intitule = "Embrayage" },
+                new CateCompetence { Intitule = "Freinage" },
+                new CateCompetence { Intitule = "Moteur" },
+                new CateCompetence { Intitule = "Pneu" }              
+                
                 );
 
             this.SsCateCompetences.AddRange(
-                new SsCateCompetence { Intitule = "Changer Roue", CateCompetenceId = 1 },
-                new SsCateCompetence { Intitule = "Changer Pneu", CateCompetenceId = 1 },
-                new SsCateCompetence { Intitule = "Changer la distribution", CateCompetenceId = 2 },
-                new SsCateCompetence { Intitule = "Changer les viblequins", CateCompetenceId = 2 }
+                new SsCateCompetence { Intitule ="Remplacement alternateur", CateCompetenceId = 1 },
+                new SsCateCompetence { Intitule = "Remplacement demarreur", CateCompetenceId = 1 },
+                new SsCateCompetence { Intitule = "Remplacement de la batterie", CateCompetenceId = 1 },
+
+                new SsCateCompetence { Intitule = "Changement d'aile", CateCompetenceId = 2 },
+                new SsCateCompetence { Intitule = "Reparation pare choc", CateCompetenceId = 2 },
+
+                new SsCateCompetence { Intitule = "Entretien de la climatisation", CateCompetenceId = 3 },
+                new SsCateCompetence { Intitule = "Probleme de chauffage", CateCompetenceId = 3 },
+                new SsCateCompetence { Intitule = "Entretien et recharge de clim", CateCompetenceId = 3 },
+                new SsCateCompetence { Intitule = "Remplacement du filtre habitacle", CateCompetenceId = 3 },
+
+                new SsCateCompetence { Intitule = "Diagnostique electronique auto", CateCompetenceId = 4 },
+
+                new SsCateCompetence { Intitule = "Remplacement des biellettes", CateCompetenceId = 5 },
+                new SsCateCompetence { Intitule = "Remplacement de cadran", CateCompetenceId = 5 },
+                new SsCateCompetence { Intitule = "Remplacement des rotules directions", CateCompetenceId = 5 },
+
+                new SsCateCompetence { Intitule = "Remplacement de catalyseur", CateCompetenceId = 6 },
+                new SsCateCompetence { Intitule = "Remplacement de vanne EGR", CateCompetenceId = 6 },
+                new SsCateCompetence { Intitule = "Remplacement du filtre a particules", CateCompetenceId = 6 },
+                new SsCateCompetence { Intitule = "Remplacement Silencieux arriere", CateCompetenceId = 6 },
+
+                new SsCateCompetence { Intitule = "Remplacement Kit Embrayage", CateCompetenceId = 7 },
+                new SsCateCompetence { Intitule = "Probleme embrayage", CateCompetenceId = 7 },
+                new SsCateCompetence { Intitule = "Remplacement volant moteur", CateCompetenceId = 7 },
+
+                new SsCateCompetence { Intitule = "Remplacement de cable", CateCompetenceId = 8 },
+                new SsCateCompetence { Intitule = "Remplacement du liquide de frein", CateCompetenceId = 8},
+
+
+                new SsCateCompetence { Intitule = "Remplacement des injecteurs", CateCompetenceId = 9 },
+                new SsCateCompetence { Intitule = "Remplacement filtre à air", CateCompetenceId = 9 },
+                new SsCateCompetence { Intitule = "Décalaminage moteur", CateCompetenceId = 9 },
+                new SsCateCompetence { Intitule = "Probleme d’allumage du moteur", CateCompetenceId = 9 },
+                new SsCateCompetence { Intitule = "Remplacement des bougies", CateCompetenceId = 9 },
+                new SsCateCompetence { Intitule = "Remplacement liquide de refroidissement", CateCompetenceId = 9 },
+
+                new SsCateCompetence { Intitule = "Equilibrage", CateCompetenceId = 10 },
+                new SsCateCompetence { Intitule = "Changer Roue", CateCompetenceId = 10 },
+                new SsCateCompetence { Intitule = "Changer Pneu", CateCompetenceId = 10}
+
+              
                 );
             this.Competences.AddRange(
-                new Competence { Id = 1, ProviderId = 1, SsCateCompetenceId = 1, NomSsCate = "Changer Roue", TarifHoraire = 28 },
-                new Competence { Id = 2, ProviderId = 1, SsCateCompetenceId = 3, NomSsCate = "Changer la distribution", TarifHoraire = 47 }
+                new Competence { Id = 1, ProviderId = 1, SsCateCompetenceId = 6, NomSsCate = "Changer Roue", TarifHoraire = 40 },
+                new Competence { Id = 2, ProviderId = 1, SsCateCompetenceId = 3, NomSsCate = "Changer la distribution", TarifHoraire = 50 },
+                new Competence { Id = 3, ProviderId = 1, SsCateCompetenceId = 2, NomSsCate = "Changer la distribution", TarifHoraire = 17 },
+                new Competence { Id = 4, ProviderId = 1, SsCateCompetenceId = 14, NomSsCate = "Changer la distribution", TarifHoraire = 44},
+
+                new Competence { Id = 5, ProviderId = 2, SsCateCompetenceId = 1, NomSsCate = "Changer la distribution", TarifHoraire = 42 },
+                new Competence { Id = 6, ProviderId = 2, SsCateCompetenceId = 3, NomSsCate = "Changer la distribution", TarifHoraire = 46 },
+                new Competence { Id = 7, ProviderId = 2, SsCateCompetenceId = 9, NomSsCate = "Changer la distribution", TarifHoraire = 48 },
+                new Competence { Id = 8, ProviderId = 2, SsCateCompetenceId = 6, NomSsCate = "Changer la distribution", TarifHoraire = 31 },
+                new Competence { Id = 9, ProviderId = 2, SsCateCompetenceId = 15, NomSsCate = "Changer la distribution", TarifHoraire = 58 },
+                new Competence { Id = 10, ProviderId = 2, SsCateCompetenceId = 20, NomSsCate = "Changer la distribution", TarifHoraire = 14 },
+
+                new Competence { Id = 11, ProviderId = 3, SsCateCompetenceId = 2, NomSsCate = "Changer la distribution", TarifHoraire = 19 },
+                new Competence { Id = 12, ProviderId = 3, SsCateCompetenceId = 6, NomSsCate = "Changer la distribution", TarifHoraire = 32 },
+                new Competence { Id = 13, ProviderId = 3, SsCateCompetenceId = 1, NomSsCate = "Changer la distribution", TarifHoraire = 40 },
+                new Competence { Id = 14, ProviderId = 3, SsCateCompetenceId = 14, NomSsCate = "Changer la distribution", TarifHoraire = 31 },
+                new Competence { Id = 15, ProviderId = 3, SsCateCompetenceId = 16, NomSsCate = "Changer la distribution", TarifHoraire = 67 },
+                new Competence { Id = 16, ProviderId = 3, SsCateCompetenceId = 22, NomSsCate = "Changer la distribution", TarifHoraire = 55 }
+
+                );
+
+            this.Ressources.AddRange(
+
+                new Ressource
+                {
+                    Intitule = "Cle à molette",
+                    Adresse = "124 Rue Hoche",
+                    Categorie = CateRessource.OUTIL,
+                    Disponible = true,
+                    TarifJournalier = 15,
+                    ProviderId = 1
+                },
+
+                  new Ressource
+                  {
+                      Intitule = "Vidangeuse",
+                      Adresse = "1 Rue Boucher",
+                      Categorie = CateRessource.OUTIL_SPECIALISE,
+                      Disponible = true,
+                      TarifJournalier = 40,
+                      ProviderId = 2
+                  },
+                  
+                  new Ressource
+
+                  {
+                      Intitule = "Garage TakoLef",
+                      Adresse = "25 Rue de la Feuille, 85000, Konoha",
+                      Categorie = CateRessource.LOCAL_GARAGE,
+                      Disponible = true,
+                      TarifJournalier = 100,
+                      ProviderId = 2
+                  },  
+                  
+                  new Ressource
+                  {
+                      Intitule = "Remorque 3m^3",
+                      Adresse = "1 Rue Boucher",
+                      Categorie = CateRessource.REMORQUE,
+                      Disponible = true,
+                      TarifJournalier = 55,
+                      ProviderId = 2
+                  }
+
+
+
 
                 );
 

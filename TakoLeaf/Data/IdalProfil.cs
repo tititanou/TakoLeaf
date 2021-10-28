@@ -10,7 +10,7 @@ namespace TakoLeaf.Data
     {
         List<Adherent> ObtenirAdherents();
         List<CompteUser> ObtenirCompteUser();
-        void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string adresse, string telephone);
+        void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string telephone);
         void ModifierCompteUser(string mail, string mdp, byte[] avatar, string description);
         void ModifierCompetence(int id, double tarif);
         Ressource AjouterRessource(int providerId,string intitule, CateRessource categorie, double tafif, string adresse);

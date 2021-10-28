@@ -24,7 +24,7 @@
             <li>Nom : @Model.Adherent.Nom</li>
             <li>Prenom : @Model.Adherent.Prenom</li>
             <li>Date de Naissance : @Model.Adherent.Date_naissance.ToShortDateString()</li>
-            <li>Adresse : @Model.Adherent.Adresse</li>
+            <li>Adresse : @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville</li>
             <li>Telephone : @Model.Adherent.Telephone</li>
         </ul>
 

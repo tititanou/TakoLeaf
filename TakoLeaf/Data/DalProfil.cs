@@ -26,7 +26,7 @@ namespace TakoLeaf.Data
 
         public List<Adherent> ObtenirAdherents()
         {
-            List<Adherent> liste = _bddContext.Adherents.ToList();
+            List<Adherent> liste = _bddContext.Adherents.Include(a => a.Adresse).ToList();
             return liste;          
         }
 
@@ -97,7 +97,7 @@ namespace TakoLeaf.Data
 
         // MODIFICATION
 
-        public void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string adresse, string telephone)
+        public void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string telephone)
         {
             Adherent adherent = _bddContext.Adherents.Find(id);
             if(adherent!=null)
@@ -105,11 +105,19 @@ namespace TakoLeaf.Data
                 adherent.Nom = nom;
                 adherent.Prenom = prenom;
                 adherent.Date_naissance = date;
-                adherent.Adresse = adresse;
                 adherent.Telephone = telephone;
                 _bddContext.SaveChanges();
             }
 
+        }
+
+        public void ModifierAdresse(int id, string rue, int codePostal, string ville)
+        {
+            Adresse adresse = _bddContext.Adresses.Find(id);
+            adresse.Rue = rue;
+            adresse.CodePostal = codePostal;
+            adresse.Ville = ville;
+            _bddContext.SaveChanges();
         }
 
         public void ModifierCompteUser(string mail,string mdp, byte[] avatar, string description)

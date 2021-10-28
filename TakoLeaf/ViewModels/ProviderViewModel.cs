@@ -19,7 +19,6 @@ namespace TakoLeaf.ViewModels
         public SsCateCompetence SsCateCompetence { get; set; }
         public List<ProviderCheckBoxViewModel> ListSSC { get; set; }
         public Rib Rib { get; set; }
-
         public List<Ressource> Ressources { get; set; }
         public Ressource Ressource { get; set; }
     }
