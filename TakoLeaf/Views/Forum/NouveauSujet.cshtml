@@ -4,32 +4,36 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>NouveauSujet</title>
-</head>
-<body>
-    @using (Html.BeginForm())
-    {
-        @Html.LabelFor(model => model.Sujet.Titre)
-        @Html.TextBoxFor(model => model.Sujet.Titre, new { placeholder = "Sujet", id = "sujetForm" })
-        @Html.ValidationMessageFor(model => model.Sujet.Titre)
-         <button id="validBtn" type="button" onclick="OuvrirPostForm()">Montrer</button>}
-    <br />
-    <div style="visibility:hidden" id="postForm">
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>NouveauSujet</title>
+    </head>
+    <body>
         @using (Html.BeginForm())
-        {
-    @Html.LabelFor(model => model.Post.CorpsPost)
-                    @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" })
-                                    @Html.ValidationMessageFor(model => model.Post.CorpsPost)
-                                                    <button id="validBtn" type="submit">Montrer</button>}
-    </div>
+         {
+            @Html.LabelFor(model => model.Sujet.Titre)
+            @Html.TextBoxFor(model => model.Sujet.Titre, new { placeholder = "Sujet", id = "sujetForm" })
+            @Html.ValidationMessageFor(model => model.Sujet.Titre)
+             <button id="validBtn" type="button" onclick="OuvrirPostForm()">Valider</button>
+      
+        <br />
+        <div style="visibility:hidden" id="postForm">
+           
+                @Html.LabelFor(model => model.Post.CorpsPost)
+                @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" })
+                @Html.ValidationMessageFor(model => model.Post.CorpsPost)
+                <button id="validBtn" type="submit">Valider</button>
+             
+        </div>
+        }
     
 
-    <script>function OuvrirPostForm() {
-    if (document.getElementById("sujetForm").value) {
-    document.getElementById("postForm").style.visibility = "visible";}
-    //document.getElementById("time").innerHTML = currDate;
-        }</script>
-</body>
+        <script>
+            function OuvrirPostForm() {
+                if (document.getElementById("sujetForm").value) {
+                    document.getElementById("postForm").style.visibility = "visible";
+                }
+            }
+        </script>
+    </body>
 </html>
