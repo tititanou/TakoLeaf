@@ -55,13 +55,17 @@
             </div>
             // TODO mettre un lien pour ajouter des Marque et des Modeles si non présent dans la base de données
             // TODO Voir en fin de semaine pour ajouter du JavaScript sur les dropdown list
+
+
+
             <div>
-                @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques)
+                @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques, "Selectionner une marque", new { @id = "ddlmarques" })
                 @Html.LabelFor(model => model.Marque.Nom)
             </div>
 
+
             <div>
-                @Html.DropDownListFor(model => model.Modele.Nom, (SelectList)ViewBag.Modele)
+                @Html.DropDownListFor(model => model.Modele.Nom, (SelectList)ViewBag.Modele,"Selectionnez modeles", new { @id = "ddlmodeles" })
                 @Html.LabelFor(model => model.Modele.Nom)
             </div>
 
@@ -97,5 +101,10 @@
             <button class="btn btn-primary btn-xl" type="submit">Créer</button>
         }
     </div>
+
+<script src="~/jquery-3.6.0.js"></script>
+<script src="~/Voiture.js"></script>
+
+
 </body>
 </html>
