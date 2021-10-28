@@ -4,59 +4,77 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <meta name="viewport" content="width=device-width" />
-    <title>Sujet</title>
-</head>
-<body>
-    <h3>@Model.Sujet.Titre</h3>
-    @foreach (var item in Model.Posts)
-    {
-
-<div class="post">
-    <p>@item.CorpsPost</p>
-    <div class="ftr">
-        <em>@item.Adherent.Prenom</em>
-        <em>@item.Date</em>
-    </div>
-    <button type="button" onclick="OuvrirPostForm(@item.Id)">Répondre</button>
-    <button type="button" onclick="OuvrirPostForm('citation')">Citer</button>
-    <button type="button" onclick="location.href='@Url.Action("Supprimer", "Forum", new { id = item.Id })'">Supprimer</button>
-    <button type="button" onclick="location.href='@Url.Action("ModifierPost", "Forum", new { id = item.Id })'">Modifier</button>
-</div>
+    <head>
+        <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <meta name="viewport" content="width=device-width" />
+        <title>Sujet</title>
+    </head>
+    <body>
+        @{var cttn = new TakoLeaf.Models.Post();
+            <h3>@Model.Sujet.Titre</h3>
+            @foreach (var item in Model.Posts)
+            {
+                /*string idrep = "rep" + item.Id;
+                string postmod = "postmod" + item.Id;
+                string idmod = "mod" + item.Id;
+                var cite = "<div contenteditable='false'><blockquote> Le " + item.Date.ToShortDateString() + " à " + item.Date.ToShortTimeString() + ", " + item.Adherent.Prenom + " a dit:</blockquote><cite>" + item.CorpsPost + "</cite></div> html";
+                cttn.CorpsPost = cite;*/
+                <div class="post">
+                    <div>@Html.Raw(@item.CorpsPost)</div>
+                    <div class="ftr">
+                        <em>@item.Adherent.Prenom</em>
+                        <em>@item.Date</em>
+                    </div>
+                    <button type="button" onclick="Citer('@item.Date.ToShortDateString()', '@item.Date.ToShortTimeString()', '@item.Adherent.Prenom', '@item.CorpsPost')">Citer</button>
+                    <button type="submit" onclick="">Signaler</button>
+                </div>
                 <br />
-                                <div style="display:none" id=@item.Id>
-                                    @using (Html.BeginForm())
-                                    {
-                    @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" , @class = "mytextarea" })
-                                        @Html.ValidationMessageFor(model => model.Post.CorpsPost)
-                                                            <button onclick="location.href='@Url.Action("Repondre", "Forum", new { id = item.Id })'">Valider</button>}
-                                </div>
-                                                <hr />}
-    <div style="display:none" id="citation">
-        @using (Html.BeginForm())
-        {
-@Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" , @class = "mytextarea" })
-                @Html.ValidationMessageFor(model => model.Post.CorpsPost)
-                                <button onclick="location.href='@Url.Action()'">Valider</button>}
-    </div>
-
-    <div>
-
-        <textarea class="mytextarea">
-</textarea>
-
-    </div>
-
-
+                /*<div style="display:none" id=@idrep>
+                    <button type="button" onclick="Close('@idrep')">x</button>
+                    
+                </div>
+                <div style="display:none" id=@idmod>
+                        <button type="button" onclick="Close('@idmod')">x</button>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.TextAreaFor(model => item.CorpsPost, new { @class = "mytextarea", id = @postmod })
+                            @Html.ValidationMessageFor(model => model.Post.CorpsPost)
+                            <button onclick="location.href='@Url.Action("ModifierPost", "Forum", new { id = item.Id })'">Valider</button>
+                        }
+                </div>*/
+                <hr />
+             }
+             @using (Html.BeginForm())
+              {
+                    @Html.HiddenFor(model=>model.Sujet.Id)
+                    @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message", @class = "mytextarea", id = "repTA" })
+                        <button type="submit">Valider</button>
+              }
+            }
     <script>function OuvrirPostForm(id) {
             document.getElementById(id).style.display = "block";
-        }</script>
-    <script>tinymce.init({
-    selector: '.mytextarea',
-    plugins: 'image',
-    a11y_advanced_options: true
-        });</script>
-</body>
+
+        }
+
+        function Close(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        function Citer(postD, postT, postA, postC) {
+            var citation = "<div contenteditable='false'><blockquote>Le " + postD + " à " + postT + ", " + postA + " a dit:</blockquote><cite>" + postC+"</cite></div><br /><p></p>"
+            tinymce.get("repTA").setContent(citation, { format: 'raw' });
+    }</script>
+            <script>
+                tinymce.init({
+                    selector: '.mytextarea',
+                    plugins: ['image','lists code emoticons'],
+                    toolbar: 'undo redo | styleselect | bold italic | ' +
+                        'alignleft aligncenter alignright alignjustify | ' +
+                        'outdent indent | numlist bullist | emoticons',
+                    a11y_advanced_options: true,
+                    min_height: 300,
+                    statusbar: false
+                });
+            </script>
+    </body>
 </html>

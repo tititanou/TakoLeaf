@@ -33,9 +33,21 @@
             </div>
 
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.Adresse, new { @class = "form-control", placeholder = "Adresse" })
-                @Html.LabelFor(model => model.Adresse)
-                @Html.ValidationMessageFor(model => model.Adresse)
+                @Html.TextBoxFor(model => model.Adresse.Rue, new { @class = "form-control", placeholder = "Adresse" })
+                @Html.LabelFor(model => model.Adresse.Rue)
+                @Html.ValidationMessageFor(model => model.Adresse.Rue)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Adresse.CodePostal, new { @class = "form-control", placeholder = "Adresse" })
+                @Html.LabelFor(model => model.Adresse.CodePostal)
+                @Html.ValidationMessageFor(model => model.Adresse.CodePostal)
+            </div>
+
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(model => model.Adresse.Ville, new { @class = "form-control", placeholder = "Adresse" })
+                @Html.LabelFor(model => model.Adresse.Ville)
+                @Html.ValidationMessageFor(model => model.Adresse.Ville)
             </div>
 
             <div class="form-floating mb-3">
@@ -44,6 +56,8 @@
                 @Html.ValidationMessageFor(model => model.Telephone)
             </div>
 
+            @Html.HiddenFor(model => model.Adresse.Id)
+            @Html.HiddenFor(model => model.AdresseId)
             <!-- Submit Button-->
             <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
         }

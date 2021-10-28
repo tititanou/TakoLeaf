@@ -133,5 +133,79 @@ namespace TakoLeaf.Data
             }
             return sujet;
         }
+
+        public List<PostSignale> GetAllPostSignales()
+        {
+            return this._bddContext.PostSignales.ToList();
+        }
+
+        public PostSignale GetPostSignale(int id)
+        {
+            PostSignale postSignale = null;
+            List<PostSignale> postSignales = this._bddContext.PostSignales.ToList();
+            for (int i = 0; i < postSignales.Count(); i++)
+            {
+                if (postSignales[i].Id == id)
+                {
+                    postSignale = postSignales[i];
+                }
+            }
+            return postSignale;
+        }
+
+        public List<PostSignale> GetPostSignalesFromAdh(int idAdh)
+        {
+            List<PostSignale> allPostSignales = this._bddContext.PostSignales.Include(p => p.Adherent).Include(p => p.Post).ToList();
+            List<PostSignale> postsFromAdh = null;
+            for (int i = 0; i < allPostSignales.Count(); i++)
+            {
+                if (allPostSignales[i].AdherentId == idAdh)
+                {
+                    postsFromAdh.Add(allPostSignales[i]);
+                }
+            }
+            return postsFromAdh;
+        }
+
+        public void AjoutPostSignale(PostSignale post)
+        {
+            this._bddContext.PostSignales.Add(post);
+            this._bddContext.SaveChanges();
+        }
+
+        public void SuppressionPostSignale(PostSignale post)
+        {
+            this._bddContext.PostSignales.Remove(post);
+            this._bddContext.SaveChanges();
+        }
+
+        public void SuppressionAllPostSignaleFromAdh(int idAdh)
+        {
+            List<PostSignale> allPostSignales = this._bddContext.PostSignales.Include(p => p.Post).ToList();
+
+            for (int i = 0; i < allPostSignales.Count(); i++)
+            {
+                if(allPostSignales[i].AdherentId == idAdh)
+                {
+                    PostSignale postStR = allPostSignales[i];
+                    this.SuppressionPostSignale(postStR);
+                }
+            }
+        }
+
+        public void SuppressionAllPostFromAdh(int idAdh)
+        {
+            List<Post> allPosts = this._bddContext.Posts.ToList();
+
+            for (int i = 0; i < allPosts.Count(); i++)
+            {
+                if (allPosts[i].AdherentId == idAdh)
+                {
+                    Post postTR = allPosts[i];
+                    this.SuppressionPost(postTR);
+                }
+            }
+        }
+
     }
 }

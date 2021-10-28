@@ -84,7 +84,9 @@ namespace TakoLeaf.Controllers
         {
             using(DalProfil dal = new DalProfil())
             {
-                dal.ModifierInfosAdherent(adherent.Id, adherent.Nom, adherent.Prenom, adherent.Date_naissance, adherent.Adresse, adherent.Telephone);
+                int idA = adherent.AdresseId;
+                dal.ModifierAdresse(idA, adherent.Adresse.Rue, adherent.Adresse.CodePostal, adherent.Adresse.Ville);
+                dal.ModifierInfosAdherent(adherent.Id, adherent.Nom, adherent.Prenom, adherent.Date_naissance, adherent.Telephone);
                 int id = adherent.Id;
                 CompteUser compteUser = dal.ObtenirCompteUser().Where(c => c.AdherentId == id).FirstOrDefault();
                 if(compteUser.Role.Equals("Consumer"))

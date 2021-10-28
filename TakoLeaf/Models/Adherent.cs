@@ -24,10 +24,8 @@ namespace TakoLeaf.Models
 
         [Required(ErrorMessage = "Cette information est obligatoire")]
         public DateTime Date_naissance { get; set; }
-
-        [Required(ErrorMessage = "Cette information est obligatoire")]
-        [Column(TypeName = "varchar(60)")]
-        public string Adresse { get; set; }
+        public int AdresseId { get; set; }
+        public Adresse Adresse { get; set; }
 
         [Display(Name = "Téléphone")]
         [Column(TypeName = "varchar(12)")]

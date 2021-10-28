@@ -37,7 +37,8 @@ namespace TakoLeaf.Controllers
         {
             if (ModelState.IsValid) //TODO a voir pour le modelState et les Regex
             {
-                Adherent adherent = dal.CreationAdherent(uvm.Adherent.Nom, uvm.Adherent.Prenom, uvm.Adherent.Date_naissance, uvm.Adherent.Adresse, uvm.Adherent.Telephone);
+                Adresse adresse = dal.CreationAdresse(uvm.Adherent.Adresse.Rue, uvm.Adherent.Adresse.CodePostal, uvm.Adherent.Adresse.Ville);
+                Adherent adherent = dal.CreationAdherent(uvm.Adherent.Nom, uvm.Adherent.Prenom, uvm.Adherent.Date_naissance, adresse.Id, uvm.Adherent.Telephone);
                 int idAdherent = adherent.Id;
                 CompteUser compteUser = dal.CreationCompte(uvm.CompteUser.Mail, uvm.CompteUser.MotDePasse, uvm.CompteUser.Avatar, uvm.CompteUser.Description, idAdherent);
 

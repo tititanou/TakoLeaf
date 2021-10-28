@@ -19,7 +19,7 @@ namespace TakoLeaf.Controllers
         public ForumController()
         {
             this.dalForum = new DalForum();
-            Console.WriteLine(userId);
+            
         }
 
         public ActionResult Sujets()
@@ -43,7 +43,52 @@ namespace TakoLeaf.Controllers
             return View(fvm);
         }
 
-        public ActionResult ModifierPost(int? id)
+        [HttpPost]
+        public ActionResult Sujet(ForumViewModel fvm)
+        {
+            userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            DateTime now = DateTime.Now;
+            Post post = new Post()
+            {
+                AdherentId = userId,
+                CorpsPost = fvm.Post.CorpsPost,
+                Date = now,
+                SujetId = fvm.Sujet.Id
+            };
+            this.dalForum.CreationPost(post);
+            return RedirectToAction("Sujet", new { id = fvm.Sujet.Id });
+        }
+
+        public ActionResult NouveauSujet()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NouveauSujet(ForumViewModel fvm)
+        {
+            userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            DateTime now = DateTime.Now;
+            Sujet sujet = new Sujet()
+            {
+                Date = now,
+                IdAdherent = userId,
+                Titre = fvm.Sujet.Titre
+            };
+            this.dalForum.CreationSujet(sujet);
+            Sujet s = this.dalForum.RechercheSujetParTitre(sujet.Titre);
+            Post post = new Post()
+            {
+                AdherentId = userId,
+                CorpsPost = fvm.Post.CorpsPost,
+                Date = now,
+                SujetId = s.Id
+            };
+            this.dalForum.CreationPost(post);
+            return RedirectToAction("Sujets");
+        }
+
+        /*public ActionResult ModifierPost(int? id)
         {
             Post post = null;
             if(id.HasValue)
@@ -108,44 +153,6 @@ namespace TakoLeaf.Controllers
                 return View("Sujet", idSujet);
             }
             return View("Error");
-        }
-
-        public ActionResult Repondre(int id)
-        {
-            return View();
-        }
-
-        public ActionResult Citer(int id)
-        {
-            return View();
-        }
-
-        public ActionResult NouveauSujet()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult NouveauSujet(string Titre, string CorpPost) {
-            BddContext _bddContext = new BddContext();
-            DateTime now = DateTime.Now;
-            Sujet sujet = new Sujet() { Date = now, Titre = Titre };
-            this.dalForum.CreationSujet(sujet);
-            Sujet s = this.dalForum.RechercheSujetParTitre(Titre);
-            Post post = new Post() { AdherentId = this.userId, CorpsPost = CorpPost, Date = now, SujetId = s.Id };
-            ForumViewModel fvm = new ForumViewModel()
-            {
-                Sujet = sujet,
-                Post = post,
-                //Adherent = _bddContext.Adherents.Find(this.userId)
-            };
-
-            return View(fvm);
-        }
-
-        public ActionResult UPosts()
-        {
-            return View();
-        }
+        }*/
     }
 }

@@ -23,9 +23,19 @@ namespace TakoLeaf.Data
             this._bddContext.Dispose();
         }
 
-        public Adherent CreationAdherent(string nom, string prenom, DateTime dateNaissance, string adresse, string telephone)
+        public Adresse CreationAdresse(string rue, int codePostal, string ville)
         {
-            Adherent adherent = new Adherent { Nom = nom, Prenom = prenom, Date_naissance = dateNaissance, Adresse = adresse, Telephone = telephone };
+            Adresse adresse = new Adresse { Rue = rue, CodePostal = codePostal, Ville = ville };
+            _bddContext.Adresses.Add(adresse);
+            _bddContext.SaveChanges();
+            return adresse;
+
+        }
+
+      
+        public Adherent CreationAdherent(string nom, string prenom, DateTime dateNaissance, int adresseId, string telephone)
+        {
+            Adherent adherent = new Adherent { Nom = nom, Prenom = prenom, Date_naissance = dateNaissance, AdresseId = adresseId, Telephone = telephone };
             this._bddContext.Adherents.Add(adherent);
             this._bddContext.SaveChanges();
             return adherent;
