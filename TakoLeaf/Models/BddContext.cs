@@ -80,7 +80,7 @@ namespace TakoLeaf.Models
                     Nom = "ABRATE",
                     Prenom = "Alexis",
                     Date_naissance = new DateTime(1990, 10, 23),
-                    Adresse = "Ripas",
+                    Adresse = "124 Rue Hoche, 93100, Montreuil",
                     Telephone = "0658423947"
 
                 },
@@ -91,7 +91,7 @@ namespace TakoLeaf.Models
                      Nom = "ROJAS",
                      Prenom = "Tania",
                      Date_naissance = new DateTime(1980, 02, 10),
-                     Adresse = "Ripas",
+                     Adresse = "205 Rue de Perrin, 43142, Hoareau sur Mer",
                      Telephone = "0693562410"
                  },
 
@@ -137,6 +137,16 @@ namespace TakoLeaf.Models
                     Adresse = "Paris",
                     Telephone = "0699885544"
 
+                },
+
+                new Adherent
+                {
+                    Id = 7,
+                    Nom = "Haroun",
+                    Prenom = "Humo",
+                    Date_naissance = new DateTime(1990, 07, 05),
+                    Adresse = "Paris",
+                    Telephone = "0699885544"
                 }
                 );
 
@@ -147,7 +157,8 @@ namespace TakoLeaf.Models
                      MotDePasse = dal.EncodeMD5("LeTruantDuCSharp"),
                      Description = "Hello",
                      EtatProfil = EtatProfil.VALIDE,
-                     AdherentId = 1
+                     AdherentId = 1,
+                     Role = "Provider"
 
                  },
 
