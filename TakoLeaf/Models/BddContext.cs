@@ -137,7 +137,40 @@ namespace TakoLeaf.Models
                     Adresse = "Paris",
                     Telephone = "0699885544"
 
-                }
+                },
+
+                 new Adherent
+                 {
+                     Id = 7,
+                     Nom = "Gaston",
+                     Prenom = "Lagaffe",
+                     Date_naissance = new DateTime(1965, 03, 15),
+                     Adresse = "Paris",
+                     Telephone = "0699885544"
+
+                 },
+
+                  new Adherent
+                  {
+                      Id = 8,
+                      Nom = "Jean",
+                      Prenom = "Neymar",
+                      Date_naissance = new DateTime(1967, 10, 09),
+                      Adresse = "Paris",
+                      Telephone = "0699885544"
+
+                  },
+
+                  new Adherent
+                  {
+                      Id = 9,
+                      Nom = "Prunelle",
+                      Prenom = "Demaizieux",
+                      Date_naissance = new DateTime(1980, 04, 22),
+                      Adresse = "Paris",
+                      Telephone = "0699885544"
+
+                  }
                 );
 
             this.CompteUsers.AddRange(
@@ -200,6 +233,36 @@ namespace TakoLeaf.Models
                        EtatProfil = EtatProfil.VALIDE,
                        AdherentId = 6,
                        Role = "Consumer"
+                   },
+
+                   new CompteUser
+                   {
+                       Mail = "Lagaffe@gmail.com",
+                       MotDePasse = dal.EncodeMD5("123"),
+                       Description = "M'enfin ?!",
+                       EtatProfil = EtatProfil.VALIDE,
+                       AdherentId = 7,
+                       Role = "Provider"
+                   },
+
+                   new CompteUser
+                   {
+                       Mail = "Naymar@gmail.com",
+                       MotDePasse = dal.EncodeMD5("123"),
+                       Description = "Ah ! Get it ?",
+                       EtatProfil = EtatProfil.VALIDE,
+                       AdherentId = 8,
+                       Role = "Consumer"
+                   },
+
+                   new CompteUser
+                   {
+                       Mail = "Demaizieux@gmail.com",
+                       MotDePasse = dal.EncodeMD5("123"),
+                       Description = "Vous avez saisi mon calembours ?",
+                       EtatProfil = EtatProfil.VALIDE,
+                       AdherentId = 9,
+                       Role = "Consumer"
                    }
 
                    );
@@ -212,7 +275,29 @@ namespace TakoLeaf.Models
                     AdherentId = 6,
                     CarteId = 1
                     
-                }
+                },
+
+                 new Consumer
+                 {
+                     Id = 2,
+                     AdherentId = 9,
+                     CarteId = 2
+                 },
+
+                  new Consumer
+                  {
+                      Id = 3,
+                      AdherentId = 8,
+                      CarteId = 3
+                  },
+
+                   new Consumer
+                   {
+                       Id = 4,
+                       AdherentId = 3,
+                       CarteId = 4
+                   }
+
 
 
 
@@ -225,7 +310,36 @@ namespace TakoLeaf.Models
                     NumeroCarte = "1578323524729856",
                     ExpirDate = "08/2023",
                     Crypto = 458
-                }
+                },
+
+                new Carte
+                {
+                    Id = 2,
+                    Titulaire = "MR DEMAIZIEUX",
+                    NumeroCarte = "1234567891012023",
+                    ExpirDate = "10/2023",
+                    Crypto = 246
+                },
+
+                new Carte
+                {
+                    Id = 3,
+                    Titulaire = "MR NAYMAR",
+                    NumeroCarte = "1415242536359695",
+                    ExpirDate = "01/2024",
+                    Crypto = 666
+                },
+
+                 new Carte
+                 {
+                     Id = 4,
+                     Titulaire = "MR ZAWARTOSKI",
+                     NumeroCarte = "878596832361412",
+                     ExpirDate = "05/2022",
+                     Crypto = 789
+                 }
+
+
                 );
 
             this.Providers.AddRange(
@@ -235,10 +349,18 @@ namespace TakoLeaf.Models
                     Note = 0,
                     RibId = 1,
                     AdherentId = 5
-                }
+                },
+
+                 new Provider
+                 {
+                     Id = 2,
+                     Note = 0,
+                     RibId = 2,
+                     AdherentId = 7
+                 }
                 );
 
-            this.Ribs.Add(
+            this.Ribs.AddRange(
                 new Rib
                 {
                     Id = 1,
@@ -246,7 +368,16 @@ namespace TakoLeaf.Models
                     Iban = "1245 1245 1245 1245",
                     Banque = "Boursorama"
 
-                }
+                },
+
+                 new Rib
+                 {
+                     Id = 2,
+                     Titulaire = "Gaston Lagaffe",
+                     Iban = "1412 3236 9698 7487",
+                     Banque = "Caisse d'Epargne"
+
+                 }
                 );
 
             this.Voitures.AddRange(
@@ -271,6 +402,28 @@ namespace TakoLeaf.Models
                     ConsumerId = 1,
                     Immatriculation = "BB-585-DF",
                     Titulaire = "MME SOULARD",
+                    ModeleId = 5
+                },
+
+                new Voiture
+                {
+                    Id = 3,
+                    Annee = 2015,
+                    Carburant = Carburant.DIESEL,
+                    ConsumerId = 3,
+                    Immatriculation = "BD-524-AV",
+                    Titulaire = "MR NEYMAR",
+                    ModeleId = 5
+                },
+
+                new Voiture
+                {
+                    Id = 4,
+                    Annee = 2010,
+                    Carburant = Carburant.GPL,
+                    ConsumerId = 2,
+                    Immatriculation = "AJ-526-NN",
+                    Titulaire = "MR DEMAIZIEUX",
                     ModeleId = 5
                 }
 
@@ -397,7 +550,55 @@ namespace TakoLeaf.Models
                       Texte = "Les dernières rumeurs suggèrent que notre spécialiste du Front, M.ZAWARTOSKI Valentin serai sur le point de révolutionner le CSS !",
                       Public = false
                   }
-                ); 
+                );
+
+            this.Prestations.AddRange(
+                new Prestation
+                {
+                    DateVoulue = new DateTime(2021, 10, 25),
+                    Prix = 100,
+                    ProviderId = 1,
+                    ConsumerId = 1,
+                    VoitureId = 1,
+                    NumeroDevis = "18644537",
+                    EtatPresta = Prestation.Etat.Valide
+
+                },
+
+                 new Prestation
+                 {
+                     DateVoulue = new DateTime(2021, 10, 30),
+                     Prix = 300,
+                     ProviderId = 1,
+                     ConsumerId = 1,
+                     VoitureId = 1,
+                     NumeroDevis = "15975364",
+                     EtatPresta = Prestation.Etat.En_cours
+                 },
+
+                 new Prestation
+                 {
+                     DateVoulue = new DateTime(2021, 10, 15),
+                     Prix = 150,
+                     ProviderId = 2,
+                     ConsumerId = 3,
+                     VoitureId = 3,
+                     NumeroDevis = "51535957",
+                     EtatPresta = Prestation.Etat.Valide
+                 },
+
+                 new Prestation
+                 {
+                     DateVoulue = new DateTime(2021, 10, 29),
+                     Prix = 100,
+                     ProviderId = 2,
+                     ConsumerId = 2,
+                     VoitureId = 4,
+                     NumeroDevis = "84868785",
+                     EtatPresta = Prestation.Etat.En_cours
+                 }
+
+                );
 
             this.SaveChanges();
         }
