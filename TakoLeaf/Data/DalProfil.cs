@@ -66,6 +66,12 @@ namespace TakoLeaf.Data
             return liste;
         }
 
+        public List<Amitie> ObtenirAmities()
+        {
+            List<Amitie> liste = _bddContext.Amities.ToList();
+            return liste;
+        }
+
         public List<Competence> ObtenirCompetences()
         {
             List<Competence> liste = _bddContext.Competences.ToList();
@@ -120,7 +126,7 @@ namespace TakoLeaf.Data
             _bddContext.SaveChanges();
         }
 
-        public void ModifierCompteUser(string mail,string mdp, byte[] avatar, string description)
+        public void ModifierCompteUser(string mail,string mdp, string avatar, string description)
         {
             CompteUser compte = _bddContext.CompteUsers.Find(mail);
             IdalLogin dal = new DalLogin();
@@ -214,6 +220,16 @@ namespace TakoLeaf.Data
         {
             _bddContext.Cartes.Remove(carte);
             _bddContext.SaveChanges();
+        }
+
+        // AMIS / BLOQUES
+
+        public void AjoutAmis(Adherent adherent1, Adherent adherent2)
+        {
+            Amitie amitie = new Amitie { AdherentCourantId = adherent2.Id, AdherentAmiId = adherent1.Id };
+            _bddContext.Amities.Add(amitie);
+            _bddContext.SaveChanges();
+            
         }
     }
 }

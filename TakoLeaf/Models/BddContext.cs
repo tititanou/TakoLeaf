@@ -39,6 +39,7 @@ namespace TakoLeaf.Models
         public DbSet<HistoriquePresta> HistoriquePrestas { get; set; }
         public DbSet<Adresse> Adresses { get; set; }
         public DbSet<PostSignale> PostSignales { get; set; }
+        public DbSet<Amitie> Amities { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -89,9 +90,9 @@ namespace TakoLeaf.Models
                 {
 
                     Id = 2,
-                    Rue = "205 Rue de Perrin",
-                    CodePostal = 43142,
-                    Ville = "Hoareau sur Mer"
+                    Rue = "148 rue du faubourg saint-martin",
+                    CodePostal = 75010,
+                    Ville = "Paris"
                 },
 
                 new Adresse
@@ -331,6 +332,16 @@ namespace TakoLeaf.Models
 
 
                    );
+
+            this.Amities.Add(
+                new Amitie
+                {
+                    Id = 1,
+                    AdherentAmiId = 3,
+                    AdherentCourantId = 6
+                }
+
+                );
 
             this.Consumers.AddRange(
 
@@ -805,6 +816,59 @@ namespace TakoLeaf.Models
 
                 //}
 
+                );
+
+            this.Messages.AddRange(
+                new Message
+                {
+                    Id = 1,
+                    AdherentExpId = 5,
+                    AdherentDestId = 3,
+                    Titre = "Info",
+                    Msg = "Turpis augue lorem justo consequat litora. Nullam habitant ullamcorper aliquam. Conubia tempor sem turpis platea mi pulvinar. At leo turpis dui. Morbi lacus habitant inceptos accumsan aliquam dui quisque.",
+                    Date = new DateTime(2021, 09, 12, 23, 41, 16),
+                    Lu = true
+                },
+                 new Message
+                 {
+                     Id = 2,
+                     AdherentExpId = 3,
+                     AdherentDestId = 5,
+                     Titre = "Reçu",
+                     Msg = "Lacinia felis integer interdum. Praesent neque arcu dictumst enim cubilia rhoncus laoreet. Et tristique ullamcorper auctor metus etiam nibh augue sociosqu.",
+                     Date = new DateTime(2021, 09, 13, 07, 34, 22),
+                     Lu = false
+                 },
+                  new Message
+                  {
+                      Id = 3,
+                      AdherentExpId = 5,
+                      AdherentDestId = 1,
+                      Titre = "Blabla",
+                      Msg = "Interdum sociosqu porta sagittis aenean mauris.",
+                      Date = new DateTime(2021, 09, 14, 09, 12, 06),
+                      Lu = false
+                  },
+                   new Message
+                   {
+                       Id = 4,
+                       AdherentExpId = 2,
+                       AdherentDestId = 5,
+                       Titre = "Okay",
+                       Msg = "Aliquet quisque nam a sociosqu dictumst quisque pharetra a. Varius venenatis iaculis tortor.",
+                       Date = new DateTime(2021, 10, 01, 05, 16, 33),
+                       Lu = false
+                   },
+                    new Message
+                    {
+                        Id = 5,
+                        AdherentExpId = 5,
+                        AdherentDestId = 2,
+                        Titre = "Alors",
+                        Msg = "Lectus praesent eleifend in. Adipiscing fames congue. Scelerisque lectus ad habitant lacus sapien.",
+                        Date = new DateTime(2021, 11, 15, 12, 36, 57),
+                        Lu = false
+                    }
                 );
 
             this.SaveChanges();

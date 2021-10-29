@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -17,9 +20,13 @@ namespace TakoLeaf.Controllers
     {
         private IdalLogin dal;
         private IdalProfil dalP;
+        private IWebHostEnvironment _env;
 
-        public LoginController()
+
+        public LoginController(IWebHostEnvironment env)
+
         {
+            this._env = env;
             this.dal = new DalLogin();
             this.dalP = new DalProfil();
         }
@@ -33,14 +40,20 @@ namespace TakoLeaf.Controllers
 
         [HttpPost]
 
-        public ActionResult Inscription(UtilisateurViewModel uvm)
+        public ActionResult Inscription(UtilisateurViewModel uvm ,IFormFile fileToUpload)
         {
             if (ModelState.IsValid) //TODO a voir pour le modelState et les Regex
             {
                 Adresse adresse = dal.CreationAdresse(uvm.Adherent.Adresse.Rue, uvm.Adherent.Adresse.CodePostal, uvm.Adherent.Adresse.Ville);
                 Adherent adherent = dal.CreationAdherent(uvm.Adherent.Nom, uvm.Adherent.Prenom, uvm.Adherent.Date_naissance, adresse.Id, uvm.Adherent.Telephone);
                 int idAdherent = adherent.Id;
-                CompteUser compteUser = dal.CreationCompte(uvm.CompteUser.Mail, uvm.CompteUser.MotDePasse, uvm.CompteUser.Avatar, uvm.CompteUser.Description, idAdherent);
+                CompteUser compteUser = dal.CreationCompte(uvm.CompteUser.Mail, uvm.CompteUser.MotDePasse, fileToUpload.FileName, uvm.CompteUser.Description, idAdherent);
+                if(fileToUpload.Length>0)
+                {
+                    string path = _env.WebRootPath + "/Avatar/" + fileToUpload.FileName;
+                    FileStream stream = new FileStream(path, FileMode.Create);
+                    fileToUpload.CopyTo(stream);
+                }
 
                 var userClaims = new List<Claim>()
                 {
@@ -236,5 +249,21 @@ namespace TakoLeaf.Controllers
 
             return Redirect("/ProfilUser/ProfilProvider?id=" + provider.AdherentId);
         }
-    }
+
+        [Produces("application/json")]
+        public IActionResult GetModeles(string marque)
+        {
+            try
+            {
+                DalProfil dalProfil = new DalProfil();
+                var modeles = dalProfil.ObtenirModeles().Where(m => m.Marque.Nom == marque);
+                return Ok(modeles);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+        }
+    } 
 }

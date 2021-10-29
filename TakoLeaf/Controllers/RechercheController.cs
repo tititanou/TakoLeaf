@@ -78,9 +78,15 @@ namespace TakoLeaf.Controllers
                     marques.Add(dal.ObtenirMarques().Where(m => m.Id == idM).FirstOrDefault().Nom);
                 }
 
-                //int idmodele = voiture.ModeleId;
-                //Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
-                UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voitures = voitures, Consumer = consumer, Modeles = modeles, Marques = marques };
+            
+            int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            DalRecherche dalR = new DalRecherche();
+            bool res = dalR.EstAmi(id, idA2);
+           
+       
+            //int idmodele = voiture.ModeleId;
+            //Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voitures = voitures, Consumer = consumer, Modeles = modeles, Marques = marques, Ami = res };
 
                 return View(uvm);
             

@@ -1,0 +1,32 @@
+@model List<TakoLeaf.Models.Message>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="https://kit.fontawesome.com/1ca99e9622.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>MessagesEnvoyes</title>
+</head>
+    <body>
+        <h3>Messages Envoyés</h3>
+        <table>
+            <thead>
+                @Html.CheckBox("IsChecked") | <i class="far fa-trash-alt"></i>
+            </thead>
+            @foreach (var message in Model)
+            {
+                <tr>
+                    <td>@Html.CheckBox("IsChecked")</td>
+                    <div onclick="">
+                        <td><p>@message.AdherentDest.Prenom @message.AdherentDest.Nom</p></td>
+                        <td><p>@message.Titre</p></td>
+                    </div>
+                </tr>
+            }
+        </table>
+    </body>
+</html>
