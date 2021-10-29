@@ -38,7 +38,8 @@ namespace TakoLeaf.Controllers
             fvm = new ForumViewModel()
             {
                 Sujet = dalForum.GetSujet(id.Value),
-                Posts = dalForum.GetPosts(id.Value)
+                Posts = dalForum.GetPosts(id.Value),
+                PostSignale = new PostSignale()
             };
             return View(fvm);
         }
@@ -86,6 +87,24 @@ namespace TakoLeaf.Controllers
             };
             this.dalForum.CreationPost(post);
             return RedirectToAction("Sujets");
+        }
+
+        [HttpPost]
+        public ActionResult Signaler(int Sujet_Id, int item_AdherentId, int item_Id, string PostSignale_Message)
+        {
+            userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            string now = DateTime.Now.ToShortDateString();
+            PostSignale postSignale = new PostSignale()
+            {
+                Date = now,
+                Vu = false,
+                Message = PostSignale_Message,
+                AdherentSignaleId = item_AdherentId,
+                AdherentSignalantId = userId,
+                PostId = item_Id
+            };
+            this.dalForum.AjoutPostSignale(postSignale);
+            return RedirectToAction("Sujet", new { id = Sujet_Id });
         }
 
         /*public ActionResult ModifierPost(int? id)

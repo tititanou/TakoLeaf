@@ -7,40 +7,142 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Connexion</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Tako Leaf Connexion</title>
+    <link rel="stylesheet" href="~/css/ConnexionStyle.css">
+
+    <link rel="stylesheet" href="~/js/Connexion-script.js">
+    <!-- BOOSTRAP CSS-->
+    <link rel="stylesheet" href="~/site/css/bootstrap.css">
+
+
 </head>
 <body>
-    <h1 style="text-align : center"> Veuillez entrer votre identifiant et mot de passe pour vous connecter</h1>
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-xl-7">
-            @using (Html.BeginForm())
-            {
-                <div class="form-floating mb-3">
-                    @Html.TextBoxFor(model => model.Mail, new { @class = "form-control", placeholder = "Mail" })
-                    @Html.LabelFor(model => model.Mail)
-                    @Html.ValidationMessageFor(model => model.Mail)
-                </div>
-
-                <div class="form-floating mb-3">
-                    @Html.TextBoxFor(model => model.MotDePasse, new { @type = "password", @class = "form-control", placeholder = "Mot de passe" })
-                    @Html.LabelFor(model => model.MotDePasse)
-                    @Html.ValidationMessageFor(model => model.MotDePasse)
-                </div>
-
-                <button class="btn btn-primary btn-xl" type="submit">Se Connecter</button>
-            }
-
-
-
-
+    <!--Début Section du Header-->
+    <section>
+        <header>
+            <button class="hamburger">&#9776;</button>
+            <button class="cross">&#735;</button>
+            <div class="logo"><img src="~/IMG/TAKO ECO new.png"></div>
+            <h1 class="titremidheader">Tako Leaf</h1>
+        </header>
+        <div class="menu">
+            <ul>
+                <li>@Html.ActionLink("Inscription", "Inscription", "Login", new { @class = "actionlink" })</li>
+                <li>@Html.ActionLink("Connexion", "Connexion", "Login", new { @class = "actionlink" })</li>
+                <li class="actionlink"><a href="#">FAQ</a></li>
+            </ul>
         </div>
-    </div>
+    </section>
 
-    <div>
-        <h2> Si vous n'avez pas de compte il faut en creer un</h2>
-        <a href="http://localhost:5000/Login/Inscription">Creer un compte</a>
-    </div>
+
+    <!--FIn Section du Header-->
+
+
+
+
+    <section class="connexionHome">
+        <div class="content">
+            <h1>Bonjour</h1>
+            <div class="bodybox">
+                <div class="l-form">
+                    <form method="post">
+                        <h2 class="form__titre">Merci de vous connecter.</h2>
+
+
+                        <div class="form__div">
+                            @Html.TextBoxFor(model => model.Mail, new { @class = "form__input" })
+                            @Html.LabelFor(model => model.Mail, new { @class = "form__label" })
+                            @Html.ValidationMessageFor(model => model.Mail)
+                        </div>
+
+                        <div class="form__div">
+                            @Html.TextBoxFor(model => model.MotDePasse, new { @type = "password", @class = "form__input" })
+                            @Html.LabelFor(model => model.MotDePasse, new { @class = "form__label" })
+                            @Html.ValidationMessageFor(model => model.MotDePasse)
+                        </div>
+
+                        <button class="form__button1" type="submit">Connexion</button>
+                        <button class="form__button2" type="button" onclick="location.href='@Url.Action("Index", "Home")'">Annuler</button>
+
+
+                    </form>
+
+                </div>
+
+                <div class="textlink1">
+                    <ul>
+                        <li> <a href="http://localhost:5000/Login/Inscription">Créez un compte</a></li>
+                        <li> <a href="#">Mot de passe oublié ?</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <!--Section footer-->
+    <section class="footerBot">
+        <footer class="footer-items">
+            <div class="container">
+                <div class="footer-contact">
+                    <h3> Nous rencontrer</h3>
+                    <ul>
+                        <li>Adresse</li>
+                        <li>Adresse</li>
+                        <li>Adresse</li>
+                        <li>Telephone: XX.XX.XX.XX.XX</li>
+                    </ul>
+                </div>
+                <div class="footer-infos">
+                    <h3> Tako Leaf</h3>
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")#section-home">Notre Projet</a></li>
+                        <li><a href="@Url.Action("Index","Home")#section-information">Comment ça marche ?</a></li>
+                    </ul>
+                </div>
+                <div class="footer-questions">
+                    <h3> Besoin d'aide ?</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Forum</a></li>
+                        <li><a href="#">Contacter Administrateur</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="imageRS">
+
+                <a href=""><img src="~/IMG/RS/entypo-social_instagram-with-circle.png" alt="" class="instagram"></a>
+                <a href=""><img src="~/IMG/RS/Vector-1.png" alt="" class="twitter"></a>
+                <a href=""><img src="~/IMG/RS/Vector.png" alt="" class="facebook"></a>
+            </div>
+            <div class="copirate">
+                <h4 class="copyratetext">
+                    © 2021 Tako’Leaf. ALL RIGHTS RESERVED.
+                </h4>
+            </div>
+        </footer>
+    </section>
+
+    <!--FIN Section footer-->
+    <!-- D'abord on vas mettre Jquery-->
+    <script src=""></script>
+
+    <!-- Puis on vas mettre boostrap.JS-->
+    <script src="~/js/boostrap.bundle.js"></script>
+
+
+    <script src="~/js/Homescript.js"></script>
+
+
+
+
+
 
 </body>
 </html>
