@@ -14,6 +14,7 @@ namespace TakoLeaf.Models
         [Required(ErrorMessage = "Cette information est obligatoire")]
         public string Mail { get; set; }
         [Column(TypeName = "varchar(100)")]
+        [Display(Name = "Mot de passe")]
         [Required(ErrorMessage = "Cette information est obligatoire")]
         public string MotDePasse { get; set; }
         [Display(Name = "Photo de profil")]
