@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TakoLeaf.Data;
 using TakoLeaf.Models;
@@ -13,11 +17,13 @@ namespace TakoLeaf.Controllers
     public class ProfilUserController : Controller
     {
         private IdalProfil dal;
-     
+        private IWebHostEnvironment _env;
 
-        public ProfilUserController()
+
+        public ProfilUserController(IWebHostEnvironment env)
         {
             this.dal = new DalProfil();
+            this._env = env;
             
         }
 
@@ -113,12 +119,20 @@ namespace TakoLeaf.Controllers
         }
 
         [HttpPost]
-        public IActionResult ModifCompte(CompteUser compteUser)
+        public IActionResult ModifCompte(CompteUser compteUser, IFormFile fileToUpload)
         {
             using(IdalProfil dal = new DalProfil())
             {
-                dal.ModifierCompteUser(compteUser.Mail, compteUser.MotDePasse, compteUser.Avatar, compteUser.Description);
+                dal.ModifierCompteUser(compteUser.Mail, compteUser.MotDePasse, fileToUpload.FileName, compteUser.Description);
                 int id = compteUser.AdherentId;
+
+                if (fileToUpload.Length > 0)
+                {
+                    string path = _env.WebRootPath + "/Avatar/" + fileToUpload.FileName;
+                    FileStream stream = new FileStream(path, FileMode.Create);
+                    fileToUpload.CopyTo(stream);
+                }
+
                 Adherent adherent = dal.ObtenirAdherents().Where(a => a.Id == id).FirstOrDefault();
                 if (compteUser.Role.Equals("Consumer"))
                 {
@@ -477,6 +491,29 @@ namespace TakoLeaf.Controllers
             dal.SupprimerCarte(carte);
 
             return Redirect("/ProfilUser/ModifierCarte?id=" + consumer.AdherentId);
+        }
+
+        [HttpPost]
+
+        public IActionResult Suivre(int id)
+        {
+            Adherent adherent1 = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
+            CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == adherent1.Id);
+            int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            Adherent adherent2 = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == idA2);
+            dal.AjoutAmis(adherent1, adherent2);
+
+            if (compteUser.Role.Equals("Consumer"))
+            {
+                return Redirect("/Recherche/VisiteProfilConsumer?id=" + id);
+            }
+
+            else if (compteUser.Role.Equals("Provider"))
+            {
+                return Redirect("/Recherche/VisiteProfilProvider?id=" + id);
+            }
+
+            return View();
         }
     }   
 }

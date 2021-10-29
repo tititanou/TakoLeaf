@@ -13,7 +13,7 @@ namespace TakoLeaf.Data
         CompteUser Authentifier(string mail, string mdp);
 
         Adherent CreationAdherent(string nom, string prenom, DateTime dateNaissance, int adresseId, string telephone);
-        CompteUser CreationCompte(string mail, string mdp, byte[] avatar, string description, int adherentId);
+        CompteUser CreationCompte(string mail, string mdp, string avatar, string description, int adherentId);
         Voiture CreationVoiture(string imma, string titulaire, Carburant carburant, int annee, int idmodele, int consumerid);
         Carte CreationCarte(int idconsumer,string titulaire, string numeroCarte, string date, int crypto);
         Consumer CreationConsumer(int idAdherent);

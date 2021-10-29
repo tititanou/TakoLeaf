@@ -39,6 +39,7 @@ namespace TakoLeaf.Models
         public DbSet<HistoriquePresta> HistoriquePrestas { get; set; }
         public DbSet<Adresse> Adresses { get; set; }
         public DbSet<PostSignale> PostSignales { get; set; }
+        public DbSet<Amitie> Amities { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -89,9 +90,9 @@ namespace TakoLeaf.Models
                 {
 
                     Id = 2,
-                    Rue = "205 Rue de Perrin",
-                    CodePostal = 43142,
-                    Ville = "Hoareau sur Mer"
+                    Rue = "148 rue du faubourg saint-martin",
+                    CodePostal = 75010,
+                    Ville = "Paris"
                 },
 
                 new Adresse
@@ -331,6 +332,16 @@ namespace TakoLeaf.Models
 
 
                    );
+
+            this.Amities.Add(
+                new Amitie
+                {
+                    Id = 1,
+                    AdherentAmiId = 3,
+                    AdherentCourantId = 6
+                }
+
+                );
 
             this.Consumers.AddRange(
 

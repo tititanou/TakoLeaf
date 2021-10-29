@@ -19,8 +19,12 @@
     <div>
         <h1>Informations du profil</h1>
         <h2>Informations Adherent</h2>
+
         <ul>
-            <li>Avatar : @Model.CompteUser.Avatar</li>
+            @{ 
+                string link = "/Avatar/" + @Model.CompteUser.Avatar;
+            }
+            <li>Avatar : <img src ="@link"/></li>
             <li>Nom : @Model.Adherent.Nom</li>
             <li>Prenom : @Model.Adherent.Prenom</li>
             <li>Date de Naissance : @Model.Adherent.Date_naissance.ToShortDateString()</li>

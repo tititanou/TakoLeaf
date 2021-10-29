@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,9 +10,12 @@ namespace TakoLeaf.Models
     {
 
         public int Id { get; set; }
-        public int AdherantId_Courant { get; set; }
-        public int AdherantId_Ami { get; set; }
+        
+        public int AdherentCourantId { get; set; }
+        
+        public int AdherentAmiId { get; set; }
 
-        public Adherent Adherent { get; set; }
+        public Adherent AdherentCourant { get; set; }
+        public Adherent AdherentAmi { get; set; }
     }
 }
