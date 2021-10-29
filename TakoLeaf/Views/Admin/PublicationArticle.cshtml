@@ -7,43 +7,55 @@
 
 <html>
 <head>
+    <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <meta name="viewport" content="width=device-width" />
     <title>PublicationArticle</title>
 </head>
 <body>
 
     <h1 style="text-align:center; font-family:sans-serif;">Bienvenue sur la page de publication d'article</h1>
+    <center>
+        @using (Html.BeginForm())
+        {
+            <fieldset style="display:inline-block">
+                <legend>Vous êtes inspirés ?</legend>
 
-    @using (Html.BeginForm())
-    {
-        <fieldset style="display:inline-block">
-            <legend>Vous êtes inspirés ?</legend>
+                <div class="form-floating mb-3">
+                    @Html.LabelFor(model => model.Titre)
+                    @Html.TextBoxFor(m => m.Titre, new { placeholder = "Votre titre ici", size = "50" })
+                    @Html.ValidationMessageFor(model => model.Titre)
+                </div>
 
-            <div class="form-floating mb-3">
-                @Html.LabelFor(model => model.Titre)
-                @Html.TextBoxFor(m => m.Titre, new { placeholder = "Votre titre ici" })
-                @Html.ValidationMessageFor(model => model.Titre)
-            </div>
+                <div class="form-floating mb-3">
+                    @Html.LabelFor(model => model.Texte)
+                    @Html.TextAreaFor(m => m.Texte, new { rows = 20, cols = 150, placeholder = "Votre article ici", @class = "mytextarea" })
+                    @Html.ValidationMessageFor(model => model.Texte)
+                </div>
 
-            <div class="form-floating mb-3">
-                @Html.LabelFor(model => model.Texte)
-                @Html.TextAreaFor(m => m.Texte, new { rows = 20, cols = 150, placeholder = "Votre article ici" })
-                @Html.ValidationMessageFor(model => model.Texte)
-            </div>
+                <div class="form-floating mb-3">
+                    @Html.LabelFor(model => model.Image)
+                    @Html.TextBoxFor(model => model.Image)
+                    @Html.ValidationMessageFor(model => model.Image)
+                </div>
 
-            <div class="form-floating mb-3">
-                @Html.LabelFor(model => model.Image)
-                @Html.TextBoxFor(model => model.Image)
-                @Html.ValidationMessageFor(model => model.Image)
-            </div>
+                <button class="btn btn-primary btn-xl" type="submit">Publier</button>
 
-            <button class="btn btn-primary btn-xl" type="submit">Publier</button>
+            </fieldset>
 
-        </fieldset>
+        }
 
-    }
+    </center>
 
-
+    <script>
+    function OuvrirPostForm(id) {
+            document.getElementById(id).style.display = "block";
+        }</script>
+    <script>
+    tinymce.init({
+            selector: '.mytextarea',
+            plugins: 'image',
+            a11y_advanced_options: true
+        });</script>
 
 
 </body>
