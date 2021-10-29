@@ -44,7 +44,16 @@ namespace TakoLeaf.Data
         public CompteUser CreationCompte(string mail, string mdp, string avatar, string description, int adherentId)
         {
             string password = EncodeMD5(mdp);
-            CompteUser compteUser = new CompteUser { Mail = mail, MotDePasse = password, Avatar = avatar, Description = description, EtatProfil = EtatProfil.NON_VALIDE, AdherentId = adherentId };
+            CompteUser compteUser = new CompteUser { Mail = mail, MotDePasse = password, Description = description, EtatProfil = EtatProfil.NON_VALIDE, AdherentId = adherentId };
+            if(avatar == null)
+            {
+                compteUser.Avatar = null;
+            }
+
+            else
+            {
+                compteUser.Avatar = avatar;
+            }
             this._bddContext.Add(compteUser);
             this._bddContext.SaveChanges();
             return compteUser;

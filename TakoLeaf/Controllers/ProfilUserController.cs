@@ -77,6 +77,23 @@ namespace TakoLeaf.Controllers
             return View(pvm);
         }    
 
+        public IActionResult VoirProfil()
+        {
+            int id = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == id);
+            if (compteUser.Role.Equals("Consumer"))
+            {
+                return Redirect("/ProfilUser/ProfilConsumer?id=" + id);
+            }
+
+            else if (compteUser.Role.Equals("Provider"))
+            {
+                return Redirect("/ProfilUser/ProfilProvider?id=" + id);
+            }
+
+            return View();
+        }
+
         // MODIFICATION INFORMATIONS ADHERANT / COMPTE
 
         public IActionResult ModifInfosAdherent(int id)

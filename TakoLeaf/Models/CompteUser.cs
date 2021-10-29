@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,7 +18,8 @@ namespace TakoLeaf.Models
         [Display(Name = "Mot de passe")]
         [Required(ErrorMessage = "Cette information est obligatoire")]
         public string MotDePasse { get; set; }
-        [Display(Name = "Photo de profil")]
+        
+        // TODO a voir comment autoriser de ne pas uploader des photos
         public string Avatar {get; set;}
         [Column(TypeName = "longtext")]
         [Required(ErrorMessage = "Cette information est obligatoire")]
