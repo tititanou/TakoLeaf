@@ -21,5 +21,6 @@ namespace TakoLeaf.ViewModels
         public Rib Rib { get; set; }
         public List<Ressource> Ressources { get; set; }
         public Ressource Ressource { get; set; }
+        public bool Amis { get; set; }
     }
 }

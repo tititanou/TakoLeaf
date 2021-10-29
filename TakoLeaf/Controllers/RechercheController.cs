@@ -93,7 +93,7 @@ namespace TakoLeaf.Controllers
 
         }
 
-        public IActionResult ProfilProviderVisite(int id)
+        public IActionResult VisiteProfilProvider(int id)
         {
                 Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
                 CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(a => a.AdherentId == adherent.Id);
@@ -102,7 +102,11 @@ namespace TakoLeaf.Controllers
                 List<Competence> competence = dal.ObtenirCompetences().Where(c => c.ProviderId == provider.Id).ToList();
                 List<Ressource> ressources = dal.ObtenirRessources().Where(r => r.ProviderId == provider.Id).ToList();
 
-                ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, Competence = competence, Provider = provider, Ressources = ressources };
+                int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                DalRecherche dalR = new DalRecherche();
+                bool res = dalR.EstAmi(id, idA2);
+
+            ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, Competence = competence, Provider = provider, Ressources = ressources, Amis = res };
             
             return View(pvm);
         }
