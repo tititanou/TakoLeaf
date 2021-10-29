@@ -1,20 +1,15 @@
 ﻿@model TakoLeaf.ViewModels.UtilisateurViewModel
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "Profil";
+
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>VisiteProfilConsumer</title>
-</head>
-<body>
 
     @{
         string Plan = "http://www.google.fr/maps/place/" + Model.Adherent.Adresse.Rue + ",+" + Model.Adherent.Adresse.CodePostal + "+" + Model.Adherent.Adresse.Ville;
-   
+
      }
 
     <div>
@@ -68,13 +63,9 @@
         }
     </div>
 
-    <div>
+    @*<div>
         <a href=""><img src="IMG/RS/entypo-social_instagram-with-circle.png" alt="" class="instagram"></a>
         <a href=""><img src="IMG/RS/Vector-1.png" alt="" class="twitter"></a>
         <a href=""><img src="IMG/RS/Vector.png" alt="" class="facebook"></a>
-    </div>
-    
+    </div>*@
 
-
-</body>
-</html>
