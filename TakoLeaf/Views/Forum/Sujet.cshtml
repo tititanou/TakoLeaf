@@ -10,15 +10,17 @@
         <title>Sujet</title>
     </head>
     <body>
-        @{var cttn = new TakoLeaf.Models.Post();
+        @{var signale = new TakoLeaf.Models.PostSignale();
             <h3>@Model.Sujet.Titre</h3>
             @foreach (var item in Model.Posts)
-            {
-                /*string idrep = "rep" + item.Id;
-                string postmod = "postmod" + item.Id;
+             {
+                string idsignal = "signal" + item.Id;
+                /*string postmod = "postmod" + item.Id;
                 string idmod = "mod" + item.Id;
                 var cite = "<div contenteditable='false'><blockquote> Le " + item.Date.ToShortDateString() + " à " + item.Date.ToShortTimeString() + ", " + item.Adherent.Prenom + " a dit:</blockquote><cite>" + item.CorpsPost + "</cite></div> html";
                 cttn.CorpsPost = cite;*/
+                int adhSignId = item.AdherentId;
+                int postSignId = item.Id;
                 <div class="post">
                     <div>@Html.Raw(@item.CorpsPost)</div>
                     <div class="ftr">
@@ -26,55 +28,61 @@
                         <em>@item.Date</em>
                     </div>
                     <button type="button" onclick="Citer('@item.Date.ToShortDateString()', '@item.Date.ToShortTimeString()', '@item.Adherent.Prenom', '@item.CorpsPost')">Citer</button>
-                    <button type="submit" onclick="">Signaler</button>
+                    <button type="submit" onclick="Signaler('@idsignal')">Signaler</button>
                 </div>
                 <br />
-                /*<div style="display:none" id=@idrep>
-                    <button type="button" onclick="Close('@idrep')">x</button>
-                    
+                <div style="display:none" id=@idsignal>
+                    <button type="button" onclick="Close(@idsignal)">x</button>
+                    @using (Html.BeginForm("Signaler", "Forum"))
+                    {
+                <input type="text" name="Sujet_Id" value="@Model.Sujet.Id" style="display:none;" />
+                <input type="text" name="item_AdherentId" value="@item.AdherentId" style="display:none;" />
+               <input type="text" name="item_Id" value="@item.Id" style="display:none;" />
+                <textarea class="mytextarea" id="PostSignale_Message" name="PostSignale_Message"></textarea>
+               
+                <button type="submit">Valider</button>}
                 </div>
-                <div style="display:none" id=@idmod>
-                        <button type="button" onclick="Close('@idmod')">x</button>
-                        @using (Html.BeginForm())
-                        {
-                            @Html.TextAreaFor(model => item.CorpsPost, new { @class = "mytextarea", id = @postmod })
-                            @Html.ValidationMessageFor(model => model.Post.CorpsPost)
-                            <button onclick="location.href='@Url.Action("ModifierPost", "Forum", new { id = item.Id })'">Valider</button>
-                        }
-                </div>*/
                 <hr />
              }
-             @using (Html.BeginForm())
-              {
-                    @Html.HiddenFor(model=>model.Sujet.Id)
+            /*<div style="display:none" id=@idrep>*/
+              @using (Html.BeginForm())
+               {
+                    @Html.HiddenFor(model => model.Sujet.Id)
                     @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message", @class = "mytextarea", id = "repTA" })
-                        <button type="submit">Valider</button>
-              }
+                    <button type="submit">Valider</button>
+               }
+
+                <script>
+                    function OuvrirPostForm(id) {
+                        document.getElementById(id).style.display = "block";
+
+                    }
+
+                    function Close(id) {
+                        document.getElementById(id).style.display = "none";
+                    }
+
+                    function Citer(postD, postT, postA, postC) {
+                        var citation = "<div contenteditable='false'><blockquote>Le " + postD + " à " + postT + ", " + postA + " a dit:</blockquote><cite>" + postC + "</cite></div><br /><p></p>"
+                        tinymce.get("repTA").setContent(citation, { format: 'raw' });
+                    }
+
+                    function Signaler(id) {
+                        document.getElementById(id).style.display = "block";
+                    }
+                </script>
             }
-    <script>function OuvrirPostForm(id) {
-            document.getElementById(id).style.display = "block";
-
-        }
-
-        function Close(id) {
-            document.getElementById(id).style.display = "none";
-        }
-
-        function Citer(postD, postT, postA, postC) {
-            var citation = "<div contenteditable='false'><blockquote>Le " + postD + " à " + postT + ", " + postA + " a dit:</blockquote><cite>" + postC+"</cite></div><br /><p></p>"
-            tinymce.get("repTA").setContent(citation, { format: 'raw' });
-    }</script>
-            <script>
-                tinymce.init({
-                    selector: '.mytextarea',
-                    plugins: ['image','lists code emoticons'],
-                    toolbar: 'undo redo | styleselect | bold italic | ' +
-                        'alignleft aligncenter alignright alignjustify | ' +
-                        'outdent indent | numlist bullist | emoticons',
-                    a11y_advanced_options: true,
-                    min_height: 300,
-                    statusbar: false
-                });
-            </script>
+        <script>
+            tinymce.init({
+                selector: '.mytextarea',
+                plugins: ['image', 'lists code emoticons'],
+                toolbar: 'undo redo | styleselect | bold italic | ' +
+                    'alignleft aligncenter alignright alignjustify | ' +
+                    'outdent indent | numlist bullist | emoticons',
+                a11y_advanced_options: true,
+                min_height: 300,
+                statusbar: false
+            });
+        </script>
     </body>
 </html>
