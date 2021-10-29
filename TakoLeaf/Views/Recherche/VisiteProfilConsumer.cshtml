@@ -1,0 +1,80 @@
+﻿@model TakoLeaf.ViewModels.UtilisateurViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VisiteProfilConsumer</title>
+</head>
+<body>
+
+    @{
+        string Plan = "http://www.google.fr/maps/place/" + Model.Adherent.Adresse.Rue + ",+" + Model.Adherent.Adresse.CodePostal + "+" + Model.Adherent.Adresse.Ville;
+   
+     }
+
+    <div>
+        <h2>Informations Adherent</h2>
+        <ul>
+            <li>Avatar : @Model.CompteUser.Avatar</li>
+            <li>Nom : @Model.Adherent.Nom</li>
+            <li>Prenom : @Model.Adherent.Prenom</li>
+
+            <li>Adresse : @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville</li>
+            <button><a href="@Plan" target="_blank">Voir Carte</a></button>
+
+            <li>Telephone : @Model.Adherent.Telephone</li>
+        </ul>
+
+        @if (Model.Ami == false)
+        {
+
+            @using (Html.BeginForm("Suivre", "ProfilUser"))
+            {                
+                <input type="text" name="id" value="@Model.Adherent.Id" style="display:none;" />
+                <button class="btn btn-primary btn-xl" type="submit">Suivre</button>
+            }
+        }
+
+        else
+        {
+            <button>Suivi</button>
+        }
+
+
+
+    </div>
+    
+    <div>
+        <p>@Model.CompteUser.Description</p>
+    </div>
+
+    <div>
+        <h2>Informations Voiture</h2>
+        @for (int i = 0; i < Model.Voitures.Count; i++)
+        {
+            <ul>
+                <li>Marque : @Model.Marques[i]</li>
+                <li>Modele : @Model.Modeles[i]</li>
+                <li>Immatriculation : @Model.Voitures[i].Immatriculation</li>
+                <li>Titulaire : @Model.Voitures[i].Titulaire</li>
+                <li>Carburant : @Model.Voitures[i].Carburant</li>
+                <li>Annee : @Model.Voitures[i].Annee</li>
+            </ul>
+        }
+    </div>
+
+    <div>
+        <a href=""><img src="IMG/RS/entypo-social_instagram-with-circle.png" alt="" class="instagram"></a>
+        <a href=""><img src="IMG/RS/Vector-1.png" alt="" class="twitter"></a>
+        <a href=""><img src="IMG/RS/Vector.png" alt="" class="facebook"></a>
+    </div>
+    
+
+
+</body>
+</html>

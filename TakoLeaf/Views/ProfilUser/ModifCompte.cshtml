@@ -12,7 +12,7 @@
 </head>
 <body>
     <div>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="form-floating mb-3">
                 @Html.TextBoxFor(model => model.MotDePasse, new { @type = "password", @class = "form-control", placeholder = "Mot de Passe" })
@@ -21,9 +21,8 @@
             </div>
 
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.Avatar, new { @class = "form-control", placeholder = "Avatar" })
+                <input type="file" name="fileToUpload" />
                 @Html.LabelFor(model => model.Avatar)
-                @Html.ValidationMessageFor(model => model.Avatar)
             </div>
 
             <div class="form-floating mb-3">

@@ -13,7 +13,7 @@
 </head>
 <body>
     <div>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null,null, FormMethod.Post,new {enctype = "multipart/form-data"}))
         {
             <div class="form-floating mb-3">
                 @Html.TextBoxFor(model => model.Adherent.Prenom, new { @class = "form-control", placeholder = "Prenom" })
@@ -71,7 +71,7 @@
             </div>
 
             <div class="form-floating mb-3">
-                @Html.TextBoxFor(model => model.CompteUser.Avatar, new { @type = "file", @name = "file" })
+                <input type="file" name="fileToUpload" />
                 @Html.LabelFor(model => model.CompteUser.Avatar)
             </div>
 
@@ -89,8 +89,8 @@
             </div>
 
             <!-- Submit Button-->
-            <button class="btn btn-primary btn-xl" type="submit">Créer</button>
+            <button class="btn btn-primary btn-xl" type="submit">Valider</button>
         }
-
+</div>
 </body>
 </html>

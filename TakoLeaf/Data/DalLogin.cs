@@ -41,7 +41,7 @@ namespace TakoLeaf.Data
             return adherent;
         }
 
-        public CompteUser CreationCompte(string mail, string mdp, byte[] avatar, string description, int adherentId)
+        public CompteUser CreationCompte(string mail, string mdp, string avatar, string description, int adherentId)
         {
             string password = EncodeMD5(mdp);
             CompteUser compteUser = new CompteUser { Mail = mail, MotDePasse = password, Avatar = avatar, Description = description, EtatProfil = EtatProfil.NON_VALIDE, AdherentId = adherentId };

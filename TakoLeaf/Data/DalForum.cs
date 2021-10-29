@@ -155,11 +155,11 @@ namespace TakoLeaf.Data
 
         public List<PostSignale> GetPostSignalesFromAdh(int idAdh)
         {
-            List<PostSignale> allPostSignales = this._bddContext.PostSignales.Include(p => p.Adherent).Include(p => p.Post).ToList();
+            List<PostSignale> allPostSignales = this._bddContext.PostSignales.Include(p => p.AdherentSignale).Include(p => p.AdherentSignalant).Include(p => p.Post).ToList();
             List<PostSignale> postsFromAdh = null;
             for (int i = 0; i < allPostSignales.Count(); i++)
             {
-                if (allPostSignales[i].AdherentId == idAdh)
+                if (allPostSignales[i].AdherentSignaleId == idAdh)
                 {
                     postsFromAdh.Add(allPostSignales[i]);
                 }
@@ -185,7 +185,7 @@ namespace TakoLeaf.Data
 
             for (int i = 0; i < allPostSignales.Count(); i++)
             {
-                if(allPostSignales[i].AdherentId == idAdh)
+                if(allPostSignales[i].AdherentSignaleId == idAdh)
                 {
                     PostSignale postStR = allPostSignales[i];
                     this.SuppressionPostSignale(postStR);
