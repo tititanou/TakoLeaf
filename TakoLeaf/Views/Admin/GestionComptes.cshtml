@@ -1,4 +1,4 @@
-﻿@model List<TakoLeaf.ViewModels.UtilisateurViewModel>
+﻿@model List<TakoLeaf.Models.CompteUser>
 @{
     Layout = null;
 }
@@ -40,10 +40,10 @@
                 <tr>
                     <td>@item.Adherent.Nom</td>
                     <td>@item.Adherent.Prenom</td>
-                    <td>@item.CompteUser.Description</td>
-                    <td>@item.CompteUser.Mail</td>
-                    <td>@item.CompteUser.EtatProfil</td>
-                    <td>@Html.ActionLink("Supprimer Profil", "SupprimerCompte", "Admin", new { id = item.CompteUser.AdherentId })</td>
+                    <td>@item.Description</td>
+                    <td>@item.Mail</td>
+                    <td>@item.EtatProfil</td>
+                    <td>@Html.ActionLink("Supprimer Profil", "SupprimerCompte", "Admin", new { id = item.AdherentId })</td>
                 </tr>
             }
 
@@ -83,18 +83,18 @@
             {
 
 
-                if (item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.NON_VALIDE || item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
+                if (item.EtatProfil == TakoLeaf.Models.EtatProfil.NON_VALIDE || item.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
                 {
 
-                    string editLink = "/Admin/ValiderProfil?id=" + item.CompteUser.AdherentId;
-                    string editLink1 = "/Admin/BloquerProfil?id=" + item.CompteUser.AdherentId;
+                    string editLink = "/Admin/ValiderProfil?id=" + item.AdherentId;
+                    string editLink1 = "/Admin/BloquerProfil?id=" + item.AdherentId;
 
                     <tr>
                         <td>@item.Adherent.Nom</td>
                         <td>@item.Adherent.Prenom</td>
-                        <td>@item.CompteUser.Description</td>
-                        <td>@item.CompteUser.Mail</td>
-                        <td>@item.CompteUser.EtatProfil</td>
+                        <td>@item.Description</td>
+                        <td>@item.Mail</td>
+                        <td>@item.EtatProfil</td>
                         @*<td>@Html.ActionLink("Valider Profil", "ValiderProfil", "Admin", new { id = item.CompteUser.AdherentId })  </td>*@
                         <td><a href="@editLink">Valider le profil</a></td>
                         <td><a href="@editLink1">Bloquer le compte</a></td>
@@ -127,19 +127,19 @@
             {
 
 
-                if (item.CompteUser.EtatProfil == TakoLeaf.Models.EtatProfil.COMPTE_BLOQUE)
+                if (item.EtatProfil == TakoLeaf.Models.EtatProfil.COMPTE_BLOQUE)
                 {
 
 
-                    string editLink3 = "/Admin/DebloquerProfil?id=" + item.CompteUser.AdherentId;
+                    string editLink3 = "/Admin/DebloquerProfil?id=" + item.AdherentId;
 
                     <tr>
                         <td>@item.Adherent.Nom</td>
                         <td>@item.Adherent.Prenom</td>
-                        <td>@item.CompteUser.Description</td>
-                        <td>@item.CompteUser.Mail</td>
-                        <td>@item.CompteUser.EtatProfil</td>
-                        <td>@Html.ActionLink("Débloquer Profil", "DebloquerProfil", "Admin", new { id = item.CompteUser.AdherentId })</td>
+                        <td>@item.Description</td>
+                        <td>@item.Mail</td>
+                        <td>@item.EtatProfil</td>
+                        <td>@Html.ActionLink("Débloquer Profil", "DebloquerProfil", "Admin", new { id = item.AdherentId })</td>
                     </tr>
 
                     count++;
@@ -151,7 +151,6 @@
         </table>
     </div>
     <h3>Nombre de comptes bloqués : <p style="color:crimson">@count</p></h3><br />
-
 
 </body>
 

@@ -52,21 +52,23 @@ namespace TakoLeaf.Data
             return comptes;
         }
 
-        public List<UtilisateurViewModel> ObtenirTousLesAdherentsEtComptes()
+        public List<CompteUser> ObtenirTousLesAdherentsEtComptes()
         {
 
-            List<UtilisateurViewModel> liste = new List<UtilisateurViewModel>();
-            List<Adherent> adherents = ObtenirTousLesAdherents().OrderBy(a => a.Id).ToList();
-            List<CompteUser> comptes = ObtenirTousLesComptesUser().OrderBy(c => c.AdherentId).ToList();
+            List<CompteUser> Ad = this._bddContext.CompteUsers.Include(a => a.Adherent).ToList();
+
+            //List<UtilisateurViewModel> liste = new List<UtilisateurViewModel>();
+            //List<Adherent> adherents = ObtenirTousLesAdherents().OrderBy(a => a.Id).ToList();
+            //List<CompteUser> comptes = ObtenirTousLesComptesUser().OrderBy(c => c.AdherentId).ToList();
 
 
-            for (int i = 0; i < adherents.Count; i++)
-            {
-                UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherents[i], CompteUser = comptes[i] };
-                liste.Add(uvm);
-            }
+            //for (int i = 0; i < adherents.Count; i++)
+            //{
+            //    UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherents[i], CompteUser = comptes[i] };
+            //    liste.Add(uvm);
+            //}
 
-            return liste;
+            return Ad;
         }
 
         public void ChangerEtatProfil(int id, int option)
@@ -88,6 +90,12 @@ namespace TakoLeaf.Data
                     profil.EtatProfil = EtatProfil.ATTENTE_VALIDATION;
                     this._bddContext.SaveChanges();
                     break;
+                case 3:
+                    profil.EtatProfil = EtatProfil.NON_VALIDE;
+                    this._bddContext.SaveChanges();
+                    break;
+
+
             }
         }
 
@@ -112,7 +120,7 @@ namespace TakoLeaf.Data
                 article.DatePublication = DateDuJour;
                 article.Public = false;
             }
-            
+
             // TODO Penser à ajouter l'ID de l'adhérent et image
             this._bddContext.Articles.Add(article);
             this._bddContext.SaveChanges();
@@ -120,13 +128,13 @@ namespace TakoLeaf.Data
 
         public void PublierArticle(Article article)
         {
-            this.AjouterArticle(article.Titre, article.Texte, article.Public=true);
-            
+            this.AjouterArticle(article.Titre, article.Texte, article.Public = true);
+
             article.DatePublication = DateTime.Now;
 
             this._bddContext.Articles.Update(article);
             this._bddContext.SaveChanges();
-  
+
         }
 
 
@@ -176,7 +184,8 @@ namespace TakoLeaf.Data
             {
                 article.Public = false;
 
-            } else
+            }
+            else
             {
                 if (article.DatePublication != null)
                 {
@@ -184,7 +193,7 @@ namespace TakoLeaf.Data
                 }
                 article.Public = true;
             }
-            
+
             this._bddContext.Articles.Update(article);
             this._bddContext.SaveChanges();
         }
@@ -207,8 +216,57 @@ namespace TakoLeaf.Data
             return liste;
         }
 
-       
+        public Prestation ObtenirPrestation(int idPrestation)
+        {
+            //Recupération Prestation avec le consumer, le provider, et la voiture associée
+
+            Prestation prestation = this._bddContext.Prestations
+                .Where(p => p.Id == idPrestation)
+                .Include(p => p.NumeroDevis)
+                .Include(p => p.Consumer.Adherent)
+                .Include(p => p.NumeroDevis)
+                .Include(p => p.Provider.Adherent)
+                .Include(p => p.Voiture)
+                .FirstOrDefault();
+            return prestation;
+        }
+
+        public CompteUser ObtenirCompteUser(int idAdherent)
+        {
+            CompteUser compte = this._bddContext.CompteUsers.Where(p => p.AdherentId == idAdherent).FirstOrDefault();
+            return compte;
+        }
+
+        public Provider ObtenirRib(int adherentId)
+        {
+            Provider rib = this._bddContext.Providers.Include(p => p.Rib).Where(p => p.AdherentId == adherentId).FirstOrDefault();
+            return rib;
+        }
 
 
+
+        //à voir si on a le temps
+
+        //public void ValiderTransaction(int idPrestation)
+        //{
+        //    Prestation prestation = this._bddContext.Prestations.Where(p => p.Id == idPrestation).FirstOrDefault();
+        //    prestation.EtatPresta = Prestation.Etat.Valide;
+        //    this._bddContext.Prestations.Update(prestation);
+        //    this._bddContext.SaveChanges();
+
+        //}
+
+
+        public CompteUser ObtenirAdherentEtCompte(int idAdherent)
+        {
+            CompteUser ad = this._bddContext.CompteUsers.Where(a => a.AdherentId == idAdherent).Include(a => a.Adherent).FirstOrDefault();
+            return ad;
+        }
+
+        public List<PieceJustificative> ObtenirPieceJustificative(int IdAdherent)
+        {
+            List<PieceJustificative> liste = this._bddContext.PieceJustificatives.Where(p => p.AdherentId == IdAdherent).ToList();
+            return liste;
+        }
     }
 }

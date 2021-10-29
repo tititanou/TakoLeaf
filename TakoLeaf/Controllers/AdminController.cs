@@ -39,7 +39,7 @@ namespace TakoLeaf.Controllers
 
         public ActionResult Dashboard()
         {
-            
+
             DashViewModel dash = new DashViewModel();
             dash.ListePrestations = dal.ObtenirToutesLesPrestations();
             dash.ListeAdherents = dal.ObtenirTousLesAdherents();
@@ -60,7 +60,7 @@ namespace TakoLeaf.Controllers
             {
                 return Redirect("/Home/Index");
             }
-            List<UtilisateurViewModel> liste = dal.ObtenirTousLesAdherentsEtComptes();
+            List<CompteUser> liste = dal.ObtenirTousLesAdherentsEtComptes();
             return View(liste);
         }
 
@@ -91,6 +91,16 @@ namespace TakoLeaf.Controllers
             dal.ChangerEtatProfil(id, 2);
             return RedirectToAction("GestionComptes");
         }
+        public ActionResult InvaliderProfil(int id)
+        {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
+            dal.ChangerEtatProfil(id, 3);
+            return RedirectToAction("GestionComptes");
+        }
+
         public ActionResult SupprimerCompte(int id)
         {
             if (!User.IsInRole("Admin"))
@@ -184,6 +194,50 @@ namespace TakoLeaf.Controllers
             dal.ModifierVisibiliteArticle(id);
             return RedirectToAction("GestionArticles");
         }
+
+
+        public ActionResult AfficherPrestation(int idPrestation)
+        {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
+
+            Prestation p = dal.ObtenirPrestation(idPrestation);
+
+            PrestationViewModel prestation = new PrestationViewModel
+            {
+
+                Presta = p,
+                CompteUserConsumer = dal.ObtenirCompteUser(p.Consumer.AdherentId),
+                CompteUserProvider = dal.ObtenirCompteUser(p.Provider.AdherentId),
+                ProviderRib = dal.ObtenirRib(p.Provider.AdherentId)
+
+            };
+
+            return View(prestation);
+        }
+
+
+        //public ActionResult ValiderPrestation(int idPrestation)
+        //{
+
+        //}
+
+        public ActionResult AfficherProfil(int id)
+        {
+            AdherentViewModel Adherent = new AdherentViewModel
+            {
+                Compte = dal.ObtenirAdherentEtCompte(id),
+                PieceJusti = dal.ObtenirPieceJustificative(id)
+            }
+            ;
+            return View(Adherent);
+
+        }
+
+
+
 
 
     }

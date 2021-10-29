@@ -33,6 +33,13 @@ namespace TakoLeaf.Models
         [RegularExpression(@"^([\+]?33[-]?|[0])?[1-9][0-9]{8}$", ErrorMessage = "Le téléphone doit avoir la forme suivante 0X XX XX XX XX)]")]
         public string Telephone { get; set; }
 
+        public DateTime DateInscription { get; }
+
+        public Adherent()
+        {
+            DateInscription = DateTime.Now;
+        }
+
         
     }
 }

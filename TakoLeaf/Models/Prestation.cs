@@ -23,17 +23,13 @@ namespace TakoLeaf.Models
 
         
         public int ConsumerId { get; set; }
-        public Consumer Consumer { get; set; }
-
-        
+        public Consumer Consumer { get; set; }  
         public int VoitureId { get; set; }
         public Voiture Voiture { get; set; }
 
         [Column(name: "NumeroDevis")]
         public string NumeroDevis { get; set; }
-        //public Devis Devis { get; set; }
-
-        
+        public Devis Devis { get; set; }
         public Etat EtatPresta { get; set; }
         public enum Etat
         {

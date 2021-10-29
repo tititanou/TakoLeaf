@@ -1,0 +1,103 @@
+﻿@model TakoLeaf.ViewModels.PrestationViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AfficherPrestation</title>
+</head>
+<body>
+
+    <div class="box">
+        <titre>Fiche Information</titre>
+
+        @using (@Html.BeginForm())
+        {
+            <image>@Model.CompteUserProvider.Avatar</image>
+            <titre>Nom</titre> <info>@Model.Presta.Provider.Adherent.Nom</info>
+            <titre>Prénom</titre> <info>@Model.Presta.Provider.Adherent.Prenom</info>
+            <titre>Email</titre> <info>@Model.CompteUserProvider.Mail</info>
+            <titre>RIB</titre> <info>@Model.ProviderRib.Rib</info>
+
+        }
+
+    </div>
+
+    <div class="box">
+        <titre>Fiche Information</titre>
+
+        @using (@Html.BeginForm())
+        {
+            <image>@Model.CompteUserConsumer.Avatar</image>
+            <titre>Nom</titre> <info>@Model.Presta.Consumer.Adherent.Nom</info>
+            <titre>Prénom</titre> <info>@Model.Presta.Consumer.Adherent.Prenom</info>
+            <titre>Email</titre> <info>@Model.CompteUserProvider.Mail</info>
+        }
+    </div>
+
+
+    @*Voir pièces justificatives*@
+
+    @*<div class="box">
+            <titre>Fiche Information</titre>
+
+            @using (@Html.BeginForm())
+            {
+                <image>@Model.CompteUserConsumer.Avatar</image>
+                <titre>Nom</titre> <info>@Model.Presta.Consumer.Adherent.Nom</info>
+                <titre>Prénom</titre> <info>@Model.Presta.Consumer.Adherent.Prenom</info>
+                <titre>Email</titre> <info>@Model.CompteUserProvider.Mail</info>
+            }
+        </div>*@
+
+
+    <div class="box">
+        <titre>Description de la transaction</titre>
+
+        <table>
+            <tr>
+                <th>ID Transaction</th>
+                <th>Date</th>
+                <th>Montant</th>
+                <th>Prestation effectuée</th>
+            </tr>
+            <tr>
+                <td>@Model.Presta.Id</td>
+                <td>@Model.Presta.DateVoulue</td>
+                <td>@Model.Presta.Prix euros</td>
+
+                @if (@Model.Presta.Devis.CompetenceL != null)
+                {
+
+                    @foreach (var item in @Model.Presta.Devis.CompetenceL)
+                    {
+
+                        <td>@item</td>
+
+                    }
+                }
+
+                else
+                {
+
+                    @foreach (var item in @Model.Presta.Devis.RessourceL)
+                    {
+
+                        <td>@item</td>
+
+                    }
+                };
+
+            </tr>
+        </table>
+    </div>
+
+    <button>Valider transaction</button>
+    <button>Annuler transaction</button>
+
+</body>
+</html>
