@@ -35,5 +35,6 @@ namespace TakoLeaf.Data
         //void ValiderTransaction(int idPrestation);
         CompteUser ObtenirAdherentEtCompte(int idAdherent);
         List<PieceJustificative> ObtenirPieceJustificative(int IdAdherent);
+        List<PostSignale> ObtenirLesPostesSignales();
     }
 }

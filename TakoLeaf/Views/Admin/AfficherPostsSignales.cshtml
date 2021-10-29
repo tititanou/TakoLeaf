@@ -1,0 +1,41 @@
+﻿@model List<TakoLeaf.Models.PostSignale>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AfficherPostsSignales</title>
+</head>
+
+<body>
+
+    <center><h1>Gestion Post Signalés</h1></center>
+
+    <table>
+        <tr>
+            <th>The Whistleblower</th>
+            <th>Commentaire</th>
+            <th>Signalé le :</th>
+            <th>Le effdépé</th>
+            <th>Post incriminé</th>
+        </tr>
+        <tr>
+            @foreach (var item in Model)
+            {
+                <td>@item.AdherentSignalant.Nom @item.AdherentSignalant.Prenom</td>
+                <td>@item.Message</td>
+                <td>@item.Date.</td>
+                <td>@item.AdherentSignale.Nom @item.AdherentSignale.Prenom</td>
+                <td>@item.Post.CorpsPost</td>
+            }
+        </tr>
+
+
+    </table>
+
+</body>
+</html>

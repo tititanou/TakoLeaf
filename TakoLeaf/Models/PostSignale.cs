@@ -15,6 +15,6 @@ namespace TakoLeaf.Models
         public Adherent AdherentSignalant { get; set; }
 
         public int PostId { get; set; }
-        public Sujet Post { get; set; }
+        public Post Post { get; set; }
     }
 }

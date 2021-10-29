@@ -798,25 +798,25 @@ namespace TakoLeaf.Models
 
                 );
 
-            this.Devis.AddRange(
+            //this.Devis.AddRange(
 
-                //new Devis
-                //{
-                //    NumeroDevis="azerty12345",
-                //    DateEmission= new DateTime(2021,10,15),
-                //    Tarif=150,
-                //    DateDebut= new DateTime(2021,11,10),
-                //    DateFin= new DateTime(2021,11,16),
-                //    DescriptionPresta = " blablablablabla",
-                //    LieuPresta="Paris",
-                //    EtatDevis= EtatDevis.EN_ATTENTE,
-                //    ProviderId = 1,
-                //    ConsumerId = 2,
-                //    VoitureId = 1,                   
+            //    //new Devis
+            //    //{
+            //    //    NumeroDevis="azerty12345",
+            //    //    DateEmission= new DateTime(2021,10,15),
+            //    //    Tarif=150,
+            //    //    DateDebut= new DateTime(2021,11,10),
+            //    //    DateFin= new DateTime(2021,11,16),
+            //    //    DescriptionPresta = " blablablablabla",
+            //    //    LieuPresta="Paris",
+            //    //    EtatDevis= EtatDevis.EN_ATTENTE,
+            //    //    ProviderId = 1,
+            //    //    ConsumerId = 2,
+            //    //    VoitureId = 1,                   
 
-                //}
+            //    //}
 
-                );
+            //    );
 
             this.Messages.AddRange(
                 new Message
@@ -870,6 +870,19 @@ namespace TakoLeaf.Models
                         Lu = false
                     }
                 );
+
+            this.PostSignales.Add(
+            new PostSignale
+            {
+                Id = 1,
+                Date = DateTime.Now.ToShortDateString(),
+                Vu = false,
+                Message = "Ouais, ce con a osé dire que Renault c'était pourri",
+                AdherentSignaleId = 1,
+                AdherentSignalantId =2,
+                PostId = 1
+            }
+            );
 
             this.SaveChanges();
         }

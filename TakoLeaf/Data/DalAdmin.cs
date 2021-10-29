@@ -220,12 +220,11 @@ namespace TakoLeaf.Data
         {
             //Recupération Prestation avec le consumer, le provider, et la voiture associée
 
-            Prestation prestation = this._bddContext.Prestations
-                .Where(p => p.Id == idPrestation)
-                .Include(p => p.NumeroDevis)
+            Prestation prestation = this._bddContext.Prestations.Where(p => p.Id == idPrestation)
                 .Include(p => p.Consumer.Adherent)
-                .Include(p => p.NumeroDevis)
+                //.ThenInclude(p => p.Adherent)
                 .Include(p => p.Provider.Adherent)
+                //.ThenInclude(p => p.Adherent)
                 .Include(p => p.Voiture)
                 .FirstOrDefault();
             return prestation;
@@ -268,5 +267,12 @@ namespace TakoLeaf.Data
             List<PieceJustificative> liste = this._bddContext.PieceJustificatives.Where(p => p.AdherentId == IdAdherent).ToList();
             return liste;
         }
+
+        public List<PostSignale> ObtenirLesPostesSignales()
+        {
+            List<PostSignale> liste = this._bddContext.PostSignales.Include(p => p.AdherentSignalant).Include(p => p.AdherentSignale).Include(p => p.Post).ToList();
+            return liste;
+        }
+
     }
 }

@@ -196,14 +196,14 @@ namespace TakoLeaf.Controllers
         }
 
 
-        public ActionResult AfficherPrestation(int idPrestation)
+        public ActionResult AfficherPrestation(int id)
         {
             if (!User.IsInRole("Admin"))
             {
                 return Redirect("/Home/Index");
             }
 
-            Prestation p = dal.ObtenirPrestation(idPrestation);
+            Prestation p = dal.ObtenirPrestation(id);
 
             PrestationViewModel prestation = new PrestationViewModel
             {
@@ -236,7 +236,11 @@ namespace TakoLeaf.Controllers
 
         }
 
-
+        public ActionResult AfficherPostsSignales()
+        {
+            List<PostSignale> liste = dal.ObtenirLesPostesSignales();
+            return View(liste);
+        }
 
 
 
