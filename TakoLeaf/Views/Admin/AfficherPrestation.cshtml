@@ -21,7 +21,7 @@
             <titre>Nom</titre> <info>@Model.Presta.Provider.Adherent.Nom</info>
             <titre>Prénom</titre> <info>@Model.Presta.Provider.Adherent.Prenom</info>
             <titre>Email</titre> <info>@Model.CompteUserProvider.Mail</info>
-            <titre>RIB</titre> <info>@Model.ProviderRib.Rib</info>
+            <titre>RIB</titre> <info>@Model.ProviderRib.Rib.Iban</info>
 
         }
 
@@ -35,7 +35,7 @@
             <image>@Model.CompteUserConsumer.Avatar</image>
             <titre>Nom</titre> <info>@Model.Presta.Consumer.Adherent.Nom</info>
             <titre>Prénom</titre> <info>@Model.Presta.Consumer.Adherent.Prenom</info>
-            <titre>Email</titre> <info>@Model.CompteUserProvider.Mail</info>
+            <titre>Email</titre> <info>@Model.CompteUserConsumer.Mail</info>
         }
     </div>
 
@@ -70,7 +70,7 @@
                 <td>@Model.Presta.DateVoulue</td>
                 <td>@Model.Presta.Prix euros</td>
 
-                @if (@Model.Presta.Devis.CompetenceL != null)
+                @*@if (@Model.Presta.Devis.CompetenceL != null)
                 {
 
                     @foreach (var item in @Model.Presta.Devis.CompetenceL)
@@ -90,7 +90,7 @@
                         <td>@item</td>
 
                     }
-                };
+                };*@
 
             </tr>
         </table>
