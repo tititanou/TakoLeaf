@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tako Leaf</title>
 
-    <link rel="stylesheet" href="css/_Layout.css">
+    <link rel="stylesheet" href="~/CSS/_Layout.css">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet">
+          rel="stylesheet">
 
+    <link rel="stylesheet" href="~/js/_Layout.js">
     <!-- BOOSTRAP CSS-->
-    <link rel="stylesheet" href="site/css/bootstrap.css">
+    <link rel="stylesheet" href="~/site/css/bootstrap.css">
 
 
 
@@ -30,7 +31,7 @@
     <header>
         <button class="hamburger">&#9776;</button>
         <button class="cross">&#735;</button>
-        <div class="logo"><img src="IMG/TAKO ECO new.png"></div>
+        <div class="logo"><img src="~/IMG/TAKO ECO new.png"></div>
         <h1 class="titremidheader">Tako Leaf</h1>
     </header>
       
@@ -47,10 +48,8 @@
 
 <!--FIn Section du Header-->
 
-<section class="PAGEMID">
-    
-
-
+<section id="contenu" class="PAGEMID">
+    @RenderBody() 
 </section>
 
 
@@ -96,9 +95,9 @@
 
         <div class="imageRS">
             
-            <a href=""><img src="IMG/RS/entypo-social_instagram-with-circle.png" alt="" class="instagram"></a>
-            <a href=""><img src="IMG/RS/Vector-1.png" alt="" class="twitter"></a>
-            <a href=""><img src="IMG/RS/Vector.png" alt="" class="facebook"></a>
+            <a href=""><img src="~/IMG/RS/entypo-social_instagram-with-circle.png" alt="" class="instagram"></a>
+            <a href=""><img src="~/IMG/RS/Vector-1.png" alt="" class="twitter"></a>
+            <a href=""><img src="~/IMG/RS/Vector.png" alt="" class="facebook"></a>
         </div>           
         <div class="copirate">
             <h4 class="copyratetext">
@@ -116,13 +115,13 @@
 
 
     <!-- D'abord on vas mettre Jquery-->
-<script src="jquery-3.6.0.js"></script>
+<script src="~/jquery-3.6.0.js"></script>
 
 <!-- Puis on vas mettre boostrap.JS-->
-<script src="js/boostrap.bundle.js"></script>
+<script src="./site/js/bootstrap.bundle"></script>
 
 
-<script src="js/Homescript.js"></script>
+<script src="~/js/_Layout.js"></script>
  
 
 
