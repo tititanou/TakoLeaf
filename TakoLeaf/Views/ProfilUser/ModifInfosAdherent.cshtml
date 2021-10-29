@@ -1,16 +1,10 @@
 ﻿@model TakoLeaf.Models.Adherent
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "Profil";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ModifInfosAdherent</title>
-</head>
-<body>
     <div>
         @using (Html.BeginForm())
         {
@@ -62,7 +56,4 @@
             <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
         }
     </div>
-   
-    
-</body>
-</html>
+  

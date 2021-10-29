@@ -1,16 +1,9 @@
 ﻿@model TakoLeaf.ViewModels.UtilisateurViewModel
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "Ajout Vehicule";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AjoutVehicule</title>
-</head>
-<body>
 
     <h1> Indiquer les informations du véhicule à ajouter </h1>
     @using (Html.BeginForm())
@@ -56,5 +49,3 @@
     <br />
     <button>@Html.ActionLink("Retour au profil", "ProfilConsumer", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
 
-</body>
-</html>

@@ -1,16 +1,10 @@
 ﻿@model TakoLeaf.ViewModels.ProviderViewModel
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "Ajout Competences";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AjoutCompetence</title>
-</head>
-<body>
     <h1>Quelles Compétence voulez vous ajouter ? </h1>
     @using (Html.BeginForm())
     { 
@@ -34,5 +28,4 @@
      }
     <br />
     <button>@Html.ActionLink("Retour au profil","ProfilProvider","ProfilUser", new { id = Model.Provider.AdherentId })</button>
-</body>
-</html>
+
