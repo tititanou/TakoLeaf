@@ -36,12 +36,29 @@ namespace TakoLeaf.Controllers
         //int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
         //
 
-        public IActionResult VisiteProfil (int id) // idAdherent-+
+        public IActionResult VisiteProfil(int id) // idAdherent-+
+        {
+            Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
+            CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == adherent.Id);
+            if(compteUser.Role.Equals("Consumer"))
+            {
+                return Redirect("/Recherche/VisiteProfilConsumer?id=" + id);
+            }
+
+            else if(compteUser.Role.Equals("Provider"))
+            {
+                return Redirect("/Recherche/VisiteProfilProvider?id=" + id);
+            }
+
+            return View();
+
+        }
+
+        public IActionResult VisiteProfilConsumer(int id)
         {
             Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
             CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(a => a.AdherentId == adherent.Id);
-            if(compteUser.Role.Equals("Consumer"))
-            {
+           
                 Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == id);
                 List<Voiture> voitures = dal.ObtenirVoiture().Where(v => v.ConsumerId == consumer.Id).OrderBy(v => v.Id).ToList();
                 //int idcarte = consumer.CarteId;
@@ -65,26 +82,36 @@ namespace TakoLeaf.Controllers
                 //Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
                 UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voitures = voitures, Consumer = consumer, Modeles = modeles, Marques = marques };
 
-               return RedirectToAction("/Recherche/ProfilConsumerVisite?id=" + id); 
-            }
+                return View(uvm);
+            
 
-            else if (compteUser.Role.Equals("Provider"))
-            {
+        }
+
+        public IActionResult ProfilProviderVisite(int id)
+        {
+                Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
+                CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(a => a.AdherentId == adherent.Id);
+
                 Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.AdherentId == id);
                 List<Competence> competence = dal.ObtenirCompetences().Where(c => c.ProviderId == provider.Id).ToList();
                 List<Ressource> ressources = dal.ObtenirRessources().Where(r => r.ProviderId == provider.Id).ToList();
 
                 ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, Competence = competence, Provider = provider, Ressources = ressources };
-
-                return Redirect("/Recherche/ProfilConsumerVisite?id=" + id);
-            }
-
-
-
-            return View();
-
+            
+            return View(pvm);
         }
+
+
     }
+}
+    
+
+
+
+            
+
+
+
+       
 
     
-}
