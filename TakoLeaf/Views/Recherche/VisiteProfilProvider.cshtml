@@ -4,83 +4,105 @@
     ViewBag.Title = "Profil";
 }
 
-    <h1> Bienvenue sur votre profil</h1>
+<h1> Bienvenue sur votre profil</h1>
 
-    <div>
+@*<div>
         <a href="/Login/Deconnexion">Se deconnecter</a>
-    </div>
-    <div>
-        <h1>Informations du profil</h1>
-        <h2>Information Adherent</h2>
-        <ul>
-            <li>Avatar : @Model.CompteUser.Avatar</li>
-            <li>Nom : @Model.Adherent.Nom</li>
-            <li>Prenom : @Model.Adherent.Prenom</li>
-            <li>Date de Naissance : @Model.Adherent.Date_naissance.ToShortDateString()</li>
-            <li>Adresse : @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville</li>
-            <li>Telephone : @Model.Adherent.Telephone</li>
-        </ul>
+    </div>*@
 
-        
-        <h2>Information Compte</h2>
-        <ul>
-            <li>Adresse mail : @Model.CompteUser.Mail</li>
-            <li>Description : @Model.CompteUser.Description</li>
-            <li>Liste d'amis : @Model.CompteUser.Amis</li>
-            <li>Rang : @Model.Provider.Rang</li>
-            <li>Etat Profil : @Model.CompteUser.EtatProfil</li>
-        </ul>
+<div>
+    @if (Model.Amis == false)
+    {
 
-
-        <h2> Information Ressources</h2>
-
-        @if (Model.Ressources != null)
+        @using (Html.BeginForm("Suivre", "ProfilUser"))
         {
-            <table border="1">
-                <tr>
-                    <th>Intitule</th>
-                    <th>Adresse</th>
-                    <th>Tarif Journalier</th>
-                    <th>Categorie</th>
-                    <th>Disponible</th>
-                </tr>
-
-                @for (int i = 0; i < Model.Ressources.Count; i++)
-                {
-                    <tr>
-                        <td>@Model.Ressources[i].Intitule</td>
-                        <td>@Model.Ressources[i].Adresse</td>
-                        <td>@Model.Ressources[i].TarifJournalier</td>
-                        <td>@Model.Ressources[i].Categorie</td>
-                        @if (@Model.Ressources[i].Disponible)
-                        {
-                            <td>Oui</td>
-                        }
-                        else
-                        {
-                            <td>Non</td>
-                        }
-
-                    </tr>
-                }
-            </table>
+            <input type="text" name="id" value="@Model.Adherent.Id" style="display:none;" />
+            <button class="btn btn-primary btn-xl" type="submit">Suivre</button>
         }
+    }
+
+    else
+    {
+        <button>Suivi</button>
+    }
+</div>
+
+<div>
+    <button>@Html.ActionLink("Demander un devis", "DemandeDevis", "Devis", new { id = Model.Provider.Id })</button>
+</div>
+
+<div>
+    <h1>Informations du profil</h1>
+    <h2>Information Adherent</h2>
+    <ul>
+        <li>Avatar : @Model.CompteUser.Avatar</li>
+        <li>Nom : @Model.Adherent.Nom</li>
+        <li>Prenom : @Model.Adherent.Prenom</li>
+        <li>Date de Naissance : @Model.Adherent.Date_naissance.ToShortDateString()</li>
+        <li>Adresse : @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville</li>
+        <li>Telephone : @Model.Adherent.Telephone</li>
+    </ul>
 
 
+    <h2>Information Compte</h2>
+    <ul>
+        <li>Adresse mail : @Model.CompteUser.Mail</li>
+        <li>Description : @Model.CompteUser.Description</li>
+        <li>Liste d'amis : @Model.CompteUser.Amis</li>
+        <li>Rang : @Model.Provider.Rang</li>
+        <li>Etat Profil : @Model.CompteUser.EtatProfil</li>
+    </ul>
 
-        <h2> Information Competences</h2>
+
+    <h2> Information Ressources</h2>
+
+    @if (Model.Ressources != null)
+    {
         <table border="1">
             <tr>
-                <th>Competence</th>
-                <th>Tarif Horaire</th>
+                <th>Intitule</th>
+                <th>Adresse</th>
+                <th>Tarif Journalier</th>
+                <th>Categorie</th>
+                <th>Disponible</th>
             </tr>
 
-            @for (int i = 0; i < Model.Competence.Count; i++)
+            @for (int i = 0; i < Model.Ressources.Count; i++)
             {
                 <tr>
-                    <td>@Model.Competence[i].NomSsCate</td>
-                    <td>@Model.Competence[i].TarifHoraire</td>
+                    <td>@Model.Ressources[i].Intitule</td>
+                    <td>@Model.Ressources[i].Adresse</td>
+                    <td>@Model.Ressources[i].TarifJournalier</td>
+                    <td>@Model.Ressources[i].Categorie</td>
+                    @if (@Model.Ressources[i].Disponible)
+                    {
+                        <td>Oui</td>
+                    }
+                    else
+                    {
+                        <td>Non</td>
+                    }
+
                 </tr>
             }
         </table>
-    </div>
+    }
+
+
+
+    <h2> Information Competences</h2>
+    <table border="1">
+        <tr>
+            <th>Competence</th>
+            <th>Tarif Horaire</th>
+        </tr>
+
+        @for (int i = 0; i < Model.Competence.Count; i++)
+        {
+            <tr>
+                <td>@Model.Competence[i].NomSsCate</td>
+                <td>@Model.Competence[i].TarifHoraire</td>
+            </tr>
+        }
+    </table>
+</div>

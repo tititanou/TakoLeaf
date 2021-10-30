@@ -38,7 +38,7 @@ namespace TakoLeaf.Data
 
         public List<Voiture> ObtenirVoiture()
         {
-            List<Voiture> liste = _bddContext.Voitures.ToList();
+            List<Voiture> liste = _bddContext.Voitures.Include(v => v.Modele).ToList();
             return liste;
         }
 
@@ -50,7 +50,7 @@ namespace TakoLeaf.Data
 
         public List<Consumer> ObtenirConsumers()
         {
-            List<Consumer> liste = _bddContext.Consumers.ToList();
+            List<Consumer> liste = _bddContext.Consumers.Include(p => p.Adherent).ToList();
             return liste;
         }
 
@@ -97,7 +97,7 @@ namespace TakoLeaf.Data
            
         public List<Provider> ObtenirProviders()
         {
-            List<Provider> liste = _bddContext.Providers.ToList();
+            List<Provider> liste = _bddContext.Providers.Include(p =>p.Adherent).ToList();
             return liste;
         }
 

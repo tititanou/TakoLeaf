@@ -22,7 +22,7 @@ namespace TakoLeaf.ViewModels
         public List<string> Modeles { get; set; }
         public List<string> Marques { get; set; }
         public List<Amitie> Amities { get; set; }
-        public bool Ami { get; set; }
+        public bool Amis { get; set; }
 
 
         
