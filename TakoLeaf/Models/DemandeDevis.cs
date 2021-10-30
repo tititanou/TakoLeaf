@@ -9,7 +9,10 @@ namespace TakoLeaf.Models
     public class DemandeDevis
     {
 
-        public int Id { get; set; }    
+        public int Id { get; set; }
+        [Display(Name = "Date de la Demande")]
+        public DateTime DateDemande { get; set; }
+        [Display(Name = "Date de debut")]
         public DateTime DateDebutVoulue { get; set; }
         [Required(ErrorMessage = "N'oubliez pas d'écrire un message à votre interlocuteur !")]
         [MaxLength(150)]
