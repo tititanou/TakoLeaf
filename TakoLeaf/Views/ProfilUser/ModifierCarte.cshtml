@@ -1,16 +1,10 @@
 ﻿@model TakoLeaf.ViewModels.UtilisateurViewModel
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "Modifier Carte";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ModifierCarte</title>
-</head>
-<body>
     <h1> Indiquer les informations des cartes à modifier </h1>
     @using (Html.BeginForm())
     {
@@ -61,6 +55,3 @@
     }
 
 
-
-</body>
-</html>

@@ -1,16 +1,9 @@
 ﻿@model TakoLeaf.ViewModels.ProviderViewModel
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "Ajout Ressource";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AjouterCompetence</title>
-</head>
-<body>
 
     <h2> Veuillez indiquer les indiquer les ressources</h2>
     @using (Html.BeginForm())
@@ -37,5 +30,3 @@
     }
     <br />
     <button>@Html.ActionLink("Retour au profil", "ProfilProvider", "ProfilUser", new { id = Model.Provider.AdherentId })</button>
-</body>
-</html>

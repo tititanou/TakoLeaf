@@ -1,6 +1,6 @@
 ﻿@model TakoLeaf.ViewModels.UtilisateurViewModel
 @{
-    Layout = "_Layout";
+    Layout = "_LayoutProfilVisite";
     ViewBag.Title = "Profil";
 
 }
@@ -25,7 +25,7 @@
             <li>Telephone : @Model.Adherent.Telephone</li>
         </ul>
 
-        @if (Model.Ami == false)
+        @if (Model.Amis == false)
         {
 
             @using (Html.BeginForm("Suivre", "ProfilUser"))

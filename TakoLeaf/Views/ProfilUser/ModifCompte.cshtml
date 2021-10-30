@@ -1,16 +1,9 @@
 ﻿@model TakoLeaf.Models.CompteUser
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "Modification Compte";
+
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ModifCompte</title>
-</head>
-<body>
     <div>
         @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -58,6 +51,3 @@
 
 
 
-
-</body>
-</html>

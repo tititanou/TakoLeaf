@@ -1,16 +1,10 @@
 ﻿@model TakoLeaf.ViewModels.ProviderViewModel
 @{
-    Layout = null;
+    Layout = "_LayoutProfil";
+    ViewBag.Title = "Profil";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ProfilProvider</title>
-</head>
-<body>
     <h1> Bienvenue sur votre profil</h1>
 
     <div>
@@ -28,7 +22,7 @@
             <li>Telephone : @Model.Adherent.Telephone</li>
         </ul>
 
-        @Html.ActionLink("Modifier information adherent", "ModifInfosAdherent", "ProfilUser", new { id = Model.Adherent.Id })
+        @*@Html.ActionLink("Modifier information adherent", "ModifInfosAdherent", "ProfilUser", new { id = Model.Adherent.Id })*@
 
         <h2>Information Compte</h2>
         <ul>
@@ -40,7 +34,7 @@
         </ul>
 
 
-        @Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })
+        @*@Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })*@
 
 
 
@@ -78,8 +72,8 @@
             </table>
         }
 
-        @Html.ActionLink("Ajouter Ressources", "AjoutRessource", "ProfilUser", new { id = Model.Provider.Id })
-        @Html.ActionLink("Modifier Ressources", "ModifierRessource", "ProfilUser", new { id = Model.Provider.Id })
+        @*@Html.ActionLink("Ajouter Ressources", "AjoutRessource", "ProfilUser", new { id = Model.Provider.Id })
+        @Html.ActionLink("Modifier Ressources", "ModifierRessource", "ProfilUser", new { id = Model.Provider.Id })*@
 
 
 
@@ -99,8 +93,6 @@
             }
         </table>
 
-        @Html.ActionLink("Modifier Competences", "ModifCompetence", "ProfilUser", new { id = Model.Provider.Id })
-        @Html.ActionLink("Ajouter Competences", "AjoutCompetence", "ProfilUser", new { id = Model.Provider.Id })
-    </div>
-</body>
-</html>
+        @*@Html.ActionLink("Modifier Competences", "ModifCompetence", "ProfilUser", new { id = Model.Provider.Id })
+        @Html.ActionLink("Ajouter Competences", "AjoutCompetence", "ProfilUser", new { id = Model.Provider.Id })*@
+  

@@ -1,16 +1,9 @@
 ﻿@model List<TakoLeaf.Models.Competence>
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "Modification Competence";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ModifCompetence</title>
-</head>
-<body>
     <h2> Modification des Competences</h2>
     <div>
         @using (Html.BeginForm())
@@ -49,5 +42,4 @@
 
     </div>
    
-    </body>
-</html>
+
