@@ -11,6 +11,8 @@ namespace TakoLeaf.ViewModels
     {
         public int CompetenceId { get; set; }
         public Competence Competence { get; set; }
+        public int RessourceId { get; set; }
+        public Ressource Ressource { get; set; }
 
         public string Intitule { get; set; }
         public bool EstSelectione { get; set; }

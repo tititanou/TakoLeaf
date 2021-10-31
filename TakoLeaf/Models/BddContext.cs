@@ -40,6 +40,8 @@ namespace TakoLeaf.Models
         public DbSet<Adresse> Adresses { get; set; }
         public DbSet<PostSignale> PostSignales { get; set; }
         public DbSet<Amitie> Amities { get; set; }
+        public DbSet<DemandeDevisListeCompetence> DemandesDevisListeCompetence { get; set; }
+        public DbSet<DemandeDevisListeRessource> DemandesDevisListeRessource { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -260,8 +262,8 @@ namespace TakoLeaf.Models
             this.CompteUsers.AddRange(
                  new CompteUser
                  {
-                     Mail = "Alexis.Abrate@gmail.com",
-                     MotDePasse = dal.EncodeMD5("LeTruantDuCSharp"),
+                     Mail = "al@gmail.com",
+                     MotDePasse = dal.EncodeMD5("123"),
                      Description = "Hello",
                      EtatProfil = EtatProfil.VALIDE,
                      AdherentId = 1,
@@ -646,9 +648,9 @@ namespace TakoLeaf.Models
                 );
             this.Competences.AddRange(
                 new Competence { Id = 1, ProviderId = 1, SsCateCompetenceId = 6, NomSsCate = "Changer Roue", TarifHoraire = 40 },
-                new Competence { Id = 2, ProviderId = 1, SsCateCompetenceId = 3, NomSsCate = "Changer la distribution", TarifHoraire = 50 },
-                new Competence { Id = 3, ProviderId = 1, SsCateCompetenceId = 2, NomSsCate = "Changer la distribution", TarifHoraire = 17 },
-                new Competence { Id = 4, ProviderId = 1, SsCateCompetenceId = 14, NomSsCate = "Changer la distribution", TarifHoraire = 44 },
+                new Competence { Id = 2, ProviderId = 1, SsCateCompetenceId = 3, NomSsCate = "Remplacement de la batterie", TarifHoraire = 50 },
+                new Competence { Id = 3, ProviderId = 1, SsCateCompetenceId = 2, NomSsCate = "Remplacement demarreur", TarifHoraire = 17 },
+                new Competence { Id = 4, ProviderId = 1, SsCateCompetenceId = 14, NomSsCate = "Remplacement de catalyseur", TarifHoraire = 44 },
 
                 new Competence { Id = 5, ProviderId = 2, SsCateCompetenceId = 1, NomSsCate = "Changer la distribution", TarifHoraire = 42 },
                 new Competence { Id = 6, ProviderId = 2, SsCateCompetenceId = 3, NomSsCate = "Changer la distribution", TarifHoraire = 46 },
@@ -685,7 +687,7 @@ namespace TakoLeaf.Models
                       Categorie = CateRessource.OUTIL_SPECIALISE,
                       Disponible = true,
                       TarifJournalier = 40,
-                      ProviderId = 2
+                      ProviderId = 1
                   },
 
                   new Ressource
@@ -883,6 +885,88 @@ namespace TakoLeaf.Models
                 PostId = 1
             }
             );
+
+
+            this.DemandeDevis.AddRange(
+                new DemandeDevis
+                {
+                    Id = 1,
+                    DateDemande = new DateTime(2021, 10, 31),
+                    DateDebutVoulue = new DateTime(2021, 11, 7),
+                    Message = "Bonjour c'est moi",
+                    ConsumerId = 3,
+                    ProviderId = 1,
+                    VoitureId = 3
+                },
+
+                new DemandeDevis
+                {
+                    Id = 2,
+                    DateDemande = new DateTime(2021, 10, 31),
+                    DateDebutVoulue = new DateTime(2021, 11, 19),
+                    Message = "Bonjour c'est moi",
+                    ConsumerId = 3,
+                    ProviderId = 1,
+                    VoitureId = 3
+                }
+
+                );
+
+
+            this.DemandesDevisListeCompetence.AddRange(
+
+                new DemandeDevisListeCompetence
+                {
+                    Id = 1,
+                    CompetenceId = 1,
+                    DemandeDevisId = 1
+
+                },
+
+                new DemandeDevisListeCompetence
+                {
+                     Id = 2,
+                     CompetenceId = 2,
+                     DemandeDevisId = 1
+
+                },
+
+                 new DemandeDevisListeCompetence
+                 {
+                     Id = 3,
+                     CompetenceId = 3,
+                     DemandeDevisId = 2
+
+                 },
+
+                new DemandeDevisListeCompetence
+                {
+                    Id = 4,
+                    CompetenceId =4,
+                    DemandeDevisId = 2
+
+                }
+
+                );
+
+            this.DemandesDevisListeRessource.AddRange(
+                new DemandeDevisListeRessource
+                {
+                    Id = 1,
+                    RessourceId = 4,
+                    DemandeDevisId = 1
+
+                },
+
+                new DemandeDevisListeRessource
+                {
+                    Id = 2,
+                    RessourceId = 4,
+                    DemandeDevisId = 2
+
+                }
+
+                );
 
             this.SaveChanges();
         }

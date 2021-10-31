@@ -66,6 +66,23 @@ namespace TakoLeaf.Data
             return liste;
         }
 
+        public List<DemandeDevis> ObtenirDemandeDevis()
+        {
+            List<DemandeDevis> liste = _bddContext.DemandeDevis.ToList();
+            return liste;
+        }
+
+        public List<DemandeDevisListeCompetence> ObtenirCompetenceDevis()
+        {
+            List<DemandeDevisListeCompetence> liste = _bddContext.DemandesDevisListeCompetence.Include(c => c.Competence).ToList();
+            return liste;
+        }
+
+        public List<DemandeDevisListeRessource> ObtenirRessourceDevis()
+        {
+            List<DemandeDevisListeRessource> liste = _bddContext.DemandesDevisListeRessource.Include(r => r.Ressource).ToList();
+            return liste;
+        }
         public List<Amitie> ObtenirAmities()
         {
             List<Amitie> liste = _bddContext.Amities.ToList();

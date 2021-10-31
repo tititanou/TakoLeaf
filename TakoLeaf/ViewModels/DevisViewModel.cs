@@ -15,11 +15,16 @@ namespace TakoLeaf.ViewModels
         public int IdC { get; set; }
         public int IdP { get; set; }
        
+        public List<DemandeDevisViewModel> ListeDemandeDevis { get; set; }
         public DemandeDevis DemandeDevis { get; set; }
+        public List<DemandeDevis> DemandesDevis { get; set; }
+        public List<DemandeDevisListeCompetence> ListeCompetencesDevis { get; set; }
+        public List<DemandeDevisListeRessource> ListeRessourcesDevis { get; set; }
         public List<Ressource> Ressources { get; set; }
         public List<Competence> Competences { get; set; }
 
         public List<DevisCheckBoxViewModel> ListD { get; set; }
+        public List<DevisCheckBoxViewModel> ListR { get; set; }
         public Voiture Voiture { get; set; }
     }
 }
