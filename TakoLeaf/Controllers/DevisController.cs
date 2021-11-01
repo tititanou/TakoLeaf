@@ -152,8 +152,34 @@ namespace TakoLeaf.Controllers
                 tarif = tarif + ressource.TarifJournalier;
             }
 
+            Devis devis = new Devis { 
+                Tarif = tarif, 
+                DateEmission = DateTime.Now, 
+                LieuPresta = provider.Adherent.Adresse,
+                DemandeDevisId = demande.Id
+                                
+            };
 
-            return View();
+            DevisViewModel dvm = new DevisViewModel { Consumer = consumer, Provider = provider, Voiture = voiture, DemandeDevis = demande, Devis = devis, Tarif = tarif, ListeCompetencesDevis = listC, ListeRessourcesDevis = listR };
+
+            return View(dvm);
+        }
+
+        [HttpPost]
+
+        public IActionResult EmmetreDevis(DevisViewModel dvm)
+        {
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == dvm.Consumer.Id);
+            Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.Id == dvm.Provider.Id);
+            Voiture voiture = dal.ObtenirVoiture().FirstOrDefault(v => v.Id == dvm.Voiture.Id);
+            DemandeDevis demandeDevis = dal.ObtenirDemandeDevis().FirstOrDefault(d => d.Id == dvm.DemandeDevis.Id);
+            int adresse = provider.Adherent.Adresse.Id;
+
+            dalD.CreationDevis(provider.Id, consumer.Id, voiture.Id, demandeDevis.Id, dvm.Devis.DateEmission, dvm.Devis.DateDebut, dvm.Devis.DateFin, dvm.Devis.Tarif, dvm.Devis.DescriptionPresta, adresse);
+
+            return Redirect("/ProfilUser/ProfilProvider?id=" + provider.AdherentId);
+
+
         }
 
 

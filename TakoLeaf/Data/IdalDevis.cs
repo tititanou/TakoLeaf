@@ -12,6 +12,7 @@ namespace TakoLeaf.Data
         void CreationListeDevisCompetence(int idC, int idDemandeDevis);
 
         public void CreationListeDevisRessource(int idR, int idDemandeDevis);
+        void CreationDevis(int idP, int idC, int idV, int iDe, DateTime dateEmi, DateTime dateDebut, DateTime datefin, double prix, string description, int idAdresse);
 
     }
 }

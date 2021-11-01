@@ -14,17 +14,19 @@ namespace TakoLeaf.Models
         public string NumeroDevis { get; set; }
         public DateTime DateEmission { get; set; }
         [Required]
-        public decimal Tarif { get; set; }
-        public byte[] Fichier { get; set; }
+        public double Tarif { get; set; }
+        //public byte[] Fichier { get; set; }
 
         [Required]
         public DateTime DateDebut { get; set; }
         [Required]
         public DateTime DateFin { get; set; }
+        [Display(Name = "Description de la prestation")]
         public string DescriptionPresta { get; set; }
 
         [Required]
-        public string LieuPresta { get; set; }
+        public int LieuPrestaId { get; set; }
+        public Adresse LieuPresta { get; set; }
         public EtatDevis EtatDevis { get; set; }
 
         
@@ -37,11 +39,11 @@ namespace TakoLeaf.Models
         public int VoitureId { get; set; }
         public Voiture Voiture { get; set; }
 
-        public List<Competence> CompetenceL { get; set; }
-        public Competence Competence { get; set; }
+        //public List<Competence> CompetenceL { get; set; }
+        //public Competence Competence { get; set; }
 
-        public List<Ressource> RessourceL { get; set; }
-        public Ressource Ressource { get; set; }
+        //public List<Ressource> RessourceL { get; set; }
+        //public Ressource Ressource { get; set; }
 
         public int DemandeDevisId { get; set; }
         public DemandeDevis DemandeDevis { get; set; }

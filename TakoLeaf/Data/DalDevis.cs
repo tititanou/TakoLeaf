@@ -43,6 +43,37 @@ namespace TakoLeaf.Data
             _bddContext.SaveChanges();
 
         }
+
+        public void CreationDevis(int idP, int idC, int idV, int iDe, DateTime dateEmi, DateTime dateDebut, DateTime datefin, double prix, string description, int idAdresse)
+        {
+            Random random = new Random();
+            string chars = "AZERTYUIOPMLKJHGFDSQWXCVBN123456789";
+            var stringChars = new char[8];
+
+            for(int i =0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            string finalstring = new string(stringChars);
+
+            Devis devis = new Devis {
+                NumeroDevis = finalstring,
+                ProviderId = idP,
+                ConsumerId = idC,
+                VoitureId = idV,
+                DemandeDevisId = iDe,
+                DateEmission = dateEmi,
+                DateDebut = dateDebut,
+                DateFin = datefin,
+                Tarif = prix,
+                DescriptionPresta = description,
+                LieuPrestaId = idAdresse,
+                EtatDevis = EtatDevis.EN_ATTENTE,               
+            };
+            _bddContext.Devis.Add(devis);
+            _bddContext.SaveChanges();
+        }
         
     }
 }
