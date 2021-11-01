@@ -10,6 +10,7 @@
         <title>Sujet</title>
     </head>
     <body>
+        <button onclick="location.href='@Url.Action("Sujets", "Forum")'">Retour à la liste des sujets</button>
         @{var signale = new TakoLeaf.Models.PostSignale();
             <h3>@Model.Sujet.Titre</h3>
             @foreach (var item in Model.Posts)
@@ -27,20 +28,20 @@
                         <em>@item.Adherent.Prenom</em>
                         <em>@item.Date</em>
                     </div>
-                    <button type="button" onclick="Citer('@item.Date.ToShortDateString()', '@item.Date.ToShortTimeString()', '@item.Adherent.Prenom', '@item.CorpsPost')">Citer</button>
+                    <button type="button" onclick="Citer('@item.Date.ToShortDateString()', '@item.Date.ToShortTimeString()', '@item.Adherent.Prenom', '@item.CorpsPost.ToString()')">Citer</button>
                     <button type="submit" onclick="Signaler('@idsignal')">Signaler</button>
                 </div>
                 <br />
                 <div style="display:none" id=@idsignal>
-                    <button type="button" onclick="Close(@idsignal)">x</button>
+                    <button type="button" onclick="Close('@idsignal')">x</button>
                     @using (Html.BeginForm("Signaler", "Forum"))
-                    {
-                <input type="text" name="Sujet_Id" value="@Model.Sujet.Id" style="display:none;" />
-                <input type="text" name="item_AdherentId" value="@item.AdherentId" style="display:none;" />
-               <input type="text" name="item_Id" value="@item.Id" style="display:none;" />
-                <textarea class="mytextarea" id="PostSignale_Message" name="PostSignale_Message"></textarea>
-               
-                <button type="submit">Valider</button>}
+                     {
+                        <input type="text" name="Sujet_Id" value="@Model.Sujet.Id" style="display:none;" />
+                        <input type="text" name="item_AdherentId" value="@item.AdherentId" style="display:none;" />
+                        <input type="text" name="item_Id" value="@item.Id" style="display:none;" />
+                        <textarea class="mytextarea" id="PostSignale_Message" name="PostSignale_Message"></textarea>
+                        <button type="submit">Valider</button>
+                     }
                 </div>
                 <hr />
              }
@@ -60,6 +61,7 @@
 
                     function Close(id) {
                         document.getElementById(id).style.display = "none";
+                        tinymce.get("PostSignale_Message").setContent("");
                     }
 
                     function Citer(postD, postT, postA, postC) {
