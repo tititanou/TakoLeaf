@@ -1,6 +1,7 @@
 ﻿@model List<TakoLeaf.Models.CompteUser>
 @{
-    Layout = null;
+    Layout = "_LayoutAdmin";
+    ViewBag.Title = "Gestion des comptes";
 }
 
 <!DOCTYPE html>
@@ -11,9 +12,142 @@
     <title>Dashboard</title>
     <style type="text/css">
 
-        table, th, td {
-            border: solid, 1px;
-            border-color: #96D4D4;
+        .box {
+            box-sizing: content-box;
+            position: static;
+            right: 10px;
+        }
+
+        .ad {
+            /*box-sizing: content-box;*/
+            text-align: center;
+            width: 80%;
+            right: 0px;
+        }
+
+        .tableauH {
+            height: 50px;
+            font-size: 20px;
+        }
+
+        .etat, .delete {
+            width: 25px;
+            height: 25px;
+        }
+
+        .etatAt {
+            width: 30px;
+            height: 30px;
+        }
+
+        .donnees {
+            background-color: white;
+            height: 100px;
+            width: 100%
+        }
+
+            .donnees td {
+                border-bottom: solid #A1E1AF 2px;
+            }
+
+        .avatar {
+            width: 90px;
+            height: 90px;
+        }
+
+        /* Modal box*/
+
+
+        /* Set a style for all buttons */
+        button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+            button:hover {
+                opacity: 1;
+            }
+
+        /* Float cancel and delete buttons and add an equal width */
+        .cancelbtn, .deletebtn {
+            float: left;
+            width: 50%;
+        }
+
+        /* Add a color to the cancel button */
+        .cancelbtn {
+            background-color: #ccc;
+            color: black;
+        }
+
+        /* Add a color to the delete button */
+        .deletebtn {
+            background-color: #f44336;
+        }
+
+        /* Add padding and center-align text to the container */
+        .container {
+            text-align: center;
+        }
+
+        /* The Modal (background) */
+        .modal {
+           
+           outline:8px solid rgb(164 234 147);
+           border-radius:40px;
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100000000000000; /* Sit on top */
+            left: 40%;
+            top: 50%;
+            width: 684px; /* Full width */
+            height: 271px; /* Full height */
+            /*overflow:auto;*/ /* Enable scroll if needed */
+            background-color: #ffffff;
+            padding-top: 50px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+           /* background-color: #fefefe;
+            margin: 5% auto 15% auto;  5% from the top, 15% from the bottom and centered */
+           /* border: 1px solid #888;*/
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* Style the horizontal ruler */
+        /*hr {*/
+            /*border: 1px solid #f1f1f1;*/
+            /*margin-bottom: 25px;*/
+        /*}*/
+
+        /* The Modal Close Button (x) */
+        .close {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #f1f1f1;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #f44336;
+                cursor: pointer;
+            }
+
+        /* Clear floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
         }
     </style>
 
@@ -23,27 +157,87 @@
         <h1>Bienvenue sur le gestionnaire de compte</h1>
     </div>
 
-    <h2 style="text-align:center; font-family:sans-serif">Vue d'ensemble adhérent</h2>
+    <h2>Vue d'ensemble adhérent</h2>
 
-    <div style="position:center">
-        <table>
-            <tr>
+    <div class="box">
+        <table class="ad">
+            <tr class="tableauH">
+                <th></th>
+                <th>Id</th>
                 <th>Nom</th>
-                <th>Prenom</th>
-                <th>Description</th>
+                <th>Statut</th>
                 <th>Mail</th>
-                <th>Etat du profil</th>
+                <th>Etat</th>
             </tr>
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.Adherent.Nom</td>
-                    <td>@item.Adherent.Prenom</td>
-                    <td>@item.Description</td>
+                <tr class="donnees">
+                    @{string editLink1 = "/Admin/AfficherProfil?id=" + item.AdherentId; }
+                    <td><a href="@editLink1"><img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /></a></td>
+                    <td>@item.Adherent.Id</td>
+                    <td>@item.Adherent.Nom.ToUpper() @item.Adherent.Prenom</td>
+                    <td>@item.Role.ToUpper()</td>
                     <td>@item.Mail</td>
-                    <td>@item.EtatProfil</td>
-                    <td>@Html.ActionLink("Supprimer Profil", "SupprimerCompte", "Admin", new { id = item.AdherentId })</td>
+
+                    @if (item.EtatProfil == TakoLeaf.Models.EtatProfil.VALIDE)
+                    {
+                        <td><img class="etat" src="~/IMG/ICONE ADMIN/EtatValide.png"></td>
+                    }
+                    else if (item.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
+                    {
+                        string editLink3 = "/Admin/ValiderProfil?id=" + item.AdherentId;
+
+                        <td><a onclick="document.getElementById('id01').style.display='block'"><img class="etatAt" src="~/IMG/ICONE ADMIN/Glyph_.png"></a></td>
+                        <div id="id01" class="modal">
+                            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+                            <form class="modal-content" action="/action_page.php">
+                                <div class="container">
+                                    <h1>Changer l'Etat du profil</h1>
+                                    <p>Que souhaitez vous faire pour @item.Adherent.Nom.ToUpper() @item.Adherent.Prenom</p>
+
+                                    <div class="clearfix">
+                                        <button type="button"class="cancelbtn" onclick="@Html.ActionLink("Valider le profil", "ValiderProfil", "Admin", new { id = item.AdherentId })"></button>
+                                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn"><img src="~/IMG/ICONE ADMIN/EtatValide.png" />Valider le compte</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    }
+
+
+
+                    else if (item.EtatProfil == TakoLeaf.Models.EtatProfil.COMPTE_BLOQUE)
+                    {
+                        <td><a onclick="document.getElementById('id01').style.display='block'"><img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png"></a></td>
+
+                        <div id="id01" class="modal">
+                            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+                            <form class="modal-content" action="/action_page.php">
+                                <div class="container">
+                                    <h1>Delete Account</h1>
+                                    <p>Are you sure you want to delete your account?</p>
+
+                                    <div class="clearfix">
+                                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+                    }
+                    else
+                    {
+                        <td><img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png"></td>
+                    }
+
+
+                    @{string editLink = "/Admin/SupprimerCompte?id=" + item.AdherentId; }
+
+                    <td><a href="@editLink"><img class="delete" src="~/IMG/ICONE ADMIN/DeleteIcon.png" /></a></td>
+                    @*<td>@Html.ActionLink("Supprimer Profil", "SupprimerCompte", "Admin", new { id = item.AdherentId })</td>*@
                 </tr>
             }
 
@@ -151,6 +345,19 @@
         </table>
     </div>
     <h3>Nombre de comptes bloqués : <p style="color:crimson">@count</p></h3><br />
+
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 

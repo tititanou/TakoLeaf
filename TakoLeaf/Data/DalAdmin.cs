@@ -274,5 +274,13 @@ namespace TakoLeaf.Data
             return liste;
         }
 
+        public Provider ObtenirProvider(int id)
+        {
+            Provider provider = this._bddContext.Providers.Where(p => p.AdherentId == id).Include(p => p.Rib).FirstOrDefault();
+            return provider;
+
+        }
+
+
     }
 }

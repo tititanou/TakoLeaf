@@ -1,6 +1,6 @@
-@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&display=swap);
+﻿@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&display=swap);
 
-*{
+* {
     font-family: 'Roboto';
     box-sizing: border-box;
 }
@@ -17,46 +17,49 @@ body {
 header {
     justify-content: space-between;
     z-index: 1;
-    width:100%; 
-	background:#FFE3B8; 
-	height:100px; 
-	border-bottom:1px solid #dddddd;
+    width: 100%;
+    background: #FFE3B8;
+    height: 100px;
+    border-bottom: 1px solid #dddddd;
     top: 0;
 }
 
-header h1{
-    text-transform: uppercase;
-    align-items: center;
-    letter-spacing: 5px;
-    font-size: 16px;
-    color: #2F4858;
-    bottom: 60px;
-    z-index: 2;
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
+    header h1 {
+        text-transform: uppercase;
+        align-items: center;
+        letter-spacing: 5px;
+        font-size: 16px;
+        color: #2F4858;
+        bottom: 60px;
+        z-index: 2;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
 
-.logo{
+.logo {
     padding-left: 15px;
     width: 100px;
     display: flex;
     justify-content: left;
     align-items: center;
 }
-.AdminIMG{
-    z-index:1000000 ;
+
+.AdminIMG {
+    z-index: 1000000;
     margin-top: 15px;
-    left: 1700px;
+    right: 50px;
     position: absolute;
+    float:right;
     width: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.imgALERT{
+
+.imgALERT {
     margin-top: 15px;
-    left: 1640px;
+    right:75px;
     top: 20px;
     position: absolute;
     width: 80px;
@@ -66,99 +69,80 @@ header h1{
     cursor: pointer;
 }
 
-
-
-
-.menu{
-    z-index:1000000; 
-    font-weight:bold; 
-    font-size:0.8em; 
-    width:100%; 
-    background:#f1f1f1;  
-    position:absolute; 
-    left: 0;
-    text-align:center; 
-    font-size:12px;
-}
-
-.menu{z-index:1000; 
-	right:0px;
-	font-weight:bold; 
-	font-size:0.8em; 
-	width:300px; 
+.menu {
+    z-index: 1000;
+    float:left;
+    left: 0px;
+    font-weight: bold;
+    font-size: 0.8em;
+    width: 20%;
+    min-width:200px;
+    max-width:300px;
     height: 1965px;
-	background:#ffffff;
-	position:absolute; 
-	text-align:left; 
-	font-size:16px;
-	opacity:100%;
-	border-top-right-radius:20px;
-	border-bottom-right-radius:20px;
+    background: #ffffff;
+   /* position: absolute;*/
+    text-align: left;
+    font-size: 16px;
+    opacity: 1;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
     filter: drop-shadow(0px 3px 0.60rem #686868);
 }
 
+.corp{
+    width:80%;
+    right:0px;
+}
 
-.menuIMG{
-    z-index:1000001; 
+.menuIMG {
+    background-color: #ffffff;
+    z-index: 1000001;
     position: absolute;
     display: flex;
     width: 45px;
-    
     justify-content: center;
     flex-direction: column;
     left: 20px;
     padding: 9px;
-	
 }
 
-.menuIMG img{
-    padding:14px 0 12px 0; 
-}
-
-.menuIMG:hover{
-    color:#A1E1AF;
-    text-decoration:none;
-}
+    .menuIMG img {
+        background-color: #ffffff;
+        padding: 14px 0 12px 0;
+    }
 
 
 .menu ul {
     position: absolute;
     left: 60px;
-	list-style-type: none; 
-	list-style-image: none;
+    list-style-type: none;
+    list-style-image: none;
     font-weight: 400;
     top: 10px;
 }
-    
+
 
 .menu li {
-    display: block;   
-	padding:15px 0 15px 0; 
-	}
-
-.menu ul li a { 
-	text-decoration:none;  
-	margin: 0px; 
-	color:#ffffff;
-}
-.menu ul li a:hover {  
-	color: #FFFFFF; 
-	text-decoration:none;
-}
-.menu a{
-	text-decoration:none; 
-	color:#808080;
-}
-.menu a:hover{
-	text-decoration:none; 
-	color:#A1E1AF;
+    display: block;
+    padding: 15px 0 15px 0;
 }
 
-.glyphicon-home{
-  color:rgb(255, 255, 255); 
-  font-size:1.5em; 
-  margin-top:5px; 
-  margin:0 auto;
+
+.menu a {
+    text-decoration: none;
+    color: #2F4858;
+}
+
+    .menu a:hover {
+        text-decoration: none;
+        color: #A1E1AF;
+    }
+
+.glyphicon-home {
+    color: rgb(255, 255, 255);
+    font-size: 1.5em;
+    margin-top: 5px;
+    margin: 0 auto;
 }
 
 /*FIN Section du header*/
@@ -166,9 +150,9 @@ header h1{
 
 /*SECTION MAIN */
 
-.PAGEMID{
+.PAGEMID {
     width: 100%;
-    height: 1965px; 
+    height: 1965px;
     background-image: url(/IMG/FooterAdmin.png);
     background-position: center;
     box-sizing: border-box;
@@ -185,7 +169,6 @@ header h1{
 
 
 /*FOOTER*/
-
 
 
 

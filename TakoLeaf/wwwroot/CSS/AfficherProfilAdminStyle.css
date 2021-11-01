@@ -1,0 +1,141 @@
+﻿#boxInfo {
+    position:relative;
+    box-sizing: border-box;
+    padding-right: 50px;
+    padding-left:350px;
+    padding-top:30px;
+}
+
+
+.info {
+    padding-left: 54px;
+    padding-right: 50px;
+    border-radius: 40px;
+    border: 2px solid #dbdbdb;
+    height: 500px;
+    width: 1000px;
+}
+
+
+.infoLeft {
+
+    float: left;
+    width: 225px;
+    height: 300px;
+}
+
+div.titre {
+    position: absolute;
+    text-align: center;
+    bottom: 60px;
+    left: 400px;
+    font-weight: 700;
+    font-size: 24px;
+    width: 240px;
+}
+
+    legend {
+        position:static;
+        box-sizing: border-box;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        font-weight: 700;
+        font-size: 24px;
+        width: 240px;
+    }
+
+ 
+.infoRight{
+    position:absolute;
+    float:left;
+/*    background-color:purple;*/
+    padding-left:200px;
+    font-size:20px;
+}
+
+.tableData {
+    position: absolute;
+    padding-left: 150px;
+    border-collapse: separate;
+    border-spacing: 50px 40px;
+}
+
+.etat {
+    width: 30px;
+    height: 30px;
+}
+
+/*CSS infos complémentaires*/
+
+#box2 {
+    position: absolute;
+    float: left;
+    box-sizing: border-box;
+    padding-right: 50px;
+    padding-left: 350px;
+    padding-top: 30px;
+    margin-left:350px;
+    margin-top:30px;
+    width: 454px;
+    height: 495px;
+    border: solid;
+    border-radius: 40px;
+    border-color: #dbdbdb;
+}
+
+div.intitule {
+    position:relative;
+    text-align: center;
+/*    top: 10px;*/
+    right: 275px;
+    width: 300px;
+    font-weight: 700;
+    font-size: 24px;
+    border: 2px solid #dbdbdb;
+    border-radius: 40px;
+}
+
+div.infoComp{
+    vertical-align:central;
+    
+}
+
+
+/*CSS box suppression comptes ou contact*/
+
+
+#box3 {
+    position: absolute;
+    float: left;
+    box-sizing: border-box;
+    padding-right: 50px;
+    padding-left: 350px;
+    padding-top: 30px;
+    margin-left: 850px;
+    margin-top: 30px;
+    width: 454px;
+    height: 495px;
+    border: solid;
+    border-radius: 40px;
+    border-color: #dbdbdb;
+}
+
+
+
+
+.lien{
+    position:relative;
+    float:left;
+    right:350px;
+    width:200px;
+    text-decoration:none;
+    padding:10px;
+}
+
+div.lien a{
+    text-decoration:none;
+    color:black;
+}
+
+
+

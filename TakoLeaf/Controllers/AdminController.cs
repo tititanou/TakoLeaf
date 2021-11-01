@@ -229,7 +229,8 @@ namespace TakoLeaf.Controllers
             AdherentViewModel Adherent = new AdherentViewModel
             {
                 Compte = dal.ObtenirAdherentEtCompte(id),
-                PieceJusti = dal.ObtenirPieceJustificative(id)
+                PieceJusti = dal.ObtenirPieceJustificative(id),
+                InfoProvider = dal.ObtenirProvider(id)
             }
             ;
             return View(Adherent);
@@ -242,6 +243,16 @@ namespace TakoLeaf.Controllers
             return View(liste);
         }
 
+        public ActionResult AfficherTransactions()
+        {
+
+            DashViewModel dash = new DashViewModel();
+            dash.ListePrestations = dal.ObtenirToutesLesPrestations();
+            dash.ListeAdherents = dal.ObtenirTousLesAdherents();
+            dash.ListeCompte = dal.ObtenirAdherentsEtComptes();
+
+            return View(dash);
+        }
 
 
     }
