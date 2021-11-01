@@ -1,11 +1,11 @@
 ﻿@model TakoLeaf.ViewModels.ProviderViewModel
 @{
-    Layout = "_LayoutProfil";
+    Layout = "_LayoutProfilProvider";
     ViewBag.Title = "Profil";
 }
 
 
-<h1> Bienvenue sur votre profil</h1>
+<!--<h1> Bienvenue sur votre profil</h1>
 
 <div>
     <a href="/Login/Deconnexion">Se deconnecter</a>
@@ -20,11 +20,11 @@
         <li>Date de Naissance : @Model.Adherent.Date_naissance.ToShortDateString()</li>
         <li>Adresse : @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville</li>
         <li>Telephone : @Model.Adherent.Telephone</li>
-    </ul>
+    </ul>-->
 
     @*@Html.ActionLink("Modifier information adherent", "ModifInfosAdherent", "ProfilUser", new { id = Model.Adherent.Id })*@
 
-    <h2>Information Compte</h2>
+    <!--<h2>Information Compte</h2>
     <ul>
         <li>Adresse mail : @Model.CompteUser.Mail</li>
         <li>Description : @Model.CompteUser.Description</li>
@@ -32,13 +32,13 @@
         <li>Rang : @Model.Provider.Rang</li>
         <li>Etat Profil : @Model.CompteUser.EtatProfil</li>
     </ul>
-</div>
+</div>-->
 
 @*@Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })*@
 
 
 
-<h2> Information Ressources</h2>
+<!--<h2> Information Ressources</h2>
 
 @if (Model.Ressources != null)
 {
@@ -70,14 +70,14 @@
             </tr>
         }
     </table>
-}
+}-->
 
 @*@Html.ActionLink("Ajouter Ressources", "AjoutRessource", "ProfilUser", new { id = Model.Provider.Id })
     @Html.ActionLink("Modifier Ressources", "ModifierRessource", "ProfilUser", new { id = Model.Provider.Id })*@
 
 
 
-<h2> Information Competences</h2>
+<!--<h2> Information Competences</h2>
 <table border="1">
     <tr>
         <th>Competence</th>
@@ -91,7 +91,7 @@
             <td>@Model.Competence[i].TarifHoraire</td>
         </tr>
     }
-</table>
+</table>-->
 
 @*@Html.ActionLink("Modifier Competences", "ModifCompetence", "ProfilUser", new { id = Model.Provider.Id })
     @Html.ActionLink("Ajouter Competences", "AjoutCompetence", "ProfilUser", new { id = Model.Provider.Id })*@
@@ -102,7 +102,7 @@
 
 
 
-@*<div class="container_Location">
+<div class="container_Location">
     @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville
 </div>
 
@@ -138,7 +138,30 @@
 </div>
 
 <div class="niveau">
-    @Model.Provider.Rang
+    @if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_AMATEUR)
+    {
+        <img src="~/IMG/RANG/PoulpeAmateur.png" title="Poulpe Amateur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_BRICOLEUR)
+    {
+        <img src="~/IMG/RANG/PoulpeBricoleur.png" title="Poulpe Bricoleur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_HABILE)
+    {
+        <img src="~/IMG/RANG/PieuvreHabile.png" title="Pieuvre Habile" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_RAFISTOLEUR)
+    {
+        <img src="~/IMG/RANG/PievureRafistoleur.png" title="Pieuvre Rafistoleur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.CALAMAR_RAVALEUR)
+    {
+        <img src="~/IMG/RANG/CalamarRavaleur.png" title="Calamar Ravaleur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.MAITRE_KRAKEN)
+    {
+        <img src="~/IMG/RANG/MaitreKraken.png" title="Maitre Krakenr" />
+    }
 </div>
 
 <div class="profile_provider">
@@ -162,4 +185,4 @@
 <div class="img-localisation">
     <img src="IMG/Localisation/Drawing Pin Filled.png" alt="">
     <p>Localisé(e) à..</p>
-</div>*@
+</div>

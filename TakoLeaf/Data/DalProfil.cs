@@ -96,7 +96,7 @@ namespace TakoLeaf.Data
 
         public List<Competence> ObtenirCompetences()
         {
-            List<Competence> liste = _bddContext.Competences.ToList();
+            List<Competence> liste = _bddContext.Competences.Include(c => c.Provider).ThenInclude(c => c.Adherent).ToList();
             return liste;
         }
         public List<SsCateCompetence> ObtenirSSCompetences()
