@@ -104,7 +104,7 @@
                     <tr>
                         <td>@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
                         <td>@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
-                        <td>@item.DateVoulue.ToShortDateString()</td>
+                        <td>@item.DateDebut.ToShortDateString()</td>
 
                         @if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Refuse)
                         {
@@ -133,7 +133,7 @@
         <fieldset>
             <legend>Vos gains</legend>
 
-            @{int count = 0; }
+            @{double count = 0; }
 
             @foreach (var item in Model.ListePrestations)
             {

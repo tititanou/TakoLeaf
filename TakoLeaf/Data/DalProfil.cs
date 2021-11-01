@@ -66,6 +66,11 @@ namespace TakoLeaf.Data
             return liste;
         }
 
+        public List<Devis> ObtenirDevis()
+        {
+            List<Devis> liste = _bddContext.Devis.Include(d => d.LieuPresta).Include(d => d.Consumer).ThenInclude(d => d.Adherent).Include(d => d.Provider).ThenInclude(d => d.Adherent).Include(d => d.Voiture).ThenInclude(d => d.Modele).ThenInclude(d => d.Marque).Include(d => d.LieuPresta).Include(d => d.DemandeDevis).ToList();
+            return liste;
+        }
         public List<DemandeDevis> ObtenirDemandeDevis()
         {
             List<DemandeDevis> liste = _bddContext.DemandeDevis.ToList();

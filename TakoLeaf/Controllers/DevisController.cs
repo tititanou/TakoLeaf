@@ -182,6 +182,36 @@ namespace TakoLeaf.Controllers
 
         }
 
+        public IActionResult AccepterDevis()
+        {
+
+            int IdA = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == IdA);
+
+            List<Devis> devis = dal.ObtenirDevis().Where(d => d.ConsumerId == consumer.Id).ToList();
+
+            
+            return View(devis);
+
+
+        }
+
+        [HttpPost]
+        public IActionResult AccepterDevis(string numero)
+        {
+            Devis devis = dal.ObtenirDevis().FirstOrDefault(d => d.NumeroDevis.Equals(numero));
+            dalD.CreationPrestation(devis);
+            return Redirect("/ProfilUser/ProfilConsumer?id=" + devis.Consumer.AdherentId);
+        }
+
+        [HttpPost]
+
+        public IActionResult RefuserDevis(string numero)
+        {
+            Devis devis = dal.ObtenirDevis().FirstOrDefault(d => d.NumeroDevis.Equals(numero));
+            dalD.CreationPrestationRefusee(devis);
+            return Redirect("/ProfilUser/ProfilConsumer?id=" + devis.Consumer.AdherentId);
+        }
 
 
 

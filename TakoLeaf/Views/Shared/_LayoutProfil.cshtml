@@ -41,10 +41,11 @@
                 <li>@Html.ActionLink("Voir Profil", "VoirProfil", "ProfilUser")</li>
                 <li>@Html.ActionLink("Modifier information adherent", "ModifInfosAdherent", "ProfilUser", new { id = Model.Adherent.Id })</li>
                 <li>@Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })</li>
-
+                
                 @if(Model.CompteUser.Role.Equals("Consumer")){
                 <li>@Html.ActionLink("Ajouter un vehicule", "AjoutVehicule", "ProfilUser", new { id = Model.Consumer.Id })</li>
                 <li>@Html.ActionLink("Modifier le véhicule", "ModifVoiture", "ProfilUser", new { id = Model.Consumer.Id }) </li>
+                <li>@Html.ActionLink("Liste des devis", "AccepterDevis","Devis") </li>
                 }
 
                 @if(Model.CompteUser.Role.Equals("Provider")) {

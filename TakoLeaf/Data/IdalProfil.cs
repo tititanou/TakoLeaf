@@ -36,7 +36,7 @@ namespace TakoLeaf.Data
         List<SsCateCompetence> ObtenirSSCompetences();
         List<CateCompetence> ObtenirCateCompetences();
         List<Ressource> ObtenirRessources();
-
+        List<Devis> ObtenirDevis();
 
 
     }

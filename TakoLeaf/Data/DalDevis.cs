@@ -74,6 +74,44 @@ namespace TakoLeaf.Data
             _bddContext.Devis.Add(devis);
             _bddContext.SaveChanges();
         }
+
+        public void CreationPrestation(Devis devis)
+        {
+
+            Prestation prestation = new Prestation
+            {
+                ConsumerId = devis.ConsumerId,
+                DateDebut = devis.DateDebut,
+                EtatPresta = Prestation.Etat.En_cours,
+                NumeroDevis = devis.NumeroDevis,
+                Prix = devis.Tarif,
+                ProviderId = devis.ProviderId,
+                VoitureId = devis.VoitureId
+
+            };
+
+            _bddContext.Prestations.Add(prestation);
+            _bddContext.SaveChanges();
+        }
+
+        public void CreationPrestationRefusee(Devis devis)
+        {
+            Prestation prestation = new Prestation
+            {
+                ConsumerId = devis.ConsumerId,
+                DateDebut = devis.DateDebut,
+                EtatPresta = Prestation.Etat.Refuse,
+                NumeroDevis = devis.NumeroDevis,
+                Prix = devis.Tarif,
+                ProviderId = devis.ProviderId,
+                VoitureId = devis.VoitureId
+
+            };
+
+
+            _bddContext.Prestations.Add(prestation);
+            _bddContext.SaveChanges();
+        }
         
     }
 }
