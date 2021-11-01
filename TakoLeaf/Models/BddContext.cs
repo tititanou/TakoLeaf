@@ -40,7 +40,10 @@ namespace TakoLeaf.Models
         public DbSet<Adresse> Adresses { get; set; }
         public DbSet<PostSignale> PostSignales { get; set; }
         public DbSet<Amitie> Amities { get; set; }
-
+        public DbSet<DemandeDevisListeCompetence> DemandesDevisListeCompetence { get; set; }
+        public DbSet<DemandeDevisListeRessource> DemandesDevisListeRessource { get; set; }
+        public DbSet<MessageEnvoye> MessageEnvoyes { get; set; }
+        public DbSet<MessageRecu> MessageRecus { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -260,9 +263,9 @@ namespace TakoLeaf.Models
             this.CompteUsers.AddRange(
                  new CompteUser
                  {
-                     Mail = "Alexis.Abrate@gmail.com",
-                     MotDePasse = dal.EncodeMD5("LeTruantDuCSharp"),
-                     Description = "Hello",
+                     Mail = "al@gmail.com",
+                     MotDePasse = dal.EncodeMD5("123"),
+                     Description = "gaebnfbgnoez nofiejog aeo ngfoaegnen goaeogae jaeg ae g aepmkgpaej pgeamt poa gm,aekp tjpa, gmae,pot apam, pt,ae t,ae t",
                      EtatProfil = EtatProfil.VALIDE,
                      AdherentId = 1,
                      Role = "Provider"
@@ -370,7 +373,8 @@ namespace TakoLeaf.Models
                     Id = 1,
                     Note = 0,
                     RibId = 1,
-                    AdherentId = 1
+                    AdherentId = 1,
+                    Rang = Rang.MAITRE_KRAKEN
                 },
 
                 new Provider
@@ -378,7 +382,8 @@ namespace TakoLeaf.Models
                     Id = 2,
                     Note = 0,
                     RibId = 2,
-                    AdherentId = 5
+                    AdherentId = 5,
+                    Rang = Rang.POULPE_AMATEUR
                 },
 
                 new Provider
@@ -386,7 +391,8 @@ namespace TakoLeaf.Models
                     Id = 3,
                     Note = 0,
                     RibId = 3,
-                    AdherentId = 7
+                    AdherentId = 7,
+                    Rang = Rang.POULPE_BRICOLEUR
                 }
                 );
 
@@ -646,9 +652,9 @@ namespace TakoLeaf.Models
                 );
             this.Competences.AddRange(
                 new Competence { Id = 1, ProviderId = 1, SsCateCompetenceId = 6, NomSsCate = "Changer Roue", TarifHoraire = 40 },
-                new Competence { Id = 2, ProviderId = 1, SsCateCompetenceId = 3, NomSsCate = "Changer la distribution", TarifHoraire = 50 },
-                new Competence { Id = 3, ProviderId = 1, SsCateCompetenceId = 2, NomSsCate = "Changer la distribution", TarifHoraire = 17 },
-                new Competence { Id = 4, ProviderId = 1, SsCateCompetenceId = 14, NomSsCate = "Changer la distribution", TarifHoraire = 44 },
+                new Competence { Id = 2, ProviderId = 1, SsCateCompetenceId = 3, NomSsCate = "Remplacement de la batterie", TarifHoraire = 50 },
+                new Competence { Id = 3, ProviderId = 1, SsCateCompetenceId = 2, NomSsCate = "Remplacement demarreur", TarifHoraire = 17 },
+                new Competence { Id = 4, ProviderId = 1, SsCateCompetenceId = 14, NomSsCate = "Remplacement de catalyseur", TarifHoraire = 44 },
 
                 new Competence { Id = 5, ProviderId = 2, SsCateCompetenceId = 1, NomSsCate = "Changer la distribution", TarifHoraire = 42 },
                 new Competence { Id = 6, ProviderId = 2, SsCateCompetenceId = 3, NomSsCate = "Changer la distribution", TarifHoraire = 46 },
@@ -685,7 +691,7 @@ namespace TakoLeaf.Models
                       Categorie = CateRessource.OUTIL_SPECIALISE,
                       Disponible = true,
                       TarifJournalier = 40,
-                      ProviderId = 2
+                      ProviderId = 1
                   },
 
                   new Ressource
@@ -753,7 +759,7 @@ namespace TakoLeaf.Models
             this.Prestations.AddRange(
                 new Prestation
                 {
-                    DateVoulue = new DateTime(2021, 10, 25),
+                    DateDebut = new DateTime(2021, 10, 25),
                     Prix = 100,
                     ProviderId = 1,
                     ConsumerId = 1,
@@ -765,7 +771,7 @@ namespace TakoLeaf.Models
 
                  new Prestation
                  {
-                     DateVoulue = new DateTime(2021, 10, 30),
+                     DateDebut = new DateTime(2021, 10, 30),
                      Prix = 300,
                      ProviderId = 1,
                      ConsumerId = 1,
@@ -776,7 +782,7 @@ namespace TakoLeaf.Models
 
                  new Prestation
                  {
-                     DateVoulue = new DateTime(2021, 10, 15),
+                     DateDebut = new DateTime(2021, 10, 15),
                      Prix = 150,
                      ProviderId = 2,
                      ConsumerId = 3,
@@ -787,7 +793,7 @@ namespace TakoLeaf.Models
 
                  new Prestation
                  {
-                     DateVoulue = new DateTime(2021, 10, 29),
+                     DateDebut = new DateTime(2021, 10, 29),
                      Prix = 100,
                      ProviderId = 2,
                      ConsumerId = 2,
@@ -870,6 +876,42 @@ namespace TakoLeaf.Models
                         Lu = false
                     }
                 );
+            this.MessageEnvoyes.AddRange(
+                new MessageEnvoye
+                {
+                    Id = 1,
+                    MessageId = 1,
+                    ExpediteurId = 5,
+                    DestinataireId = 3
+                },
+                new MessageEnvoye
+                {
+                    Id = 2,
+                    MessageId = 2,
+                    ExpediteurId = 3,
+                    DestinataireId = 5
+                },
+                new MessageEnvoye
+                {
+                    Id = 3,
+                    MessageId = 3,
+                    ExpediteurId = 5,
+                    DestinataireId = 1
+                },
+                new MessageEnvoye
+                {
+                    Id = 4,
+                    MessageId = 4,
+                    ExpediteurId = 2,
+                    DestinataireId = 5
+                },
+                new MessageEnvoye
+                {
+                    Id = 5,
+                    MessageId = 5,
+                    ExpediteurId = 5,
+                    DestinataireId = 2
+                });
 
             this.PostSignales.Add(
             new PostSignale
@@ -883,6 +925,125 @@ namespace TakoLeaf.Models
                 PostId = 1
             }
             );
+
+
+            this.DemandeDevis.AddRange(
+                new DemandeDevis
+                {
+                    Id = 1,
+                    DateDemande = new DateTime(2021, 10, 31),
+                    DateDebutVoulue = new DateTime(2021, 11, 7),
+                    Message = "Bonjour c'est moi",
+                    ConsumerId = 3,
+                    ProviderId = 1,
+                    VoitureId = 3
+                },
+
+                new DemandeDevis
+                {
+                    Id = 2,
+                    DateDemande = new DateTime(2021, 10, 31),
+                    DateDebutVoulue = new DateTime(2021, 11, 19),
+                    Message = "Bonjour c'est moi",
+                    ConsumerId = 3,
+                    ProviderId = 1,
+                    VoitureId = 3
+                }
+
+                );
+
+
+            this.DemandesDevisListeCompetence.AddRange(
+
+                new DemandeDevisListeCompetence
+                {
+                    Id = 1,
+                    CompetenceId = 1,
+                    DemandeDevisId = 1
+
+                },
+
+                new DemandeDevisListeCompetence
+                {
+                     Id = 2,
+                     CompetenceId = 2,
+                     DemandeDevisId = 1
+
+                },
+
+                 new DemandeDevisListeCompetence
+                 {
+                     Id = 3,
+                     CompetenceId = 3,
+                     DemandeDevisId = 2
+
+                 },
+
+                new DemandeDevisListeCompetence
+                {
+                    Id = 4,
+                    CompetenceId =4,
+                    DemandeDevisId = 2
+
+                }
+
+                );
+
+            this.DemandesDevisListeRessource.AddRange(
+                new DemandeDevisListeRessource
+                {
+                    Id = 1,
+                    RessourceId = 4,
+                    DemandeDevisId = 1
+
+                },
+
+                new DemandeDevisListeRessource
+                {
+                    Id = 2,
+                    RessourceId = 4,
+                    DemandeDevisId = 2
+
+                }
+
+                );
+
+            this.MessageRecus.AddRange(
+                new MessageRecu
+                {
+                    Id = 1,
+                    MessageId = 1,
+                    ExpediteurId = 5,
+                    DestinataireId = 3
+                },
+                new MessageRecu
+                {
+                    Id = 2,
+                    MessageId = 2,
+                    ExpediteurId = 3,
+                    DestinataireId = 5
+                },
+                new MessageRecu
+                {
+                    Id = 3,
+                    MessageId = 3,
+                    ExpediteurId = 5,
+                    DestinataireId = 1
+                },
+                new MessageRecu
+                {
+                    Id = 4,
+                    MessageId = 4,
+                    ExpediteurId = 2,
+                    DestinataireId = 5
+                },
+                new MessageRecu
+                {
+                    Id = 5,
+                    MessageId = 5,
+                    ExpediteurId = 5,
+                    DestinataireId = 2
+                });
 
             this.SaveChanges();
         }

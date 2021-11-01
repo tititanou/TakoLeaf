@@ -11,6 +11,9 @@ namespace TakoLeaf.Data
         List<Adherent> ObtenirAdherents();
         List<CompteUser> ObtenirCompteUser();
         List<Amitie> ObtenirAmities();
+        List<DemandeDevis> ObtenirDemandeDevis();
+        List<DemandeDevisListeRessource> ObtenirRessourceDevis();
+        public List<DemandeDevisListeCompetence> ObtenirCompetenceDevis();
         void AjoutAmis(Adherent adhrent1, Adherent adherent2);
         void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string telephone);
         void ModifierCompteUser(string mail, string mdp, string avatar, string description);
@@ -33,7 +36,7 @@ namespace TakoLeaf.Data
         List<SsCateCompetence> ObtenirSSCompetences();
         List<CateCompetence> ObtenirCateCompetences();
         List<Ressource> ObtenirRessources();
-
+        List<Devis> ObtenirDevis();
 
 
     }

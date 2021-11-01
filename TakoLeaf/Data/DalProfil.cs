@@ -38,7 +38,7 @@ namespace TakoLeaf.Data
 
         public List<Voiture> ObtenirVoiture()
         {
-            List<Voiture> liste = _bddContext.Voitures.Include(v => v.Modele).ToList();
+            List<Voiture> liste = _bddContext.Voitures.Include(v => v.Modele).ThenInclude(v => v.Marque).ToList();
             return liste;
         }
 
@@ -50,7 +50,7 @@ namespace TakoLeaf.Data
 
         public List<Consumer> ObtenirConsumers()
         {
-            List<Consumer> liste = _bddContext.Consumers.Include(p => p.Adherent).ToList();
+            List<Consumer> liste = _bddContext.Consumers.Include(p => p.Adherent).ThenInclude(p => p.Adresse).ToList();
             return liste;
         }
 
@@ -66,6 +66,28 @@ namespace TakoLeaf.Data
             return liste;
         }
 
+        public List<Devis> ObtenirDevis()
+        {
+            List<Devis> liste = _bddContext.Devis.Include(d => d.LieuPresta).Include(d => d.Consumer).ThenInclude(d => d.Adherent).Include(d => d.Provider).ThenInclude(d => d.Adherent).Include(d => d.Voiture).ThenInclude(d => d.Modele).ThenInclude(d => d.Marque).Include(d => d.LieuPresta).Include(d => d.DemandeDevis).ToList();
+            return liste;
+        }
+        public List<DemandeDevis> ObtenirDemandeDevis()
+        {
+            List<DemandeDevis> liste = _bddContext.DemandeDevis.ToList();
+            return liste;
+        }
+
+        public List<DemandeDevisListeCompetence> ObtenirCompetenceDevis()
+        {
+            List<DemandeDevisListeCompetence> liste = _bddContext.DemandesDevisListeCompetence.Include(c => c.Competence).ToList();
+            return liste;
+        }
+
+        public List<DemandeDevisListeRessource> ObtenirRessourceDevis()
+        {
+            List<DemandeDevisListeRessource> liste = _bddContext.DemandesDevisListeRessource.Include(r => r.Ressource).ToList();
+            return liste;
+        }
         public List<Amitie> ObtenirAmities()
         {
             List<Amitie> liste = _bddContext.Amities.ToList();
@@ -97,7 +119,7 @@ namespace TakoLeaf.Data
            
         public List<Provider> ObtenirProviders()
         {
-            List<Provider> liste = _bddContext.Providers.Include(p =>p.Adherent).ToList();
+            List<Provider> liste = _bddContext.Providers.Include(p =>p.Adherent).ThenInclude(p =>p.Adresse).ToList();
             return liste;
         }
 

@@ -1,0 +1,50 @@
+﻿@model TakoLeaf.ViewModels.DevisViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = " Liste Demande de devis";
+}
+
+<h2> Liste de demande de devis</h2>
+
+@for (int i = 0; i < Model.ListeDemandeDevis.Count; i++)
+{
+    <div>
+        <div>
+            <h2>Demande devis du @Model.ListeDemandeDevis[i].DemandeDevis.DateDemande de @Model.ListeDemandeDevis[i].DemandeDevis.Consumer.Adherent.Nom @Model.ListeDemandeDevis[i].DemandeDevis.Consumer.Adherent.Prenom</h2>
+        </div>
+        <div>
+            Date de début voulue @Model.ListeDemandeDevis[i].DemandeDevis.DateDebutVoulue
+            <br />
+
+            Carburant : @Model.ListeDemandeDevis[i].Voiture.Carburant<br />
+            Marque/Modele de la voiture : @Model.ListeDemandeDevis[i].Voiture.Modele.Nom<br />
+            Année du vehicule : @Model.ListeDemandeDevis[i].Voiture.Annee<br />
+
+        </div>
+
+        <div>
+            Competence demandées :
+
+            @for (int j = 0; j < @Model.ListeDemandeDevis[i].ListeCompetences.Count; j++)
+            {
+                @Model.ListeDemandeDevis[i].ListeCompetences[j].Competence.NomSsCate<br />
+
+            }
+        </div>
+        <br />
+        <div>
+            Ressources demandées :
+
+            @for (int j = 0; j < @Model.ListeDemandeDevis[i].ListeRessources.Count; j++)
+            {
+                @Model.ListeDemandeDevis[i].ListeRessources[j].Ressource.Intitule<br />
+
+            }
+        </div>
+
+        <div>
+            <button>@Html.ActionLink("Emmetre le devis", "EmmetreDevis", "Devis", new {id = Model.ListeDemandeDevis[i].DemandeDevis.Id})</button>
+        </div>
+    
+    </div>
+}

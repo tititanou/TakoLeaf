@@ -1,0 +1,120 @@
+@model TakoLeaf.Models.Message
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="https://kit.fontawesome.com/1ca99e9622.js" crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width" />
+        <title>Message</title>
+    </head>
+    <body>
+        <div style="display:inline"><button type="button"><i class="fas fa-edit"></i>Nouveau Message</button><button type="button" id="rep" onclick="Repondre()"><i class="fas fa-reply"></i>Répondre</button><button><i class="far fa-trash-alt"></i>Supprimer</button></div>
+        <br />
+        <i style="display:inline-block" class="fas fa-long-arrow-alt-left" onclick="window.history.go(-1);"></i>    <h4 style="display:inline-block">@Model.Titre</h4>
+        <br />
+        <p style="display:inline-block">De:  </p>   <h5 style="display:inline-block">@Model.AdherentExp.Prenom @Model.AdherentExp.Nom</h5>
+        <br />
+        <small>@Model.Date</small>
+        <br />
+        <br />
+        <p style="display:inline-block">A:  </p>   <h5 style="display:inline-block">@Model.AdherentDest.Prenom @Model.AdherentDest.Nom</h5>
+
+        <p>@Model.Msg</p>
+
+        <hr />
+
+        <div style="display:none; border:solid 1px;" id="reponse">
+            @using (Html.BeginForm("NouveauMessage", "Messagerie"))
+            {
+                /*@Html.HiddenFor(model => model.AdherentExpId, new { name = "Destinataire", id = "Destinataire" })*/
+    <input name="Destinataire" value=@Model.AdherentExpId style="display:none" />
+                    <h5 class="tinymce-dest" style="border: solid 1px; width:100%; margin-top:0; margin-bottom:0;">À:   @Model.AdherentExp.Prenom @Model.AdherentExp.Nom</h5>
+                                    <div style="border: solid 1px; width:100%; height:20px; margin-top:0; padding-top:0;">
+                                        <label for="Objet" style="display: inline-block; margin-top:0; padding-top: 0;">Objet:</label>
+                                        <h4 class="tinymce-title" id="Objet" style="display: inline-block; width: 90%; margin-top: 0; padding-top: 0;" name="Objet"> RE:@Model.Titre</h4>
+                                    </div>
+                                                    <textarea class="tinymce-body" style="border: solid 1px;" name="Message">
+                                                    <div style="height:100px"></div>
+                                                    <p>Le @Model.Date.ToShortDateString() à @Model.Date.ToShortTimeString(), @Model.AdherentExp.Prenom a écrit:</p>
+                    @Html.Raw(Model.Msg)
+                </textarea>
+                                                                    <button type="submit">Valider</button>}
+        </div>
+
+        <script>function Repondre() {
+                document.getElementById("reponse").style.display = "block";
+            }</script>
+        <script>var emailDestConfig = {
+                selector: '.tinymce-dest',
+                menubar: false,
+                toolbar: false,
+                statusbar: false,
+                inline: true,
+                readonly: true,
+                plugins: [
+                    'lists',
+                    'powerpaste',
+                    'autolink',
+                    'table'
+                ],
+                valid_elements: 'strong,em,span[style],a[href]',
+                valid_styles: {
+                    '*': 'font-size,font-family,color,text-decoration,text-align'
+                },
+                powerpaste_word_import: 'clean',
+                powerpaste_html_import: 'clean',
+            };
+
+            var emailTitleConfig = {
+                selector: '.tinymce-title',
+                menubar: false,
+                toolbar: false,
+                statusbar: false,
+                inline: true,
+                plugins: [
+                    'lists',
+                    'powerpaste',
+                    'autolink',
+                    'table'
+                ],
+                valid_elements: 'strong,em,span[style],a[href]',
+                valid_styles: {
+                    '*': 'font-size,font-family,color,text-decoration,text-align'
+                },
+                powerpaste_word_import: 'clean',
+                powerpaste_html_import: 'clean',
+            };
+
+            var emailBodyConfig = {
+                selector: '.tinymce-body',
+                statusbar: false,
+                plugins: [
+                    'link',
+                    'lists',
+                    'powerpaste',
+                    'autolink',
+                    'tinymcespellchecker'
+                ],
+                toolbar: [
+                    'undo redo | bold italic underline | fontselect fontsizeselect',
+                    'forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist outdent indent'
+                ],
+                valid_elements: 'p[style],strong,em,span[style],a[href],ul,ol,li',
+                valid_styles: {
+                    '*': 'font-size,font-family,color,text-decoration,text-align'
+                },
+                powerpaste_word_import: 'clean',
+                powerpaste_html_import: 'clean',
+            };
+
+            tinymce.init(emailDestConfig);
+            tinymce.init(emailTitleConfig);
+            tinymce.init(emailBodyConfig);</script>
+        <script src="~/jquery-3.6.0.js"></script>
+    </body>
+</html>
