@@ -42,7 +42,8 @@ namespace TakoLeaf.Models
         public DbSet<Amitie> Amities { get; set; }
         public DbSet<DemandeDevisListeCompetence> DemandesDevisListeCompetence { get; set; }
         public DbSet<DemandeDevisListeRessource> DemandesDevisListeRessource { get; set; }
-
+        public DbSet<MessageEnvoye> MessageEnvoyes { get; set; }
+        public DbSet<MessageRecu> MessageRecus { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -875,6 +876,42 @@ namespace TakoLeaf.Models
                         Lu = false
                     }
                 );
+            this.MessageEnvoyes.AddRange(
+                new MessageEnvoye
+                {
+                    Id = 1,
+                    MessageId = 1,
+                    ExpediteurId = 5,
+                    DestinataireId = 3
+                },
+                new MessageEnvoye
+                {
+                    Id = 2,
+                    MessageId = 2,
+                    ExpediteurId = 3,
+                    DestinataireId = 5
+                },
+                new MessageEnvoye
+                {
+                    Id = 3,
+                    MessageId = 3,
+                    ExpediteurId = 5,
+                    DestinataireId = 1
+                },
+                new MessageEnvoye
+                {
+                    Id = 4,
+                    MessageId = 4,
+                    ExpediteurId = 2,
+                    DestinataireId = 5
+                },
+                new MessageEnvoye
+                {
+                    Id = 5,
+                    MessageId = 5,
+                    ExpediteurId = 5,
+                    DestinataireId = 2
+                });
 
             this.PostSignales.Add(
             new PostSignale
@@ -970,6 +1007,43 @@ namespace TakoLeaf.Models
                 }
 
                 );
+
+            this.MessageRecus.AddRange(
+                new MessageRecu
+                {
+                    Id = 1,
+                    MessageId = 1,
+                    ExpediteurId = 5,
+                    DestinataireId = 3
+                },
+                new MessageRecu
+                {
+                    Id = 2,
+                    MessageId = 2,
+                    ExpediteurId = 3,
+                    DestinataireId = 5
+                },
+                new MessageRecu
+                {
+                    Id = 3,
+                    MessageId = 3,
+                    ExpediteurId = 5,
+                    DestinataireId = 1
+                },
+                new MessageRecu
+                {
+                    Id = 4,
+                    MessageId = 4,
+                    ExpediteurId = 2,
+                    DestinataireId = 5
+                },
+                new MessageRecu
+                {
+                    Id = 5,
+                    MessageId = 5,
+                    ExpediteurId = 5,
+                    DestinataireId = 2
+                });
 
             this.SaveChanges();
         }

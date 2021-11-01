@@ -1,18 +1,36 @@
-@page
-@{
-    Layout = null;
-}
+@model List<TakoLeaf.Models.Message>
+@{ Layout = null; }
 
 <!DOCTYPE html>
 
 <html>
 <head>
+    <script src="https://kit.fontawesome.com/1ca99e9622.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width" />
     <title>MessagesRecus</title>
 </head>
 <body>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <h3>Messages Envoyés</h3>
+    @using (@Html.BeginForm("SupprimerMessage", "Messagerie"))
+    {
+<table>
+    <thead>
+    <th>@Html.CheckBox("IsChecked", new { id = "all" })</th>
+    <th><label for="del"><i class="far fa-trash-alt"></i></label><input type="submit" aria-hidden="true" style="display:none" id="del" /></th>
+    </thead>
+    <tbody>
+        @foreach (var message in Model)
+        {
+<tr>
+    @{ string goTo = "/Messagerie/Message?id=" + message.Id; }
+    <td><input class="messCB" id="IsChecked" name="MessageList" type="checkbox" value="@message.Id"></td>
+    <td><a href=@goTo style="text-decoration: none;color: black;">@message.AdherentExp.Prenom @message.AdherentExp.Nom</a></td>
+    <td><a href=@goTo style="text-decoration: none; color: black;">@message.Titre</a></td>
+</tr>
 }
+    </tbody>
+</table>}
+    <script src="~/jquery-3.6.0.js"></script>
+    <script src="~/js/Messagerie-script.js"></script>
 </body>
 </html>

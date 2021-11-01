@@ -14,6 +14,12 @@ namespace TakoLeaf.Data
 
         public Message GetMessage(int id);
 
-        public void SuppressionMessage(Message message);
+        MessageRecu GetMessageRecu(int id);
+
+        MessageEnvoye GetMessageEnvoye(int id);
+
+        void SuppressionMessageRecu(MessageRecu message);
+
+        void SuppressionMessageEnvoye(MessageEnvoye message);
     }
 }
