@@ -264,7 +264,7 @@ namespace TakoLeaf.Models
                  {
                      Mail = "al@gmail.com",
                      MotDePasse = dal.EncodeMD5("123"),
-                     Description = "Hello",
+                     Description = "gaebnfbgnoez nofiejog aeo ngfoaegnen goaeogae jaeg ae g aepmkgpaej pgeamt poa gm,aekp tjpa, gmae,pot apam, pt,ae t,ae t",
                      EtatProfil = EtatProfil.VALIDE,
                      AdherentId = 1,
                      Role = "Provider"
@@ -372,7 +372,8 @@ namespace TakoLeaf.Models
                     Id = 1,
                     Note = 0,
                     RibId = 1,
-                    AdherentId = 1
+                    AdherentId = 1,
+                    Rang = Rang.MAITRE_KRAKEN
                 },
 
                 new Provider
@@ -380,7 +381,8 @@ namespace TakoLeaf.Models
                     Id = 2,
                     Note = 0,
                     RibId = 2,
-                    AdherentId = 5
+                    AdherentId = 5,
+                    Rang = Rang.POULPE_AMATEUR
                 },
 
                 new Provider
@@ -388,7 +390,8 @@ namespace TakoLeaf.Models
                     Id = 3,
                     Note = 0,
                     RibId = 3,
-                    AdherentId = 7
+                    AdherentId = 7,
+                    Rang = Rang.POULPE_BRICOLEUR
                 }
                 );
 

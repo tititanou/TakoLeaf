@@ -1,14 +1,14 @@
 ﻿@model TakoLeaf.ViewModels.ProviderViewModel
 @{
-    Layout = "_LayoutProfilVisite";
+    Layout = "_LayoutProfil";
     ViewBag.Title = "Profil";
 }
 
 <h1> Bienvenue sur votre profil</h1>
 
-@*<div>
+<div>
         <a href="/Login/Deconnexion">Se deconnecter</a>
-    </div>*@
+    </div>
 
 <div>
     @if (Model.Amis == false)
@@ -23,8 +23,9 @@
 
     else
     {
-        <button>Suivi</button>
+        <button class="btn btn-primary btn-xl">Suivi</button>
     }
+
 </div>
 
 <div>
@@ -49,10 +50,34 @@
         <li>Adresse mail : @Model.CompteUser.Mail</li>
         <li>Description : @Model.CompteUser.Description</li>
         <li>Liste d'amis : @Model.CompteUser.Amis</li>
-        <li>Rang : @Model.Provider.Rang</li>
         <li>Etat Profil : @Model.CompteUser.EtatProfil</li>
     </ul>
 
+    <h6>Rang</h6>
+    @if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_AMATEUR)
+    {
+        <img src="~/IMG/RANG/PoulpeAmateur.png" title="Poulpe Amateur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_BRICOLEUR)
+    {
+        <img src="~/IMG/RANG/PoulpeBricoleur.png" title="Poulpe Bricoleur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_HABILE)
+    {
+        <img src="~/IMG/RANG/PieuvreHabile.png" title="Pieuvre Habile" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_RAFISTOLEUR)
+    {
+        <img src="~/IMG/RANG/PievureRafistoleur.png" title="Pieuvre Rafistoleur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.CALAMAR_RAVALEUR)
+    {
+        <img src="~/IMG/RANG/CalamarRavaleur.png" title="Calamar Ravaleur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.MAITRE_KRAKEN)
+    {
+        <img src="~/IMG/RANG/MaitreKraken.png" title="Maitre Krakenr" />
+    }
 
     <h2> Information Ressources</h2>
 
@@ -106,3 +131,123 @@
         }
     </table>
 </div>
+<div class="container_Location">
+    @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville
+</div>
+
+<div class="container_Competences">
+    <table border="1">
+        <tr>
+            <th>Competence</th>
+            <th>Tarif Horaire</th>
+        </tr>
+
+        @for (int i = 0; i < Model.Competence.Count; i++)
+        {
+            <tr>
+                <td>@Model.Competence[i].NomSsCate</td>
+                <td>@Model.Competence[i].TarifHoraire</td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+@*<div class="container_Presentation">
+    @Model.CompteUser.Description
+</div>
+
+<div class="container_Competences">
+            
+
+        @for (int i = 0; i < Model.Competence.Count; i++)
+        {
+            @Model.Competence[i].NomSsCate @Model.Competence[i].TarifHoraire ;
+
+        }
+    
+</div>
+
+<div class="container_RS">
+
+    <div class="icones_RS">
+        <a href="#"><img src="IMG/RS PROFILE/entypo-social_facebook-with-circle.png" alt=""></a>
+        <a href="#"><img src="IMG/RS PROFILE/entypo-social_instagram-with-circle.png" alt=""></a>
+        <a href="#"><img src="IMG/RS PROFILE/entypo-social_twitter-with-circle.png" alt=""> </a>
+
+    </div>
+</div>
+
+<div class="niveau">
+    @if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_AMATEUR)
+    {
+        <img src="~/IMG/RANG/PoulpeAmateur.png" title="Poulpe Amateur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_BRICOLEUR)
+    {
+        <img src="~/IMG/RANG/PoulpeBricoleur.png" title="Poulpe Bricoleur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_HABILE)
+    {
+        <img src="~/IMG/RANG/PieuvreHabile.png" title="Pieuvre Habile" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_RAFISTOLEUR)
+    {
+        <img src="~/IMG/RANG/PievureRafistoleur.png" title="Pieuvre Rafistoleur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.CALAMAR_RAVALEUR)
+    {
+        <img src="~/IMG/RANG/CalamarRavaleur.png" title="Poulpe Amateur" />
+    }
+    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.MAITRE_KRAKEN)
+    {
+        <img src="~/IMG/RANG/MaitreKraken.png" title="Poulpe Amateur" />
+    }
+</div>
+
+<div class="profile_provider">
+    <div class="tarif">
+        <p>Tarif</p>
+    </div>
+
+    <div class="follow">
+        @if (Model.Amis == false)
+        {
+
+            @using (Html.BeginForm("Suivre", "ProfilUser"))
+            {
+                <input type="text" name="id" value="@Model.Adherent.Id" style="display:none;" />
+                <button type="submit">Suivre</button>
+            }
+        }
+
+        else
+        {
+            <button>Suivi</button>
+        }
+
+    </div>
+
+    <div class="contacter">
+        <div class="elements">
+            <p>Contacter</p>
+            <a href="#"> <img src="~/IMG/Localisation/Envelope Open.png" alt="">  </a>
+        </div>
+    </div>
+   
+    
+    <p class="Nom-Provider">@Model.Adherent.Nom</p>
+    <p class="Prenom-Provider">@Model.Adherent.Prenom</p>
+</div>
+
+<div class="img-localisation">
+    <img src="IMG/Localisation/Drawing Pin Filled.png" alt="">
+    <p>Localisé(e) au @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville</p>
+</div>*@
