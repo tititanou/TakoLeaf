@@ -1,6 +1,7 @@
 @model List<TakoLeaf.Models.Message>
 @{
     Layout = null;
+
 }
 
 <!DOCTYPE html>
@@ -13,20 +14,27 @@
 </head>
     <body>
         <h3>Messages Envoyés</h3>
-        <table>
-            <thead>
-                @Html.CheckBox("IsChecked") | <i class="far fa-trash-alt"></i>
-            </thead>
-            @foreach (var message in Model)
-            {
-                <tr>
-                    <td>@Html.CheckBox("IsChecked")</td>
-                    <div onclick="">
-                        <td><p>@message.AdherentDest.Prenom @message.AdherentDest.Nom</p></td>
-                        <td><p>@message.Titre</p></td>
-                    </div>
-                </tr>
-            }
-        </table>
+        @using (@Html.BeginForm("SupprimerMessage","Messagerie"))
+         {
+            <table>
+                 <thead>
+                    <th>@Html.CheckBox("IsChecked", new { id = "all" })</th>
+                    <th><label for="del"><i class="far fa-trash-alt"></i></label><input type="submit" aria-hidden="true" style="display:none" id="del" /></th>
+                </thead>
+                <tbody>
+                    @foreach (var message in Model)
+                     {
+                        <tr>
+                            @{ string goTo = "/Messagerie/Message?id=" + message.Id; }
+                            <td><input class="messCB" id="IsChecked" name="MessageList" type="checkbox" value="@message.Id"></td>
+                            <td><a href=@goTo style="text-decoration: none;color: black;">@message.AdherentDest.Prenom @message.AdherentDest.Nom</a></td>
+                            <td><a href=@goTo style="text-decoration: none; color: black;">@message.Titre</a></td>
+                        </tr>
+                     }
+                </tbody>
+            </table>
+         }
+        <script src="~/jquery-3.6.0.js"></script>
+        <script src="~/js/Messagerie-script.js"> </script>
     </body>
 </html>

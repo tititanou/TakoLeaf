@@ -1,0 +1,32 @@
+@model TakoLeaf.Models.Message
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <meta name="viewport" content="width=device-width" />
+        <title>NouveauMessage</title>
+    </head>
+    <body>
+        <h3>Nouveau Message</h3>
+        @using (Html.BeginForm())
+         {
+            
+         }
+        <script>tinymce.init({
+                selector: '.mytextarea',
+                plugins: ['image', 'lists code emoticons'],
+                toolbar: 'undo redo | styleselect | bold italic | ' +
+                    'alignleft aligncenter alignright alignjustify | ' +
+                    'outdent indent | numlist bullist | emoticons',
+                a11y_advanced_options: true,
+                min_height: 300,
+                statusbar: false
+            });</script>
+    </body>
+</html>
