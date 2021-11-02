@@ -37,6 +37,8 @@ header h1{
     justify-content: center;
 }
 
+
+
 .logo{
     padding-left: 15px;
     width: 100px;
@@ -70,24 +72,14 @@ header h1{
 
 
 .menu{
-    z-index:1000000; 
-    font-weight:bold; 
-    font-size:0.8em; 
-    width:100%; 
-    background:#f1f1f1;  
-    position:absolute; 
-    left: 0;
-    text-align:center; 
-    font-size:12px;
-}
-
-.menu{z-index:1000; 
-	right:0px;
+    
+    z-index:1000; 
+	left:0px;
 	font-weight:bold; 
 	font-size:0.8em; 
 	width:300px; 
     height: 1965px;
-	background:#ffffff;
+	background:white;
 	position:absolute; 
 	text-align:left; 
 	font-size:16px;
@@ -98,7 +90,9 @@ header h1{
 }
 
 
+
 .menuIMG{
+   
     z-index:1000001; 
     position: absolute;
     display: flex;
@@ -112,16 +106,15 @@ header h1{
 }
 
 .menuIMG img{
+   
     padding:14px 0 12px 0; 
 }
 
-.menuIMG:hover{
-    color:#A1E1AF;
-    text-decoration:none;
-}
+
 
 
 .menu ul {
+    
     position: absolute;
     left: 60px;
 	list-style-type: none; 
@@ -132,19 +125,11 @@ header h1{
     
 
 .menu li {
+   
     display: block;   
 	padding:15px 0 15px 0; 
 	}
 
-.menu ul li a { 
-	text-decoration:none;  
-	margin: 0px; 
-	color:#ffffff;
-}
-.menu ul li a:hover {  
-	color: #FFFFFF; 
-	text-decoration:none;
-}
 .menu a{
 	text-decoration:none; 
 	color:#808080;

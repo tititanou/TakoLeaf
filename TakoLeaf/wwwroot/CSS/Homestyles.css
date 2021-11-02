@@ -112,26 +112,23 @@ header h1{
 	padding:15px 0 15px 0; 
 	}
 
-    .menu ul li .actionlink {
-        text-decoration: none;
-        margin: 0px;
-        color: #FFFFFF;
-    }
-
-        .menu ul li .actionlink:hover {
-            color: #FFFFFF;
-            text-decoration: none;
-        }
-
-    .menu .actionlink {
-        text-decoration: none;
-        color: #FFFFFF;
-    }
-
-    .menu .actionlink:hover {
-        text-decoration: none;
-        color: #A1E1AF;
-    }
+.menu ul li a { 
+	text-decoration:none;  
+	margin: 0px; 
+	color:#FFFFFF;
+}
+.menu ul li a:hover {  
+	color: #FFFFFF; 
+	text-decoration:none;
+}
+.menu a{
+	text-decoration:none; 
+	color:#FFFFFF;
+}
+.menu a:hover{
+	text-decoration:none; 
+	color:#A1E1AF;
+}
 
 .glyphicon-home{
   color:white; 
