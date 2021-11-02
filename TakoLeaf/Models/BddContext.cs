@@ -260,6 +260,20 @@ namespace TakoLeaf.Models
 
                 );
 
+            this.Historiques.AddRange( 
+                
+                new Historique { AdherentId = 1},
+                new Historique { AdherentId = 2 },
+                new Historique { AdherentId = 3 },
+                new Historique { AdherentId = 4 },
+                new Historique { AdherentId = 5 },
+                new Historique { AdherentId = 6 },
+                new Historique { AdherentId = 7 },
+                new Historique { AdherentId = 8 },
+                new Historique { AdherentId = 9 }
+
+                );
+
             this.CompteUsers.AddRange(
                  new CompteUser
                  {
@@ -320,7 +334,8 @@ namespace TakoLeaf.Models
                        Description = "C'est moi le consumer Test",
                        EtatProfil = EtatProfil.NON_VALIDE,
                        AdherentId = 6,
-                       Role = "Consumer"
+                       Role = "Consumer",
+                       Avatar = "AVATAR-ADMIN.png"
                    },
 
                    new CompteUser

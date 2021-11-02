@@ -37,6 +37,8 @@ namespace TakoLeaf.Data
         {
             Adherent adherent = new Adherent { Nom = nom, Prenom = prenom, Date_naissance = dateNaissance, AdresseId = adresseId, Telephone = telephone };
             this._bddContext.Adherents.Add(adherent);
+            Historique historique = new Historique { AdherentId = adherent.Id };
+            this._bddContext.Historiques.Add(historique);
             this._bddContext.SaveChanges();
             return adherent;
         }
