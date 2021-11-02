@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace TakoLeaf.Models
 {
     public class Ressource
@@ -15,11 +17,17 @@ namespace TakoLeaf.Models
     }
     public enum CateRessource
     {
+        [Display(Name="Outil")]
         OUTIL,
+        [Display(Name = "Outil Spécialisé")]
         OUTIL_SPECIALISE,
+        [Display(Name = "Local/Garage")]
         LOCAL_GARAGE,
+        [Display(Name = "Terrain")]
         TERRAIN,
+        [Display(Name = "Remorque")]
         REMORQUE,
+        [Display(Name = "Pont élévateur")]
         PONT_ELEVATEUR
     }
 }

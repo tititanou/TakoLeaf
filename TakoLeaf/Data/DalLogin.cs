@@ -25,7 +25,12 @@ namespace TakoLeaf.Data
 
         public Adresse CreationAdresse(string rue, int codePostal, string ville)
         {
-            Adresse adresse = new Adresse { Rue = rue, CodePostal = codePostal, Ville = ville };
+            string dep = codePostal.ToString().Substring(0, 2);
+            if (dep.Equals("97"))
+            {
+                dep = codePostal.ToString().Substring(0, 3);
+            }
+            Adresse adresse = new Adresse { Rue = rue, CodePostal = codePostal, Departement = Int32.Parse(dep), Ville = ville };
             _bddContext.Adresses.Add(adresse);
             _bddContext.SaveChanges();
             return adresse;

@@ -5,6 +5,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using TakoLeaf.Data;
 using TakoLeaf.Models;
 using TakoLeaf.ViewModels;
@@ -17,23 +19,104 @@ namespace TakoLeaf.Controllers
 
 
         private IdalProfil dal;
+        private IDalRecherche dalRecherche;
 
 
         public RechercheController()
         {
             this.dal = new DalProfil();
-
+            this.dalRecherche = new DalRecherche();
         }
 
 
-        public IActionResult Index()
+        public IActionResult Recherche()
         {
-            return View();
+            List<string> choix1 = new List<string>() { "Un utilisateur", "Un service", "Une ressource" };
+            ViewBag.Choix1 = new SelectList(choix1);
+            List<CateRessource> cateRessources = new List<CateRessource>();
+            foreach (CateRessource item in Enum.GetValues(typeof(CateRessource)))
+            {
+                cateRessources.Add(item);
+            }
+            ViewBag.Ressources = new SelectList(cateRessources);
+
+
+            List<Adherent> adherents = this.dal.ObtenirAdherents();
+            List<string> prenoms = new List<string>();
+            List<string> noms = new List<string>();
+            foreach(Adherent adherent in adherents)
+            {
+                if(prenoms.Count() == 0)
+                {
+                    prenoms.Add(adherent.Prenom);
+                }
+                else
+                {
+                    if (!prenoms.Contains(adherent.Prenom))
+                    {
+                        prenoms.Add(adherent.Prenom);
+                    }
+                }
+                if (noms.Count() == 0)
+                {
+                    noms.Add(adherent.Nom);
+                }
+                else
+                {
+                    if (!noms.Contains(adherent.Nom))
+                    {
+                        noms.Add(adherent.Nom);
+                    }
+                }
+            }
+            noms.Sort();
+            prenoms.Sort();
+            ViewBag.Noms = new List<string>(noms);
+            ViewBag.Prenoms = new List<string>(prenoms);
+
+             var model = new RechercheViewModel()
+             {
+                 SsCateList = new List<SelectListItem>(),
+                 CodePostauxList = new List<SelectListItem>()
+             };
+
+             var ssCateComp = this.dalRecherche.RechercheCompetence();
+             var adresses = this.dalRecherche.RechercheCodePostal();
+
+            foreach(var adresse in adresses)
+            {
+                var optionGroup = new SelectListGroup() { Name = adresse.Key.ToString() };
+                foreach(var codePostal in adresse.Value)
+                {
+                    model.CodePostauxList.Add(new SelectListItem() { Value = codePostal.ToString(), Text = codePostal.ToString(), Group = optionGroup });
+                }
+            }
+
+             foreach (var cateGroup in ssCateComp)
+             {
+                 var optionGroup = new SelectListGroup() { Name = cateGroup.Key };
+                 foreach (var ssCateCompetence in cateGroup.Value)
+                 {
+                     model.SsCateList.Add(new SelectListItem() { Value = ssCateCompetence.Id.ToString(), Text = ssCateCompetence.Intitule, Group = optionGroup });
+                 }
+             }
+             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Recherche(int Adresse, string Prenom, string Nom, int Competence, string Ressource)
+        {
+            List<Adherent> resultats = this.dalRecherche.RechercheAdherent(Adresse, Nom, Prenom, Competence);
+            return View("AfficherProfils", resultats);
+        }
 
-        // TODO Pour avoir l'adherenrt connecté
-        //int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        public ActionResult AfficherProfils(List<Adherent> Adhs)
+        {
+
+            return View(Adhs);
+        }
+        // TODO Pour avoir l'adherenrt connect?
+        //int idA2 = Int32.Parse(User.FindFirst(PClaimTypes.NameIdentifier).Value);
         //
 
         public IActionResult VisiteProfil(int id) // idAdherent-+
@@ -89,8 +172,6 @@ namespace TakoLeaf.Controllers
             UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voitures = voitures, Consumer = consumer, Modeles = modeles, Marques = marques, Amis = res };
 
                 return View(uvm);
-            
-
         }
 
         public IActionResult VisiteProfilProvider(int id)

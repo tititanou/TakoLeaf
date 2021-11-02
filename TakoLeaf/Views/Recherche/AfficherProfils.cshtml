@@ -1,0 +1,20 @@
+@model List<TakoLeaf.Models.Adherent>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AfficherProfils</title>
+</head>
+<body>
+    <h3>Résultat de la recherche</h3>
+    @foreach(var item in Model)
+            {
+                <h6>@item.Nom @item.Prenom</h6>
+            }
+</body>
+</html>
