@@ -13,6 +13,7 @@ namespace TakoLeaf.Data
         List<Amitie> ObtenirAmities();
         List<DemandeDevis> ObtenirDemandeDevis();
         List<DemandeDevisListeRessource> ObtenirRessourceDevis();
+        List<HistoriquePresta> ObtenirHistorique();
         public List<DemandeDevisListeCompetence> ObtenirCompetenceDevis();
         void AjoutAmis(Adherent adhrent1, Adherent adherent2);
         void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string telephone);
@@ -27,6 +28,7 @@ namespace TakoLeaf.Data
         void SupprimerRessource(Ressource ressource);
         void SupprimerCarte(Carte carte);
         List<Voiture> ObtenirVoiture();
+        List<Prestation> ObtenirToutesLesPrestations();
         List<Marque> ObtenirMarques();
         List<Carte> ObtenirCartes();
         List<Modele> ObtenirModeles();
@@ -36,7 +38,7 @@ namespace TakoLeaf.Data
         List<SsCateCompetence> ObtenirSSCompetences();
         List<CateCompetence> ObtenirCateCompetences();
         List<Ressource> ObtenirRessources();
-
+        List<Devis> ObtenirDevis();
 
 
     }

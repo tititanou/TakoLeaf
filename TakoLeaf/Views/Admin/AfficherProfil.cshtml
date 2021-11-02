@@ -1,6 +1,7 @@
 ﻿@model TakoLeaf.ViewModels.AdherentViewModel
 @{
-    Layout = null;
+    Layout = "_LayoutAdmin";
+    ViewBag.Title = "Profil";
 }
 
 <!DOCTYPE html>
@@ -9,103 +10,130 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>AfficherProfil</title>
+    <link rel="stylesheet" href="~/CSS/AfficherProfilAdminStyle.css" />
 </head>
 <body>
 
-    <div class="box">
-        <titre>FICHE INFORMATION</titre>
+    <div id="boxInfo">
+        <fieldset class="info">
+            <legend>FICHE INFORMATION</legend>
+            <div class="infoLeft">
 
-        <avatar>@*@Model.Compte.Avatar*@ Avatar</avatar>
-
-        <table>
-            <tr>
-                <th>NOM</th>
-                <td>@Model.Compte.Adherent.Nom</td>
-            </tr>
-            <tr>
-                <th>Prénom</th>
-                <td>@Model.Compte.Adherent.Prenom</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>@Model.Compte.Mail</td>
-            </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>@Model.Compte.Adherent.Telephone</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>@Model.Compte.Description</td>
-            </tr>
-            <tr>
-                <th>Date d'inscription</th>
-                <td>@Model.Compte.Adherent.DateInscription.ToShortDateString() à @Model.Compte.Adherent.DateInscription.ToShortTimeString()</td>
-            </tr>
-
-
-
-            <tr>
-                <th>Profil</th>
-
-                @if (Model.Compte.EtatProfil == TakoLeaf.Models.EtatProfil.VALIDE)
+                @if (Model.Compte.Avatar != null)
                 {
-                    <td>Validé</td>
+                    <avatar><img src="@Model.Compte.Avatar" /> Avatar</avatar><br />
                 }
-                else if (Model.Compte.EtatProfil == TakoLeaf.Models.EtatProfil.NON_VALIDE)
+                else
                 {
-                    <td>Invalide</td>
-                }
-                else if (Model.Compte.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
-                {
-                    <td>En attente de validation</td>
-                }
-                else if (Model.Compte.EtatProfil == TakoLeaf.Models.EtatProfil.COMPTE_BLOQUE)
-                {
-                    <td>Compte Suspendu</td>
+                    <avatar><img src="~/IMG/AVATAR ADMIN/Anonyme.png" /></avatar><br />
                 }
 
-        </table>
+                <div class="titre">Adhérent(e)</div>
+            </div>
+            <div class="infoRight">
+                <table class="tableData">
+                    <tr>
+                        <th>NOM</th>
+                        <td>@Model.Compte.Adherent.Nom</td>
+                    </tr>
+                    <tr>
+                        <th>Prénom</th>
+                        <td>@Model.Compte.Adherent.Prenom</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>@Model.Compte.Mail</td>
+                    </tr>
+                    <tr>
+                        <th>Téléphone</th>
+                        <td>@Model.Compte.Adherent.Telephone</td>
+                    </tr>
+
+                    <tr>
+                        <th>Date d'inscription</th>
+                        <td>@Model.Compte.Adherent.DateInscription.ToShortDateString() à @Model.Compte.Adherent.DateInscription.ToShortTimeString()</td>
+                    </tr>
+
+                    <tr>
+                        <th>Profil</th>
+
+                        @if (Model.Compte.EtatProfil == TakoLeaf.Models.EtatProfil.VALIDE)
+                        {
+                            <td><img class="etat" src="~/IMG/ICONE ADMIN/EtatValide.png"></td>
+                        }
+                        else if (Model.Compte.EtatProfil == TakoLeaf.Models.EtatProfil.NON_VALIDE)
+                        {
+                            <td><img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png"></td>
+                        }
+                        else if (Model.Compte.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
+                        {
+                            <td><img class="etatAt" src="~/IMG/ICONE ADMIN/Glyph_.png"></td>
+                        }
+                        else if (Model.Compte.EtatProfil == TakoLeaf.Models.EtatProfil.COMPTE_BLOQUE)
+                        {
+                            <td><img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png"></td>
+                        }
+
+                </table>
+            </div>
+        </fieldset>
+    </div>
+
+    <div id="box2">
+        <div class="intitule">Informations complémentaires</div>
+        <div class="infoComp">
+            <table>
+                <tr>
+                    <th>Rôle</th>
+                    <td>@Model.Compte.Role</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    @*<td>@Model.Compte.Adherent.Adresse.Rue</td>*@
+                    @*<td>@Model.Compte.Adherent.Adresse.CodePostal</td>
+                    <td>@Model.Compte.Adherent.Adresse.Ville</td>*@
+                </tr>
+
+            </table>
+        </div>
 
     </div>
 
+    @*<div id="box2">
+            <div class="intitule">Pièce(s) justificative(s)</div>
 
-
-    <div class="box">
-        <titre>Pièces justificatives</titre>
-
-        @if (Model.PieceJusti == null)
-        {
-            <p>Aucune pièce justificative n'a été déclarée</p>
-        }
-        else
-        {
-            foreach (var item in Model.PieceJusti)
+            @if (Model.PieceJusti == null)
             {
-                <div class="pc">@item</div>
+                <p>Aucune pièce justificative n'a été déclarée</p>
             }
-        }
+            else
+            {
+                foreach (var item in Model.PieceJusti)
+                {
+                    <div class="pc">@item</div>
+                }
+            }
 
-    </div>
+        </div>*@
 
-    <div class="box">
+    <div id="box3">
 
-        @Html.ActionLink("Supprimer Profil", "SupprimerCompte", "Admin", new { id = Model.Compte.AdherentId })
+        <div class="lien"> @Html.ActionLink("Supprimer profil", "SupprimerCompte", "Admin", new { id = Model.Compte.AdherentId })</div>
 
         @if (Model.Compte.EtatProfil != TakoLeaf.Models.EtatProfil.VALIDE)
         {
-            @Html.ActionLink("Valider Profil", "ValiderProfil", "Admin", new { id = Model.Compte.AdherentId })
-            @Html.ActionLink("Valider Profil", "InvaliderProfil", "Admin", new { id = Model.Compte.AdherentId })
+            <div class="lien"> @Html.ActionLink("Valider profil", "ValiderProfil", "Admin", new { id = Model.Compte.AdherentId })</div>
+            @*<div class="lien"> @Html.ActionLink("Valider profil", "InvaliderProfil", "Admin", new { id = Model.Compte.AdherentId })</div>*@
 
         }
 
         @if (Model.Compte.EtatProfil != TakoLeaf.Models.EtatProfil.COMPTE_BLOQUE)
         {
-            @Html.ActionLink("Suspendre le profil", "BloquerProfil", "Admin", new { id = Model.Compte.AdherentId })
+            <div class="lien"> @Html.ActionLink("Suspendre le profil", "BloquerProfil", "Admin", new { id = Model.Compte.AdherentId })</div>
         }
         else
         {
-            @Html.ActionLink("Débloquer le compte", "DebloquerProfil", "Admin", new { id = Model.Compte.AdherentId })
+            <div class="lien"> @Html.ActionLink("Débloquer le compte", "DebloquerProfil", "Admin", new { id = Model.Compte.AdherentId })</div>
         }
 
     </div>

@@ -1,0 +1,25 @@
+﻿@model List<TakoLeaf.Models.HistoriquePresta>
+@{
+    Layout = "_Layout";
+}
+
+<h2>Historique</h2>
+
+
+
+
+@for (int i = 0; i < Model.Count; i++)
+{
+    <h3>Prestation n° @i</h3>
+    <ul>
+        <li>Date debut : @Model[i].Prestation.DateDebut</li>
+        <li>Consumer : @Model[i].Prestation.Consumer.Adherent.Prenom  @Model[i].Prestation.Consumer.Adherent.Nom</li>
+        <li>Provider : @Model[i].Prestation.Provider.Adherent.Prenom  @Model[i].Prestation.Provider.Adherent.Nom</li>
+        <li>Adresse : @Model[i].Prestation.Provider.Adherent.Adresse.Rue ,  @Model[i].Prestation.Provider.Adherent.Adresse.CodePostal , @Model[i].Prestation.Provider.Adherent.Adresse.Ville</li>
+        <li>Voiture : @Model[i].Prestation.Voiture.Modele.Marque.Nom @Model[i].Prestation.Voiture.Modele.Nom</li>
+        <li>Prix : @Model[i].Prestation.Prix €</li>
+        <li>note</li>
+               
+
+    </ul>
+}

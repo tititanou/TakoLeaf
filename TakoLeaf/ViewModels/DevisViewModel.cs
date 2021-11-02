@@ -14,6 +14,7 @@ namespace TakoLeaf.ViewModels
         public Provider Provider { get; set; }
         public int IdC { get; set; }
         public int IdP { get; set; }
+        public double Tarif { get; set; }
        
         public List<DemandeDevisViewModel> ListeDemandeDevis { get; set; }
         public DemandeDevis DemandeDevis { get; set; }
@@ -22,6 +23,7 @@ namespace TakoLeaf.ViewModels
         public List<DemandeDevisListeRessource> ListeRessourcesDevis { get; set; }
         public List<Ressource> Ressources { get; set; }
         public List<Competence> Competences { get; set; }
+        public Devis Devis { get; set; }
 
         public List<DevisCheckBoxViewModel> ListD { get; set; }
         public List<DevisCheckBoxViewModel> ListR { get; set; }

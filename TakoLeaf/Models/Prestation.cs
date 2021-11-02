@@ -9,13 +9,14 @@ namespace TakoLeaf.Models
 {
     public class Prestation
     {
+       
         public int Id { get; set; }
 
         [Required]
-        public DateTime DateVoulue { get; set; }
+        public DateTime DateDebut { get; set; }
 
         [Required]
-        public int Prix { get; set; }
+        public double Prix { get; set; }
 
         
         public int ProviderId { get; set; }

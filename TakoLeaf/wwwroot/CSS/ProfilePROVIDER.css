@@ -181,10 +181,44 @@ header h1{
     left: 750px;
 }
 
+    .container_Competences li {
+        
+        position: relative;
+        list-style-type: none;
+        padding-left: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+.container li:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 5px;
+    height: 11px;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    border-color: #00a8a8;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+}
+
 .container_Competences p{
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+#container_txt {
+
+    color : red
+    display :flex;
+    flex-direction :column;
+
+
+
+
 }
 
 
@@ -368,6 +402,45 @@ header h1{
 
 }
 
+#follow-button {
+    color: white;
+    font-family: "Roboto";
+    font-size: 20pt;
+    background-color: #699BF7;
+    border: 1px solid;
+    border-color: #3399FF;
+    width: 180px;
+    position: relative;
+    height: 92px;
+    cursor: hand;
+    left: 500px;
+    border-radius: 40px;
+    top: 250px;
+    left: 270px;
+    box-shadow: 0px 6px 10px #c9c9c9;
+}
+
+ /*   .follow button {
+        position: absolute;
+        width: 180px;
+        Height: 92px;
+        border: solid 1px;
+        border-radius: 40px;
+        border-color: #ffffff;
+        background-color: #699BF7;
+        top: 250px;
+        left: 270px;
+        box-shadow: 0px 6px 10px #c9c9c9;
+    }*/
+
+.follow p{
+    font-size: 30px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center; 
+    
+}
 
 .contacter{
     position: absolute;

@@ -22,18 +22,35 @@ namespace TakoLeaf.Data
 
         public void CreationMessage(Message message)
         {
-            throw new NotImplementedException();
+            
+            this._bddContext.Messages.Add(message);
+            this._bddContext.SaveChanges();
+            MessageEnvoye messageEnvoye = new MessageEnvoye
+            {
+                MessageId = message.Id,
+                ExpediteurId = message.AdherentExpId,
+                DestinataireId = message.AdherentDestId
+            };
+            MessageRecu messageRecu = new MessageRecu
+            {
+                MessageId = message.Id,
+                ExpediteurId = message.AdherentExpId,
+                DestinataireId = message.AdherentDestId
+            };
+            this._bddContext.MessageEnvoyes.Add(messageEnvoye);
+            this._bddContext.MessageRecus.Add(messageRecu);
+            this._bddContext.SaveChanges();
         }
 
         public List<Message> GetMessageRecus(int id)
         {
-            List<Message> allMessages = this._bddContext.Messages.Include(m => m.AdherentDest).Include(m => m.AdherentExp).ToList();
+            List<MessageRecu> allMessages = this._bddContext.MessageRecus.Include(m => m.Message).ThenInclude(m=>m.AdherentDest).Include(m=>m.Message).ThenInclude(m=>m.AdherentExp).ToList();
             List<Message> messageRecus = new List<Message>();
-            foreach(Message message in allMessages)
+            foreach(MessageRecu message in allMessages)
             {
-                if (message.AdherentDestId == id)
+                if (message.DestinataireId == id)
                 {
-                    messageRecus.Add(message);
+                    messageRecus.Add(message.Message);
                 }
             }
             return messageRecus;
@@ -41,13 +58,13 @@ namespace TakoLeaf.Data
 
         public List<Message> GetMessageEnvoyes(int id)
         {
-            List<Message> allMessages = this._bddContext.Messages.Include(m => m.AdherentDest).Include(m => m.AdherentExp).ToList();
+            List<MessageEnvoye> allMessages = this._bddContext.MessageEnvoyes.Include(m => m.Message).ThenInclude(m => m.AdherentDest).Include(m => m.Message).ThenInclude(m=>m.AdherentExp).ToList();
             List<Message> messageEnvoyes = new List<Message>();
-            foreach (Message message in allMessages)
+            foreach (MessageEnvoye message in allMessages)
             {
-                if (message.AdherentExpId == id)
+                if (message.ExpediteurId == id)
                 {
-                    messageEnvoyes.Add(message);
+                    messageEnvoyes.Add(message.Message);
                 }
             }
             return messageEnvoyes;
@@ -55,12 +72,67 @@ namespace TakoLeaf.Data
 
         public Message GetMessage(int id)
         {
-            throw new NotImplementedException();
+            List<Message> allMessages = this._bddContext.Messages.Include(m => m.AdherentExp).Include(m => m.AdherentDest).ToList();
+            Message message = null;
+            foreach(Message messageItem in allMessages)
+            {
+                if(messageItem.Id == id)
+                {
+                    message = messageItem;
+                }
+            }
+            return message;
         }
 
-        public void SuppressionMessage(Message message)
+        public MessageRecu GetMessageRecu(int id)
         {
-            throw new NotImplementedException();
+            List<MessageRecu> allMessageRecus = this._bddContext.MessageRecus.ToList();
+            MessageRecu messageRecu = null;
+            foreach (MessageRecu messageItem in allMessageRecus)
+            {
+                if (messageItem.Id == id)
+                {
+                    messageRecu = messageItem;
+                }
+            }
+            return messageRecu;
+        }
+
+        public MessageEnvoye GetMessageEnvoye(int id)
+        {
+            List<MessageEnvoye> allMessageEnvoyes = this._bddContext.MessageEnvoyes.ToList();
+            MessageEnvoye message = null;
+            foreach (MessageEnvoye messageItem in allMessageEnvoyes)
+            {
+                if (messageItem.Id == id)
+                {
+                    message = messageItem;
+                }
+            }
+            return message;
+        }
+
+        public void SuppressionMessageRecu(MessageRecu messageRecu)
+        {
+            Message message = this.GetMessage(messageRecu.Id);
+            if(this.GetMessageEnvoye(messageRecu.Id) == null)
+            {
+                this._bddContext.Messages.Remove(message);
+            }
+            this._bddContext.MessageRecus.Remove(messageRecu);
+            this._bddContext.SaveChanges();
+        }
+
+        public void SuppressionMessageEnvoye(MessageEnvoye messageEnvoye)
+        {
+            MessageRecu messageRecu = this.GetMessageRecu(messageEnvoye.Id);
+            Message message = this.GetMessage(messageEnvoye.Id);
+            if (messageRecu == null)
+            {
+                this._bddContext.Messages.Remove(message);
+            }
+            this._bddContext.MessageEnvoyes.Remove(messageEnvoye);
+            this._bddContext.SaveChanges();
         }
     }
 }

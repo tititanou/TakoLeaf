@@ -11,7 +11,7 @@ using TakoLeaf.ViewModels;
 
 namespace TakoLeaf.Controllers
 {
-    [Authorize]
+    
     public class RechercheController : Controller
     {
 

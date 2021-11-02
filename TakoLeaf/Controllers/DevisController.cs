@@ -152,10 +152,66 @@ namespace TakoLeaf.Controllers
                 tarif = tarif + ressource.TarifJournalier;
             }
 
+            Devis devis = new Devis { 
+                Tarif = tarif, 
+                DateEmission = DateTime.Now, 
+                LieuPresta = provider.Adherent.Adresse,
+                DemandeDevisId = demande.Id
+                                
+            };
 
-            return View();
+            DevisViewModel dvm = new DevisViewModel { Consumer = consumer, Provider = provider, Voiture = voiture, DemandeDevis = demande, Devis = devis, Tarif = tarif, ListeCompetencesDevis = listC, ListeRessourcesDevis = listR };
+
+            return View(dvm);
         }
 
+        [HttpPost]
+
+        public IActionResult EmmetreDevis(DevisViewModel dvm)
+        {
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == dvm.Consumer.Id);
+            Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.Id == dvm.Provider.Id);
+            Voiture voiture = dal.ObtenirVoiture().FirstOrDefault(v => v.Id == dvm.Voiture.Id);
+            DemandeDevis demandeDevis = dal.ObtenirDemandeDevis().FirstOrDefault(d => d.Id == dvm.DemandeDevis.Id);
+            int adresse = provider.Adherent.Adresse.Id;
+
+            dalD.CreationDevis(provider.Id, consumer.Id, voiture.Id, demandeDevis.Id, dvm.Devis.DateEmission, dvm.Devis.DateDebut, dvm.Devis.DateFin, dvm.Devis.Tarif, dvm.Devis.DescriptionPresta, adresse);
+
+            return Redirect("/ProfilUser/ProfilProvider?id=" + provider.AdherentId);
+
+
+        }
+
+        public IActionResult AccepterDevis()
+        {
+
+            int IdA = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == IdA);
+
+            List<Devis> devis = dal.ObtenirDevis().Where(d => d.ConsumerId == consumer.Id).ToList();
+
+            
+            return View(devis);
+
+
+        }
+
+        [HttpPost]
+        public IActionResult AccepterDevis(string numero)
+        {
+            Devis devis = dal.ObtenirDevis().FirstOrDefault(d => d.NumeroDevis.Equals(numero));
+            dalD.CreationPrestation(devis);
+            return Redirect("/ProfilUser/ProfilConsumer?id=" + devis.Consumer.AdherentId);
+        }
+
+        [HttpPost]
+
+        public IActionResult RefuserDevis(string numero)
+        {
+            Devis devis = dal.ObtenirDevis().FirstOrDefault(d => d.NumeroDevis.Equals(numero));
+            dalD.CreationPrestationRefusee(devis);
+            return Redirect("/ProfilUser/ProfilConsumer?id=" + devis.Consumer.AdherentId);
+        }
 
 
 

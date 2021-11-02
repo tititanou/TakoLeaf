@@ -200,7 +200,7 @@ namespace TakoLeaf.Data
 
         public List<Prestation> ObtenirToutesLesPrestations()
         {
-            List<Prestation> prestations = this._bddContext.Prestations.Include(p => p.Consumer.Adherent).Include(p => p.Provider.Adherent).OrderByDescending(p => p.DateVoulue).ToList();
+            List<Prestation> prestations = this._bddContext.Prestations.Include(p => p.Consumer.Adherent).Include(p => p.Provider.Adherent).OrderByDescending(p => p.DateDebut).ToList();
             return prestations;
         }
 
@@ -273,6 +273,14 @@ namespace TakoLeaf.Data
             List<PostSignale> liste = this._bddContext.PostSignales.Include(p => p.AdherentSignalant).Include(p => p.AdherentSignale).Include(p => p.Post).ToList();
             return liste;
         }
+
+        public Provider ObtenirProvider(int id)
+        {
+            Provider provider = this._bddContext.Providers.Where(p => p.AdherentId == id).Include(p => p.Rib).FirstOrDefault();
+            return provider;
+
+        }
+
 
     }
 }

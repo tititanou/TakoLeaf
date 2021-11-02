@@ -38,7 +38,7 @@ namespace TakoLeaf.Data
 
         public List<Voiture> ObtenirVoiture()
         {
-            List<Voiture> liste = _bddContext.Voitures.Include(v => v.Modele).ToList();
+            List<Voiture> liste = _bddContext.Voitures.Include(v => v.Modele).ThenInclude(v => v.Marque).ToList();
             return liste;
         }
 
@@ -50,7 +50,7 @@ namespace TakoLeaf.Data
 
         public List<Consumer> ObtenirConsumers()
         {
-            List<Consumer> liste = _bddContext.Consumers.Include(p => p.Adherent).ToList();
+            List<Consumer> liste = _bddContext.Consumers.Include(p => p.Adherent).ThenInclude(p => p.Adresse).ToList();
             return liste;
         }
 
@@ -66,6 +66,11 @@ namespace TakoLeaf.Data
             return liste;
         }
 
+        public List<Devis> ObtenirDevis()
+        {
+            List<Devis> liste = _bddContext.Devis.Include(d => d.LieuPresta).Include(d => d.Consumer).ThenInclude(d => d.Adherent).Include(d => d.Provider).ThenInclude(d => d.Adherent).Include(d => d.Voiture).ThenInclude(d => d.Modele).ThenInclude(d => d.Marque).Include(d => d.LieuPresta).Include(d => d.DemandeDevis).ToList();
+            return liste;
+        }
         public List<DemandeDevis> ObtenirDemandeDevis()
         {
             List<DemandeDevis> liste = _bddContext.DemandeDevis.ToList();
@@ -91,7 +96,7 @@ namespace TakoLeaf.Data
 
         public List<Competence> ObtenirCompetences()
         {
-            List<Competence> liste = _bddContext.Competences.ToList();
+            List<Competence> liste = _bddContext.Competences.Include(c => c.Provider).ThenInclude(c => c.Adherent).ToList();
             return liste;
         }
         public List<SsCateCompetence> ObtenirSSCompetences()
@@ -114,10 +119,15 @@ namespace TakoLeaf.Data
            
         public List<Provider> ObtenirProviders()
         {
-            List<Provider> liste = _bddContext.Providers.Include(p =>p.Adherent).ToList();
+            List<Provider> liste = _bddContext.Providers.Include(p =>p.Adherent).ThenInclude(p =>p.Adresse).ToList();
             return liste;
         }
 
+        public List<Prestation> ObtenirToutesLesPrestations()
+        {
+            List<Prestation> prestations = this._bddContext.Prestations.Include(p => p.Consumer).ThenInclude(p => p.Adherent).ThenInclude(p => p.Adresse).Include(p => p.Provider).ThenInclude(p => p.Adherent).ThenInclude(p => p.Adresse).OrderByDescending(p => p.DateDebut).ToList();
+            return prestations;
+        }
         // MODIFICATION
 
         public void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string telephone)
@@ -248,5 +258,14 @@ namespace TakoLeaf.Data
             _bddContext.SaveChanges();
             
         }
+
+        // Historique
+
+        public List<HistoriquePresta> ObtenirHistorique() 
+        { 
+            List<HistoriquePresta> historiques = _bddContext.HistoriquePrestas.Include(p => p.Prestation).ThenInclude(p => p.Consumer).Include(p =>p.Prestation).ThenInclude(p=>p.Devis).ToList();
+            return historiques;
+        }
+       
     }
 }

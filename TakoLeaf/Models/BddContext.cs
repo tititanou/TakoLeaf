@@ -42,7 +42,8 @@ namespace TakoLeaf.Models
         public DbSet<Amitie> Amities { get; set; }
         public DbSet<DemandeDevisListeCompetence> DemandesDevisListeCompetence { get; set; }
         public DbSet<DemandeDevisListeRessource> DemandesDevisListeRessource { get; set; }
-
+        public DbSet<MessageEnvoye> MessageEnvoyes { get; set; }
+        public DbSet<MessageRecu> MessageRecus { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -259,12 +260,26 @@ namespace TakoLeaf.Models
 
                 );
 
+            this.Historiques.AddRange( 
+                
+                new Historique { AdherentId = 1},
+                new Historique { AdherentId = 2 },
+                new Historique { AdherentId = 3 },
+                new Historique { AdherentId = 4 },
+                new Historique { AdherentId = 5 },
+                new Historique { AdherentId = 6 },
+                new Historique { AdherentId = 7 },
+                new Historique { AdherentId = 8 },
+                new Historique { AdherentId = 9 }
+
+                );
+
             this.CompteUsers.AddRange(
                  new CompteUser
                  {
                      Mail = "al@gmail.com",
                      MotDePasse = dal.EncodeMD5("123"),
-                     Description = "Hello",
+                     Description = "gaebnfbgnoez nofiejog aeo ngfoaegnen goaeogae jaeg ae g aepmkgpaej pgeamt poa gm,aekp tjpa, gmae,pot apam, pt,ae t,ae t",
                      EtatProfil = EtatProfil.VALIDE,
                      AdherentId = 1,
                      Role = "Provider"
@@ -319,7 +334,8 @@ namespace TakoLeaf.Models
                        Description = "C'est moi le consumer Test",
                        EtatProfil = EtatProfil.NON_VALIDE,
                        AdherentId = 6,
-                       Role = "Consumer"
+                       Role = "Consumer",
+                       Avatar = "AVATAR-ADMIN.png"
                    },
 
                    new CompteUser
@@ -372,7 +388,8 @@ namespace TakoLeaf.Models
                     Id = 1,
                     Note = 0,
                     RibId = 1,
-                    AdherentId = 1
+                    AdherentId = 1,
+                    Rang = Rang.MAITRE_KRAKEN
                 },
 
                 new Provider
@@ -380,7 +397,8 @@ namespace TakoLeaf.Models
                     Id = 2,
                     Note = 0,
                     RibId = 2,
-                    AdherentId = 5
+                    AdherentId = 5,
+                    Rang = Rang.POULPE_AMATEUR
                 },
 
                 new Provider
@@ -388,7 +406,8 @@ namespace TakoLeaf.Models
                     Id = 3,
                     Note = 0,
                     RibId = 3,
-                    AdherentId = 7
+                    AdherentId = 7,
+                    Rang = Rang.POULPE_BRICOLEUR
                 }
                 );
 
@@ -755,7 +774,7 @@ namespace TakoLeaf.Models
             this.Prestations.AddRange(
                 new Prestation
                 {
-                    DateVoulue = new DateTime(2021, 10, 25),
+                    DateDebut = new DateTime(2021, 10, 25),
                     Prix = 100,
                     ProviderId = 1,
                     ConsumerId = 1,
@@ -767,7 +786,7 @@ namespace TakoLeaf.Models
 
                  new Prestation
                  {
-                     DateVoulue = new DateTime(2021, 10, 30),
+                     DateDebut = new DateTime(2021, 10, 30),
                      Prix = 300,
                      ProviderId = 1,
                      ConsumerId = 1,
@@ -778,7 +797,7 @@ namespace TakoLeaf.Models
 
                  new Prestation
                  {
-                     DateVoulue = new DateTime(2021, 10, 15),
+                     DateDebut = new DateTime(2021, 10, 15),
                      Prix = 150,
                      ProviderId = 2,
                      ConsumerId = 3,
@@ -789,7 +808,7 @@ namespace TakoLeaf.Models
 
                  new Prestation
                  {
-                     DateVoulue = new DateTime(2021, 10, 29),
+                     DateDebut = new DateTime(2021, 10, 29),
                      Prix = 100,
                      ProviderId = 2,
                      ConsumerId = 2,
@@ -872,6 +891,42 @@ namespace TakoLeaf.Models
                         Lu = false
                     }
                 );
+            this.MessageEnvoyes.AddRange(
+                new MessageEnvoye
+                {
+                    Id = 1,
+                    MessageId = 1,
+                    ExpediteurId = 5,
+                    DestinataireId = 3
+                },
+                new MessageEnvoye
+                {
+                    Id = 2,
+                    MessageId = 2,
+                    ExpediteurId = 3,
+                    DestinataireId = 5
+                },
+                new MessageEnvoye
+                {
+                    Id = 3,
+                    MessageId = 3,
+                    ExpediteurId = 5,
+                    DestinataireId = 1
+                },
+                new MessageEnvoye
+                {
+                    Id = 4,
+                    MessageId = 4,
+                    ExpediteurId = 2,
+                    DestinataireId = 5
+                },
+                new MessageEnvoye
+                {
+                    Id = 5,
+                    MessageId = 5,
+                    ExpediteurId = 5,
+                    DestinataireId = 2
+                });
 
             this.PostSignales.Add(
             new PostSignale
@@ -967,6 +1022,43 @@ namespace TakoLeaf.Models
                 }
 
                 );
+
+            this.MessageRecus.AddRange(
+                new MessageRecu
+                {
+                    Id = 1,
+                    MessageId = 1,
+                    ExpediteurId = 5,
+                    DestinataireId = 3
+                },
+                new MessageRecu
+                {
+                    Id = 2,
+                    MessageId = 2,
+                    ExpediteurId = 3,
+                    DestinataireId = 5
+                },
+                new MessageRecu
+                {
+                    Id = 3,
+                    MessageId = 3,
+                    ExpediteurId = 5,
+                    DestinataireId = 1
+                },
+                new MessageRecu
+                {
+                    Id = 4,
+                    MessageId = 4,
+                    ExpediteurId = 2,
+                    DestinataireId = 5
+                },
+                new MessageRecu
+                {
+                    Id = 5,
+                    MessageId = 5,
+                    ExpediteurId = 5,
+                    DestinataireId = 2
+                });
 
             this.SaveChanges();
         }

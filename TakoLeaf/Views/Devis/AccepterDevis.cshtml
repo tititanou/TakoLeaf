@@ -1,0 +1,40 @@
+﻿@model List<TakoLeaf.Models.Devis>
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Profil";
+}
+
+
+
+
+@for (int i = 0; i < Model.Count; i++)
+{
+
+<ul>
+    <li>Date emission : @Model[i].DateEmission</li>
+    <li>Consumer : @Model[i].Consumer.Adherent.Prenom  @Model[i].Consumer.Adherent.Nom</li>
+    <li>Provider : @Model[i].Provider.Adherent.Prenom  @Model[i].Provider.Adherent.Nom</li>
+    <li>Adresse : @Model[i].LieuPresta.Rue  @Model[i].LieuPresta.CodePostal @Model[i].LieuPresta.Ville</li>
+    <li>Voiture : @Model[i].Voiture.Modele.Marque.Nom @Model[i].Voiture.Modele.Nom</li>
+    <li>Prix : @Model[i].Tarif €</li>
+    <li>Date Debut : @Model[i].DateDebut.ToShortDateString()</li>
+    <li>Date fin : @Model[i].DateFin.ToShortDateString()</li>
+    <li>Description : @Model[i].DescriptionPresta</li>
+
+    @Html.HiddenFor(m => Model[i].NumeroDevis)
+
+</ul>
+    @using (Html.BeginForm("AccepterDevis", "Devis"))
+    {
+        
+        <input type="text" name="numero" value="@Model[i].NumeroDevis" style="display:none;" />
+        <button class="btn btn-primary btn-xl" type="submit">Accepter devis</button>
+    }
+
+    @using (Html.BeginForm("RefuserDevis", "Devis"))
+    {
+       
+        <input type="text" name="numero" value="@Model[i].NumeroDevis" style="display:none;" />
+        <button class="btn btn-primary btn-xl" type="submit">Refuser devis</button>
+    }
+}

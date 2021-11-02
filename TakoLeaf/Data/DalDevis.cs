@@ -43,6 +43,75 @@ namespace TakoLeaf.Data
             _bddContext.SaveChanges();
 
         }
+
+        public void CreationDevis(int idP, int idC, int idV, int iDe, DateTime dateEmi, DateTime dateDebut, DateTime datefin, double prix, string description, int idAdresse)
+        {
+            Random random = new Random();
+            string chars = "AZERTYUIOPMLKJHGFDSQWXCVBN123456789";
+            var stringChars = new char[8];
+
+            for(int i =0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            string finalstring = new string(stringChars);
+
+            Devis devis = new Devis {
+                NumeroDevis = finalstring,
+                ProviderId = idP,
+                ConsumerId = idC,
+                VoitureId = idV,
+                DemandeDevisId = iDe,
+                DateEmission = dateEmi,
+                DateDebut = dateDebut,
+                DateFin = datefin,
+                Tarif = prix,
+                DescriptionPresta = description,
+                LieuPrestaId = idAdresse,
+                EtatDevis = EtatDevis.EN_ATTENTE,               
+            };
+            _bddContext.Devis.Add(devis);
+            _bddContext.SaveChanges();
+        }
+
+        public void CreationPrestation(Devis devis)
+        {
+
+            Prestation prestation = new Prestation
+            {
+                ConsumerId = devis.ConsumerId,
+                DateDebut = devis.DateDebut,
+                EtatPresta = Prestation.Etat.En_cours,
+                NumeroDevis = devis.NumeroDevis,
+                Prix = devis.Tarif,
+                ProviderId = devis.ProviderId,
+                VoitureId = devis.VoitureId
+
+            };
+
+            _bddContext.Prestations.Add(prestation);
+            _bddContext.SaveChanges();
+        }
+
+        public void CreationPrestationRefusee(Devis devis)
+        {
+            Prestation prestation = new Prestation
+            {
+                ConsumerId = devis.ConsumerId,
+                DateDebut = devis.DateDebut,
+                EtatPresta = Prestation.Etat.Refuse,
+                NumeroDevis = devis.NumeroDevis,
+                Prix = devis.Tarif,
+                ProviderId = devis.ProviderId,
+                VoitureId = devis.VoitureId
+
+            };
+
+
+            _bddContext.Prestations.Add(prestation);
+            _bddContext.SaveChanges();
+        }
         
     }
 }

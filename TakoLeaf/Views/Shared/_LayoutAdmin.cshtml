@@ -1,18 +1,18 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Tako Leaf Admin</title>
+    <title>Admin</title>
 
-    <link rel="stylesheet" href="css/_LayoutAdmin.css">
+    <link rel="stylesheet" href="~/CSS/_LayoutAdmin.css">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet">
+          rel="stylesheet">
 
     <!-- BOOSTRAP CSS-->
-    <link rel="stylesheet" href="site/css/bootstrap.css">
+    <link rel="stylesheet" href="~/site/css/bootstrap.css">
 
 
 
@@ -20,118 +20,81 @@
 
 </head>
 <body>
-    
+
     <!--Début Section du Header-->
-<section>
-    <header>
-        <div class="imgALERT">
-            <a href="#"><img src="IMG/ICONE ADMIN/BELL.png"></a>
-        </div>
-        <div class="AdminIMG"><img src="IMG/AVATAR ADMIN/AVATAR-ADMIN.png"></div>
-        <div class="logo"><img src="IMG/TAKO ECO new.png"></div>
-        <h1 class="titremidheader">Tako Leaf</h1>
-        
-    </header>   
- </section>
+    <section>
+        <header>
+            <div class="imgALERT">
+                <a href="#"><img src="~/IMG/ICONE ADMIN/BELL.png"></a>
+            </div>
+            <div class="AdminIMG"><img src="~/IMG/AVATAR ADMIN/AVATAR-ADMIN.png"></div>
+            <div class="logo"><img src="~/IMG/TAKO ECO new.png"></div>
+            <h1 class="titremidheader">Tako Leaf</h1>
 
+        </header>
+    </section>
 
-<!--FIn Section du Header-->
 
+    <!--FIn Section du Header-->
 
-<section class="PAGEMID">
-    <div class="menu">
-        <ul>
-          <a href="#"><li>Dashboard</li></a>
-          <a href="#"><li>Messages</li></a>
-          <a href="#"><li>Comptes</li></a>
-          <a href="#"><li>Transactions</li></a>
-          <a href="#"><li>Articles</li></a>
-        </ul>
-    </div> 
-    <div class="menuIMG">
-        <img src="IMG/ICONE ADMIN/Group.png">
-        <img src="IMG/ICONE ADMIN/Envelope Closed.png">
-        <img src="IMG/ICONE ADMIN/Person.png">
-        <img src="IMG/ICONE ADMIN/Bar Chart.png">
-        <img src="IMG/ICONE ADMIN/Pencil 2.png">
-        
-    </div>
 
+    <section class="PAGEMID">
 
 
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li><a>@Html.ActionLink("Dashboard", "dashboard", "admin")</a></li>
+                    <li> <a href="#">messages</a></li>
+                    <li>@Html.ActionLink("Comptes", "gestioncomptes", "admin")</li>
+                    <li> <a href="#">@Html.ActionLink("Transaction", "AfficherTransactions", "Admin")</a></li>
+                    <li><a>@Html.ActionLink("Articles", "gestionarticles", "admin")</a></li>
+                </ul>
+            </div>
+            <div class="menuIMG">
+                <img src="~/IMG/ICONE ADMIN/Group.png">
+                <img src="~/IMG/ICONE ADMIN/Envelope Closed.png">
+                <img src="~/IMG/ICONE ADMIN/Person.png">
+                <img src="~/IMG/ICONE ADMIN/Bar Chart.png">
+                <img src="~/IMG/ICONE ADMIN/Pencil 2.png">
 
+            </div>
+        </nav>
 
+        @RenderBody()
 
 
+    </section>
 
 
 
 
 
 
+    <!--Section footer-->
 
+    <section class="footerBot">
+        <footer class="footer-items">
+        </footer>
 
 
 
 
 
+    </section>
 
 
 
 
+    <!--FIN Section footer-->
+    <!-- D'abord on vas mettre Jquery-->
+    <script src="~/jquery-3.6.0.js"></script>
 
+    <!-- Puis on vas mettre boostrap.JS-->
+    <script src="./site/js/bootstrap.bundle.js"></script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-<!--Section footer-->
-
-<section class="footerBot">
-    <footer class="footer-items">
-    </footer>
-
-
-
-
-
- </section>
- 
-
-
-
-<!--FIN Section footer-->
-
-
-<!-- D'abord on vas mettre Jquery-->
-<script src="jquery-3.6.0.js"></script>
-
-<!-- Puis on vas mettre boostrap.JS-->
-<script src="js/boostrap.bundle.js"></script>
-
-
-<script src="js/_LayoutAdmin.js"></script>
+    @*<script src="~/js/_Layout.js"></script>*@
 
 
 

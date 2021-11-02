@@ -8,7 +8,8 @@
 <html>
 <head>
     <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>PublicationArticle</title>
 </head>
 <body>
@@ -38,20 +39,81 @@
                     @Html.ValidationMessageFor(model => model.Image)
                 </div>
 
-                <button class="btn btn-primary btn-xl" type="submit">Publier</button>
-
+                <button type="button" onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Publier</button>
+                <button type="button" onclick="document.GetElementById('id02').style.display='block'" class="w3-button w3-black">Ajouter</button>
             </fieldset>
+            <div id="id01" class="w3-modal">
+                <div class="w3-modal-content">
+                    <header class="w3-container w3-teal">
+                        <span onclick="document.getElementById('id01').style.display='none'"
+                              class="w3-button w3-display-topright">&times;</span>
+                        <h2>Attention @User.Identity.Name !</h2>
+                    </header>
+                    <div class="w3-container">
+                        <p>Confirmer la publication de l'article sur le site ?</p>
+                        <button type="submit" class="cancelbtn">Let's go !</button>
+                        <button type="button" class="deletebtn" onclick="document.getElementById('id01').style.display='none'">Finalement...</button>
+                    </div>
+                    <footer class="w3-container w3-teal">
+                        <p>TakoLeaf.inc</p>
+                    </footer>
+                </div>
+            </div>
+
+
+            <div id="id02" class="w3-modal">
+                <div class="w3-modal-content">
+                    <header class="w3-container w3-teal">
+                        <span onclick="document.getElementById('id02').style.display='none'"
+                              class="w3-button w3-display-topright">&times;</span>
+                        <h2>Attention @User.Identity.Name !</h2>
+                    </header>
+                    <div class="w3-container">
+                        <p>L'article ne sera pas publié sur le site et sera mis en attente</p>
+                        <button type="submit" class="cancelbtn">Confirmer</button>
+                        <button type="button" class="deletebtn" onclick="document.getElementById('id02').style.display='none'">Finalement...</button>
+                    </div>
+                    <footer class="w3-container w3-teal">
+                        <p>TakoLeaf.inc</p>
+                    </footer>
+                </div>
+            </div>
 
         }
 
     </center>
 
     <script>
-    function OuvrirPostForm(id) {
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id02');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+
+    <script>
+        function OuvrirPostForm(id) {
             document.getElementById(id).style.display = "block";
         }</script>
     <script>
-    tinymce.init({
+        tinymce.init({
             selector: '.mytextarea',
             plugins: 'image',
             a11y_advanced_options: true

@@ -1,6 +1,8 @@
 ﻿@model TakoLeaf.ViewModels.DashViewModel
+
 @{
-    Layout = null;
+    Layout = "_LayoutAdmin";
+    ViewBag.Title = "Dashboard";
 }
 
 <!DOCTYPE html>
@@ -8,8 +10,11 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/CSS/AfficherProfilAdminStyle.css" />
     <title>Dashboard</title>
+
     <style>
+
 
         th {
             text-align: left;
@@ -20,9 +25,9 @@
 
 
         table, th, td {
-            text-align:center;
-            font-family: sans-serif;
-            padding:10px;
+            text-align: center;
+            font-family: 'Roboto';
+            padding: 10px;
         }
 
         tr:nth-child(even) {
@@ -39,8 +44,8 @@
             padding-left: 200px;
             padding-bottom: 100px;
             padding-top: 50px;
-            display: inline-block; 
-            float: left; 
+            display: inline-block;
+            float: left;
         }
 
         .box {
@@ -49,15 +54,15 @@
             padding-top: 50px;
             text-align: center;
             font-family: sans-serif;
-            font-size: 50px; 
+            font-size: 50px;
             display: inline-block;
             float: left;
             clear: right;
         }
 
-        .conteneur{
+        .conteneur {
             padding: 10px;
-            clear:left;
+            clear: left;
         }
 
         fieldset {
@@ -69,21 +74,26 @@
             box-shadow: 10px 5px 5px grey;
         }
 
-        legend {
-            font-family: sans-serif;
-            font-size: 30px;
-            font-weight:bolder;
-            font-style:italic;
-            background-color: #A1E1AF;
-            color:white;
-            padding: 50px;
-            border-radius: 10px 100px / 120px;
-        }
+        /*legend {
+    font-family: sans-serif;
+    font-size: 30px;
+    font-weight: bolder;
+    font-style: italic;
+    background-color: #A1E1AF;
+    color: white;
+    padding: 50px;
+    border-radius: 10px 100px / 120px;
+}*/
+
+
+
     </style>
+    
 </head>
+
 <body>
 
-    <h1 style="text-align:center; font-family:sans-serif">-- Dashboard --</h1>
+    <h1>-- Dashboard --</h1>
 
 
 
@@ -104,7 +114,7 @@
                     <tr>
                         <td>@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
                         <td>@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
-                        <td>@item.DateVoulue.ToShortDateString()</td>
+                        <td>@item.DateDebut.ToShortDateString()</td>
 
                         @if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Refuse)
                         {
@@ -133,7 +143,7 @@
         <fieldset>
             <legend>Vos gains</legend>
 
-            @{int count = 0; }
+            @{double count = 0; }
 
             @foreach (var item in Model.ListePrestations)
             {

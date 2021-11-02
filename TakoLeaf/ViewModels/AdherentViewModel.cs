@@ -10,6 +10,7 @@ namespace TakoLeaf.ViewModels
     {
         public CompteUser Compte { get; set; }
         public List<PieceJustificative> PieceJusti { get; set; }
+        public Provider InfoProvider { get; set; }
 
     }
 }

@@ -186,7 +186,7 @@
                     @Html.TextBoxFor(model => model.Image)
                     @Html.ValidationMessageFor(model => model.Image)
                 </div>
-                <button type="button" onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Publier</button>
+                <button type="button" onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Publier</button> 
             </fieldset>
 
             @*<div id="postForm" style="visibility:hidden">
@@ -233,6 +233,8 @@
             </div>
         </div>
 
+
+
     }
 
 
@@ -249,6 +251,17 @@
         }
     </script>
 
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id02');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
     <script>
         function OuvrirPostForm(id) {
