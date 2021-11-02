@@ -178,7 +178,13 @@
     </div>
 
 
-
+    <div class="pp_Provider">
+        <div class="pp_providerImage">
+            @{ string image = Model.CompteUser.Avatar;}
+            <img src=@image alt="">
+        </div>
+        <img src="IMG/Localisation/bi_check-circle-fill.png" class="Checked" alt="">
+    </div>
 
 
     <div class="contacter">
@@ -194,7 +200,7 @@
 </div>
 
 <div>
-    <button>@Html.ActionLink("Demander un devis", "DemandeDevis", "Devis", new { id = Model.Provider.Id })</button>
+    <button id="devis-button">@Html.ActionLink("Demander un devis", "DemandeDevis", "Devis", new { id = Model.Provider.Id })</button>
 </div>
 
 <div class="img-localisation">
@@ -249,45 +255,47 @@
         </ul>
     </div>
 
+</div>
+
+<div class="container_Location">
+    <div>
+        <ul>
+            @for (int i = 0; i < Model.Ressources.Count; i++)
+            {
+                <li>
+                    @Model.Ressources[i].Intitule     @Model.Ressources[i].TarifJournalier €
+                </li>
+
+            }
+        </ul>
+    </div>
+</div>
+
+<div class="container_Avis">
+
+    @if (Model.Avis.Count == 0)
+    {
+        <p>Pas d'avis laissé</p>
+    }
+    else
+    {
+        @for (int i = 0; i < Model.Avis.Count; i++)
+        {
+            <p>@Model.Avis[i].Contenu</p>
+
+        }
+    }
 
 </div>
 
 <div class="container_RS">
 
-
-    <div class="niveau">
-        @if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_AMATEUR)
-        {
-            <img src="~/IMG/RANG/PoulpeAmateur.png" title="Poulpe Amateur" />
-        }
-        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_BRICOLEUR)
-        {
-            <img src="~/IMG/RANG/PoulpeBricoleur.png" title="Poulpe Bricoleur" />
-        }
-        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_HABILE)
-        {
-            <img src="~/IMG/RANG/PieuvreHabile.png" title="Pieuvre Habile" />
-        }
-        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_RAFISTOLEUR)
-        {
-            <img src="~/IMG/RANG/PievureRafistoleur.png" title="Pieuvre Rafistoleur" />
-        }
-        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.CALAMAR_RAVALEUR)
-        {
-            <img src="~/IMG/RANG/CalamarRavaleur.png" title="Poulpe Amateur" />
-        }
-        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.MAITRE_KRAKEN)
-        {
-            <img src="~/IMG/RANG/MaitreKraken.png" title="Poulpe Amateur" />
-        }
-    </div>
-
-
-
+    
     <div class="icones_RS">
-        <a href="#"><img src="IMG/RS PROFILE/entypo-social_facebook-with-circle.png" alt=""></a>
-        <a href="#"><img src="IMG/RS PROFILE/entypo-social_instagram-with-circle.png" alt=""></a>
-        <a href="#"><img src="IMG/RS PROFILE/entypo-social_twitter-with-circle.png" alt=""> </a>
+        <a href="#"><img src="~/IMG/RS PROFILE/entypo-social_instagram-with-circle.png" alt=""></a>
+        <a href="#"><img src="~/IMG/RS PROFILE/entypo-social_facebook-with-circle.png" alt=""></a>
+        <a href="#"><img src="~/IMG/RS PROFILE/entypo-social_twitter-with-circle.png" alt=""> </a>
 
     </div>
+
 </div>

@@ -291,6 +291,7 @@ namespace TakoLeaf.Models
                      Description = "gaebnfbgnoez nofiejog aeo ngfoaegnen goaeogae jaeg ae g aepmkgpaej pgeamt poa gm,aekp tjpa, gmae,pot apam, pt,ae t,ae t",
                      EtatProfil = EtatProfil.VALIDE,
                      AdherentId = 1,
+                     Avatar ="cv.png",
                      Role = "Provider"
 
                  },
