@@ -123,6 +123,11 @@ namespace TakoLeaf.Data
             return liste;
         }
 
+        public List<Prestation> ObtenirToutesLesPrestations()
+        {
+            List<Prestation> prestations = this._bddContext.Prestations.Include(p => p.Consumer).ThenInclude(p => p.Adherent).ThenInclude(p => p.Adresse).Include(p => p.Provider).ThenInclude(p => p.Adherent).ThenInclude(p => p.Adresse).OrderByDescending(p => p.DateDebut).ToList();
+            return prestations;
+        }
         // MODIFICATION
 
         public void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string telephone)
@@ -253,5 +258,14 @@ namespace TakoLeaf.Data
             _bddContext.SaveChanges();
             
         }
+
+        // Historique
+
+        public List<HistoriquePresta> ObtenirHistorique() 
+        { 
+            List<HistoriquePresta> historiques = _bddContext.HistoriquePrestas.Include(p => p.Prestation).ThenInclude(p => p.Consumer).Include(p =>p.Prestation).ThenInclude(p=>p.Devis).ToList();
+            return historiques;
+        }
+       
     }
 }

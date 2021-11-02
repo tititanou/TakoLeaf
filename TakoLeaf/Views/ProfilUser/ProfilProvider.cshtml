@@ -21,10 +21,9 @@
         <li>Adresse : @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville</li>
         <li>Telephone : @Model.Adherent.Telephone</li>
     </ul>-->
+@*@Html.ActionLink("Modifier information adherent", "ModifInfosAdherent", "ProfilUser", new { id = Model.Adherent.Id })*@
 
-    @*@Html.ActionLink("Modifier information adherent", "ModifInfosAdherent", "ProfilUser", new { id = Model.Adherent.Id })*@
-
-    <!--<h2>Information Compte</h2>
+<!--<h2>Information Compte</h2>
     <ul>
         <li>Adresse mail : @Model.CompteUser.Mail</li>
         <li>Description : @Model.CompteUser.Description</li>
@@ -33,7 +32,6 @@
         <li>Etat Profil : @Model.CompteUser.EtatProfil</li>
     </ul>
 </div>-->
-
 @*@Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })*@
 
 
@@ -71,7 +69,6 @@
         }
     </table>
 }-->
-
 @*@Html.ActionLink("Ajouter Ressources", "AjoutRessource", "ProfilUser", new { id = Model.Provider.Id })
     @Html.ActionLink("Modifier Ressources", "ModifierRessource", "ProfilUser", new { id = Model.Provider.Id })*@
 
@@ -92,7 +89,6 @@
         </tr>
     }
 </table>-->
-
 @*@Html.ActionLink("Modifier Competences", "ModifCompetence", "ProfilUser", new { id = Model.Provider.Id })
     @Html.ActionLink("Ajouter Competences", "AjoutCompetence", "ProfilUser", new { id = Model.Provider.Id })*@
 
@@ -169,7 +165,7 @@
         <p>Tarif</p>
     </div>
     <div class="follow">
-        <p>Suivre</p>
+        <button></button>
 
     </div>
     <div class="contacter">
@@ -184,5 +180,14 @@
 
 <div class="img-localisation">
     <img src="IMG/Localisation/Drawing Pin Filled.png" alt="">
-    <p>Localisé(e) à..</p>
+    <p>Localisé(e) à <br />@Model.Adherent.Adresse.Rue <br />@Model.Adherent.Adresse.CodePostal @Model.Adherent.Adresse.Ville</p>
+</div>
+
+<div class="pp_Provider">
+    <div class="pp_providerImage">
+
+        <img src="/IMG/AVATAR ADMIN/AVATAR-ADMIN.png" />
+    </div>
+    <img src="IMG/Localisation/bi_check-circle-fill.png" class="Checked" alt="">
+    <img src="IMG/Localisation/Notes.png" alt="" class="notes">
 </div>

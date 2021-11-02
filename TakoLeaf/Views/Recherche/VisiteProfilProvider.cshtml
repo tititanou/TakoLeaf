@@ -1,59 +1,208 @@
 ﻿@model TakoLeaf.ViewModels.ProviderViewModel
 @{
-    Layout = "_LayoutProfil";
+    Layout = "_LayoutProfilProvider";
     ViewBag.Title = "Profil";
 }
 
-<h1> Bienvenue sur votre profil</h1>
+@*<h1> Bienvenue sur votre profil</h1>
 
-<div>
-        <a href="/Login/Deconnexion">Se deconnecter</a>
+    <div>
+            <a href="/Login/Deconnexion">Se deconnecter</a>
+        </div>
+
+    <div>
+        @if (Model.Amis == false)
+        {
+
+            @using (Html.BeginForm("Suivre", "ProfilUser"))
+            {
+                <input type="text" name="id" value="@Model.Adherent.Id" style="display:none;" />
+                <button class="btn btn-primary btn-xl" type="submit">Suivre</button>
+            }
+        }
+
+        else
+        {
+            <button class="btn btn-primary btn-xl">Suivi</button>
+        }
+
     </div>
 
-<div>
-    @if (Model.Amis == false)
-    {
+    <div>
+        <button>@Html.ActionLink("Demander un devis", "DemandeDevis", "Devis", new { id = Model.Provider.Id })</button>
+    </div>
 
-        @using (Html.BeginForm("Suivre", "ProfilUser"))
+    <div>
+        <h1>Informations du profil</h1>
+        <h2>Information Adherent</h2>
+        <ul>
+            <li>Avatar : @Model.CompteUser.Avatar</li>
+            <li>Nom : @Model.Adherent.Nom</li>
+            <li>Prenom : @Model.Adherent.Prenom</li>
+            <li>Date de Naissance : @Model.Adherent.Date_naissance.ToShortDateString()</li>
+            <li>Adresse : @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville</li>
+            <li>Telephone : @Model.Adherent.Telephone</li>
+        </ul>
+
+
+        <h2>Information Compte</h2>
+        <ul>
+            <li>Adresse mail : @Model.CompteUser.Mail</li>
+            <li>Description : @Model.CompteUser.Description</li>
+            <li>Liste d'amis : @Model.CompteUser.Amis</li>
+            <li>Etat Profil : @Model.CompteUser.EtatProfil</li>
+        </ul>
+
+        <h6>Rang</h6>
+        @if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_AMATEUR)
         {
-            <input type="text" name="id" value="@Model.Adherent.Id" style="display:none;" />
-            <button class="btn btn-primary btn-xl" type="submit">Suivre</button>
+            <img src="~/IMG/RANG/PoulpeAmateur.png" title="Poulpe Amateur" />
         }
-    }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_BRICOLEUR)
+        {
+            <img src="~/IMG/RANG/PoulpeBricoleur.png" title="Poulpe Bricoleur" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_HABILE)
+        {
+            <img src="~/IMG/RANG/PieuvreHabile.png" title="Pieuvre Habile" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_RAFISTOLEUR)
+        {
+            <img src="~/IMG/RANG/PievureRafistoleur.png" title="Pieuvre Rafistoleur" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.CALAMAR_RAVALEUR)
+        {
+            <img src="~/IMG/RANG/CalamarRavaleur.png" title="Calamar Ravaleur" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.MAITRE_KRAKEN)
+        {
+            <img src="~/IMG/RANG/MaitreKraken.png" title="Maitre Krakenr" />
+        }
 
-    else
-    {
-        <button class="btn btn-primary btn-xl">Suivi</button>
-    }
+        <h2> Information Ressources</h2>
 
+        @if (Model.Ressources != null)
+        {
+            <table border="1">
+                <tr>
+                    <th>Intitule</th>
+                    <th>Adresse</th>
+                    <th>Tarif Journalier</th>
+                    <th>Categorie</th>
+                    <th>Disponible</th>
+                </tr>
+
+                @for (int i = 0; i < Model.Ressources.Count; i++)
+                {
+                    <tr>
+                        <td>@Model.Ressources[i].Intitule</td>
+                        <td>@Model.Ressources[i].Adresse</td>
+                        <td>@Model.Ressources[i].TarifJournalier</td>
+                        <td>@Model.Ressources[i].Categorie</td>
+                        @if (@Model.Ressources[i].Disponible)
+                        {
+                            <td>Oui</td>
+                        }
+                        else
+                        {
+                            <td>Non</td>
+                        }
+
+                    </tr>
+                }
+            </table>
+        }
+
+
+
+        <h2> Information Competences</h2>
+        <table border="1">
+            <tr>
+                <th>Competence</th>
+                <th>Tarif Horaire</th>
+            </tr>
+
+            @for (int i = 0; i < Model.Competence.Count; i++)
+            {
+                <tr>
+                    <td>@Model.Competence[i].NomSsCate</td>
+                    <td>@Model.Competence[i].TarifHoraire</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="container_Location">
+        @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville
+    </div>
+
+    <div class="container_Competences">
+        <table border="1">
+            <tr>
+                <th>Competence</th>
+                <th>Tarif Horaire</th>
+            </tr>
+
+            @for (int i = 0; i < Model.Competence.Count; i++)
+            {
+                <tr>
+                    <td>@Model.Competence[i].NomSsCate</td>
+                    <td>@Model.Competence[i].TarifHoraire</td>
+                </tr>
+            }
+        </table>
+    </div>*@
+
+
+
+<div class="profile_provider">
+    <div class="tarif">
+        <p>Tarif</p>
+    </div>
+
+    <div class="followbt">
+        @if (Model.Amis == false)
+        {
+
+            @using (Html.BeginForm("Suivre", "ProfilUser"))
+            {
+                <input type="text" name="id" value="@Model.Adherent.Id" style="display:none;" />
+                <button id="follow-button" type="submit">Suivre</button>
+            }
+        }
+
+        else
+        {
+            <button id="follow-button">Suivi</button>
+        }
+
+    </div>
+
+
+
+
+
+    <div class="contacter">
+        <div class="elements">
+            <p>Contacter</p>
+            <a href="#"> <img src="~/IMG/Localisation/Envelope Open.png" alt="">  </a>
+        </div>
+    </div>
+
+
+    <p class="Nom-Provider">@Model.Adherent.Nom</p>
+    <p class="Prenom-Provider">@Model.Adherent.Prenom</p>
 </div>
 
 <div>
     <button>@Html.ActionLink("Demander un devis", "DemandeDevis", "Devis", new { id = Model.Provider.Id })</button>
 </div>
 
-<div>
-    <h1>Informations du profil</h1>
-    <h2>Information Adherent</h2>
-    <ul>
-        <li>Avatar : @Model.CompteUser.Avatar</li>
-        <li>Nom : @Model.Adherent.Nom</li>
-        <li>Prenom : @Model.Adherent.Prenom</li>
-        <li>Date de Naissance : @Model.Adherent.Date_naissance.ToShortDateString()</li>
-        <li>Adresse : @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville</li>
-        <li>Telephone : @Model.Adherent.Telephone</li>
-    </ul>
+<div class="img-localisation">
+    <img src="IMG/Localisation/Drawing Pin Filled.png" alt="">
+    <p>Localisé(e) à <br />@Model.Adherent.Adresse.Rue <br />@Model.Adherent.Adresse.CodePostal @Model.Adherent.Adresse.Ville</p>
+</div>
 
-
-    <h2>Information Compte</h2>
-    <ul>
-        <li>Adresse mail : @Model.CompteUser.Mail</li>
-        <li>Description : @Model.CompteUser.Description</li>
-        <li>Liste d'amis : @Model.CompteUser.Amis</li>
-        <li>Etat Profil : @Model.CompteUser.EtatProfil</li>
-    </ul>
-
-    <h6>Rang</h6>
+<div class="niveau">
     @if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_AMATEUR)
     {
         <img src="~/IMG/RANG/PoulpeAmateur.png" title="Poulpe Amateur" />
@@ -78,104 +227,62 @@
     {
         <img src="~/IMG/RANG/MaitreKraken.png" title="Maitre Krakenr" />
     }
-
-    <h2> Information Ressources</h2>
-
-    @if (Model.Ressources != null)
-    {
-        <table border="1">
-            <tr>
-                <th>Intitule</th>
-                <th>Adresse</th>
-                <th>Tarif Journalier</th>
-                <th>Categorie</th>
-                <th>Disponible</th>
-            </tr>
-
-            @for (int i = 0; i < Model.Ressources.Count; i++)
-            {
-                <tr>
-                    <td>@Model.Ressources[i].Intitule</td>
-                    <td>@Model.Ressources[i].Adresse</td>
-                    <td>@Model.Ressources[i].TarifJournalier</td>
-                    <td>@Model.Ressources[i].Categorie</td>
-                    @if (@Model.Ressources[i].Disponible)
-                    {
-                        <td>Oui</td>
-                    }
-                    else
-                    {
-                        <td>Non</td>
-                    }
-
-                </tr>
-            }
-        </table>
-    }
-
-
-
-    <h2> Information Competences</h2>
-    <table border="1">
-        <tr>
-            <th>Competence</th>
-            <th>Tarif Horaire</th>
-        </tr>
-
-        @for (int i = 0; i < Model.Competence.Count; i++)
-        {
-            <tr>
-                <td>@Model.Competence[i].NomSsCate</td>
-                <td>@Model.Competence[i].TarifHoraire</td>
-            </tr>
-        }
-    </table>
-</div>
-<div class="container_Location">
-    @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville
-</div>
-
-<div class="container_Competences">
-    <table border="1">
-        <tr>
-            <th>Competence</th>
-            <th>Tarif Horaire</th>
-        </tr>
-
-        @for (int i = 0; i < Model.Competence.Count; i++)
-        {
-            <tr>
-                <td>@Model.Competence[i].NomSsCate</td>
-                <td>@Model.Competence[i].TarifHoraire</td>
-            </tr>
-        }
-    </table>
 </div>
 
 
 
-
-
-
-
-
-
-@*<div class="container_Presentation">
+<div class="container_Presentation">
     @Model.CompteUser.Description
 </div>
 
 <div class="container_Competences">
-            
 
-        @for (int i = 0; i < Model.Competence.Count; i++)
-        {
-            @Model.Competence[i].NomSsCate @Model.Competence[i].TarifHoraire ;
+    <div>
+        <ul>
+            @for (int i = 0; i < Model.Competence.Count; i++)
+            {
+                <li>
+                    @Model.Competence[i].NomSsCate      @Model.Competence[i].TarifHoraire €
+                </li>
 
-        }
-    
+            }
+        </ul>
+    </div>
+
+
 </div>
 
 <div class="container_RS">
+
+
+    <div class="niveau">
+        @if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_AMATEUR)
+        {
+            <img src="~/IMG/RANG/PoulpeAmateur.png" title="Poulpe Amateur" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_BRICOLEUR)
+        {
+            <img src="~/IMG/RANG/PoulpeBricoleur.png" title="Poulpe Bricoleur" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_HABILE)
+        {
+            <img src="~/IMG/RANG/PieuvreHabile.png" title="Pieuvre Habile" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_RAFISTOLEUR)
+        {
+            <img src="~/IMG/RANG/PievureRafistoleur.png" title="Pieuvre Rafistoleur" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.CALAMAR_RAVALEUR)
+        {
+            <img src="~/IMG/RANG/CalamarRavaleur.png" title="Poulpe Amateur" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.MAITRE_KRAKEN)
+        {
+            <img src="~/IMG/RANG/MaitreKraken.png" title="Poulpe Amateur" />
+        }
+    </div>
+
+
 
     <div class="icones_RS">
         <a href="#"><img src="IMG/RS PROFILE/entypo-social_facebook-with-circle.png" alt=""></a>
@@ -184,70 +291,3 @@
 
     </div>
 </div>
-
-<div class="niveau">
-    @if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_AMATEUR)
-    {
-        <img src="~/IMG/RANG/PoulpeAmateur.png" title="Poulpe Amateur" />
-    }
-    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_BRICOLEUR)
-    {
-        <img src="~/IMG/RANG/PoulpeBricoleur.png" title="Poulpe Bricoleur" />
-    }
-    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_HABILE)
-    {
-        <img src="~/IMG/RANG/PieuvreHabile.png" title="Pieuvre Habile" />
-    }
-    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_RAFISTOLEUR)
-    {
-        <img src="~/IMG/RANG/PievureRafistoleur.png" title="Pieuvre Rafistoleur" />
-    }
-    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.CALAMAR_RAVALEUR)
-    {
-        <img src="~/IMG/RANG/CalamarRavaleur.png" title="Poulpe Amateur" />
-    }
-    else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.MAITRE_KRAKEN)
-    {
-        <img src="~/IMG/RANG/MaitreKraken.png" title="Poulpe Amateur" />
-    }
-</div>
-
-<div class="profile_provider">
-    <div class="tarif">
-        <p>Tarif</p>
-    </div>
-
-    <div class="follow">
-        @if (Model.Amis == false)
-        {
-
-            @using (Html.BeginForm("Suivre", "ProfilUser"))
-            {
-                <input type="text" name="id" value="@Model.Adherent.Id" style="display:none;" />
-                <button type="submit">Suivre</button>
-            }
-        }
-
-        else
-        {
-            <button>Suivi</button>
-        }
-
-    </div>
-
-    <div class="contacter">
-        <div class="elements">
-            <p>Contacter</p>
-            <a href="#"> <img src="~/IMG/Localisation/Envelope Open.png" alt="">  </a>
-        </div>
-    </div>
-   
-    
-    <p class="Nom-Provider">@Model.Adherent.Nom</p>
-    <p class="Prenom-Provider">@Model.Adherent.Prenom</p>
-</div>
-
-<div class="img-localisation">
-    <img src="IMG/Localisation/Drawing Pin Filled.png" alt="">
-    <p>Localisé(e) au @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville</p>
-</div>*@
