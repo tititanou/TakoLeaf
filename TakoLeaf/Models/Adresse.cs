@@ -16,6 +16,7 @@ namespace TakoLeaf.Models
         [Required(ErrorMessage = "Cette information est obligatoire")]
         [Display(Name = "Code Postal")]
         public int CodePostal { get; set; }
+        public int Departement { get; set; }
         [Required(ErrorMessage = "Cette information est obligatoire")]
         [Column(TypeName = "varchar(60)")]
         public string Ville { get; set; }

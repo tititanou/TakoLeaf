@@ -86,6 +86,7 @@ namespace TakoLeaf.Models
                     Id = 1,
                     Rue = "124 Rue Hoche",
                     CodePostal = 93100,
+                    Departement = 93,
                     Ville = "Montreuil"
                 },
 
@@ -95,6 +96,7 @@ namespace TakoLeaf.Models
                     Id = 2,
                     Rue = "148 rue du faubourg saint-martin",
                     CodePostal = 75010,
+                    Departement = 75,
                     Ville = "Paris"
                 },
 
@@ -103,6 +105,7 @@ namespace TakoLeaf.Models
                     Id = 3,
                     Rue = "74 Rue General de Gaulle",
                     CodePostal = 92250,
+                    Departement = 92,
                     Ville = "La Garenne Colombes"
                 },
 
@@ -111,6 +114,7 @@ namespace TakoLeaf.Models
                     Id = 4,
                     Rue = "14 Rue de la Victoire",
                     CodePostal = 57100,
+                    Departement = 57,
                     Ville = "Thionville"
                 },
 
@@ -119,6 +123,7 @@ namespace TakoLeaf.Models
                     Id = 5,
                     Rue = "1 Rue Boucher",
                     CodePostal = 30364,
+                    Departement = 30,
                     Ville = "Guibert"
                 },
 
@@ -127,6 +132,7 @@ namespace TakoLeaf.Models
                     Id = 6,
                     Rue = "5 Chemin Susanne Joseph",
                     CodePostal = 13177,
+                    Departement = 13,
                     Ville = "Leroux"
 
                 },
@@ -136,6 +142,7 @@ namespace TakoLeaf.Models
                     Id = 7,
                     Rue = "13 Rue de Pottier",
                     CodePostal = 64127,
+                    Departement = 64,
                     Ville = "Descamps"
 
                 },
@@ -145,6 +152,7 @@ namespace TakoLeaf.Models
                     Id = 8,
                     Rue = "40 Rue des Coteaux",
                     CodePostal = 64127,
+                    Departement = 64,
                     Ville = "Tonnay"
 
                 },
@@ -154,6 +162,7 @@ namespace TakoLeaf.Models
                     Id = 9,
                     Rue = "13 Avenue de la république",
                     CodePostal = 64127,
+                    Departement = 64,
                     Ville = "Lyon"
 
                 }
