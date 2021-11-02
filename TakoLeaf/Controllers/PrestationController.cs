@@ -73,8 +73,9 @@ namespace TakoLeaf.Controllers
         {
             DalPrestation dalPrestation = new DalPrestation();
             dalPrestation.CreationAvis(avm.Prestation.Consumer.Id, avm.Prestation.Provider.Id, avm.Avis.Note, avm.Avis.Contenu, avm.Prestation.Id);
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.Id == avm.Prestation.Consumer.Id);
 
-            return Redirect("/Prestation/Historique?id=" + avm.Prestation.Consumer.AdherentId);
+            return Redirect("/Prestation/Historique?id=" + consumer.AdherentId);
 
 
         }
@@ -83,8 +84,13 @@ namespace TakoLeaf.Controllers
         public IActionResult Historique(int id)
         {
             List<HistoriquePresta> historiquePrestas = dal.ObtenirHistorique().Where(h => h.HistoriqueId == id).ToList();
-            
-            return View(historiquePrestas);
+            List<Avis> liste = new List<Avis>();
+            foreach(HistoriquePresta item in historiquePrestas)
+            {
+                liste.Add(dal.ObtenirAvis().FirstOrDefault(a => a.PrestationId == item.PrestationId));
+            }
+            HistoriqueViewModel hvm = new HistoriqueViewModel { Avis = liste, HistoriquePrestas = historiquePrestas };
+            return View(hvm);
         }
     }
 }

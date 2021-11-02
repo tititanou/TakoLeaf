@@ -1,4 +1,4 @@
-﻿@model List<TakoLeaf.Models.HistoriquePresta>
+﻿@model TakoLeaf.ViewModels.HistoriqueViewModel
 @{
     Layout = "_Layout";
 }
@@ -8,17 +8,18 @@
 
 
 
-@for (int i = 0; i < Model.Count; i++)
+@for (int i = 0; i < Model.HistoriquePrestas.Count; i++)
 {
-    <h3>Prestation n° @i</h3>
+    <h3>Prestation n° @(i+1)</h3>
     <ul>
-        <li>Date debut : @Model[i].Prestation.DateDebut</li>
-        <li>Consumer : @Model[i].Prestation.Consumer.Adherent.Prenom  @Model[i].Prestation.Consumer.Adherent.Nom</li>
-        <li>Provider : @Model[i].Prestation.Provider.Adherent.Prenom  @Model[i].Prestation.Provider.Adherent.Nom</li>
-        <li>Adresse : @Model[i].Prestation.Provider.Adherent.Adresse.Rue ,  @Model[i].Prestation.Provider.Adherent.Adresse.CodePostal , @Model[i].Prestation.Provider.Adherent.Adresse.Ville</li>
-        <li>Voiture : @Model[i].Prestation.Voiture.Modele.Marque.Nom @Model[i].Prestation.Voiture.Modele.Nom</li>
-        <li>Prix : @Model[i].Prestation.Prix €</li>
-        <li>note</li>
+        <li>Date debut : @Model.HistoriquePrestas[i].Prestation.DateDebut</li>
+        <li>Consumer : @Model.HistoriquePrestas[i].Prestation.Consumer.Adherent.Prenom  @Model.HistoriquePrestas[i].Prestation.Consumer.Adherent.Nom</li>
+        <li>Provider : @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Prenom @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Nom</li>
+        <li>Adresse : @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Adresse.Rue ,  @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Adresse.CodePostal , @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Adresse.Ville</li>
+        <li>Voiture : @Model.HistoriquePrestas[i].Prestation.Voiture.Modele.Marque.Nom @Model.HistoriquePrestas[i].Prestation.Voiture.Modele.Nom</li>
+        <li>Prix : @Model.HistoriquePrestas[i].Prestation.Prix €</li>
+        <li>Note : @Model.Avis[i].Note</li>
+        <li>Avis : @Model.Avis[i].Contenu</li>
                
 
     </ul>

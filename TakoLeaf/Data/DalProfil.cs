@@ -30,6 +30,12 @@ namespace TakoLeaf.Data
             return liste;          
         }
 
+        public List<Avis> ObtenirAvis()
+        {
+            List<Avis> liste = _bddContext.Avis.Include(a => a.Prestation).Include(a => a.Provider).Include(a => a.Prestation).ToList();
+            return liste;
+        }
+
         public List<CompteUser> ObtenirCompteUser()
         {
             List<CompteUser> liste = _bddContext.CompteUsers.ToList();
@@ -263,7 +269,7 @@ namespace TakoLeaf.Data
 
         public List<HistoriquePresta> ObtenirHistorique() 
         { 
-            List<HistoriquePresta> historiques = _bddContext.HistoriquePrestas.Include(p => p.Prestation).ThenInclude(p => p.Consumer).Include(p =>p.Prestation).ThenInclude(p=>p.Devis).ToList();
+            List<HistoriquePresta> historiques = _bddContext.HistoriquePrestas.Include(p => p.Prestation).ThenInclude(p => p.Consumer).ThenInclude(p => p.Adherent).ThenInclude(p => p.Adresse).Include(p =>p.Prestation).ThenInclude(p=>p.Devis).Include(p => p.Prestation.Provider).ThenInclude(p => p.Adherent).ThenInclude(p => p.Adresse).Include(p =>p.Prestation).ThenInclude(p=>p.Voiture).ThenInclude(p=>p.Modele).ThenInclude(p => p.Marque).ToList();
             return historiques;
         }
        

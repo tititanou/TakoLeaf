@@ -12,6 +12,7 @@ namespace TakoLeaf.Data
         List<CompteUser> ObtenirCompteUser();
         List<Amitie> ObtenirAmities();
         List<DemandeDevis> ObtenirDemandeDevis();
+        List<Avis> ObtenirAvis();
         List<DemandeDevisListeRessource> ObtenirRessourceDevis();
         List<HistoriquePresta> ObtenirHistorique();
         public List<DemandeDevisListeCompetence> ObtenirCompetenceDevis();

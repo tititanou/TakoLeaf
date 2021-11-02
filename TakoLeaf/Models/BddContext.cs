@@ -260,17 +260,17 @@ namespace TakoLeaf.Models
 
                 );
 
-            this.Historiques.AddRange( 
-                
-                new Historique { AdherentId = 1},
-                new Historique { AdherentId = 2 },
-                new Historique { AdherentId = 3 },
-                new Historique { AdherentId = 4 },
-                new Historique { AdherentId = 5 },
-                new Historique { AdherentId = 6 },
-                new Historique { AdherentId = 7 },
-                new Historique { AdherentId = 8 },
-                new Historique { AdherentId = 9 }
+            this.Historiques.AddRange(
+
+                new Historique { Id = 1, AdherentId = 1 },
+                new Historique { Id = 2, AdherentId = 2 },
+                new Historique { Id = 3, AdherentId = 3 },
+                new Historique { Id = 4, AdherentId = 4 },
+                new Historique { Id = 5, AdherentId = 5 },
+                new Historique { Id = 6, AdherentId = 6 },
+                new Historique { Id = 7, AdherentId = 7 },
+                new Historique { Id = 8, AdherentId = 8 },
+                new Historique { Id = 9, AdherentId = 9 }
 
                 );
 

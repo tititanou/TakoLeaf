@@ -48,10 +48,18 @@ namespace TakoLeaf.Data
         {
             Avis avis = new Avis { ConsumerId = idC, ProviderId = idP, Note = note, Contenu = contenu, PrestationId = idPresta, DateCreation = DateTime.Now };
             _bddContext.Avis.Add(avis);
+            _bddContext.SaveChanges();
             Provider provider = _bddContext.Providers.Find(idP);
-            List<HistoriquePresta> historique = _bddContext.HistoriquePrestas.Where(p => p.Prestation.ProviderId == idP).Where(p => p.Prestation.EtatPresta == Prestation.Etat.Valide).ToList();
+            List<HistoriquePresta> historique = _bddContext.HistoriquePrestas.Where(p => p.HistoriqueId == provider.AdherentId && p.Prestation.EtatPresta == Prestation.Etat.Valide).ToList();
             int nbr = historique.Count;
-            //provider.Note = (provider.Note + note) / nbr;
+            DalProfil dalProfil = new DalProfil();
+            List<Avis> Avis = dalProfil.ObtenirAvis();
+            double noteP = 0;
+            foreach(Avis item in Avis)
+            {
+                noteP = noteP + item.Note;
+            }
+            provider.Note = noteP / Avis.Count ;
             _bddContext.SaveChanges();
         }
 
