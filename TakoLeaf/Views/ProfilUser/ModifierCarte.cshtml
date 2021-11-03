@@ -32,7 +32,7 @@
                         <td>@Html.TextBoxFor(model => model.Cartes[i].NumeroCarte, new { @class = "textbox" })</td>
                         <td>@Html.TextBoxFor(model => model.Cartes[i].ExpirDate, new { @class = "textbox" })</td>
                         <td>@Html.TextBoxFor(model => model.Cartes[i].Crypto, new { @class = "textbox" })</td>
-                        <td><button>@Html.ActionLink("Supprimer la carte", "SupprimerCarte", "ProfilUser", new { @class = "valider", id = Model.Cartes[i].Id })</button></td>
+                        <td><button class="valider">@Html.ActionLink("Supprimer la carte", "SupprimerCarte", "ProfilUser", new { @class = "valider", id = Model.Cartes[i].Id })</button></td>
                     </tr>
 
 
@@ -44,27 +44,28 @@
         </div>
     </div>
 
-
+    <div class="row">
+        <button class="valider" style="text-align : center" type="submit">Modifier Cartes</button>
+    </div>
+    <br />
 
 
 
     <div class="raw">
-        <button class="valider">@Html.ActionLink("Ajouter une carte", "AjouterCarte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+        <button class="valider" style="align-content : center">@Html.ActionLink("Ajouter une carte", "AjouterCarte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
     </div>
 
 
     <br />
-    <div class="row">
-        <button class="valider" type="submit">Modifier Cartes</button>
-    </div>
-    
+
+
     <br />
 
     <div class="row">
-        <button class="valider">@Html.ActionLink("Retour au modification de compte", "ModifCompte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+        <button class="valider" style="width : auto ; text-align : center;">@Html.ActionLink("Retour au modification de compte", "ModifCompte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
     </div>
     <br />
-    
+
 
 
     <br />

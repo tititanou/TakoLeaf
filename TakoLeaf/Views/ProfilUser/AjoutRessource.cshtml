@@ -3,39 +3,40 @@
     Layout = "_LayoutConnecte";
     ViewBag.Title = "Ajout Ressource";
 }
+
+<link rel="stylesheet" href="~/CSS/Zoutils.css" />
 <h2 class="text-center"> Veuillez indiquer les indiquer les ressources</h2>
-<div class="container w-auto">
-    
+<div class="container">
+
     @using (Html.BeginForm())
     {
 
         <div>
             @Html.LabelFor(m => m.Ressource.Intitule)
-            @Html.TextBoxFor(m => m.Ressource.Intitule)
+            @Html.TextBoxFor(m => m.Ressource.Intitule, new { @class = "textbox" })
 
-            @Html.LabelFor(m => m.Ressource.Adresse.Rue)
+            @Html.LabelFor(m => m.Ressource.Adresse.Rue, new { @class = "textbox" })
             @Html.TextBoxFor(m => m.Ressource.Adresse.Rue)
 
             @Html.LabelFor(m => m.Ressource.Adresse.CodePostal)
-            @Html.TextBoxFor(m => m.Ressource.Adresse.CodePostal)
+            @Html.TextBoxFor(m => m.Ressource.Adresse.CodePostal, new { @class = "textbox" })
 
             @Html.LabelFor(m => m.Ressource.Adresse.Ville)
-            @Html.TextBoxFor(m => m.Ressource.Adresse.Ville)
+            @Html.TextBoxFor(m => m.Ressource.Adresse.Ville, new { @class = "textbox" })
 
             @Html.LabelFor(m => m.Ressource.TarifJournalier)
-            @Html.TextBoxFor(m => m.Ressource.TarifJournalier)
+            @Html.TextBoxFor(m => m.Ressource.TarifJournalier, new { @class = "textbox" })
 
             @Html.LabelFor(m => m.Ressource.Categorie)
             @Html.DropDownListFor(m => m.Ressource.Categorie, (SelectList)ViewBag.Cate)
         </div>
 
-        <button id="ajouter" type="submit">Ajouter</button>
-
+        <button class="valider" id="ajouter" type="submit">Ajouter</button>
+        <button class="valider">@Html.ActionLink("Retour au profil", "ProfilProvider", "ProfilUser", new { id = Model.Provider.AdherentId })</button>
         @Html.HiddenFor(m => m.Provider.Id)
         @Html.HiddenFor(m => m.Provider.AdherentId)
     }
     <br />
-    
+
 </div>
   
-<button class="text-center">@Html.ActionLink("Retour au profil", "ProfilProvider", "ProfilUser", new { id = Model.Provider.AdherentId })</button>

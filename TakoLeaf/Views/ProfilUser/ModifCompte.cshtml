@@ -10,37 +10,43 @@
 
 
 <div class="conteneur">
-    <div class="article">
+    <div class="article" style="width : 900px; height : 500px; text-align : center">
         @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-
+            <br />
+            <br />
             @Html.LabelFor(model => model.MotDePasse)
             @Html.TextBoxFor(model => model.MotDePasse, new { @type = "password", @class = "textbox", placeholder = "Mot de Passe" })
             @Html.ValidationMessageFor(model => model.MotDePasse)
-
+            <br />
+            <br />
 
             @Html.LabelFor(model => model.Avatar)
             <input type="file" name="fileToUpload" />
-
+            <br />
+            <br />
 
 
             @Html.LabelFor(model => model.Description)
             @Html.TextBoxFor(model => model.Description, new { @class = "textbox", placeholder = "Description" })
             @Html.ValidationMessageFor(model => model.Description)
-
+            <br />
+            <br />
 
             @Html.HiddenFor(m => m.AdherentId)
             @Html.HiddenFor(m => m.Mail)
             @Html.HiddenFor(m => m.Role)
-
+            <br />
 
             <!-- Submit Button-->
             <button class="valider" type="submit">Modifier</button>
         }
 
+        <br />
+        <br />
 
         <h3>Coordonnées banquaires</h3>
-        <button class="valider">@Html.ActionLink("Modifier les coordonnées banquaire", "ModifierCarte", "ProfilUser", new { id = Model.AdherentId })</button>
+        <button class="valider" style="width :auto;">@Html.ActionLink("Modifier les coordonnées banquaire", "ModifierCarte", "ProfilUser", new { id = Model.AdherentId })</button>
 
         <br />
         @if (Model.Role.Equals("Consumer"))
