@@ -1,6 +1,6 @@
-@model TakoLeaf.Models.Message
+@model TakoLeaf.ViewModels.MessagerieViewModel
 @{
-    Layout = null;
+    Layout = "_LayoutConnecte";
 }
 
 <!DOCTYPE html>
@@ -13,43 +13,52 @@
         <title>Message</title>
     </head>
     <body>
-        <div style="display:inline"><button type="button"><i class="fas fa-edit"></i>Nouveau Message</button><button type="button" id="rep" onclick="Repondre()"><i class="fas fa-reply"></i>Répondre</button><button type="button" onclick="window.location.href = '@Url.Action("Supprimer", "Messagerie", new { Id = @Model.Id })'"><i class="far fa-trash-alt"></i>Supprimer</button></div>
-        <br />
-        <i style="display:inline-block" class="fas fa-long-arrow-alt-left" onclick="window.history.go(-1);"></i>    <h4 style="display:inline-block">@Model.Titre</h4>
-        <br />
-        <p style="display:inline-block">De:  </p>   <h5 style="display:inline-block">@Model.AdherentExp.Prenom @Model.AdherentExp.Nom</h5>
-        <br />
-        <small>@Model.Date</small>
-        <br />
-        <br />
-        <p style="display:inline-block">A:  </p>   <h5 style="display:inline-block">@Model.AdherentDest.Prenom @Model.AdherentDest.Nom</h5>
-
-        <p>@Model.Msg</p>
-
-        <hr />
-
-        <div style="display:none; border:solid 1px;" id="reponse">
-            @using (Html.BeginForm("NouveauMessage", "Messagerie"))
-            {
-                /*@Html.HiddenFor(model => model.AdherentExpId, new { name = "Destinataire", id = "Destinataire" })*/
-    <input name="Destinataire" value=@Model.AdherentExpId style="display:none" />
-                    <h5 class="tinymce-dest" style="border: solid 1px; width:100%; margin-top:0; margin-bottom:0;">À:   @Model.AdherentExp.Prenom @Model.AdherentExp.Nom</h5>
-                                    <div style="border: solid 1px; width:100%; height:20px; margin-top:0; padding-top:0;">
-                                        <label for="Objet" style="display: inline-block; margin-top:0; padding-top: 0;">Objet:</label>
-                                        <h4 class="tinymce-title" id="Objet" style="display: inline-block; width: 90%; margin-top: 0; padding-top: 0;" name="Objet"> RE:@Model.Titre</h4>
-                                    </div>
-                                                    <textarea class="tinymce-body" style="border: solid 1px;" name="Message">
-                                                    <div style="height:100px"></div>
-                                                    <p>Le @Model.Date.ToShortDateString() à @Model.Date.ToShortTimeString(), @Model.AdherentExp.Prenom a écrit:</p>
-                    @Html.Raw(Model.Msg)
-                </textarea>
-                                                                    <button type="submit">Valider</button>}
+        <div class="container">
+            <div class="card mx-auto" style="width:80%">
+                <div class="card-header text-center">
+                    <i style="display:inline-block; float:left" class="fas fa-long-arrow-alt-left" onclick="window.history.go(-1);"></i>
+                    <h4 style="display:inline-block">@Model.Message.Titre</h4>
+                </div>
+                <div class="card-body">
+                    <p style="display:inline-block">De:  </p>   <h5 style="display:inline-block">@Model.Message.AdherentExp.Prenom @Model.Message.AdherentExp.Nom</h5>
+                    <br />
+                    <small>@Model.Message.Date</small>
+                    <br />
+                    <br />
+                    <p style="display:inline-block">A:  </p>   <h5 style="display:inline-block">@Model.Message.AdherentDest.Prenom @Model.Message.AdherentDest.Nom</h5>
+                    <p>@Model.Message.Msg</p>
+                    <div style="display:none; border:solid 1px;" id="reponse">
+                        @using (Html.BeginForm("NouveauMessage", "Messagerie"))
+                        {
+                            /*@Html.HiddenFor(model => model.AdherentExpId, new { name = "Destinataire", id = "Destinataire" })*/
+            <input name="Destinataire" value=@Model.Message.AdherentExpId style="display:none" />
+                            <h6 class="tinymce-dest" style="border: solid 1px; width:100%; margin-top:0; margin-bottom:0;">À:   @Model.Message.AdherentExp.Prenom @Model.Message.AdherentExp.Nom</h6>
+                                            <div style="border: solid 1px; width:100%; height:25px; margin-top:0; padding-top:0;">
+                                                <label for="Objet" style="display: inline-block; margin-top:0; padding-top: 0;">Objet:</label>
+                                                <h5 class="tinymce-title" id="Objet" style="display: inline-block; width: 90%; margin-top: 0; padding-top: 0;" name="Objet"> RE:@Model.Message.Titre</h5>
+                                            </div>
+                                                            <textarea class="tinymce-body" style="border: solid 1px;" name="Message">
+                                                            <div style="height:100px"></div>
+                                                            <p>Le @Model.Message.Date.ToShortDateString() à @Model.Message.Date.ToShortTimeString(), @Model.Message.AdherentExp.Prenom a écrit:</p>
+                            @Html.Raw(Model.Message.Msg)
+                        </textarea>
+                                                                            <button type="submit" class="btn btn-outline-success">Valider</button>}
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <div style="display:inline"><button type="button" onclick="window.location.href = '@Url.Action("NouveauMessage", "Messagerie")'" class="btn btn-outline-info"><i class="fas fa-edit"></i>Nouveau Message</button><button type="button" id="rep" onclick="Repondre()" class="btn btn-outline-info"><i class="fas fa-reply"></i>Répondre</button><button type="button" onclick="window.location.href = '@Url.Action("Supprimer", "Messagerie", new { Id = @Model.Message.Id })'" class="btn btn-outline-info"><i class="far fa-trash-alt"></i>Supprimer</button></div>
+                </div>
+            </div>
         </div>
 
-        <script>function Repondre() {
+        <script>
+            function Repondre() {
                 document.getElementById("reponse").style.display = "block";
-            }</script>
-        <script>var emailDestConfig = {
+            }
+        </script>
+
+        <script>
+            var emailDestConfig = {
                 selector: '.tinymce-dest',
                 menubar: false,
                 toolbar: false,

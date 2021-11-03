@@ -20,9 +20,12 @@ namespace TakoLeaf.Data
             this._bddContext.Dispose();
         }
 
-        public void CreationMessage(Message message)
+        public bool CreationMessage(Message message)
         {
-            
+            bool creaOk = false;
+
+            try
+            {
             this._bddContext.Messages.Add(message);
             this._bddContext.SaveChanges();
             MessageEnvoye messageEnvoye = new MessageEnvoye
@@ -40,6 +43,15 @@ namespace TakoLeaf.Data
             this._bddContext.MessageEnvoyes.Add(messageEnvoye);
             this._bddContext.MessageRecus.Add(messageRecu);
             this._bddContext.SaveChanges();
+                creaOk = true;
+
+            }
+            catch (Exception e)
+            {
+                creaOk = false;
+                Console.WriteLine(e.Source);
+            }
+            return creaOk;
         }
 
         public List<Message> GetMessageRecus(int id)

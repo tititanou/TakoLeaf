@@ -1,6 +1,6 @@
 ﻿@model TakoLeaf.ViewModels.ProviderViewModel
 @{
-    Layout = "_Layout";
+    Layout = "_LayoutConnecte";
 }
 
 <!DOCTYPE html>
@@ -8,66 +8,75 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/CSS/InscriPro.css" />
     <title>InscriptionProvider</title>
 </head>
 <body>
-    <div>
-    <h2>Information sur votre voiture</h2>
-    @using (Html.BeginForm())
-    {
-        <h1> Informations concernant vos information Adherent</h1>
-        <ul>
-            <li>Nom : @Model.Adherent.Nom</li>
-            <li>Prenom : @Model.Adherent.Prenom</li>
-            <li>Date de Naissance : @Model.Adherent.Date_naissance</li>
-            <li>Adresse : @Model.Adherent.Adresse.Rue,  @Model.Adherent.Adresse.CodePostal,  @Model.Adherent.Adresse.Ville </li>
-            <li>Telephone : @Model.Adherent.Telephone</li>
-        </ul>
 
-        <h1> Informations concernant vos information Compte</h1>
-        <ul>
-            <li>Mail : @Model.CompteUser.Mail</li>
-            <li>Description : @Model.CompteUser.Description</li>
-        </ul>
+    <h1 class="titreP">Inscription Provider</h1>
+    <div class="container" id="cont">
+        @using (Html.BeginForm())
+        {
+            <div class="box">
+                <div class="contenu">
+                    <h3>Récapitulatif de vos informations</h3>
+                    <ul>
+                        <li>Nom : @Model.Adherent.Nom</li>
+                        <li>Prenom : @Model.Adherent.Prenom</li>
+                        <li>Date de Naissance : @Model.Adherent.Date_naissance</li>
+                        <li>Adresse : @Model.Adherent.Adresse.Rue,  @Model.Adherent.Adresse.CodePostal,  @Model.Adherent.Adresse.Ville </li>
+                        <li>Telephone : @Model.Adherent.Telephone</li>
+                        <li>Mail : @Model.CompteUser.Mail</li>
+                        <li>Description : @Model.CompteUser.Description</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box">
+                <div class="contenu">
+                    <h3>Quels sont vos talents ?</h3>
 
-        <h1>Quelles sont vos compétences en tant que Provider</h1>
-        <div>
-            @for (int i = 0; i < Model.ListSSC.Count; i++)
-            {
-                @Html.Label(Model.ListSSC[i].Intitule)
-                @Html.CheckBoxFor(m => m.ListSSC[i].EstSelectione)
+                    @for (int i = 0; i < Model.ListSSC.Count; i++)
+                    {
+                        <div class="col">
+                            @Html.Label(Model.ListSSC[i].Intitule)
+                            @Html.CheckBoxFor(m => m.ListSSC[i].EstSelectione)
 
-                @Html.LabelFor(m => m.ListSSC[i].TarifHoraire)
-                @Html.TextBoxFor(m => m.ListSSC[i].TarifHoraire)
-                @Html.HiddenFor(m => m.ListSSC[i].SsCateCompetenceId)
-                @Html.HiddenFor(m => m.ListSSC[i].Intitule)
+                            @Html.LabelFor(m => m.ListSSC[i].TarifHoraire)
+                            @Html.TextBoxFor(m => m.ListSSC[i].TarifHoraire)
+                            @Html.HiddenFor(m => m.ListSSC[i].SsCateCompetenceId)
+                            @Html.HiddenFor(m => m.ListSSC[i].Intitule)
+                        </div>
 
 
-            }
-        </div>
+                    }
+                </div>
+                </div>
 
-        <h1> Quelles sont vos ressources a proposer</h1>
-           
+
+
+            @*<h1> Quelles sont vos ressources a proposer</h1>*@
+
 
             @*<div>
-                @Html.TextBoxFor(model => model.Voiture.Annee, new { @class = "form-control", placeholder = "Annee" })
-                @Html.LabelFor(model => model.Voiture.Annee)
-                @Html.ValidationMessageFor(model => model.Voiture.Annee)
-            </div>
+                    @Html.TextBoxFor(model => model.Voiture.Annee, new { @class = "form-control", placeholder = "Annee" })
+                    @Html.LabelFor(model => model.Voiture.Annee)
+                    @Html.ValidationMessageFor(model => model.Voiture.Annee)
+                </div>
 
-            <div>
-                @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques)
-                @Html.LabelFor(model => model.Marque.Nom)
-            </div>
+                <div>
+                    @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques)
+                    @Html.LabelFor(model => model.Marque.Nom)
+                </div>
 
-            <div>
-                @Html.DropDownListFor(model => model.Modele.Nom, (SelectList)ViewBag.Modele)
-                @Html.LabelFor(model => model.Modele.Nom)
-            </div>*@
+                <div>
+                    @Html.DropDownListFor(model => model.Modele.Nom, (SelectList)ViewBag.Modele)
+                    @Html.LabelFor(model => model.Modele.Nom)
+                </div>*@
 
 
-
-            <h2>Information sur votre RIB</h2>
+    <div class="box">
+        <div class="contenu">
+            <h3>Votre RIB</h3>
 
             <div class="form-floating mb-3">
                 @Html.TextBoxFor(model => model.Rib.Titulaire, new { @class = "form-control", placeholder = "Titulaire" })
@@ -87,10 +96,13 @@
                 @Html.ValidationMessageFor(model => model.Rib.Banque)
             </div>
 
-            
-        <!-- Submit Button-->
-        <button class="btn btn-primary btn-xl" type="submit">Créer</button>
-    }
+
+            <!-- Submit Button-->
+            <button class="btn btn-primary btn-xl" type="submit">Créer</button>
+        </div>
+        </div>
+        }
+
     </div>
 </body>
 </html>
