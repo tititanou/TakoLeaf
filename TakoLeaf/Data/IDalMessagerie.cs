@@ -21,5 +21,7 @@ namespace TakoLeaf.Data
         void SuppressionMessageRecu(MessageRecu message);
 
         void SuppressionMessageEnvoye(MessageEnvoye message);
+
+        List<Adherent> GetAdherents();
     }
 }

@@ -134,5 +134,10 @@ namespace TakoLeaf.Data
             this._bddContext.MessageEnvoyes.Remove(messageEnvoye);
             this._bddContext.SaveChanges();
         }
+
+        public List<Adherent> GetAdherents()
+        {
+            return this._bddContext.Adherents.ToList();
+        }
     }
 }
