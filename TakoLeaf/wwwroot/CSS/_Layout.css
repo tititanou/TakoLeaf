@@ -147,9 +147,14 @@ header h1{
 
 /* DETAIL DE LA PAGE*/
 
-.PAGEMID{
+.PAGEMID {
     width: 100%;
     height: 1300px;
+    background-image: url(~/IMG/BACKFRISTPAGE.png);
+    background-position: center;
+    background-size: cover;
+    box-sizing: border-box;
+    position: relative;
 }
 
 

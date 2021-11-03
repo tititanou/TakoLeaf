@@ -39,6 +39,10 @@ namespace TakoLeaf.Controllers
 
         public ActionResult Dashboard()
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
 
             DashViewModel dash = new DashViewModel();
             dash.ListePrestations = dal.ObtenirToutesLesPrestations();

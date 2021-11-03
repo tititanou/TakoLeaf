@@ -1,6 +1,7 @@
 ﻿@model List<TakoLeaf.Models.Article>
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "Actualités";
 }
 
 <!DOCTYPE html>
@@ -8,61 +9,50 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/CSS/Actualitest.css" />
     <title>Articles</title>
-    <style>
-        .all-browsers {
-            margin: 0;
-            padding: 5px;
-            background-color: #2F4858;
-        }
 
-            .all-browsers > h1, .browser {
-                margin: 10px;
-                padding: 5px;
-            }
-
-        h2 {
-            color: white;
-        }
-
-        .browser {
-            background: #FFFFFF;
-            border-radius: 3em;
-        }
-
-            .browser > h2, p {
-                margin: 4px;
-                font-size: 90%;
-            }
-    </style>
 
 </head>
 <body>
 
-    <h1 style="text-align:center; font-family:sans-serif">Bienvenue sur le fil d'actualité de TakoLeaf'</h1>
+    <div class="leTout">
+        <h1 class="titrePage">Bienvenue sur le fil d'actualité de TakoLeaf'</h1>
 
-    <article class="all-browsers">
-        <h2>Voyons ce qu'on a au programme</h2>
+        <div class="conteneur">
 
-        @foreach (var item in Model)
-        {
-            <article class="browser">
-                <h3>@item.Titre</h3>
-                <p>@Html.Raw(@item.Texte)</p>
-                <p>Publié le : @item.DatePublication.ToShortDateString()</p>
-            </article>
-
-            if (User.IsInRole("Admin"))
+            @foreach (var item in Model)
             {
+                <article class="article">
+                  
+                    <div class="titreA">
+                        <h3>@item.Titre</h3>
+                    </div>
+                    <div class="corpA">
+                        <p>@Html.Raw(@item.Texte)</p>
+                    </div>
+                    <div class="heure">
+                        <p>Publié le : @item.DatePublication.ToShortDateString()</p>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            string editLink1 = "/Admin/PublicationArticle";
+                            string editLink2 = "/Admin/SuppressionArticle?id=" + item.Id;
+                            string editLink3 = "/Admin/ModifierArticle?id=" + item.Id;
 
-                <button>@Html.ActionLink("Modifier Article", "ModifierArticle", "Admin", new { id = item.Id })</button>
-                <button>@Html.ActionLink("Supprimer Article", "SuppressionArticle", "Admin", new { id = item.Id })</button>
+                            <a href="@editLink3"><img class="icon" src="~/IMG/ICONE ADMIN/ModifArticle.png" /></a>
+                            <a href="@editLink2"><img class="icon" src="~/IMG/ICONE ADMIN/DeleteIcon.png" /></a>
+                            <a href="@editLink1"><img class="icon" src="~/IMG/ICONE ADMIN/plus.png" /></a>
+
+                        }
+
+                    </div>
+                </article>
+
             }
-        }
 
+        </div>
+    </div>
 
-
-    </article>
 
 </body>
 </html>

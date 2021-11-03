@@ -1,6 +1,7 @@
 ﻿@model TakoLeaf.Models.Article
 @{
-    Layout = null;
+    Layout = "_LayoutAdmin";
+    ViewBag.Title = "Publier article";
 }
 
 <!DOCTYPE html>
@@ -8,40 +9,48 @@
 <html>
 <head>
     <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta name="viewport" content="width=device-width" />
+    @*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">*@
+    <link rel="stylesheet" href="~/CSS/ModificationArticleAdmin.css"/>
     <title>PublicationArticle</title>
 </head>
 <body>
 
-    <h1 style="text-align:center; font-family:sans-serif;">Bienvenue sur la page de publication d'article</h1>
-    <center>
-        @using (Html.BeginForm())
-        {
-            <fieldset style="display:inline-block">
-                <legend>Vous êtes inspirés ?</legend>
+    <h1 class="test">Publication d'un article</h1>
 
-                <div class="form-floating mb-3">
+    <div id="box">
+        <div class="contenu">
+            @using (Html.BeginForm())
+            {
+
+                <h3 class="test">Êtes-vous inspiré(e) ?</h3>
+
+                <div class="titre">
                     @Html.LabelFor(model => model.Titre)
                     @Html.TextBoxFor(m => m.Titre, new { placeholder = "Votre titre ici", size = "50" })
                     @Html.ValidationMessageFor(model => model.Titre)
                 </div>
 
-                <div class="form-floating mb-3">
+                <div class="article">
                     @Html.LabelFor(model => model.Texte)
                     @Html.TextAreaFor(m => m.Texte, new { rows = 20, cols = 150, placeholder = "Votre article ici", @class = "mytextarea" })
                     @Html.ValidationMessageFor(model => model.Texte)
                 </div>
 
-                <div class="form-floating mb-3">
+                @*<div class="form-floating mb-3">
                     @Html.LabelFor(model => model.Image)
                     @Html.TextBoxFor(model => model.Image)
                     @Html.ValidationMessageFor(model => model.Image)
-                </div>
+                </div>*@
+        <div class="bouton">
+            <button type="submit" @*onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black"*@>Publier</button>
+            <!--<button type="button"--> @*onclick="document.GetElementById('id02').style.display='block'" class="w3-button w3-black"*@
+        </div>
+}
+        </div>
 
-                <button type="button" onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Publier</button>
-                <button type="button" onclick="document.GetElementById('id02').style.display='block'" class="w3-button w3-black">Ajouter</button>
-            </fieldset>
+    </div>
+    @*Ajouter</button
             <div id="id01" class="w3-modal">
                 <div class="w3-modal-content">
                     <header class="w3-container w3-teal">
@@ -79,45 +88,47 @@
                 </div>
             </div>
 
-        }
 
-    </center>
+        <div>
+        </div>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+
+        <script>
+            // Get the modal
+            var modal = document.getElementById('id01');
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
             }
-        }
-    </script>
+        </script>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id02');
+        <script>
+            // Get the modal
+            var modal = document.getElementById('id02');
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
             }
-        }
-    </script>
+        </script>*@
 
 
-    <script>
-        function OuvrirPostForm(id) {
-            document.getElementById(id).style.display = "block";
-        }</script>
-    <script>
-        tinymce.init({
-            selector: '.mytextarea',
-            plugins: 'image',
-            a11y_advanced_options: true
-        });</script>
+        <script>
+            function OuvrirPostForm(id) {
+                document.getElementById(id).style.display = "block";
+            }</script>
+        <script>
+            tinymce.init({
+                selector: '.mytextarea',
+                plugins: 'image',
+                a11y_advanced_options: true
+            });</script>
 
 
 </body>
