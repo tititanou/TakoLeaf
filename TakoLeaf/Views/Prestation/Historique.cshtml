@@ -3,24 +3,44 @@
     Layout = "_Layout";
 }
 
-<h2>Historique</h2>
+<div class="leTout">
+    <h2 class="text-center">Historique</h2>
+    <div class="article">
+        @for (int i = 0; i < Model.HistoriquePrestas.Count; i++)
+        {
+            <h3>Prestation n° @(i+1)</h3>
+            <ul>
+                <li>Date debut : @Model.HistoriquePrestas[i].Prestation.DateDebut</li>
+                <li>Consumer : @Model.HistoriquePrestas[i].Prestation.Consumer.Adherent.Prenom  @Model.HistoriquePrestas[i].Prestation.Consumer.Adherent.Nom</li>
+                <li>Provider : @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Prenom @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Nom</li>
+                <li>Adresse : @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Adresse.Rue ,  @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Adresse.CodePostal , @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Adresse.Ville</li>
+                <li>Voiture : @Model.HistoriquePrestas[i].Prestation.Voiture.Modele.Marque.Nom @Model.HistoriquePrestas[i].Prestation.Voiture.Modele.Nom</li>
+                <li>Prix : @Model.HistoriquePrestas[i].Prestation.Prix €</li>
+                <li>Note : @Model.Avis[i].Note</li>
+                <li>Avis : @Model.Avis[i].Contenu</li>
+
+                @Html.HiddenFor(m => Model.HistoriquePrestas[i].Prestation.Consumer.Id)
+                @Html.HiddenFor(m => Model.HistoriquePrestas[i].Prestation.Provider.Id)
+
+            </ul>
+        }
+    </div>
+
+    <div>
+        @if(Model.Compte.Role.Equals("Consumer"))
+        {
+        <button>@Html.ActionLink("Retour au profil", "ProfilConsumer", "ProfilUser", new { id = Model.Compte.AdherentId })</button>
+        }
+        else if(Model.Compte.Role.Equals("Provider"))
+        {
+        <button>@Html.ActionLink("Retour au profil", "ProfilProvider", "ProfilUser", new { id = Model.Compte.AdherentId })</button>
+        }
+    </div>
+   
+</div>
 
 
 
 
-@for (int i = 0; i < Model.HistoriquePrestas.Count; i++)
-{
-    <h3>Prestation n° @(i+1)</h3>
-    <ul>
-        <li>Date debut : @Model.HistoriquePrestas[i].Prestation.DateDebut</li>
-        <li>Consumer : @Model.HistoriquePrestas[i].Prestation.Consumer.Adherent.Prenom  @Model.HistoriquePrestas[i].Prestation.Consumer.Adherent.Nom</li>
-        <li>Provider : @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Prenom @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Nom</li>
-        <li>Adresse : @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Adresse.Rue ,  @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Adresse.CodePostal , @Model.HistoriquePrestas[i].Prestation.Provider.Adherent.Adresse.Ville</li>
-        <li>Voiture : @Model.HistoriquePrestas[i].Prestation.Voiture.Modele.Marque.Nom @Model.HistoriquePrestas[i].Prestation.Voiture.Modele.Nom</li>
-        <li>Prix : @Model.HistoriquePrestas[i].Prestation.Prix €</li>
-        <li>Note : @Model.Avis[i].Note</li>
-        <li>Avis : @Model.Avis[i].Contenu</li>
-               
 
-    </ul>
 }

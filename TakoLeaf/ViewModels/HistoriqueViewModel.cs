@@ -10,5 +10,6 @@ namespace TakoLeaf.ViewModels
     {
         public List<HistoriquePresta> HistoriquePrestas;
         public List<Avis> Avis;
+        public CompteUser Compte;
     }
 }
