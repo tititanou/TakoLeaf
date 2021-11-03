@@ -5,41 +5,43 @@
 }
 
 
-    <h1> Indiquer les informations des cartes à modifier </h1>
+    <h1 class="text-center"> Indiquer les informations des cartes à modifier </h1>
     @using (Html.BeginForm())
     {
 
+<div class="container">
+    <table>
 
-        <table>
+        <tr>
+            <th>Titulaire</th>
+            <th>Numero de Carte</th>
+            <th>Date Expiration</th>
+            <th>Cryptogramme</th>
+            <th>Action</th>
+        </tr>
+
+
+        @for (int i = 0; i < Model.Cartes.Count; i++)
+        {
 
             <tr>
-                <th>Titulaire</th>
-                <th>Numero de Carte</th>
-                <th>Date Expiration</th>
-                <th>Cryptogramme</th>
-                <th>Action</th>
+                <td>@Html.TextBoxFor(model => model.Cartes[i].Titulaire, new { @class = "form-control" })</td>
+                <td>@Html.TextBoxFor(model => model.Cartes[i].NumeroCarte, new { @class = "form-control" })</td>
+                <td>@Html.TextBoxFor(model => model.Cartes[i].ExpirDate, new { @class = "form-control" })</td>
+                <td>@Html.TextBoxFor(model => model.Cartes[i].Crypto, new { @class = "form-control" })</td>
+                <td><button>@Html.ActionLink("Supprimer la carte", "SupprimerCarte", "ProfilUser", new { id = Model.Cartes[i].Id })</button></td>
             </tr>
 
 
-            @for (int i = 0; i < Model.Cartes.Count; i++)
-            {
-
-                <tr>
-                    <td>@Html.TextBoxFor(model => model.Cartes[i].Titulaire, new { @class = "form-control" })</td>
-                    <td>@Html.TextBoxFor(model => model.Cartes[i].NumeroCarte, new { @class = "form-control" })</td>
-                    <td>@Html.TextBoxFor(model => model.Cartes[i].ExpirDate, new { @class = "form-control" })</td>
-                    <td>@Html.TextBoxFor(model => model.Cartes[i].Crypto, new { @class = "form-control" })</td>
-                    <td><button>@Html.ActionLink("Supprimer la carte", "SupprimerCarte", "ProfilUser", new { id = Model.Cartes[i].Id })</button></td>
-                </tr>
-
-
-                @Html.HiddenFor(m => m.Consumer.Id)
-                @Html.HiddenFor(m => m.Cartes[i].Id)
-            }
+            @Html.HiddenFor(m => m.Consumer.Id)
+            @Html.HiddenFor(m => m.Cartes[i].Id)
+        }
 
 
 
-        </table>
+    </table>
+</div>
+        
         <br />
         <button>@Html.ActionLink("Ajouter une carte", "AjouterCarte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
 

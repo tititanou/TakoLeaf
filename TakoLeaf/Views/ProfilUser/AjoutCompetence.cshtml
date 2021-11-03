@@ -11,23 +11,53 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-            @for (int i = 0; i < Model.ListSSC.Count; i++)
-            {
-                @Html.Label(Model.ListSSC[i].Intitule)
-                @Html.CheckBoxFor(m => m.ListSSC[i].EstSelectione)
+                    @for (int i = 0; i < Model.ListSSC.Count; i++)
+                    {
 
-                @Html.LabelFor(m => m.ListSSC[i].TarifHoraire)
-                @Html.TextBoxFor(m => m.ListSSC[i].TarifHoraire)
-                <br />
-                @Html.HiddenFor(m => m.ListSSC[i].SsCateCompetenceId)
-                @Html.HiddenFor(m => m.ListSSC[i].Intitule)
-            }
+                        @Html.Label(Model.ListSSC[i].Intitule)
+                        @Html.CheckBoxFor(m => m.ListSSC[i].EstSelectione)
 
 
-            @Html.HiddenFor(m => m.Provider.Id)
+                        @*@Html.LabelFor(m => m.ListSSC[i].TarifHoraire)
+                        @Html.TextBoxFor(m => m.ListSSC[i].TarifHoraire)*@
 
-            <button class="btn btn-primary btn-xl" type="submit">Créer</button>
-            </div>
+
+
+                        <br />
+                        @Html.HiddenFor(m => m.ListSSC[i].SsCateCompetenceId)
+                        @Html.HiddenFor(m => m.ListSSC[i].Intitule)
+                    }
+
+
+                </div>
+              
+                <div class="col">
+
+                    @for (int i = 0; i < Model.ListSSC.Count; i++)
+                    {
+
+                        @*@Html.Label(Model.ListSSC[i].Intitule)
+                        @Html.CheckBoxFor(m => m.ListSSC[i].EstSelectione)*@
+
+
+
+                        @Html.LabelFor(m => m.ListSSC[i].TarifHoraire)
+                        @Html.TextBoxFor(m => m.ListSSC[i].TarifHoraire)
+
+
+                        <br />
+                        @Html.HiddenFor(m => m.ListSSC[i].SsCateCompetenceId)
+                        @Html.HiddenFor(m => m.ListSSC[i].Intitule)
+                    }
+
+
+                </div>
+                
+
+                @Html.HiddenFor(m => m.Provider.Id)
+
+                <button class="btn btn-primary btn-xl" type="submit">Créer</button>
+
             </div>
         </div>
 

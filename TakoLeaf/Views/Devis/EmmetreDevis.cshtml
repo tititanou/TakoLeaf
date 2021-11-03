@@ -4,94 +4,99 @@
     ViewBag.Title = "Emission de devis";
 }
 
+<link rel="stylesheet" href="~/CSS/Actualitest.css" />
 
-<h1> Procedez à votre demande de devis</h1>
+<div class="container">
+    <h1 class="text-center"> Procedez à votre demande de devis</h1>
 
-<div>
-    <ul>
-        <li>Consumer : @Model.Consumer.Adherent.Prenom  @Model.Consumer.Adherent.Nom</li>
-        <li>Provider : @Model.Provider.Adherent.Prenom  @Model.Provider.Adherent.Nom</li>
-        <li>Adresse : @Model.Devis.LieuPresta.Rue  @Model.Devis.LieuPresta.CodePostal @Model.Devis.LieuPresta.Ville</li>
-    </ul>
+    <div class="row">
+        <ul>
+            <li>Consumer : @Model.Consumer.Adherent.Prenom  @Model.Consumer.Adherent.Nom</li>
+            <li>Provider : @Model.Provider.Adherent.Prenom  @Model.Provider.Adherent.Nom</li>
+            <li>Adresse : @Model.Devis.LieuPresta.Rue  @Model.Devis.LieuPresta.CodePostal @Model.Devis.LieuPresta.Ville</li>
+        </ul>
 
+
+    </div>
+
+
+
+    <div class="row">
+
+        @using (Html.BeginForm())
+        {
+
+            <div>
+                @Html.TextBoxFor(model => model.Devis.DateEmission, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+
+            <div>
+                @Html.TextBoxFor(model => model.Devis.Tarif, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+
+            <div>
+                @Html.TextBoxFor(model => model.Voiture.Modele.Nom, new { @class = "form-control" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Devis.DateDebut)
+                @Html.TextBoxFor(model => model.Devis.DateDebut, new { @type = "date", @class = "form-control" })
+
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Devis.DateFin)
+                @Html.TextBoxFor(model => model.Devis.DateFin, new { @type = "date", @class = "form-control" })
+
+            </div>
+
+            <div>
+
+                @for (int i = 0; i < Model.ListeCompetencesDevis.Count; i++)
+                {
+                    @Model.ListeCompetencesDevis[i].Competence.NomSsCate
+                    @Model.ListeCompetencesDevis[i].Competence.TarifHoraire
+
+
+                    @Html.HiddenFor(m => m.ListeCompetencesDevis[i].Id)
+
+                    <br />
+
+                }
+
+            </div>
+
+            <div>
+                @for (int i = 0; i < Model.ListeRessourcesDevis.Count; i++)
+                {
+                    @Model.ListeRessourcesDevis[i].Ressource.Intitule
+                    @Model.ListeRessourcesDevis[i].Ressource.TarifJournalier
+
+                    @Html.HiddenFor(m => m.ListeRessourcesDevis[i].Id)
+                    <br />
+
+                }
+            </div>
+
+            <div>
+                @Html.TextAreaFor(m => m.Devis.DescriptionPresta)
+                @Html.LabelFor(m => m.Devis.DescriptionPresta)
+            </div>
+
+            @Html.HiddenFor(m => m.Devis.LieuPresta)
+            @Html.HiddenFor(m => m.DemandeDevis.Id)
+            @Html.HiddenFor(m => m.Voiture.Id)
+            @Html.HiddenFor(m => m.Consumer.Id)
+            @Html.HiddenFor(m => m.Provider.Id)
+
+            <div>
+                <button type="submit">Envoyer</button>
+            </div>
+
+        }
+
+
+
+    </div>
 
 </div>
 
-
-
-<div>
-
-    @using (Html.BeginForm())
-    {
-
-        <div>
-            @Html.TextBoxFor(model => model.Devis.DateEmission, new { @readonly = "readonly", @class = "form-control" })
-        </div>
-
-        <div>
-            @Html.TextBoxFor(model => model.Devis.Tarif, new { @readonly = "readonly", @class = "form-control" })
-        </div>
-
-        <div>
-            @Html.TextBoxFor(model => model.Voiture.Modele.Nom, new { @class = "form-control" })
-        </div>
-
-        <div>
-            @Html.LabelFor(model => model.Devis.DateDebut)
-            @Html.TextBoxFor(model => model.Devis.DateDebut, new { @type = "date", @class = "form-control" })
-
-        </div>
-        <div>
-            @Html.LabelFor(model => model.Devis.DateFin)
-            @Html.TextBoxFor(model => model.Devis.DateFin, new { @type = "date", @class = "form-control" })
-
-        </div>
-
-        <div>
-
-            @for (int i = 0; i < Model.ListeCompetencesDevis.Count; i++)
-            {
-                @Model.ListeCompetencesDevis[i].Competence.NomSsCate
-                @Model.ListeCompetencesDevis[i].Competence.TarifHoraire
-
-
-                @Html.HiddenFor(m => m.ListeCompetencesDevis[i].Id)
-
-                <br />
-
-            }
-
-        </div>
-
-        <div>
-            @for (int i = 0; i < Model.ListeRessourcesDevis.Count; i++)
-            {
-                @Model.ListeRessourcesDevis[i].Ressource.Intitule
-                @Model.ListeRessourcesDevis[i].Ressource.TarifJournalier
-
-                @Html.HiddenFor(m => m.ListeRessourcesDevis[i].Id)
-                <br />
-
-            }
-        </div>
-
-        <div>
-            @Html.TextAreaFor(m => m.Devis.DescriptionPresta)
-            @Html.LabelFor(m => m.Devis.DescriptionPresta)
-        </div>
-
-        @Html.HiddenFor(m => m.Devis.LieuPresta)
-        @Html.HiddenFor(m => m.DemandeDevis.Id)
-        @Html.HiddenFor(m => m.Voiture.Id)
-        @Html.HiddenFor(m => m.Consumer.Id)
-        @Html.HiddenFor(m => m.Provider.Id)
-
-        <div>
-            <button type="submit">Envoyer</button>
-        </div>
-
-    }
-
-
-
-</div>

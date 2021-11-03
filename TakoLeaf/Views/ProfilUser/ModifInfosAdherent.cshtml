@@ -5,9 +5,10 @@
 }
 
 
-    <div>
+    <div class="container">
         @using (Html.BeginForm())
         {
+        
             <div class="form-floating mb-3">
                 @Html.TextBoxFor(model => model.Prenom, new { @class = "form-control", placeholder = "Prenom" })
                 @Html.LabelFor(model => model.Prenom)
@@ -54,6 +55,12 @@
             @Html.HiddenFor(model => model.AdresseId)
             <!-- Submit Button-->
             <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
+
+
+
+
+        
+           
         }
     </div>
   

@@ -3,48 +3,57 @@
     Layout = "_Layout";
     ViewBag.Title = " Liste Demande de devis";
 }
+<link rel="stylesheet" href="~/CSS/Actualitest.css" />
 
-<h2> Liste de demande de devis</h2>
+<div class="leTout">
+    <h2 class="titrePage"> Liste de demande de devis</h2>
+    <div class="conteneur">
 
-@for (int i = 0; i < Model.ListeDemandeDevis.Count; i++)
-{
-    <div>
-        <div>
-            <h2>Demande devis du @Model.ListeDemandeDevis[i].DemandeDevis.DateDemande de @Model.ListeDemandeDevis[i].DemandeDevis.Consumer.Adherent.Nom @Model.ListeDemandeDevis[i].DemandeDevis.Consumer.Adherent.Prenom</h2>
-        </div>
-        <div>
-            Date de début voulue @Model.ListeDemandeDevis[i].DemandeDevis.DateDebutVoulue
-            <br />
+        @for (int i = 0; i < Model.ListeDemandeDevis.Count; i++)
+        {
+            <div class="article text-center">
+                <div>
+                    <h2>Demande devis du @Model.ListeDemandeDevis[i].DemandeDevis.DateDemande de @Model.ListeDemandeDevis[i].DemandeDevis.Consumer.Adherent.Nom @Model.ListeDemandeDevis[i].DemandeDevis.Consumer.Adherent.Prenom</h2>
+                </div>
+                <div>
+                    Date de début voulue @Model.ListeDemandeDevis[i].DemandeDevis.DateDebutVoulue
+                    <br />
 
-            Carburant : @Model.ListeDemandeDevis[i].Voiture.Carburant<br />
-            Marque/Modele de la voiture : @Model.ListeDemandeDevis[i].Voiture.Modele.Nom<br />
-            Année du vehicule : @Model.ListeDemandeDevis[i].Voiture.Annee<br />
+                    Carburant : @Model.ListeDemandeDevis[i].Voiture.Carburant<br />
+                    Marque/Modele de la voiture : @Model.ListeDemandeDevis[i].Voiture.Modele.Nom<br />
+                    Année du vehicule : @Model.ListeDemandeDevis[i].Voiture.Annee<br />
 
-        </div>
+                </div>
 
-        <div>
-            Competence demandées :
+                <div>
+                    Competence demandées :
 
-            @for (int j = 0; j < @Model.ListeDemandeDevis[i].ListeCompetences.Count; j++)
-            {
-                @Model.ListeDemandeDevis[i].ListeCompetences[j].Competence.NomSsCate<br />
+                    @for (int j = 0; j < @Model.ListeDemandeDevis[i].ListeCompetences.Count; j++)
+                    {
+                        @Model.ListeDemandeDevis[i].ListeCompetences[j].Competence.NomSsCate<br />
 
-            }
-        </div>
-        <br />
-        <div>
-            Ressources demandées :
+                    }
+                </div>
+                <br />
+                <div>
+                    Ressources demandées :
 
-            @for (int j = 0; j < @Model.ListeDemandeDevis[i].ListeRessources.Count; j++)
-            {
-                @Model.ListeDemandeDevis[i].ListeRessources[j].Ressource.Intitule<br />
+                    @for (int j = 0; j < @Model.ListeDemandeDevis[i].ListeRessources.Count; j++)
+                    {
+                        @Model.ListeDemandeDevis[i].ListeRessources[j].Ressource.Intitule<br />
 
-            }
-        </div>
+                    }
+                </div>
 
-        <div>
-            <button>@Html.ActionLink("Emmetre le devis", "EmmetreDevis", "Devis", new {id = Model.ListeDemandeDevis[i].DemandeDevis.Id})</button>
-        </div>
-    
+                <div>
+                    <button>@Html.ActionLink("Emmetre le devis", "EmmetreDevis", "Devis", new { id = Model.ListeDemandeDevis[i].DemandeDevis.Id })</button>
+                </div>
+
+            </div>
+        }
+
+
     </div>
-}
+</div>
+
+

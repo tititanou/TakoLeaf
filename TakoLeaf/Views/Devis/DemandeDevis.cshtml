@@ -4,83 +4,96 @@
     ViewBag.Title = "Demande de devis";
 }
 
-<h1> Procedez à votre demande de devis</h1>
+<link rel="stylesheet" href="~/CSS/Actualitest.css" />
+<div class="leTout">
 
-<div>
-    <ul>
-        <li>Demandeur de devis : @Model.Consumer.Adherent.Prenom  @Model.Consumer.Adherent.Nom</li>
-        
-        <li>Provider choisi : @Model.Provider.Adherent.Prenom  @Model.Provider.Adherent.Nom</li>
-       
-    </ul>
+    <h1 class="text-center"> Procedez à votre demande de devis</h1>
+
+    <div class="conteneur">
+
+        <div>
+            <ul>
+                <li>Demandeur de devis : @Model.Consumer.Adherent.Prenom  @Model.Consumer.Adherent.Nom</li>
+
+                <li>Provider choisi : @Model.Provider.Adherent.Prenom  @Model.Provider.Adherent.Nom</li>
+
+            </ul>
+        </div>
+
+
+
+        <div>
+
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(m => m.Provider.Id)
+                @Html.HiddenFor(m => m.Consumer.Id)
+                <div>
+                    @Html.TextBoxFor(model => model.DemandeDevis.DateDemande, new { @readonly = "readonly", @class = "form-control" })
+
+
+                    @Html.TextBoxFor(model => model.DemandeDevis.DateDebutVoulue, new { @type = "date", @class = "form-control" })
+                    @Html.LabelFor(model => model)
+                </div>
+
+                <div>
+                    @Html.DropDownListFor(model => model.Voiture.Modele.Nom, (SelectList)ViewBag.Modeles, "Selectionnez voiture")
+                    @Html.LabelFor(model => model.Voiture.Modele.Nom)
+
+                </div>
+
+                <div>
+                    @for (int i = 0; i < Model.ListD.Count; i++)
+                    {
+                        @Model.ListD[i].Intitule
+                        @Model.ListD[i].TarifHoraire
+                        @Html.CheckBoxFor(m => m.ListD[i].EstSelectione)
+
+
+                        @Html.HiddenFor(m => m.ListD[i].CompetenceId)
+                        @Html.HiddenFor(m => m.ListD[i].Intitule)
+
+                        <br />
+
+                    }
+                </div>
+                <br />
+
+                <div>
+                    @for (int i = 0; i < Model.ListR.Count; i++)
+                    {
+                        @Model.ListR[i].Intitule
+                        @Model.ListR[i].TarifHoraire
+                        @Html.CheckBoxFor(m => m.ListR[i].EstSelectione)
+
+
+                        @Html.HiddenFor(m => m.ListR[i].RessourceId)
+                        @Html.HiddenFor(m => m.ListD[i].Intitule)
+
+                        <br />
+
+                    }
+                </div>
+
+                <div>
+                    @Html.LabelFor(model => model.DemandeDevis.Message)
+                    @Html.TextAreaFor(model => model.DemandeDevis.Message, new { @type = "text" })
+                </div>
+
+                <div>
+                    <button type="submit">Envoyer</button>
+                </div>
+
+            }
+
+
+        </div>
+
+    </div>
+
 </div>
 
 
 
-<div>
-
-    @using (Html.BeginForm())
-    {
-        @Html.HiddenFor(m => m.Provider.Id)
-        @Html.HiddenFor(m => m.Consumer.Id)
-        <div>
-            @Html.TextBoxFor(model => model.DemandeDevis.DateDemande, new { @readonly = "readonly", @class = "form-control" })
 
 
-            @Html.TextBoxFor(model => model.DemandeDevis.DateDebutVoulue, new { @type = "date", @class = "form-control" })
-            @Html.LabelFor(model => model)
-        </div>
-
-        <div>
-            @Html.DropDownListFor(model => model.Voiture.Modele.Nom, (SelectList)ViewBag.Modeles, "Selectionnez voiture")
-            @Html.LabelFor(model => model.Voiture.Modele.Nom)
-
-        </div>
-
-        <div>
-            @for (int i = 0; i < Model.ListD.Count; i++)
-            {
-                @Model.ListD[i].Intitule
-                @Model.ListD[i].TarifHoraire
-                @Html.CheckBoxFor(m => m.ListD[i].EstSelectione)
-
-
-                @Html.HiddenFor(m => m.ListD[i].CompetenceId)
-                @Html.HiddenFor(m => m.ListD[i].Intitule)
-
-                <br />
-
-            }
-        </div>
-        <br />
-
-        <div>
-            @for (int i = 0; i < Model.ListR.Count; i++)
-            {
-                @Model.ListR[i].Intitule
-                @Model.ListR[i].TarifHoraire
-                @Html.CheckBoxFor(m => m.ListR[i].EstSelectione)
-
-
-                @Html.HiddenFor(m => m.ListR[i].RessourceId)
-                @Html.HiddenFor(m => m.ListD[i].Intitule)
-
-                <br />
-
-            }
-        </div>
-
-        <div>
-            @Html.LabelFor(model => model.DemandeDevis.Message)
-            @Html.TextAreaFor(model => model.DemandeDevis.Message, new { @type = "text" })
-        </div>
-
-        <div>
-            <button type="submit">Envoyer</button>
-        </div>
-
-    }
-
-
-
-</div>

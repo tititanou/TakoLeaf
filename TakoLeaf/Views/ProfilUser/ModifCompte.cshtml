@@ -4,6 +4,8 @@
     ViewBag.Title = "Modification Compte";
 
 }
+
+<div class="container">
     <div>
         @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -48,6 +50,9 @@
     {
         <button>@Html.ActionLink("Retour au profil", "ProfilProvider", "ProfilUser", new { id = Model.AdherentId })</button>
     }
+
+</div>
+    
 
 
 
