@@ -85,11 +85,12 @@ namespace TakoLeaf.Controllers
         {
             List<HistoriquePresta> historiquePrestas = dal.ObtenirHistorique().Where(h => h.HistoriqueId == id).ToList();
             List<Avis> liste = new List<Avis>();
+            CompteUser compte = dal.ObtenirCompteUser().FirstOrDefault(c => c.AdherentId == id);
             foreach(HistoriquePresta item in historiquePrestas)
             {
                 liste.Add(dal.ObtenirAvis().FirstOrDefault(a => a.PrestationId == item.PrestationId));
             }
-            HistoriqueViewModel hvm = new HistoriqueViewModel { Avis = liste, HistoriquePrestas = historiquePrestas };
+            HistoriqueViewModel hvm = new HistoriqueViewModel { Avis = liste, HistoriquePrestas = historiquePrestas, Compte = compte };
             return View(hvm);
         }
     }

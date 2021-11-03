@@ -240,6 +240,8 @@ header h1{
 
 
 .container_Presentation{
+    max-height : 211px;
+    overflow : auto;
     position: absolute;
     width: 1000px;
     height: 211px;
@@ -253,7 +255,6 @@ header h1{
 
     .container_Presentation p {
         font-weight: bold;
-        line-height: 12em;
         display: flex;
         justify-content: center;
         text-align: center;
@@ -261,6 +262,8 @@ header h1{
     }
 
 .container_Avis{
+    max-height : 211px;
+    overflow : auto;
     position: absolute;
     width: 1000px;
     height: 211px;
@@ -273,12 +276,54 @@ header h1{
 
 .container_Avis p{
     font-weight : bold;
-    line-height : 12em;
     display: flex;
     justify-content: center;
     text-align: center;
     font-size:large;
 }
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e1e1e1;
+    border: 31px none #ffffff;
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #a1a1a1;
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        background: #a3a3a3;
+    }
+
+::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-track:hover {
+        background: #f2f2f2;
+    }
+
+    ::-webkit-scrollbar-track:active {
+        background: #f5f5f5;
+    }
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+
 
 .container_RS{
     position: absolute;
@@ -306,14 +351,17 @@ header h1{
     justify-content: center;
 }
 
-.map{
+.map {
+    background-image: url("/IMG/MAP/Orleans.png");
+    background-position-x: -10px;
+    background-position-y: -10px;
     position: absolute;
     width: 500px;
     height: 250px;
     border: solid;
     border-radius: 40px;
     border-color: #dbdbdb;
-    top:760px;
+    top: 760px;
     left: 100px;
 }
 

@@ -7,7 +7,8 @@ namespace TakoLeaf.Models
 {
     public class HistoriquePresta
     {
-  
+
+        public int Id { get; set; }
         public int HistoriqueId { get; set; }
         public Historique Historique { get; set; }
 
