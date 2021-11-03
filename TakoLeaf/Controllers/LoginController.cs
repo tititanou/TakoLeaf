@@ -40,7 +40,7 @@ namespace TakoLeaf.Controllers
 
         [HttpPost]
 
-        public ActionResult Inscription(UtilisateurViewModel uvm ,IFormFile fileToUpload)
+        public ActionResult Inscription(UtilisateurViewModel uvm ,IFormFile fileToUpload, string Role)
         {
             if (ModelState.IsValid) //TODO a voir pour le modelState et les Regex
             {
@@ -59,7 +59,7 @@ namespace TakoLeaf.Controllers
                 {
                     new Claim(ClaimTypes.Name, uvm.Adherent.Nom),
                     new Claim(ClaimTypes.NameIdentifier, uvm.Adherent.Id.ToString()),
-                    new Claim(ClaimTypes.Role, uvm.CompteUser.Role)
+                    new Claim(ClaimTypes.Role, Role)
                 };
 
                 var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
@@ -68,13 +68,13 @@ namespace TakoLeaf.Controllers
                 HttpContext.SignInAsync(userPrincipal);
 
                 
-                if (uvm.CompteUser.Role.Equals("Provider"))
+                if (Role.Equals("Provider"))
                 {
                     dal.RoleIsProvider(compteUser);
                     return Redirect("/Login/InscriptionProvider");
                 }
 
-                else if (uvm.CompteUser.Role.Equals("Consumer"))
+                else if (Role.Equals("Consumer"))
                 {
                     dal.RoleIsConsumer(compteUser);
                     return Redirect("/Login/InscriptionConsumer");

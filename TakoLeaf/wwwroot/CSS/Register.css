@@ -186,7 +186,7 @@ header h1{
 
 
 input[type="checkbox"]{
-    display: none;
+    
 }
 
 .box{
@@ -388,7 +388,7 @@ input[type="checkbox"]:checked+.box::before{
     height: 260px;
     padding: 25px;
     margin: 80px;
-    align-items: left;
+    align-items:start;
     justify-content: center;
 }
 
@@ -418,7 +418,7 @@ input[type="checkbox"]:checked+.box::before{
     height: 260px;
     padding: 25px;
     margin: 80px;
-    align-items: left;
+    align-items: start;
     justify-content: center;
 }
 
@@ -501,25 +501,15 @@ input[type="checkbox"]:checked+.box::before{
 /*SECTION EN VERRE*/
 
 .text1{
-    color: white;
-    
-    top: 20px;
+    color: white;    
     height: 50px;
-    width: 150px;
+    width: 260px;
     background-color: #99D6A6;
     border-radius: 3rem;
     border: solid;
+    justify-content:center;
     font-size: 17px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: "Roboto",sans-serif;
-}
-
-.text1{
-    position:absolute;
-    top: 120px;
-    margin-left: 100px;
 }
 
 
@@ -707,18 +697,9 @@ input[type="checkbox"]:checked+.box::before{
     border-radius: 3rem;
     border: solid;
     font-size: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: "Roboto",sans-serif;
 }
-.ValiderBox{
-    position: relative;
-    top: 730px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 
 .AjouterBox{

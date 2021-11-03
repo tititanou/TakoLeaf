@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tako Leaf</title>
+
+    <link rel="stylesheet" href="~/CSS/InscriptionConsumer.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="~/js/Inscription-script.js">
+    <!-- BOOSTRAP CSS-->
+    <link rel="stylesheet" href="~/site/css/bootstrap.css">
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+<!--Début Section du Header-->
+<section>
+    <header>
+        <button class="hamburger">&#9776;</button>
+        <button class="cross">&#735;</button>
+        <div class="logo"><img src="~/IMG/TAKO ECO new.png"></div>
+        <h1 class="titremidheader">Tako Leaf</h1>
+    </header>
+      
+      <div class="menu">
+        <ul>
+          <a href="#"><li>Inscription</li></a>
+          <a href="#"><li>Connection</li></a>
+          <a href="#"><li>FAQ</li></a>
+        </ul>
+      </div> 
+    
+ </section>
+
+
+<!--FIn Section du Header-->
+
+<section id="contenu" class="PAGEMID">
+    @RenderBody() 
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!--Section footer-->
+
+<section class="footerBot">
+    <footer class="footer-items">
+        <div class="container">
+            <div class="footer-contact">
+                <h3> Nous rencontrer</h3>
+                <ul>
+                    <li>Adresse</li>
+                    <li>Adresse</li>
+                    <li>Adresse</li>
+                    <li>Telephone: XX.XX.XX.XX.XX</li>
+                </ul>        
+            </div>
+            <div class="footer-infos">
+                <h3> Tako Leaf</h3>
+                <ul>
+                    <li><a href="#section-home">Notre Projet</a></li>
+                    <li><a href="#section-information">Comment ça marche ?</a></li>
+                </ul>        
+            </div>
+            <div class="footer-questions">
+                <h3> Besoin d'aide ?</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Forum</a></li>
+                    <li><a href="#">Contacter Administrateur</a></li>
+                </ul>        
+            </div>
+        </div>
+
+        <div class="imageRS">
+            
+            <a href=""><img src="~/IMG/RS/entypo-social_instagram-with-circle.png" alt="" class="instagram"></a>
+            <a href=""><img src="~/IMG/RS/Vector-1.png" alt="" class="twitter"></a>
+            <a href=""><img src="~/IMG/RS/Vector.png" alt="" class="facebook"></a>
+        </div>           
+        <div class="copirate">
+            <h4 class="copyratetext">
+                © 2021 Tako’Leaf. ALL RIGHTS RESERVED.</h4>
+        </div>
+    </footer>
+ </section>
+ 
+
+
+
+<!--FIN Section footer-->
+
+
+
+
+    <!-- D'abord on vas mettre Jquery-->
+<script src="~/jquery-3.6.0.js"></script>
+
+<!-- Puis on vas mettre boostrap.JS-->
+<script src="./site/js/bootstrap.bundle"></script>
+
+
+<script src="~/js/Inscription-script.js"></script>
+ 
+
+
+
+
+
+
+
+    
+</body>
+</html>

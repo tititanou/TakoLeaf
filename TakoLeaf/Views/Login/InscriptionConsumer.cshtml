@@ -3,41 +3,40 @@
     Layout = "_Layout";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>InscriptionConsumer</title>
-</head>
-<body>
-
+<section>
     <div>
         <h2>Information sur votre voiture</h2>
         @using (Html.BeginForm())
         {
-            <h1> Informations concernant vos information Adherent</h1>
-            <ul>
-                <li>Nom : @Model.Adherent.Nom</li>
-                <li>Prenom : @Model.Adherent.Prenom</li>
-                <li>Date de Naissance : @Model.Adherent.Date_naissance</li>
-                <li>Adresse : @Model.Adherent.Adresse.Rue,  @Model.Adherent.Adresse.CodePostal,  @Model.Adherent.Adresse.Ville </li>
-                <li>Telephone : @Model.Adherent.Telephone</li>
-            </ul>
+    <div class="container">
+         <div class="row">
+            <div class="col">
+                <h1> Informations concernant vos information Adherent</h1>
+                <ul>
+                    <li>Nom : @Model.Adherent.Nom</li>
+                    <li>Prenom : @Model.Adherent.Prenom</li>
+                    <li>Date de Naissance : @Model.Adherent.Date_naissance</li>
+                    <li>Adresse : @Model.Adherent.Adresse.Rue,  @Model.Adherent.Adresse.CodePostal,  @Model.Adherent.Adresse.Ville </li>
+                    <li>Telephone : @Model.Adherent.Telephone</li>
+                </ul>
+            </div>
 
-            <h1> Informations concernant vos information Compte</h1>
-            <ul>
-                <li>Mail : @Model.CompteUser.Mail</li>
-                <li>Description : @Model.CompteUser.Description</li>
-            </ul>
+            <div class="col">
+                <h1> Informations concernant vos information Compte</h1>
+                <ul>
+                    <li>Mail : @Model.CompteUser.Mail</li>
+                    <li>Description : @Model.CompteUser.Description</li>
+                </ul>
+            </div>
+            
 
-            <div class="form-floating mb-3">
+            <div>
                 @Html.TextBoxFor(model => model.Voiture.Immatriculation, new { @class = "form-control", placeholder = "Plaque Immatriculation" })
                 @Html.LabelFor(model => model.Voiture.Immatriculation)
                 @Html.ValidationMessageFor(model => model.Voiture.Immatriculation)
             </div>
 
-            <div class="form-floating mb-3">
+            <div>
                 @Html.TextBoxFor(model => model.Voiture.Titulaire, new { @class = "form-control", placeholder = "Titulaire" })
                 @Html.LabelFor(model => model.Voiture.Titulaire)
                 @Html.ValidationMessageFor(model => model.Voiture.Titulaire)
@@ -53,9 +52,7 @@
                 @Html.LabelFor(model => model.Voiture.Annee)
                 @Html.ValidationMessageFor(model => model.Voiture.Annee)
             </div>
-            // TODO mettre un lien pour ajouter des Marque et des Modeles si non présent dans la base de données
-            // TODO Voir en fin de semaine pour ajouter du JavaScript sur les dropdown list
-
+           
 
 
             <div>
@@ -65,7 +62,7 @@
 
 
             <div>
-                @Html.DropDownListFor(model => model.Modele.Nom, (SelectList)ViewBag.Modele,"Selectionnez modeles", new { @id = "ddlmodeles" })
+                @Html.DropDownListFor(model => model.Modele.Nom, (SelectList)ViewBag.Modele, "Selectionnez modeles", new { @id = "ddlmodeles" })
                 @Html.LabelFor(model => model.Modele.Nom)
             </div>
 
@@ -99,12 +96,14 @@
 
             <!-- Submit Button-->
             <button class="btn btn-primary btn-xl" type="submit">Créer</button>
-        }
+        </div>
     </div>
+                    }
+               
 
-<script src="~/jquery-3.6.0.js"></script>
-<script src="~/Voiture.js"></script>
-
-
-</body>
-</html>
+                <script src="~/jquery-3.6.0.js"></script>
+                <script src="~/Voiture.js"></script>
+            
+    </div>
+</section>
+    

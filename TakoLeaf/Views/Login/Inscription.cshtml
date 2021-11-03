@@ -90,154 +90,218 @@
 <section class="InscriptionHome">
     @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <div class="content">
-            <h1>Bienvenue !</h1>
-            <div class="checkboxChoix">
+    <div>
+        <h1 class="text-center">Bienvenue !</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="text1 text-center">Qui êtes vous ?</p>
 
-                <div class="group">
-                    <input type="checkbox" id="Provider">
-                    <label class="box" for="Provider">Provider</label>
+                    @Html.TextBoxFor(model => model.Adherent.Prenom, new { @class = "form-text", placeholder = "Prenom" })
+                    @*@Html.LabelFor(model => model.Adherent.Prenom, new { @class = "text__label" }*@
+                    @Html.ValidationMessageFor(model => model.Adherent.Prenom)
+
+
+
+                    @Html.TextBoxFor(model => model.Adherent.Nom, new { @class = "form-text", placeholder = "Nom" })
+                    @*@Html.LabelFor(model => model.Adherent.Nom, new { @class = "text__label" })*@
+                    @Html.ValidationMessageFor(model => model.Adherent.Nom)
+
+
+
+                    @Html.TextBoxFor(model => model.Adherent.Date_naissance, new { @type = "date", @class = "form-text" })
+                    @*@Html.LabelFor(model => model.Adherent.Date_naissance, new { @class = "text__label" })*@
+                    @Html.ValidationMessageFor(model => model.Adherent.Date_naissance)
+
+
+                    @Html.TextBoxFor(model => model.Adherent.Adresse.Rue, new { @class = "form-text", placeholder = "Adresse" })
+                    @*@Html.LabelFor(model => model.Adherent.Adresse.Rue, new { @class = "text__label" })*@
+                    @Html.ValidationMessageFor(model => model.Adherent.Adresse.Rue)
+
+
+
+                    @Html.TextBoxFor(model => model.Adherent.Adresse.CodePostal, new { @class = "form-text", placeholder = "Adresse" })
+                    @*@Html.LabelFor(model => model.Adherent.Adresse.CodePostal, new { @class = "text__label" })*@
+                    @Html.ValidationMessageFor(model => model.Adherent.Adresse.CodePostal)
+
+
+
+                    @Html.TextBoxFor(model => model.Adherent.Adresse.Ville, new { @class = "form-text", placeholder = "Adresse" })
+                    @*@Html.LabelFor(model => model.Adherent.Adresse.Ville, new { @class = "text__label" })*@
+                    @Html.ValidationMessageFor(model => model.Adherent.Adresse.Ville)
+
+
+
+                    @Html.TextBoxFor(model => model.Adherent.Telephone, new { @type = "tel", @class = "form-text", placeholder = "Téléphone" })
+                    @*@Html.LabelFor(model => model.Adherent.Telephone, new { @class = "text__label" })*@
+                    @Html.ValidationMessageFor(model => model.Adherent.Telephone)
+
+                    <div>
+
+                        <div class="text-center">
+                            <input type="checkbox" value="Provider" name="Role">
+                            <label for="Role">Provider</label>
+                        </div>
+
+                        <div class="text-center">
+                            <input type="checkbox" value="Consumer" name="Role">
+                            <label for="Role">Consumer</label>
+                        </div>
+
+                    </div>
                 </div>
-
-                <div class="group">
-                    <input type="checkbox" id="Consumer">
-                    <label class="box" for="Consumer">Consumer</label>
-                </div>
-
-            </div>
-
-            <div class="information-Consumer">
-
-
-                @Html.TextBoxFor(model => model.Adherent.Prenom, new { @class = "form-text", placeholder = "Prenom" })
-                @Html.LabelFor(model => model.Adherent.Prenom, new { @class = "text__label" })
-                @Html.ValidationMessageFor(model => model.Adherent.Prenom)
-                
-
-
-                @Html.TextBoxFor(model => model.Adherent.Nom, new { @class = "form-text", placeholder = "Nom" })
-                @Html.LabelFor(model => model.Adherent.Nom, new { @class = "text__label" })
-                @Html.ValidationMessageFor(model => model.Adherent.Nom)
-
-
-
-                @Html.TextBoxFor(model => model.Adherent.Date_naissance, new { @type = "date", @class = "form-text" })
-                @Html.LabelFor(model => model.Adherent.Date_naissance, new { @class = "text__label" })
-                @Html.ValidationMessageFor(model => model.Adherent.Date_naissance)
-
-
-                @Html.TextBoxFor(model => model.Adherent.Adresse.Rue, new { @class = "form-text", placeholder = "Adresse" })
-                @Html.LabelFor(model => model.Adherent.Adresse.Rue, new { @class = "text__label" })
-                @Html.ValidationMessageFor(model => model.Adherent.Adresse.Rue)
-
-
-
-                @Html.TextBoxFor(model => model.Adherent.Adresse.CodePostal, new { @class = "form-text", placeholder = "Adresse" })
-                @Html.LabelFor(model => model.Adherent.Adresse.CodePostal, new { @class = "text__label" })
-                @Html.ValidationMessageFor(model => model.Adherent.Adresse.CodePostal)
-
-
-
-                @Html.TextBoxFor(model => model.Adherent.Adresse.Ville, new { @class = "form-text", placeholder = "Adresse" })
-                @Html.LabelFor(model => model.Adherent.Adresse.Ville, new { @class = "text__label" })
-                @Html.ValidationMessageFor(model => model.Adherent.Adresse.Ville)
-
-
-
-                @Html.TextBoxFor(model => model.Adherent.Telephone, new { @type = "tel", @class = "form-text", placeholder = "Téléphone" })
-                @Html.LabelFor(model => model.Adherent.Telephone, new { @class = "text__label" })
-                @Html.ValidationMessageFor(model => model.Adherent.Telephone)
-
-
-                @*<input type="text" class="form-text" placeholder="Nom..">
-                    <label for="form-text" class="text__label"></label>*@
-
-                @*<input type="text" class="form-text" placeholder="Prenom..">
-                        <label for="form-text" class="text__label"></label>
-
-                        <input type="datetime" class="form-text" placeholder="Date de naissance..">
-                        <label for="form-text" class="text__label"></label>
-
-                        <input type="text" class="form-text" placeholder="Adresse rue..">
-                        <label for="form-text" class="text__label"></label>
-
-                        <input type="text" class="form-text" placeholder="Ville..">
-                        <label for="form-text" class="text__label"></label>
-
-                        <input type="text" class="form-text" placeholder="Code postal..">
-                        <label for="form-text" class="text__label"></label>
-
-                        <input type="tel" class="form-text" placeholder="Téléphone..">
-                        <label for="form-text" class="text__label"></label>
-                    </div>*@
-
-                <div class="infoPerso">
-
+                <div class="col">
+                    <p class="text1 text-center">Information de connexion</p>
                     <div class="form-floating mb-3">
                         @Html.TextBoxFor(model => model.CompteUser.Mail, new { @type = "email", @class = "form-text", placeholder = "Email" })
-                        @Html.LabelFor(model => model.CompteUser.Mail, new { @class = "text__label" })
+                        @*@Html.LabelFor(model => model.CompteUser.Mail, new { @class = "text__label" })*@
                         @Html.ValidationMessageFor(model => model.CompteUser.Mail)
                     </div>
 
                     <div>
                         @Html.TextBoxFor(model => model.CompteUser.MotDePasse, new { @type = "password", @class = "form-text", placeholder = "Mot de Passe" })
-                        @Html.LabelFor(model => model.CompteUser.MotDePasse, new { @class = "text__label" })
+                        @*@Html.LabelFor(model => model.CompteUser.MotDePasse, new { @class = "text__label" })*@
                         @Html.ValidationMessageFor(model => model.CompteUser.MotDePasse)
                     </div>
-
-                    @*<input type="email" class="form-text" placeholder="Adresse Mail..">
-                        <label for="form-text" class="text__label"></label>
-
-                        <input type="password" class="form-text" placeholder="Mot de passe..">
-                        <label for="form-text" class="text__label"></label>*@
-
-
                 </div>
-
-
-
-
-                <!-- Section des box d'image-->
-
-                <div class="fichier">
-                    <input class="fichier_TEXT" type="file" name="Avatar" id="file" accept="image/*">
-                    <label for="file">
+                <div class="col">
+                    <p class="text1 text-center" >A quoi ressemblez vous ?</p>
+                    <input class="fichier_TEXT" type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+                    <label for="fileToUpload">
                         <span class="material-icons">
                             add_photo_alternate
                         </span> &nbsp;
                         Votre avatar
                     </label>
 
-
+                </div>
+                <div class="col">
+                    <p class="text1 text-center">Parlez nous de vous.</p>
+                    <div>
+                        @Html.TextAreaFor(model => model.CompteUser.Description, new { @class = "textarea", placeholder = "Description" })
+                        @Html.LabelFor(model => model.CompteUser.Description)
+                    </div>
                 </div>
 
-
-
-
-                <!-- FIN Section des box d'image-->
-                <!-- Section des box de zone-->
-
-                <div class="textesection">
-                    <p class="text1">Qui êtes vous ?</p>
-                    <p class="text2">A quoi ressemblez vous ?</p>
-                    <p class="text3">Parlez nous de vous.</p>
-                    <p class="text7">Information de connexion</p>
-
-                </div>
-
-                <!-- FIN Section des box de zone-->
-
-                <div class="ValiderBox">
-                    <button class="Valider" type="submit">Valider</button>
-                </div>
-
-                <div class="textare_style">
-                    <textarea class="textarea" name="textarea_description" id="textarea" cols="70" rows="8"
-                              placeholder="Que pouvez vous nous dire de vous.."></textarea>
-                </div>
-
-                <button class="Valider" type="submit">Valider</button>
             </div>
+
+
         </div>
+        <div class="text-center">
+                <button class="Valider text-center" type="submit">Valider</button>
+           
+        </div>
+
+
+
+
+
+        @*<div class="information-Consumer">*@
+
+
+
+
+
+        @*<input type="text" name=@Model.Adherent.Nom id=Model.Adherent.Nom class="form-text" placeholder="Nom..">
+            <label for=@Model.Adherent.Nom class="text__label"></label>
+
+
+            <input type="text" name=@Model.Adherent.Prenom id=Model.Adherent.Nom class="form-text" placeholder="Prenom..">
+            <label for=@Model.Adherent.Prenom class="text__label"></label>
+
+            <input type="datetime" name=@Model.Adherent.DateInscription id=Model.Adherent.Nom class="form-text" placeholder="Date de naissance..">
+            <label for=@Model.Adherent.Date_naissance class="text__label"></label>
+
+            <input type="text" name=@Model.Adherent.Adresse.Rue id=Model.Adherent.Nom class="form-text" placeholder="Adresse rue..">
+            <label for=@Model.Adherent.Adresse.Rue class="text__label"></label>
+
+            <input type="text" name=@Model.Adherent.Adresse.Ville id=Model.Adherent.Nom class="form-text" placeholder="Ville..">
+            <label for=@Model.Adherent.Adresse.Ville class="text__label"></label>
+
+            <input type="text" name=@Model.Adherent.Adresse.CodePostal id=Model.Adherent.Nom class="form-text" placeholder="Code postal..">
+            <label for=@Model.Adherent.Adresse.CodePostal class="text__label"></label>
+
+            <input type="tel" name=@Model.Adherent.Telephone id=Model.Adherent.Nom class="form-text" placeholder="Téléphone..">
+            <label for=@Model.Adherent.Telephone class="text__label"></label>
+        </div>*@
+
+        @*<div class="infoPerso">*@
+
+        @*<div class="form-floating mb-3">
+            @Html.TextBoxFor(model => model.CompteUser.Mail, new { @type = "email", @class = "form-text", placeholder = "Email" })
+            @Html.LabelFor(model => model.CompteUser.Mail, new { @class = "text__label" })
+            @Html.ValidationMessageFor(model => model.CompteUser.Mail)
+        </div>
+
+        <div>
+            @Html.TextBoxFor(model => model.CompteUser.MotDePasse, new { @type = "password", @class = "form-text", placeholder = "Mot de Passe" })
+           @Html.LabelFor(model => model.CompteUser.MotDePasse, new { @class = "text__label" })
+            @Html.ValidationMessageFor(model => model.CompteUser.MotDePasse)
+        </div>*@
+
+        @*<input type="email" class="form-text" name=@Model.CompteUser.Mail id=@Model.CompteUser.Mail placeholder="Adresse Mail..">
+        <label for=@Model.CompteUser.Mail class="text__label"></label>
+
+        <input type="password" class="form-text" name=@Model.CompteUser.MotDePasse id=@Model.CompteUser.MotDePasse placeholder="Mot de passe..">
+        <label for=@Model.CompteUser.MotDePasse class="text__label"></label>*@
+
+
+        @*</div>*@
+
+
+
+
+        <!-- Section des box d'image-->
+        @*<div class="fichier">
+            <input type="file" name="fileToUpload" />
+            @Html.LabelFor(model => model.CompteUser.Avatar)
+        </div>*@
+
+        @*<div class="fichier">
+            <input class="fichier_TEXT" type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+            <label for="fileToUpload">
+                <span class="material-icons">
+                    add_photo_alternate
+                </span> &nbsp;
+                Votre avatar
+            </label>
+
+
+        </div>*@
+
+
+
+
+        <!-- FIN Section des box d'image-->
+        <!-- Section des box de zone-->
+        @*<div class="textesection">
+            <p class="text1">Qui êtes vous ?</p>
+            <p class="text2">A quoi ressemblez vous ?</p>
+            <p class="text3">Parlez nous de vous.</p>
+            <p class="text7">Information de connexion</p>
+
+        </div>*@
+
+        <!-- FIN Section des box de zone-->
+        @*<div class="textare_style">
+            @Html.TextAreaFor(model => model.CompteUser.Description, new { @class = "textarea", placeholder = "Description" })
+            @Html.LabelFor(model => model.CompteUser.Description)
+        </div>*@
+
+        @*<div class="textare_style">
+        <textarea class="textarea" name=@Model.CompteUser.Description id=@Model.CompteUser.Description cols="70" rows="8"
+                  placeholder="Que pouvez vous nous dire de vous.."></textarea>
+        </div>*@
+
+        @*<div class="ValiderBox">
+            <button class="Valider" type="submit">Valider</button>
+        </div>*@
+
+
+
+
+    </div>
+    
+        
        }
-    </section>
+</section>
