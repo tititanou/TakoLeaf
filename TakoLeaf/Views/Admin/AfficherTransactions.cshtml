@@ -34,11 +34,12 @@
 
             @foreach (var item in Model.ListePrestations)
             {
-                <tr>
+                @*<tr>
                     <td>@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
                     <td>@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
                     <td>@item.DateDebut.ToShortDateString()</td>
-                </tr>
+                </tr>*@
+
                 string editLink = "/Admin/AfficherPrestation?id=" + item.Id.ToString();
                 <tr class="donnees">
                     <td><img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /> <img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /></td>
