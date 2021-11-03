@@ -9,7 +9,7 @@ namespace TakoLeaf.Data
     {
         bool EstAmi(int id1, int id2);
         List<Adresse> GetAllAdresses();
-        List<Adherent> RechercheAdherent(int code, string nom, string prenom, int competence);
+        List<Adherent> RechercheAdherent(string choix, int code, string nom, string prenom, int competence, string ressource, string input);
         Dictionary<string, List<SsCateCompetence>> RechercheCompetence();
         Dictionary<string, List<int>> RechercheCodePostal();
     }

@@ -165,6 +165,16 @@ namespace TakoLeaf.Models
                     Departement = 64,
                     Ville = "Lyon"
 
+                },
+
+                new Adresse
+                {
+                    Id = 10,
+                    Rue = "25 Rue de la Feuille",
+                    CodePostal = 85000,
+                    Departement = 85,
+                    Ville = "Konoha"
+
                 }
                 );
 
@@ -702,7 +712,7 @@ namespace TakoLeaf.Models
                 new Ressource
                 {
                     Intitule = "Cle à molette",
-                    Adresse = "124 Rue Hoche",
+                    AdresseId = 1,
                     Categorie = CateRessource.OUTIL,
                     Disponible = true,
                     TarifJournalier = 15,
@@ -712,7 +722,7 @@ namespace TakoLeaf.Models
                   new Ressource
                   {
                       Intitule = "Vidangeuse",
-                      Adresse = "1 Rue Boucher",
+                      AdresseId = 5,
                       Categorie = CateRessource.OUTIL_SPECIALISE,
                       Disponible = true,
                       TarifJournalier = 40,
@@ -723,7 +733,7 @@ namespace TakoLeaf.Models
 
                   {
                       Intitule = "Garage TakoLef",
-                      Adresse = "25 Rue de la Feuille, 85000, Konoha",
+                      AdresseId = 10,
                       Categorie = CateRessource.LOCAL_GARAGE,
                       Disponible = true,
                       TarifJournalier = 100,
@@ -733,7 +743,7 @@ namespace TakoLeaf.Models
                   new Ressource
                   {
                       Intitule = "Remorque 3m^3",
-                      Adresse = "1 Rue Boucher",
+                      AdresseId = 5,
                       Categorie = CateRessource.REMORQUE,
                       Disponible = true,
                       TarifJournalier = 55,
