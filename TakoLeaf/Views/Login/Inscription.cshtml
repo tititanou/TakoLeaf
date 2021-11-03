@@ -1,18 +1,11 @@
 ﻿@model TakoLeaf.ViewModels.UtilisateurViewModel
 @{
-    Layout = null;
+    Layout = "_LayoutInscription";
 }
 
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Inscription</title>
-</head>
-<body>
-    <div>
+    @*<div>
         @using (Html.BeginForm(null,null, FormMethod.Post,new {enctype = "multipart/form-data"}))
         {
             <div class="form-floating mb-3">
@@ -88,9 +81,163 @@
 
             </div>
 
-            <!-- Submit Button-->
+            
             <button class="btn btn-primary btn-xl" type="submit">Valider</button>
         }
-</div>
-</body>
-</html>
+</div>*@
+
+
+<section class="InscriptionHome">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="content">
+            <h1>Bienvenue !</h1>
+            <div class="checkboxChoix">
+
+                <div class="group">
+                    <input type="checkbox" id="Provider">
+                    <label class="box" for="Provider">Provider</label>
+                </div>
+
+                <div class="group">
+                    <input type="checkbox" id="Consumer">
+                    <label class="box" for="Consumer">Consumer</label>
+                </div>
+
+            </div>
+
+            <div class="information-Consumer">
+
+
+                @Html.TextBoxFor(model => model.Adherent.Prenom, new { @class = "form-text", placeholder = "Prenom" })
+                @Html.LabelFor(model => model.Adherent.Prenom, new { @class = "text__label" })
+                @Html.ValidationMessageFor(model => model.Adherent.Prenom)
+                
+
+
+                @Html.TextBoxFor(model => model.Adherent.Nom, new { @class = "form-text", placeholder = "Nom" })
+                @Html.LabelFor(model => model.Adherent.Nom, new { @class = "text__label" })
+                @Html.ValidationMessageFor(model => model.Adherent.Nom)
+
+
+
+                @Html.TextBoxFor(model => model.Adherent.Date_naissance, new { @type = "date", @class = "form-text" })
+                @Html.LabelFor(model => model.Adherent.Date_naissance, new { @class = "text__label" })
+                @Html.ValidationMessageFor(model => model.Adherent.Date_naissance)
+
+
+                @Html.TextBoxFor(model => model.Adherent.Adresse.Rue, new { @class = "form-text", placeholder = "Adresse" })
+                @Html.LabelFor(model => model.Adherent.Adresse.Rue, new { @class = "text__label" })
+                @Html.ValidationMessageFor(model => model.Adherent.Adresse.Rue)
+
+
+
+                @Html.TextBoxFor(model => model.Adherent.Adresse.CodePostal, new { @class = "form-text", placeholder = "Adresse" })
+                @Html.LabelFor(model => model.Adherent.Adresse.CodePostal, new { @class = "text__label" })
+                @Html.ValidationMessageFor(model => model.Adherent.Adresse.CodePostal)
+
+
+
+                @Html.TextBoxFor(model => model.Adherent.Adresse.Ville, new { @class = "form-text", placeholder = "Adresse" })
+                @Html.LabelFor(model => model.Adherent.Adresse.Ville, new { @class = "text__label" })
+                @Html.ValidationMessageFor(model => model.Adherent.Adresse.Ville)
+
+
+
+                @Html.TextBoxFor(model => model.Adherent.Telephone, new { @type = "tel", @class = "form-text", placeholder = "Téléphone" })
+                @Html.LabelFor(model => model.Adherent.Telephone, new { @class = "text__label" })
+                @Html.ValidationMessageFor(model => model.Adherent.Telephone)
+
+
+                @*<input type="text" class="form-text" placeholder="Nom..">
+                    <label for="form-text" class="text__label"></label>*@
+
+                @*<input type="text" class="form-text" placeholder="Prenom..">
+                        <label for="form-text" class="text__label"></label>
+
+                        <input type="datetime" class="form-text" placeholder="Date de naissance..">
+                        <label for="form-text" class="text__label"></label>
+
+                        <input type="text" class="form-text" placeholder="Adresse rue..">
+                        <label for="form-text" class="text__label"></label>
+
+                        <input type="text" class="form-text" placeholder="Ville..">
+                        <label for="form-text" class="text__label"></label>
+
+                        <input type="text" class="form-text" placeholder="Code postal..">
+                        <label for="form-text" class="text__label"></label>
+
+                        <input type="tel" class="form-text" placeholder="Téléphone..">
+                        <label for="form-text" class="text__label"></label>
+                    </div>*@
+
+                <div class="infoPerso">
+
+                    <div class="form-floating mb-3">
+                        @Html.TextBoxFor(model => model.CompteUser.Mail, new { @type = "email", @class = "form-text", placeholder = "Email" })
+                        @Html.LabelFor(model => model.CompteUser.Mail, new { @class = "text__label" })
+                        @Html.ValidationMessageFor(model => model.CompteUser.Mail)
+                    </div>
+
+                    <div>
+                        @Html.TextBoxFor(model => model.CompteUser.MotDePasse, new { @type = "password", @class = "form-text", placeholder = "Mot de Passe" })
+                        @Html.LabelFor(model => model.CompteUser.MotDePasse, new { @class = "text__label" })
+                        @Html.ValidationMessageFor(model => model.CompteUser.MotDePasse)
+                    </div>
+
+                    @*<input type="email" class="form-text" placeholder="Adresse Mail..">
+                        <label for="form-text" class="text__label"></label>
+
+                        <input type="password" class="form-text" placeholder="Mot de passe..">
+                        <label for="form-text" class="text__label"></label>*@
+
+
+                </div>
+
+
+
+
+                <!-- Section des box d'image-->
+
+                <div class="fichier">
+                    <input class="fichier_TEXT" type="file" name="Avatar" id="file" accept="image/*">
+                    <label for="file">
+                        <span class="material-icons">
+                            add_photo_alternate
+                        </span> &nbsp;
+                        Votre avatar
+                    </label>
+
+
+                </div>
+
+
+
+
+                <!-- FIN Section des box d'image-->
+                <!-- Section des box de zone-->
+
+                <div class="textesection">
+                    <p class="text1">Qui êtes vous ?</p>
+                    <p class="text2">A quoi ressemblez vous ?</p>
+                    <p class="text3">Parlez nous de vous.</p>
+                    <p class="text7">Information de connexion</p>
+
+                </div>
+
+                <!-- FIN Section des box de zone-->
+
+                <div class="ValiderBox">
+                    <button class="Valider" type="submit">Valider</button>
+                </div>
+
+                <div class="textare_style">
+                    <textarea class="textarea" name="textarea_description" id="textarea" cols="70" rows="8"
+                              placeholder="Que pouvez vous nous dire de vous.."></textarea>
+                </div>
+
+                <button class="Valider" type="submit">Valider</button>
+            </div>
+        </div>
+       }
+    </section>

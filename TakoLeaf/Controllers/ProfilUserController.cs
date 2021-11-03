@@ -59,7 +59,8 @@ namespace TakoLeaf.Controllers
 
             //int idmodele = voiture.ModeleId;
             //Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
-            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voitures = voitures, Consumer = consumer, Modeles = modeles , Marques = marques };
+            List<Avis> avis = dal.ObtenirAvis().Where(a => a.ConsumerId == consumer.Id).ToList();
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Avis =avis, Voitures = voitures, Consumer = consumer, Modeles = modeles , Marques = marques };
 
             return View(uvm);
         }
@@ -298,7 +299,9 @@ namespace TakoLeaf.Controllers
         [HttpPost]
         public IActionResult AjoutRessource(ProviderViewModel pvm)
         {
-            Ressource ressource = dal.AjouterRessource(pvm.Provider.Id, pvm.Ressource.Intitule, pvm.Ressource.Categorie, pvm.Ressource.TarifJournalier, pvm.Ressource.Adresse);
+            DalLogin dalLogin = new DalLogin();
+            Adresse adresse = dalLogin.CreationAdresse(pvm.Ressource.Adresse.Rue, pvm.Ressource.Adresse.CodePostal, pvm.Ressource.Adresse.Ville);
+            Ressource ressource = dal.AjouterRessource(pvm.Provider.Id, pvm.Ressource.Intitule, pvm.Ressource.Categorie, pvm.Ressource.TarifJournalier, adresse.Id);
             return Redirect("/ProfilUser/ProfilProvider?id=" + pvm.Provider.AdherentId);
         }
 
@@ -320,7 +323,7 @@ namespace TakoLeaf.Controllers
 
             for(int i =0; i < pvm.Ressources.Count; i++)
             {
-                dal.ModifierRessource(pvm.Ressources[i].Id, pvm.Ressources[i].Intitule, pvm.Ressources[i].Categorie, pvm.Ressources[i].TarifJournalier, pvm.Ressources[i].Adresse);
+                dal.ModifierRessource(pvm.Ressources[i].Id, pvm.Ressources[i].Intitule, pvm.Ressources[i].Categorie, pvm.Ressources[i].TarifJournalier, pvm.Ressources[i].Adresse.Rue, pvm.Ressources[i].Adresse.CodePostal, pvm.Ressources[i].Adresse.Ville);
             }
 
 
@@ -532,5 +535,9 @@ namespace TakoLeaf.Controllers
 
             return View();
         }
+
+        // HISTORIQUE
+
+       
     }   
 }

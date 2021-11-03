@@ -13,7 +13,7 @@
         <title>Message</title>
     </head>
     <body>
-        <div style="display:inline"><button type="button"><i class="fas fa-edit"></i>Nouveau Message</button><button type="button" id="rep" onclick="Repondre()"><i class="fas fa-reply"></i>Répondre</button><button><i class="far fa-trash-alt"></i>Supprimer</button></div>
+        <div style="display:inline"><button type="button"><i class="fas fa-edit"></i>Nouveau Message</button><button type="button" id="rep" onclick="Repondre()"><i class="fas fa-reply"></i>Répondre</button><button type="button" onclick="window.location.href = '@Url.Action("Supprimer", "Messagerie", new { Id = @Model.Id })'"><i class="far fa-trash-alt"></i>Supprimer</button></div>
         <br />
         <i style="display:inline-block" class="fas fa-long-arrow-alt-left" onclick="window.history.go(-1);"></i>    <h4 style="display:inline-block">@Model.Titre</h4>
         <br />

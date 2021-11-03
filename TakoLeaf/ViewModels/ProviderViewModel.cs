@@ -22,5 +22,6 @@ namespace TakoLeaf.ViewModels
         public List<Ressource> Ressources { get; set; }
         public Ressource Ressource { get; set; }
         public bool Amis { get; set; }
+        public List<Avis> Avis { get; set; }
     }
 }

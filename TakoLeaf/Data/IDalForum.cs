@@ -24,6 +24,6 @@ namespace TakoLeaf.Data
         void SuppressionPostSignale(PostSignale post);
         void SuppressionAllPostSignaleFromAdh(int idAdh);
         void SuppressionAllPostFromAdh(int idAdh);
-        
+   
     }
 }

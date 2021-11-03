@@ -27,14 +27,16 @@
 
                 @for (int i = 0; i < Model.Ressources.Count; i++)
                 {
-                    <tr>
-                        <td>@Html.TextBoxFor(m => m.Ressources[i].Intitule)</td>
-                        <td>@Html.TextBoxFor(m => m.Ressources[i].Adresse)</td>
-                        <td>@Html.TextBoxFor(m => m.Ressources[i].TarifJournalier) </td>
-                        <td>@Html.DropDownListFor(m => m.Ressources[i].Categorie, (SelectList)ViewBag.Cate)</td>
-                        <td><button>@Html.ActionLink("Supprimer la ressource", "SupprimerRessource", "ProfilUser", new { id = Model.Ressources[i].Id })</button></td>
+            <tr>
+                <td>@Html.TextBoxFor(m => m.Ressources[i].Intitule)</td>
+                <td>@Html.TextBoxFor(m => m.Ressources[i].Adresse.Rue)</td>
+                <td>@Html.TextBoxFor(m => m.Ressources[i].Adresse.CodePostal)</td>
+                <td>@Html.TextBoxFor(m => m.Ressources[i].Adresse.Ville)</td>
+                <td>@Html.TextBoxFor(m => m.Ressources[i].TarifJournalier) </td>
+                <td>@Html.DropDownListFor(m => m.Ressources[i].Categorie, (SelectList)ViewBag.Cate)</td>
+                <td><button>@Html.ActionLink("Supprimer la ressource", "SupprimerRessource", "ProfilUser", new { id = Model.Ressources[i].Id })</button></td>
 
-                    </tr>
+            </tr>
 
 
                     @Html.HiddenFor(m => m.Ressources[i].Id)

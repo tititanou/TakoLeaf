@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TakoLeaf.Data;
 using TakoLeaf.Models;
 
@@ -37,9 +38,10 @@ namespace TakoLeaf.Controllers
         }
 
         [HttpPost]
-        public ActionResult SupprimerMessage(List<int> MessageList)
+        public ActionResult SupprimerMessages(List<int> MessageList)
         {
             userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            string retour = null;
             if (MessageList.Count != 0)
             {
                  for (int i = 0; i < MessageList.Count(); i++)
@@ -50,19 +52,52 @@ namespace TakoLeaf.Controllers
                     {
                         MessageRecu messageRecu = this.dalMessagerie.GetMessageRecu(id);
                         this.dalMessagerie.SuppressionMessageRecu(messageRecu);
-                        return RedirectToAction("MessagesRecus");
+                        retour = "MessagesRecus";
                     }
                     else if (message.AdherentExpId == userId)
                     {
                         MessageEnvoye messageEnvoye = this.dalMessagerie.GetMessageEnvoye(id);
                         this.dalMessagerie.SuppressionMessageEnvoye(messageEnvoye);
-                        return RedirectToAction("MessagesEnvoyes");
-                    }
-                    else
-                    {
-                        return View("Error");
+                        retour = "MessagesEnvoyes";
                     }
                 }
+            }
+            if(retour == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                return RedirectToAction(retour);
+            }
+            
+            
+        }
+
+        [HttpPost]
+        public ActionResult Supprimer(int Id)
+        {
+            userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (Id != 0)
+            {
+                Message message = this.dalMessagerie.GetMessage(Id);
+                if (message.AdherentDestId == userId)
+                {
+                    MessageRecu messageRecu = this.dalMessagerie.GetMessageRecu(Id);
+                    this.dalMessagerie.SuppressionMessageRecu(messageRecu);
+                    return RedirectToAction("MessagesRecus");
+                }
+                else if (message.AdherentExpId == userId)
+                {
+                    MessageEnvoye messageEnvoye = this.dalMessagerie.GetMessageEnvoye(Id);
+                    this.dalMessagerie.SuppressionMessageEnvoye(messageEnvoye);
+                    return RedirectToAction("MessagesEnvoyes");
+                }
+                else
+                {
+                    return View("Error");
+                }
+                
             }
             return View("Error");
         }
@@ -75,6 +110,8 @@ namespace TakoLeaf.Controllers
 
         public ActionResult NouveauMessage()
         {
+            List<Adherent> adherents = this.dalMessagerie.GetAdherents();
+            ViewBag.AdhList = new List<Adherent>(adherents);
             return View();
         }
 

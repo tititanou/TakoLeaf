@@ -1,11 +1,11 @@
 ﻿@model TakoLeaf.ViewModels.UtilisateurViewModel
 @{
-    Layout = "_LayoutProfil";
+    Layout = "_LayoutProfilConsumer";
     ViewBag.Title = "Profil";
 }
 
 
-    <h1> Bienvenue sur votre profil</h1>
+@*<h1> Bienvenue sur votre profil</h1>
 
     <div>
         <a href ="/Login/Deconnexion">Se deconnecter</a>
@@ -15,7 +15,7 @@
         <h2>Informations Adherent</h2>
 
         <ul>
-            @{ 
+            @{
                 string link = "/Avatar/" + @Model.CompteUser.Avatar;
             }
             <li>Avatar : <img src ="@link"/></li>
@@ -26,7 +26,7 @@
             <li>Telephone : @Model.Adherent.Telephone</li>
         </ul>
 
-        @*@Html.ActionLink("Modifier information adherent", "ModifInfosAdherent", "ProfilUser", new { id = Model.Adherent.Id })*@
+        @Html.ActionLink("Modifier information adherent", "ModifInfosAdherent", "ProfilUser", new { id = Model.Adherent.Id })
 
         <h2>Informations Compte</h2>
         <ul>
@@ -38,28 +38,148 @@
         </ul>
 
 
-        @*@Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })*@
+        @Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })
 
 
         <h2>Informations Voiture</h2>
 
         @for (int i = 0; i < Model.Voitures.Count; i++)
         {
-            <ul>
-                <li>Marque : @Model.Marques[i]</li>
-                <li>Modele : @Model.Modeles[i]</li>
-                <li>Immatriculation : @Model.Voitures[i].Immatriculation</li>
-                <li>Titulaire : @Model.Voitures[i].Titulaire</li>
-                <li>Carburant : @Model.Voitures[i].Carburant</li>
-                <li>Annee : @Model.Voitures[i].Annee</li>
-            </ul>
-
-            @*@Html.ActionLink("Modifier le véhicule", "ModifVoiture", "ProfilUser", new  { id = Model.Voitures[i].Id })*@
+    <ul>
+        <li>Marque : @Model.Marques[i]</li>
+        <li>Modele : @Model.Modeles[i]</li>
+        <li>Immatriculation : @Model.Voitures[i].Immatriculation</li>
+        <li>Titulaire : @Model.Voitures[i].Titulaire</li>
+        <li>Carburant : @Model.Voitures[i].Carburant</li>
+        <li>Annee : @Model.Voitures[i].Annee</li>
+        @Html.ActionLink("Modifier le véhicule", "ModifVoiture", "ProfilUser", new { id = Model.Voitures[i].Id })
+    </ul>
         }
 
 
-        @*@Html.ActionLink("Ajouter un vehicule", "AjoutVehicule", "ProfilUser", new { id = Model.Consumer.Id })
-        @Html.ActionLink("Modifier le véhicule", "ModifVoiture", "ProfilUser", new { id = Model.Consumer.Id })*@ 
+
+
+
+        @Html.ActionLink("Ajouter un vehicule", "AjoutVehicule", "ProfilUser", new { id = Model.Consumer.Id })
+        @Html.ActionLink("Modifier le véhicule", "ModifVoiture", "ProfilUser", new { id = Model.Consumer.Id })
+
+    </div>*@
+
+@{
+    string Plan = "http://www.google.fr/maps/place/" + Model.Adherent.Adresse.Rue + ",+" + Model.Adherent.Adresse.CodePostal + "+" + Model.Adherent.Adresse.Ville;
+
+}
+
+<section class="ProfilConsumer">
+
+    <div class="container_Location">
+        <table class="data">
+            <tr>
+                <th>Titulaire</th>
+                <th>Marque</th>
+                <th>Modele</th>
+                <th>Immatriculation</th>
+                <th>Annee</th>
+                <th>Carburant</th>
+
+
+            </tr>
+
+            @for (int i = 0; i < Model.Voitures.Count; i++)
+            {
+                <tr>
+                    <td>@Model.Voitures[i].Titulaire</td>
+                    <td>@Model.Voitures[i].Modele.Marque.Nom</td>
+                    <td>@Model.Voitures[i].Modele.Nom</td>
+                    <td>@Model.Voitures[i].Immatriculation</td>
+                    <td>@Model.Voitures[i].Annee</td>
+                    <td>@Model.Voitures[i].Carburant</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+
+    <div class="container_Avis">
+
+        @if (Model.Avis.Count == 0)
+        {
+            <p>Pas d'avis laissé</p>
+        }
+        else
+        {
+            @for (int i = 0; i < Model.Avis.Count; i++)
+            {
+                <p>Avis laissé par  @Model.Avis[i].Consumer.Adherent.Nom @Model.Avis[i].Consumer.Adherent.Prenom le @Model.Avis[i].DateCreation.ToShortDateString() : @Model.Avis[i].Contenu</p>
+
+            }
+        }
+    </div>
+
+
+
+    <div class="container_Presentation">
+        <p>@Model.CompteUser.Description</p>
+    </div>
+
+
+    <div class="container_RS">
+
+        <div class="icones_RS">
+            <a href="#"><img src="~/IMG/RS PROFILE/entypo-social_instagram-with-circle.png" alt=""></a>
+            <a href="#"><img src="~/IMG/RS PROFILE/entypo-social_facebook-with-circle.png" alt=""></a>
+            <a href="#"><img src="~/IMG/RS PROFILE/entypo-social_twitter-with-circle.png" alt=""> </a>
+
+        </div>
+    </div>
+
+    <div class="map">
+        <button><a href="@Plan"></a></button>
+    </div>
+
+
+
+    <div class="localisation">
+        <p class="loca">
+            Localisation
+        </p>
+        <p class="deplace">
+            Peut se déplacer :
+        </p>
+        <ul class="deplacement">
+            <li> 10km et autour</li>
+            <li> 30km et autour</li>
+        </ul>
+        <div class="img_localisation">
+            <img src="IMG/Localisation/Drawing Pin Filled.png" alt="">
+            <img src="IMG/Localisation/Double Arrow Right.png" alt="">
+        </div>
 
     </div>
+
+    <div class="profile_consumer">
+
+        <button class="liste-devis-button">@Html.ActionLink("Liste des devis", "AccepterDevis", "Devis")</button>
+        <button class="presta-button">@Html.ActionLink("Liste des prestations", "PrestationsEnCours", "Prestation", new { id = Model.Adherent.Id })</button>
+
+        <p class="Nom-Provider">@Model.Adherent.Nom</p>
+        <p class="Prenom-Provider">@Model.Adherent.Prenom</p>
+
+    </div>
+
+    <div class="img-localisation">
+        <img src="IMG/Localisation/Drawing Pin Filled.png" alt="">
+        <p>Localisé(e) à.. <br />@Model.Adherent.Adresse.Rue <br />@Model.Adherent.Adresse.CodePostal @Model.Adherent.Adresse.Ville</p>
+    </div>
+
+    <div class="pp_Provider">
+        <div class="pp_providerImage">
+
+        </div>
+        <img src="IMG/Localisation/bi_check-circle-fill.png" class="Checked" alt="">
+
+    </div>
+
+</section>
+
 

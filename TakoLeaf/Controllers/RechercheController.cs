@@ -5,35 +5,118 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using TakoLeaf.Data;
 using TakoLeaf.Models;
 using TakoLeaf.ViewModels;
 
 namespace TakoLeaf.Controllers
 {
-    [Authorize]
+    
     public class RechercheController : Controller
     {
 
 
         private IdalProfil dal;
+        private IDalRecherche dalRecherche;
 
 
         public RechercheController()
         {
             this.dal = new DalProfil();
-
+            this.dalRecherche = new DalRecherche();
         }
 
 
-        public IActionResult Index()
+        public IActionResult Recherche()
         {
-            return View();
+            List<string> choix = new List<string>() { "Un utilisateur", "Un service", "Une ressource" };
+            ViewBag.Choix = new SelectList(choix);
+            List<string> cateRessources = new List<string>();
+            foreach (string item in Enum.GetNames(typeof(CateRessource)))
+            {
+                cateRessources.Add(item);
+            }
+            ViewBag.Ressources = new SelectList(cateRessources);
+
+
+            List<Adherent> adherents = this.dal.ObtenirAdherents();
+            List<string> prenoms = new List<string>();
+            List<string> noms = new List<string>();
+            foreach(Adherent adherent in adherents)
+            {
+                if(prenoms.Count() == 0)
+                {
+                    prenoms.Add(adherent.Prenom);
+                }
+                else
+                {
+                    if (!prenoms.Contains(adherent.Prenom))
+                    {
+                        prenoms.Add(adherent.Prenom);
+                    }
+                }
+                if (noms.Count() == 0)
+                {
+                    noms.Add(adherent.Nom);
+                }
+                else
+                {
+                    if (!noms.Contains(adherent.Nom))
+                    {
+                        noms.Add(adherent.Nom);
+                    }
+                }
+            }
+            noms.Sort();
+            prenoms.Sort();
+            ViewBag.Noms = new List<string>(noms);
+            ViewBag.Prenoms = new List<string>(prenoms);
+
+             var model = new RechercheViewModel()
+             {
+                 SsCateList = new List<SelectListItem>(),
+                 CodePostauxList = new List<SelectListItem>()
+             };
+
+             var ssCateComp = this.dalRecherche.RechercheCompetence();
+             var adresses = this.dalRecherche.RechercheCodePostal();
+
+            foreach(var adresse in adresses)
+            {
+                var optionGroup = new SelectListGroup() { Name = adresse.Key.ToString() };
+                foreach(var codePostal in adresse.Value)
+                {
+                    model.CodePostauxList.Add(new SelectListItem() { Value = codePostal.ToString(), Text = codePostal.ToString(), Group = optionGroup });
+                }
+            }
+
+             foreach (var cateGroup in ssCateComp)
+             {
+                 var optionGroup = new SelectListGroup() { Name = cateGroup.Key };
+                 foreach (var ssCateCompetence in cateGroup.Value)
+                 {
+                     model.SsCateList.Add(new SelectListItem() { Value = ssCateCompetence.Id.ToString(), Text = ssCateCompetence.Intitule, Group = optionGroup });
+                 }
+             }
+             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Recherche(string Choix, int Adresse, string Prenom, string Nom, int Competence, string Ressource, string Input)
+        {
+            List<Adherent> resultats = this.dalRecherche.RechercheAdherent(Choix, Adresse, Nom, Prenom, Competence, Ressource, Input);
+            return View("AfficherProfils", resultats);
+        }
 
-        // TODO Pour avoir l'adherenrt connecté
-        //int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        public ActionResult AfficherProfils(List<Adherent> Adhs)
+        {
+
+            return View(Adhs);
+        }
+        // TODO Pour avoir l'adherenrt connect?
+        //int idA2 = Int32.Parse(User.FindFirst(PClaimTypes.NameIdentifier).Value);
         //
 
         public IActionResult VisiteProfil(int id) // idAdherent-+
@@ -82,15 +165,14 @@ namespace TakoLeaf.Controllers
             int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             DalRecherche dalR = new DalRecherche();
             bool res = dalR.EstAmi(id, idA2);
-           
-       
+            List<Avis> avis = dal.ObtenirAvis().Where(a => a.ConsumerId == consumer.Id).ToList();
+
+
             //int idmodele = voiture.ModeleId;
             //Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
-            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voitures = voitures, Consumer = consumer, Modeles = modeles, Marques = marques, Amis = res };
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, Avis = avis, CompteUser = compteUser, Voitures = voitures, Consumer = consumer, Modeles = modeles, Marques = marques, Amis = res };
 
                 return View(uvm);
-            
-
         }
 
         public IActionResult VisiteProfilProvider(int id)
@@ -101,12 +183,12 @@ namespace TakoLeaf.Controllers
                 Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.AdherentId == id);
                 List<Competence> competence = dal.ObtenirCompetences().Where(c => c.ProviderId == provider.Id).ToList();
                 List<Ressource> ressources = dal.ObtenirRessources().Where(r => r.ProviderId == provider.Id).ToList();
-
+                List<Avis> avis = dal.ObtenirAvis().Where(a => a.Provider.AdherentId == adherent.Id).ToList();
                 int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 DalRecherche dalR = new DalRecherche();
                 bool res = dalR.EstAmi(id, idA2);
 
-            ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, Competence = competence, Provider = provider, Ressources = ressources, Amis = res };
+            ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, Competence = competence, Provider = provider, Ressources = ressources, Amis = res, Avis = avis };
             
             return View(pvm);
         }

@@ -25,7 +25,12 @@ namespace TakoLeaf.Data
 
         public Adresse CreationAdresse(string rue, int codePostal, string ville)
         {
-            Adresse adresse = new Adresse { Rue = rue, CodePostal = codePostal, Ville = ville };
+            string dep = codePostal.ToString().Substring(0, 2);
+            if (dep.Equals("97"))
+            {
+                dep = codePostal.ToString().Substring(0, 3);
+            }
+            Adresse adresse = new Adresse { Rue = rue, CodePostal = codePostal, Departement = Int32.Parse(dep), Ville = ville };
             _bddContext.Adresses.Add(adresse);
             _bddContext.SaveChanges();
             return adresse;
@@ -37,6 +42,9 @@ namespace TakoLeaf.Data
         {
             Adherent adherent = new Adherent { Nom = nom, Prenom = prenom, Date_naissance = dateNaissance, AdresseId = adresseId, Telephone = telephone };
             this._bddContext.Adherents.Add(adherent);
+            this._bddContext.SaveChanges();
+            Historique historique = new Historique { AdherentId = adherent.Id };
+            this._bddContext.Historiques.Add(historique);
             this._bddContext.SaveChanges();
             return adherent;
         }

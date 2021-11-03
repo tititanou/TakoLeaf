@@ -30,6 +30,12 @@ namespace TakoLeaf.Data
             return liste;          
         }
 
+        public List<Avis> ObtenirAvis()
+        {
+            List<Avis> liste = _bddContext.Avis.Include(a => a.Prestation).ThenInclude(a => a.Consumer).ThenInclude(a => a.Adherent).Include(a => a.Prestation).ToList();
+            return liste;
+        }
+
         public List<CompteUser> ObtenirCompteUser()
         {
             List<CompteUser> liste = _bddContext.CompteUsers.ToList();
@@ -96,7 +102,7 @@ namespace TakoLeaf.Data
 
         public List<Competence> ObtenirCompetences()
         {
-            List<Competence> liste = _bddContext.Competences.ToList();
+            List<Competence> liste = _bddContext.Competences.Include(c => c.SsCateCompetence).Include(c => c.Provider).ThenInclude(c => c.Adherent).ToList();
             return liste;
         }
         public List<SsCateCompetence> ObtenirSSCompetences()
@@ -123,6 +129,11 @@ namespace TakoLeaf.Data
             return liste;
         }
 
+        public List<Prestation> ObtenirToutesLesPrestations()
+        {
+            List<Prestation> prestations = this._bddContext.Prestations.Include(p => p.Consumer).ThenInclude(p => p.Adherent).ThenInclude(p => p.Adresse).Include(p => p.Provider).ThenInclude(p => p.Adherent).ThenInclude(p => p.Adresse).OrderByDescending(p => p.DateDebut).ToList();
+            return prestations;
+        }
         // MODIFICATION
 
         public void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string telephone)
@@ -182,11 +193,13 @@ namespace TakoLeaf.Data
 
         }
 
-        public void ModifierRessource (int id, string intitule, CateRessource categorie, double tarif, string adresse)
+        public void ModifierRessource (int id, string intitule, CateRessource categorie, double tarif, string rue, int code, string ville)
         {
             Ressource ressource = _bddContext.Ressources.Find(id);
             ressource.Intitule = intitule;
-            ressource.Adresse = adresse;
+            ressource.Adresse.Rue = rue;
+            ressource.Adresse.CodePostal = code;
+            ressource.Adresse.Ville = ville;
             ressource.Categorie = categorie;
             ressource.TarifJournalier = tarif;
             _bddContext.SaveChanges();
@@ -204,9 +217,9 @@ namespace TakoLeaf.Data
         }
         // AJOUT
 
-        public Ressource AjouterRessource(int providerId, string intitule, CateRessource categorie, double tarif, string adresse)
+        public Ressource AjouterRessource(int providerId, string intitule, CateRessource categorie, double tarif, int adresseId)
         {
-            Ressource ressource = new Ressource { Intitule = intitule, Adresse = adresse, Categorie = categorie, Disponible = true, ProviderId = providerId, TarifJournalier = tarif };
+            Ressource ressource = new Ressource { Intitule = intitule, AdresseId = adresseId, Categorie = categorie, Disponible = true, ProviderId = providerId, TarifJournalier = tarif };
             _bddContext.Ressources.Add(ressource);
             _bddContext.SaveChanges();
             return ressource;
@@ -253,5 +266,14 @@ namespace TakoLeaf.Data
             _bddContext.SaveChanges();
             
         }
+
+        // Historique
+
+        public List<HistoriquePresta> ObtenirHistorique() 
+        { 
+            List<HistoriquePresta> historiques = _bddContext.HistoriquePrestas.Include(p => p.Prestation).ThenInclude(p => p.Consumer).ThenInclude(p => p.Adherent).ThenInclude(p => p.Adresse).Include(p =>p.Prestation).ThenInclude(p=>p.Devis).Include(p => p.Prestation.Provider).ThenInclude(p => p.Adherent).ThenInclude(p => p.Adresse).Include(p =>p.Prestation).ThenInclude(p=>p.Voiture).ThenInclude(p=>p.Modele).ThenInclude(p => p.Marque).ToList();
+            return historiques;
+        }
+       
     }
 }

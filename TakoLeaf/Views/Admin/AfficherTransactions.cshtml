@@ -34,6 +34,10 @@
 
             @foreach (var item in Model.ListePrestations)
             {
+                <tr>
+                    <td>@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
+                    <td>@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
+                    <td>@item.DateDebut.ToShortDateString()</td>
 
                 string editLink = "/Admin/AfficherPrestation?id=" + item.Id.ToString();
                 <tr class="donnees">

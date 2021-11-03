@@ -1,0 +1,24 @@
+﻿@model TakoLeaf.ViewModels.AvisViewModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.LabelFor(m => m.Avis.Contenu)
+    @Html.TextAreaFor(m => m.Avis.Contenu)
+
+
+    @Html.LabelFor(m => m.Avis.Note)
+    @Html.TextBoxFor(m => m.Avis.Note)
+
+    <button class="btn btn-primary btn-xl" type="submit">Laisser avis</button>
+
+    @Html.HiddenFor(m => m.Prestation.Id)
+    @Html.HiddenFor(m => m.Prestation.Provider)
+    @Html.HiddenFor(m => m.Prestation.Provider.Id)
+    @Html.HiddenFor(m => m.Prestation.Consumer)
+    @Html.HiddenFor(m => m.Prestation.Consumer.Id)
+
+}

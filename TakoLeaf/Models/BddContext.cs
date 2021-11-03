@@ -86,6 +86,7 @@ namespace TakoLeaf.Models
                     Id = 1,
                     Rue = "124 Rue Hoche",
                     CodePostal = 93100,
+                    Departement = 93,
                     Ville = "Montreuil"
                 },
 
@@ -95,6 +96,7 @@ namespace TakoLeaf.Models
                     Id = 2,
                     Rue = "148 rue du faubourg saint-martin",
                     CodePostal = 75010,
+                    Departement = 75,
                     Ville = "Paris"
                 },
 
@@ -103,6 +105,7 @@ namespace TakoLeaf.Models
                     Id = 3,
                     Rue = "74 Rue General de Gaulle",
                     CodePostal = 92250,
+                    Departement = 92,
                     Ville = "La Garenne Colombes"
                 },
 
@@ -111,6 +114,7 @@ namespace TakoLeaf.Models
                     Id = 4,
                     Rue = "14 Rue de la Victoire",
                     CodePostal = 57100,
+                    Departement = 57,
                     Ville = "Thionville"
                 },
 
@@ -119,15 +123,17 @@ namespace TakoLeaf.Models
                     Id = 5,
                     Rue = "1 Rue Boucher",
                     CodePostal = 30364,
+                    Departement = 30,
                     Ville = "Guibert"
                 },
 
                 new Adresse
                 {
                     Id = 6,
-                    Rue = "5 Chemin Susanne Joseph",
-                    CodePostal = 13177,
-                    Ville = "Leroux"
+                    Rue = "15 Rue Pierre Nobel",
+                    CodePostal = 45700,
+                    Departement = 45,
+                    Ville = "Villmandeur"
 
                 },
 
@@ -136,6 +142,7 @@ namespace TakoLeaf.Models
                     Id = 7,
                     Rue = "13 Rue de Pottier",
                     CodePostal = 64127,
+                    Departement = 64,
                     Ville = "Descamps"
 
                 },
@@ -145,6 +152,7 @@ namespace TakoLeaf.Models
                     Id = 8,
                     Rue = "40 Rue des Coteaux",
                     CodePostal = 64127,
+                    Departement = 64,
                     Ville = "Tonnay"
 
                 },
@@ -154,7 +162,18 @@ namespace TakoLeaf.Models
                     Id = 9,
                     Rue = "13 Avenue de la république",
                     CodePostal = 64127,
+                    Departement = 64,
                     Ville = "Lyon"
+
+                },
+
+                new Adresse
+                {
+                    Id = 10,
+                    Rue = "25 Rue de la Feuille",
+                    CodePostal = 85000,
+                    Departement = 85,
+                    Ville = "Konoha"
 
                 }
                 );
@@ -260,6 +279,20 @@ namespace TakoLeaf.Models
 
                 );
 
+            this.Historiques.AddRange(
+
+                new Historique { Id = 1, AdherentId = 1 },
+                new Historique { Id = 2, AdherentId = 2 },
+                new Historique { Id = 3, AdherentId = 3 },
+                new Historique { Id = 4, AdherentId = 4 },
+                new Historique { Id = 5, AdherentId = 5 },
+                new Historique { Id = 6, AdherentId = 6 },
+                new Historique { Id = 7, AdherentId = 7 },
+                new Historique { Id = 8, AdherentId = 8 },
+                new Historique { Id = 9, AdherentId = 9 }
+
+                );
+
             this.CompteUsers.AddRange(
                  new CompteUser
                  {
@@ -268,6 +301,7 @@ namespace TakoLeaf.Models
                      Description = "gaebnfbgnoez nofiejog aeo ngfoaegnen goaeogae jaeg ae g aepmkgpaej pgeamt poa gm,aekp tjpa, gmae,pot apam, pt,ae t,ae t",
                      EtatProfil = EtatProfil.VALIDE,
                      AdherentId = 1,
+                     Avatar ="cv.png",
                      Role = "Provider"
 
                  },
@@ -320,7 +354,8 @@ namespace TakoLeaf.Models
                        Description = "C'est moi le consumer Test",
                        EtatProfil = EtatProfil.NON_VALIDE,
                        AdherentId = 6,
-                       Role = "Consumer"
+                       Role = "Consumer",
+                       Avatar = "AVATAR-ADMIN.png"
                    },
 
                    new CompteUser
@@ -677,7 +712,7 @@ namespace TakoLeaf.Models
                 new Ressource
                 {
                     Intitule = "Cle à molette",
-                    Adresse = "124 Rue Hoche",
+                    AdresseId = 1,
                     Categorie = CateRessource.OUTIL,
                     Disponible = true,
                     TarifJournalier = 15,
@@ -687,7 +722,7 @@ namespace TakoLeaf.Models
                   new Ressource
                   {
                       Intitule = "Vidangeuse",
-                      Adresse = "1 Rue Boucher",
+                      AdresseId = 5,
                       Categorie = CateRessource.OUTIL_SPECIALISE,
                       Disponible = true,
                       TarifJournalier = 40,
@@ -698,7 +733,7 @@ namespace TakoLeaf.Models
 
                   {
                       Intitule = "Garage TakoLef",
-                      Adresse = "25 Rue de la Feuille, 85000, Konoha",
+                      AdresseId = 10,
                       Categorie = CateRessource.LOCAL_GARAGE,
                       Disponible = true,
                       TarifJournalier = 100,
@@ -708,7 +743,7 @@ namespace TakoLeaf.Models
                   new Ressource
                   {
                       Intitule = "Remorque 3m^3",
-                      Adresse = "1 Rue Boucher",
+                      AdresseId = 5,
                       Categorie = CateRessource.REMORQUE,
                       Disponible = true,
                       TarifJournalier = 55,
