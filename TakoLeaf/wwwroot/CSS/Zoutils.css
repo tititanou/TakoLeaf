@@ -1,0 +1,35 @@
+﻿
+
+.valider {
+    color: white;
+    height: 60px;
+    width: 240px;
+    background-color: #54A49D;
+    border-radius: 3rem;
+    border: solid;
+    font-size: 25px;
+    font-family: "Roboto",sans-serif;
+}
+
+    .valider:hover {
+        background-color: #498983;
+    }
+
+.supprimer {
+    color: red;
+    height: 60px;
+    width: 240px;
+    background-color: #FF7B7B;
+    border-radius: 3rem;
+    border: solid;
+    font-size: 25px;
+    font-family: "Roboto",sans-serif;
+}
+
+    .supprimer:hover {
+        background-color: #BEBEBE;
+    }
+
+    .textbox{
+        border-radius:3em;
+    }
