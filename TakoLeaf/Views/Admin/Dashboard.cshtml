@@ -111,6 +111,7 @@
 
                 @foreach (var item in Model.ListePrestations)
                 {
+                   
                     <tr>
                         <td>@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
                         <td>@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
@@ -171,12 +172,17 @@
 
                 @foreach (var item in Model.ListeCompte)
                 {
+                    if(item.Role != "Admin")
+                {
+
+               
                     <tr>
                         <td>@item.Adherent.Nom @item.Adherent.Prenom</td>
                         <td>@item.Mail</td>
                         <td>@item.Role</td>
 
                     </tr>
+                    }
                 }
 
             </table>
