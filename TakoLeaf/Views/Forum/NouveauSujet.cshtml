@@ -10,42 +10,42 @@
     <title>NouveauSujet</title>
 </head>
 <body>
-    @using (Html.BeginForm())
-    {
-@Html.LabelFor(model => model.Sujet.Titre)
-                @Html.TextBoxFor(model => model.Sujet.Titre, new { placeholder = "Sujet", id = "sujetForm" })
-                                @Html.ValidationMessageFor(model => model.Sujet.Titre)
-                                                <button id="validBtn" type="button" onclick="OuvrirPostForm()">Valider</button>
-
-                                                                <br />
-                                                                                <div style="visibility:hidden" id="postForm">
-
-                                                                                    @Html.LabelFor(model => model.Post.CorpsPost)
-                                                                                    @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message" , @class = "mytextarea"})
-                                                                                    @Html.ValidationMessageFor(model => model.Post.CorpsPost)
-                                                                                    <button id="validBtn" type="submit">Valider</button>
-
-                                                                                </div>}
-
-
-    <script>
-        function OuvrirPostForm() {
-            if (document.getElementById("sujetForm").value) {
-                document.getElementById("postForm").style.visibility = "visible";
-            }
-        }
-    </script>
-    <script>
-        tinymce.init({
-            selector: '.mytextarea',
-            plugins: ['image', 'lists code emoticons'],
-            toolbar: 'undo redo | styleselect | bold italic | ' +
-                'alignleft aligncenter alignright alignjustify | ' +
-                'outdent indent | numlist bullist | emoticons',
-            a11y_advanced_options: true,
-            min_height: 300,
-            statusbar: false
-        });
-    </script>
+    <div class="container">
+        <div class="card mx-auto text-center" style="width:80%">
+            <div class="card-header">
+                <h3> Nouveau sujet</h3>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm())
+                 {
+                    @Html.TextBoxFor(model => model.Sujet.Titre, new { placeholder = "Sujet", id = "sujetForm" })
+                    <button id="validBtn" class="btn btn-outline-success" type="button" onclick="OuvrirPostForm()">Valider</button>
+                    <br />
+                    <div style="visibility:hidden" id="postForm">
+                        @Html.LabelFor(model => model.Post.CorpsPost)
+                        @Html.TextAreaFor(model => model.Post.CorpsPost, new { placeholder = "Message", @class = "mytextarea" })
+                        @Html.ValidationMessageFor(model => model.Post.CorpsPost)
+                        <button id="validBtn" class="btn btn-outline-success" type="submit">Valider</button>
+                    </div>
+                 }
+            </div>
+        </div>
+    </div>
+    
+                <script>function OuvrirPostForm() {
+                        if (document.getElementById("sujetForm").value) {
+                            document.getElementById("postForm").style.visibility = "visible";
+                        }
+                    }</script>
+                <script>tinymce.init({
+                        selector: '.mytextarea',
+                        plugins: ['image', 'lists code emoticons'],
+                        toolbar: 'undo redo | styleselect | bold italic | ' +
+                            'alignleft aligncenter alignright alignjustify | ' +
+                            'outdent indent | numlist bullist | emoticons',
+                        a11y_advanced_options: true,
+                        min_height: 300,
+                        statusbar: false
+                    });</script>
 </body>
 </html>
