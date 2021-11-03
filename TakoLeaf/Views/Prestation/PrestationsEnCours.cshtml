@@ -3,26 +3,30 @@
     Layout = "_Layout";
 }
 
-<h1>Liste des Prestations en cours</h1>
+<link rel="stylesheet" href="~/CSS/Actualitest.css" />
 
 
+<div class="leTout">
+<h1 class="text-center">Liste des Prestations en cours</h1>
 @for (int i = 0; i < Model.Count; i++)
 {
+<div class="article text-center">
 
-    <ul>
-        <li>Date debut : @Model[i].DateDebut</li>
-        <li>Consumer : @Model[i].Consumer.Adherent.Prenom  @Model[i].Consumer.Adherent.Nom</li>
-        <li>Provider : @Model[i].Provider.Adherent.Prenom  @Model[i].Provider.Adherent.Nom</li>
-        <li>Adresse : @Model[i].Provider.Adherent.Adresse.Rue ,  @Model[i].Provider.Adherent.Adresse.CodePostal , @Model[i].Provider.Adherent.Adresse.Ville</li>
-        @*<li>Voiture : @Model[i].Voiture.Modele.Marque.Nom @Model[i].Voiture.Modele.Nom</li>*@
-        <li>Prix : @Model[i].Prix €</li>
-        <li>Date Debut : @Model[i].DateDebut.ToShortDateString()</li>
-        <li>Etat : @Model[i].EtatPresta</li>
-        
+    Date debut : @Model[i].DateDebut
+    Consumer : @Model[i].Consumer.Adherent.Prenom  @Model[i].Consumer.Adherent.Nom<br />
+    Provider : @Model[i].Provider.Adherent.Prenom  @Model[i].Provider.Adherent.Nom<br />
+    Adresse : @Model[i].Provider.Adherent.Adresse.Rue ,  @Model[i].Provider.Adherent.Adresse.CodePostal , @Model[i].Provider.Adherent.Adresse.Ville<br />
+    @*Voiture : @Model[i].Voiture.Modele.Marque.Nom @Model[i].Voiture.Modele.Nom*@
+    Prix : @Model[i].Prix €<br />
+    Date Debut : @Model[i].DateDebut.ToShortDateString()<br />
+    Etat : @Model[i].EtatPresta<br />
 
-        @Html.HiddenFor(m => Model[i].NumeroDevis)
 
-    </ul>
+
+    @Html.HiddenFor(m => Model[i].NumeroDevis)
+
+    <br />
+
     @using (Html.BeginForm("ValiderPrestation", "Prestation"))
     {
 
@@ -30,10 +34,12 @@
         <button class="btn btn-primary btn-xl" type="submit">Finaliser la prestation</button>
     }
 
+    <br />
     @using (Html.BeginForm("RefuserPrestation", "Prestation"))
     {
 
-        <input type="text" name="id" value="@Model[i].Id style="display:none;" />
         <button class="btn btn-primary btn-xl" type="submit">Signaler la prestation</button>
     }
-}
+</div>
+   }
+ </div>

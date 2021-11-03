@@ -4,16 +4,9 @@
     ViewBag.Title = "Modification Ressource";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ModifierRessource</title>
-</head>
-<body>
-    <h2> Modification des Ressources</h2>
-    <div>
+    <h2 class="text-center"> Modification des Ressources</h2>
+    <div class="container">
         @using (Html.BeginForm())
         {
             <table>
@@ -76,5 +69,4 @@
         <button>@Html.ActionLink("Retour au profil", "ProfilProvider", "ProfilUser", new { id = Model.Provider.AdherentId })</button>
 
     </div>
-</body>
-</html>
+

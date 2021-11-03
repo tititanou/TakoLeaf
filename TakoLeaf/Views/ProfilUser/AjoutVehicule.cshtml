@@ -5,9 +5,10 @@
 }
 
 
-    <h1> Indiquer les informations du véhicule à ajouter </h1>
-    @using (Html.BeginForm())
-    {
+<h1 class="text-center"> Indiquer les informations du véhicule à ajouter </h1>
+@using (Html.BeginForm())
+{
+    <div class="container">
         <div class="form-floating mb-3">
             @Html.TextBoxFor(model => model.Voiture.Immatriculation, new { @class = "form-control", placeholder = "Plaque Immatriculation" })
             @Html.LabelFor(model => model.Voiture.Immatriculation)
@@ -31,21 +32,41 @@
             @Html.ValidationMessageFor(model => model.Voiture.Annee)
         </div>
 
-        <div>
-            @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques)
+        @*<div>
             @Html.LabelFor(model => model.Marque.Nom)
+            @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques)
+
         </div>
 
         <div>
+            @Html.LabelFor(model => model.Modele.Nom)
             @Html.DropDownListFor(model => model.Modele.Nom, (SelectList)ViewBag.Modele)
+
+        </div>*@
+
+        <div>
+            @Html.DropDownListFor(model => model.Marque.Nom, (SelectList)ViewBag.Marques, "Selectionner une marque", new { @id = "ddlmarques" })
+            @Html.LabelFor(model => model.Marque.Nom)
+        </div>
+
+
+        <div>
+            @Html.DropDownListFor(model => model.Modele.Nom, (SelectList)ViewBag.Modele, "Selectionnez modeles", new { @id = "ddlmodeles" })
             @Html.LabelFor(model => model.Modele.Nom)
         </div>
 
         @Html.HiddenFor(m => m.Consumer.Id)
 
         <button class="btn btn-primary btn-xl" type="submit">Ajouter véhicule</button>
-    }
 
-    <br />
-    <button>@Html.ActionLink("Retour au profil", "ProfilConsumer", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+    </div>
 
+}
+
+<br />
+<button>@Html.ActionLink("Retour au profil", "ProfilConsumer", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+
+
+
+<script src="~/jquery-3.6.0.js"></script>
+<script src="~/Voiture.js"></script>
