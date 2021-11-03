@@ -47,35 +47,203 @@ namespace TakoLeaf.Data
             return this._bddContext.Adresses.ToList();
         }
 
-        public List<Adherent> RechercheAdherent(int code, string nom, string prenom, int competence)
+        public List<Adherent> RechercheAdherent(string choix, int code, string nom, string prenom, int competence, string ressource, string input)
         {
             List<Adherent> adherents = new List<Adherent>();
-            if (nom != null && prenom != null)
+            if (code != 0)
             {
-                adherents = this._bddContext.Adherents.Where(a => a.Nom.Equals(nom) && a.Prenom.Equals(prenom)).ToList();
-            }
-            else if(competence != null || !competence.Equals(""))
-            {
-                SsCateCompetence ssCateCompetence = this._bddContext.SsCateCompetences.FirstOrDefault(c => c.Id == competence);
-                if (this._bddContext.Competences.Where(c => c.Id == ssCateCompetence.Id).ToList() != null)
+                if (choix.Equals("Un utilisateur"))
                 {
-                    List<Competence> competences = this._bddContext.Competences.Where(c => c.Id == ssCateCompetence.Id).ToList();
-                    foreach (Competence comp in competences)
+                    if (nom != null && !nom.Equals(""))
                     {
-                        Provider provider = this._bddContext.Providers.FirstOrDefault(p => p.Id == comp.ProviderId);
-                        Adherent adherent = this._bddContext.Adherents.FirstOrDefault(a => a.Id == provider.AdherentId);
-                        if (adherents.Count == 0)
+                        if (prenom != null && !prenom.Equals(""))
                         {
-                            adherents.Add(adherent);
+                            adherents = this._bddContext.Adherents.Where(a => a.Nom.Equals(nom) && a.Prenom.Equals(prenom) && a.Adresse.CodePostal == code).ToList();
                         }
                         else
                         {
-                            if (!adherents.Contains(adherent))
+                            adherents = this._bddContext.Adherents.Where(a => a.Nom.Equals(nom) && a.Adresse.CodePostal == code).ToList();
+                        }
+                    }
+                    else if (nom == null || nom.Equals(""))
+                    {
+                        if (prenom != null && !prenom.Equals(""))
+                        {
+                            adherents = this._bddContext.Adherents.Where(a => a.Prenom.Equals(prenom) && a.Adresse.CodePostal == code).ToList();
+                        }
+                        else
+                        {
+                            adherents = this._bddContext.Adherents.Where(a => a.Adresse.CodePostal == code).ToList();
+                        }
+                    }
+
+                }
+                else
+                {
+                    if (competence != 0)
+                    {
+                        SsCateCompetence ssCateCompetence = this._bddContext.SsCateCompetences.FirstOrDefault(c => c.Id == competence);
+                        if (this._bddContext.Competences.Where(c => c.Id == ssCateCompetence.Id && c.Provider.Adherent.Adresse.CodePostal == code).ToList() != null)
+                        {
+                            List<Competence> competences = this._bddContext.Competences.Where(c => c.Id == ssCateCompetence.Id && c.Provider.Adherent.Adresse.CodePostal == code).ToList();
+                            foreach (Competence comp in competences)
                             {
-                                adherents.Add(adherent);
+                                Provider provider = this._bddContext.Providers.FirstOrDefault(p => p.Id == comp.ProviderId);
+                                Adherent adherent = this._bddContext.Adherents.FirstOrDefault(a => a.Id == provider.AdherentId);
+                                if (adherents.Count == 0)
+                                {
+                                    adherents.Add(adherent);
+                                }
+                                else
+                                {
+                                    if (!adherents.Contains(adherent))
+                                    {
+                                        adherents.Add(adherent);
+                                    }
+                                }
                             }
                         }
                     }
+                    else if (ressource != null)
+                    {
+                        if (input != null || !input.Equals(""))
+                        {
+                            List<Ressource> ressources = this._bddContext.Ressources.Include(r => r.Adresse).Where(r => r.Categorie == (CateRessource)Enum.Parse(typeof(CateRessource), ressource) && r.Intitule.ToLower().Contains(input.ToLower()) && r.Adresse.CodePostal == code).ToList();
+                            foreach (Ressource ress in ressources)
+                            {
+                                Provider provider = this._bddContext.Providers.FirstOrDefault(p => p.Id == ress.ProviderId);
+                                Adherent adherent = this._bddContext.Adherents.FirstOrDefault(a => a.Id == provider.AdherentId);
+                                if (adherents.Count == 0)
+                                {
+                                    adherents.Add(adherent);
+                                }
+                                else
+                                {
+                                    if (!adherents.Contains(adherent))
+                                    {
+                                        adherents.Add(adherent);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            List<Ressource> ressources = this._bddContext.Ressources.Where(r => r.Categorie == (CateRessource)Enum.Parse(typeof(CateRessource), ressource) && r.Adresse.CodePostal == code).ToList();
+                            foreach (Ressource ress in ressources)
+                            {
+                                Provider provider = this._bddContext.Providers.FirstOrDefault(p => p.Id == ress.ProviderId);
+                                Adherent adherent = this._bddContext.Adherents.FirstOrDefault(a => a.Id == provider.AdherentId);
+                                if (adherents.Count == 0)
+                                {
+                                    adherents.Add(adherent);
+                                }
+                                else
+                                {
+                                    if (!adherents.Contains(adherent))
+                                    {
+                                        adherents.Add(adherent);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        List<Provider> providers = this._bddContext.Providers.Include(p => p.Adherent).Where(p => p.Adherent.Adresse.CodePostal == code).ToList();
+                        foreach(Provider provider in providers)
+                        {
+                            adherents.Add(provider.Adherent);
+                        }
+                    }
+                }
+            }
+            else if (code == 0)
+            {
+                if (nom != null && !nom.Equals(""))
+                {
+                    if (prenom != null && !prenom.Equals(""))
+                    {
+                        adherents = this._bddContext.Adherents.Where(a => a.Nom.Equals(nom) && a.Prenom.Equals(prenom)).ToList();
+                    }
+                    else
+                    {
+                        adherents = this._bddContext.Adherents.Where(a => a.Nom.Equals(nom)).ToList();
+                    }
+                }
+                else if ((nom == null || nom.Equals("")) && (prenom != null && !prenom.Equals("")))
+                {
+                    adherents = this._bddContext.Adherents.Where(a => a.Prenom.Equals(prenom)).ToList();
+                }
+                else if (competence != 0)
+                {
+                    SsCateCompetence ssCateCompetence = this._bddContext.SsCateCompetences.FirstOrDefault(c => c.Id == competence);
+                    if (this._bddContext.Competences.Where(c => c.Id == ssCateCompetence.Id).ToList() != null)
+                    {
+                        List<Competence> competences = this._bddContext.Competences.Where(c => c.Id == ssCateCompetence.Id).ToList();
+                        foreach (Competence comp in competences)
+                        {
+                            Provider provider = this._bddContext.Providers.FirstOrDefault(p => p.Id == comp.ProviderId);
+                            Adherent adherent = this._bddContext.Adherents.FirstOrDefault(a => a.Id == provider.AdherentId);
+                            if (adherents.Count == 0)
+                            {
+                                adherents.Add(adherent);
+                            }
+                            else
+                            {
+                                if (!adherents.Contains(adherent))
+                                {
+                                    adherents.Add(adherent);
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (ressource != null)
+                {
+                    if(input != null)
+                    {
+                        if (!input.Equals(""))
+                        {
+                            List<Ressource> ressources = this._bddContext.Ressources.Where(r => r.Categorie == (CateRessource)Enum.Parse(typeof(CateRessource),ressource) && r.Intitule.ToLower().Contains(input.ToLower())).ToList();
+                            foreach (Ressource ress in ressources)
+                            {
+                                Provider provider = this._bddContext.Providers.FirstOrDefault(p => p.Id == ress.ProviderId);
+                                Adherent adherent = this._bddContext.Adherents.FirstOrDefault(a => a.Id == provider.AdherentId);
+                                if (adherents.Count == 0)
+                                {
+                                    adherents.Add(adherent);
+                                }
+                                else
+                                {
+                                    if (!adherents.Contains(adherent))
+                                    {
+                                        adherents.Add(adherent);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        List<Ressource> ressources = this._bddContext.Ressources.Where(r => r.Categorie == (CateRessource)Enum.Parse(typeof(CateRessource), ressource)).ToList();
+                        foreach (Ressource ress in ressources)
+                        {
+                            Provider provider = this._bddContext.Providers.FirstOrDefault(p => p.Id == ress.ProviderId);
+                            Adherent adherent = this._bddContext.Adherents.FirstOrDefault(a => a.Id == provider.AdherentId);
+                            if (adherents.Count == 0)
+                            {
+                                adherents.Add(adherent);
+                            }
+                            else
+                            {
+                                if (!adherents.Contains(adherent))
+                                {
+                                    adherents.Add(adherent);
+                                }
+                            }
+                        }
+                    }
+                   
                 }
             }
             else

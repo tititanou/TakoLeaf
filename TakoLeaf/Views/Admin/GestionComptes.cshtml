@@ -14,15 +14,65 @@
 
         .box {
             box-sizing: content-box;
-            position: static;
-            right: 10px;
+/*            position: static;*/
+            display:flex;
+        }
+
+        .conteneur {
+            width:100%;
+            margin-left:auto;
+            margin-right:auto;
+            max-height:900px;
+            overflow:auto;
         }
 
         .ad {
             /*box-sizing: content-box;*/
             text-align: center;
-            width: 80%;
+            width: 100%;
             right: 0px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-button {
+            width: 0px;
+            height: 0px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e1e1e1;
+            border: 31px none #ffffff;
+            border-radius: 5px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #a1a1a1;
+            }
+
+            ::-webkit-scrollbar-thumb:active {
+                background: #a3a3a3;
+            }
+
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+        }
+
+            ::-webkit-scrollbar-track:hover {
+                background: #f2f2f2;
+            }
+
+            ::-webkit-scrollbar-track:active {
+                background: #f5f5f5;
+            }
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
         }
 
         .tableauH {
@@ -46,6 +96,10 @@
             width: 100%
         }
 
+        tr.donnees:hover {
+            background-color: #F5F5F5;
+        }
+
             .donnees td {
                 border-bottom: solid #A1E1AF 2px;
             }
@@ -53,6 +107,7 @@
         .avatar {
             width: 90px;
             height: 90px;
+            clip-path: ellipse(50% 50%);
         }
 
         /* Modal box*/
@@ -149,102 +204,113 @@
             clear: both;
             display: table;
         }
+
+        .entete{
+            text-align:center;
+            padding:30px;
+        }
+
+        * {
+            color: #2f4858;
+        }
+
+
     </style>
 
 </head>
 <body>
-    <div style="text-align:center">
-        <h1>Bienvenue sur le gestionnaire de compte</h1>
-    </div>
-
-    <h2>Vue d'ensemble adhérent</h2>
+    
+        <h1 class="entete">Bienvenue sur le gestionnaire de compte</h1>
+    
 
     <div class="box">
-        <table class="ad">
-            <tr class="tableauH">
-                <th></th>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Statut</th>
-                <th>Mail</th>
-                <th>Etat</th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr class="donnees">
-                    @{string editLink1 = "/Admin/AfficherProfil?id=" + item.AdherentId; }
-                    <td><a href="@editLink1"><img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /></a></td>
-                    <td>@item.Adherent.Id</td>
-                    <td>@item.Adherent.Nom.ToUpper() @item.Adherent.Prenom</td>
-                    <td>@item.Role.ToUpper()</td>
-                    <td>@item.Mail</td>
-
-                    @if (item.EtatProfil == TakoLeaf.Models.EtatProfil.VALIDE)
-                    {
-                        <td><img class="etat" src="~/IMG/ICONE ADMIN/EtatValide.png"></td>
-                    }
-                    else if (item.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
-                    {
-                        string editLink3 = "/Admin/ValiderProfil?id=" + item.AdherentId;
-
-                        <td><a onclick="document.getElementById('id01').style.display='block'"><img class="etatAt" src="~/IMG/ICONE ADMIN/Glyph_.png"></a></td>
-                        <div id="id01" class="modal">
-                            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-                            <form class="modal-content" action="/action_page.php">
-                                <div class="container">
-                                    <h1>Changer l'Etat du profil</h1>
-                                    <p>Que souhaitez vous faire pour @item.Adherent.Nom.ToUpper() @item.Adherent.Prenom</p>
-
-                                    <div class="clearfix">
-                                        <button type="button"class="cancelbtn" onclick="@Html.ActionLink("Valider le profil", "ValiderProfil", "Admin", new { id = item.AdherentId })"></button>
-                                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn"><img src="~/IMG/ICONE ADMIN/EtatValide.png" />Valider le compte</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    }
-
-
-
-                    else if (item.EtatProfil == TakoLeaf.Models.EtatProfil.COMPTE_BLOQUE)
-                    {
-                        <td><a onclick="document.getElementById('id01').style.display='block'"><img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png"></a></td>
-
-                        <div id="id01" class="modal">
-                            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-                            <form class="modal-content" action="/action_page.php">
-                                <div class="container">
-                                    <h1>Delete Account</h1>
-                                    <p>Are you sure you want to delete your account?</p>
-
-                                    <div class="clearfix">
-                                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-
-                    }
-                    else
-                    {
-                        <td><img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png"></td>
-                    }
-
-
-                    @{string editLink = "/Admin/SupprimerCompte?id=" + item.AdherentId; }
-
-                    <td><a href="@editLink"><img class="delete" src="~/IMG/ICONE ADMIN/DeleteIcon.png" /></a></td>
-                    @*<td>@Html.ActionLink("Supprimer Profil", "SupprimerCompte", "Admin", new { id = item.AdherentId })</td>*@
+        <div class="conteneur">
+            <table class="ad">
+                <tr class="tableauH">
+                    <th></th>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Statut</th>
+                    <th>Mail</th>
+                    <th>Etat</th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model)
+                {
+                    <tr class="donnees">
+                        @{string editLink1 = "/Admin/AfficherProfil?id=" + item.AdherentId; }
+                        <td><a href="@editLink1"><img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /></a></td>
+                        <td>@item.Adherent.Id</td>
+                        <td>@item.Adherent.Nom.ToUpper() @item.Adherent.Prenom</td>
+                        <td>@item.Role.ToUpper()</td>
+                        <td>@item.Mail</td>
+
+                        @if (item.EtatProfil == TakoLeaf.Models.EtatProfil.VALIDE)
+                        {
+                            <td><img class="etat" src="~/IMG/ICONE ADMIN/EtatValide.png"></td>
+                        }
+                        else if (item.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
+                        {
+                            string editLink3 = "/Admin/ValiderProfil?id=" + item.AdherentId;
+
+                            <td><a onclick="document.getElementById('id01').style.display='block'"><img class="etatAt" src="~/IMG/ICONE ADMIN/Glyph_.png"></a></td>
+                            <div id="id01" class="modal">
+                                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+                                <form class="modal-content" action="/action_page.php">
+                                    <div class="container">
+                                        <h1>Changer l'Etat du profil</h1>
+                                        <p>Que souhaitez vous faire pour @item.Adherent.Nom.ToUpper() @item.Adherent.Prenom</p>
+
+                                        <div class="clearfix">
+                                            <button type="button" class="cancelbtn" onclick="@Html.ActionLink("Valider le profil", "ValiderProfil", "Admin", new { id = item.AdherentId })"></button>
+                                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn"><img src="~/IMG/ICONE ADMIN/EtatValide.png" />Valider le compte</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        }
+
+
+
+                        else if (item.EtatProfil == TakoLeaf.Models.EtatProfil.COMPTE_BLOQUE)
+                        {
+                            <td><a onclick="document.getElementById('id01').style.display='block'"><img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png"></a></td>
+
+                            <div id="id01" class="modal">
+                                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+                                <form class="modal-content" action="/action_page.php">
+                                    <div class="container">
+                                        <h1>Delete Account</h1>
+                                        <p>Are you sure you want to delete your account?</p>
+
+                                        <div class="clearfix">
+                                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        }
+                        else
+                        {
+                            <td><img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png"></td>
+                        }
+
+
+                        @{string editLink = "/Admin/SupprimerCompte?id=" + item.AdherentId; }
+
+                        <td><a href="@editLink"><img class="delete" src="~/IMG/ICONE ADMIN/DeleteIcon.png" /></a></td>
+                        @*<td>@Html.ActionLink("Supprimer Profil", "SupprimerCompte", "Admin", new { id = item.AdherentId })</td>*@
+                    </tr>
+                }
+
+            </table>
+        </div>
     </div>
 
-    <h3>Nombre d'adhérent actuel : <p style="color:crimson">@Model.Count</p></h3> <br />
+    @*<h3>Nombre d'adhérent actuel : <p style="color:crimson">@Model.Count</p></h3> <br />
 
     <br />
 
@@ -257,10 +323,10 @@
             <button>Rechercher</button>
             <span class="validity"></span>
         </div>
-    </form>
+    </form>*@
 
 
-    <div style="position:center">
+    @*<div style="position:center">
         <table>
             <tr>
                 <th>Nom</th>
@@ -289,7 +355,7 @@
                         <td>@item.Description</td>
                         <td>@item.Mail</td>
                         <td>@item.EtatProfil</td>
-                        @*<td>@Html.ActionLink("Valider Profil", "ValiderProfil", "Admin", new { id = item.CompteUser.AdherentId })  </td>*@
+                        <td>@Html.ActionLink("Valider Profil", "ValiderProfil", "Admin", new { id = item.CompteUser.AdherentId })  </td>
                         <td><a href="@editLink">Valider le profil</a></td>
                         <td><a href="@editLink1">Bloquer le compte</a></td>
                     </tr>
@@ -299,11 +365,11 @@
             }
 
         </table>
-    </div>
+    </div>*@
 
-    <h3>Comptes nécessitant une validation de profil : <p style="color:crimson">@count</p></h3><br />
+    @*<h3>Comptes nécessitant une validation de profil : <p style="color:crimson">@count</p></h3><br />*@
 
-    <h2 style="text-align:center; font-family:sans-serif;">Comptes bloqués</h2>
+    @*<h2 style="text-align:center; font-family:sans-serif;">Comptes bloqués</h2>
 
     @{count = 0;}
 
@@ -344,7 +410,7 @@
 
         </table>
     </div>
-    <h3>Nombre de comptes bloqués : <p style="color:crimson">@count</p></h3><br />
+    <h3>Nombre de comptes bloqués : <p style="color:crimson">@count</p></h3><br />*@
 
 
     <script>

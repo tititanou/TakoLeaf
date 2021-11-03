@@ -1,9 +1,24 @@
-﻿#boxInfo {
-    position:relative;
+﻿* {
+    color: #2f4858;
+}
+
+.vueProfil{
+    text-align:center;
+    padding:30px;
+}
+
+.head{
+    text-align:center;
+    padding:30px;
+}
+
+#boxInfo {
+    position: relative;
     box-sizing: border-box;
     padding-right: 50px;
-    padding-left:350px;
-    padding-top:30px;
+    padding-left: 350px;
+    padding-top: 30px;
+
 }
 
 
@@ -11,9 +26,10 @@
     padding-left: 54px;
     padding-right: 50px;
     border-radius: 40px;
-    border: 2px solid #dbdbdb;
+    border: 3px solid #dbdbdb;
     height: 500px;
     width: 1000px;
+    box-shadow: 10px 5px 5px #ADADAD;
 }
 
 
@@ -44,6 +60,9 @@ div.titre {
         width: 240px;
     }
 
+img.avatar {
+    clip-path: ellipse(50% 50%);
+}
  
 .infoRight{
     position:absolute;
@@ -58,6 +77,7 @@ div.titre {
     padding-left: 150px;
     border-collapse: separate;
     border-spacing: 50px 40px;
+    width:600px;
 }
 
 .etat {
@@ -74,13 +94,14 @@ div.titre {
     padding-right: 50px;
     padding-left: 350px;
     padding-top: 30px;
-    margin-left:350px;
-    margin-top:30px;
+    margin-left: 350px;
+    margin-top: 30px;
     width: 454px;
     height: 495px;
     border: solid;
     border-radius: 40px;
     border-color: #dbdbdb;
+    box-shadow: 10px 5px 5px #ADADAD;
 }
 
 div.intitule {
@@ -90,16 +111,29 @@ div.intitule {
     right: 275px;
     width: 300px;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     border: 2px solid #dbdbdb;
     border-radius: 40px;
 }
 
 div.infoComp{
+    position:relative;
     vertical-align:central;
-    
+    width:450px;
+    right:350px;
+    overflow:auto;
 }
 
+.tableInfo {
+    border-collapse: separate;
+    border-spacing: 50px 40px;
+    width:400px;
+}
+
+.rang{
+    height:50px;
+    width:50px;
+}
 
 /*CSS box suppression comptes ou contact*/
 
@@ -113,20 +147,19 @@ div.infoComp{
     padding-top: 30px;
     margin-left: 850px;
     margin-top: 30px;
-    width: 454px;
-    height: 495px;
+    width: 490px;
+    height: 200px;
     border: solid;
     border-radius: 40px;
     border-color: #dbdbdb;
+    box-shadow: 10px 5px 5px #ADADAD;
 }
-
-
 
 
 .lien{
     position:relative;
     float:left;
-    right:350px;
+    right:325px;
     width:200px;
     text-decoration:none;
     padding:10px;
@@ -138,4 +171,135 @@ div.lien a{
 }
 
 
+
+
+/*Box Pièces justificatives*/
+
+
+#box4 {
+    position: absolute;
+    float: right;
+    top: 775px;
+    height: 275px;
+    width: 500px;
+    border: solid;
+    border-radius: 40px;
+    border-color: #dbdbdb;
+    right: 175px;
+    box-shadow: 10px 5px 5px #ADADAD;
+}
+
+div.intitule2 {
+    position:relative;
+    width: 300px;
+    font-weight: 700;
+    font-size: 20px;
+    border: 2px solid #dbdbdb;
+    border-radius: 40px;
+    text-align: center;
+    left:90px;
+    top:20px;
+
+}
+
+
+div.fichier {
+    float: left;
+    height: 175px;
+    width:390px;
+    margin-left:50px;
+    margin-top:30px;
+    margin-bottom:30px;
+    margin-right:50px;
+    overflow:auto;
+}
+
+/*Bloc description*/
+
+#box5 {
+    position:relative;
+    top:525px;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.zinfo {
+    border: solid;
+    border-radius: 40px;
+    border-color: #dbdbdb;
+    margin-top: 30px;
+    margin-left: 50px;
+    width: 990px;
+    box-shadow: 10px 5px 5px #ADADAD;
+}
+
+.titre5 {
+    font-weight: 700;
+    font-size: 20px;
+    border: 2px solid #dbdbdb;
+    border-radius: 40px;
+    text-align: center;
+    display:inline-block;
+    margin-left: 50px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-right: 50px;
+    padding:10px;
+}
+.arlo {
+  padding:30px;
+  max-height:400px;
+  overflow:auto;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e1e1e1;
+    border: 31px none #ffffff;
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #a1a1a1;
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        background: #a3a3a3;
+    }
+
+::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-track:hover {
+        background: #f2f2f2;
+    }
+
+    ::-webkit-scrollbar-track:active {
+        background: #f5f5f5;
+    }
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+
+.lien a .delete:hover {
+    color: #E88490;
+}
+
+.lien a .bloquer:hover {
+    color: #EAEE97;
+}
 

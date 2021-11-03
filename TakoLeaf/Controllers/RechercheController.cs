@@ -31,10 +31,10 @@ namespace TakoLeaf.Controllers
 
         public IActionResult Recherche()
         {
-            List<string> choix1 = new List<string>() { "Un utilisateur", "Un service", "Une ressource" };
-            ViewBag.Choix1 = new SelectList(choix1);
-            List<CateRessource> cateRessources = new List<CateRessource>();
-            foreach (CateRessource item in Enum.GetValues(typeof(CateRessource)))
+            List<string> choix = new List<string>() { "Un utilisateur", "Un service", "Une ressource" };
+            ViewBag.Choix = new SelectList(choix);
+            List<string> cateRessources = new List<string>();
+            foreach (string item in Enum.GetNames(typeof(CateRessource)))
             {
                 cateRessources.Add(item);
             }
@@ -104,9 +104,9 @@ namespace TakoLeaf.Controllers
         }
 
         [HttpPost]
-        public ActionResult Recherche(int Adresse, string Prenom, string Nom, int Competence, string Ressource)
+        public ActionResult Recherche(string Choix, int Adresse, string Prenom, string Nom, int Competence, string Ressource, string Input)
         {
-            List<Adherent> resultats = this.dalRecherche.RechercheAdherent(Adresse, Nom, Prenom, Competence);
+            List<Adherent> resultats = this.dalRecherche.RechercheAdherent(Choix, Adresse, Nom, Prenom, Competence, Ressource, Input);
             return View("AfficherProfils", resultats);
         }
 

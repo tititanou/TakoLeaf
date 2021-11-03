@@ -4,18 +4,32 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>AfficherTransactions</h1>
+<!DOCTYPE html>
 
-<div class="boite">
-    <fieldset>
-        <legend>Vos dernières transactions</legend>
-        <table>
-            <tr>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AfficherProfil</title>
+    <link rel="stylesheet" href="~/CSS/TransactionsAdmin.css" />
+</head>
+<body>
+
+
+
+    <h1 class="titre">Espace transactions</h1>
+
+    <div id="box">
+
+
+        <table class="ad">
+            <tr class="tableauH">
+                <th>Avatars</th>
+                <th>ID transaction</th>
                 <th>Consumer</th>
                 <th>Provider</th>
                 <th>Date</th>
-                <th>Etat de la prestation</th>
-                <th>Prix</th>
+                <th>Etat</th>
+
             </tr>
 
             @foreach (var item in Model.ListePrestations)
@@ -25,24 +39,34 @@
                     <td>@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
                     <td>@item.DateDebut.ToShortDateString()</td>
 
+                string editLink = "/Admin/AfficherPrestation?id=" + item.Id.ToString();
+                <tr class="donnees">
+                    <td><img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /> <img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /></td>
+                    <td><a class="laink" href="@editLink">@item.Id</a></td>
+                    <td href="@editLink">@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
+                    <td href="@editLink">@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
+                    <td href="@editLink">@item.DateDebut.ToShortDateString()</td>
+
                     @if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Refuse)
                     {
-                        <td text="text" style="background-color:darkred; color:white">Annulé</td>
+                        <td><img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png" /></td>
                     }
                     else if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.En_cours)
                     {
-                        <td text="text" style="background-color:orange; color:white">En cours</td>
+                        <td><img class="etat" src="~/IMG/ICONE ADMIN/Glyph_.png" /></td>
                     }
                     else
                     {
-                        <td text="text" style="background-color:green; color:white">Terminée</td>
+                        <td><img class="etat" src="~/IMG/ICONE ADMIN/EtatValide.png" /></td>
                     }
-
-                    <td>@item.Prix €</td>
-
                 </tr>
+
+
+
             }
 
         </table>
-    </fieldset>
-</div>
+
+    </div>
+</body>
+</html>

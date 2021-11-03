@@ -1,0 +1,183 @@
+﻿* {
+    color: #2f4858;
+}
+#info{
+    display:flex;
+}
+
+h1.entete{
+    text-align:center;
+    padding-top:30px;
+}
+
+h3.fiche {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom:40px;
+    margin-top:10px;
+}
+
+
+#boxProvider {
+    float: none;
+    display: flex;
+    /* background-color:aqua;*/
+    box-sizing: border-box;
+    border-radius: 40px;
+    border: 2px solid #dbdbdb;
+    box-shadow: 10px 5px 5px #ADADAD;
+    margin-left: 20px;
+    margin-top: 50px;
+    width: 600px;
+    height: 304px;
+}
+
+#boxConsumer {
+    display: flex;
+    /* background-color:aqua;*/
+    box-sizing: border-box;
+    border-radius: 40px;
+    border: 2px solid #dbdbdb;
+    box-shadow: 10px 5px 5px #ADADAD;
+    margin-left: 20px;
+    margin-top: 50px;
+    width: 600px;
+    height: 304px;
+}
+
+.infoLeft{
+   
+   /* background:purple;*/
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+    margin-top:10px;
+    width:250px;
+}
+
+.infoLeft, .avatar, h4{
+    margin:10px;
+}
+
+
+   .avatar {
+        clip-path: ellipse(50% 50%);
+        height:100px;
+        width:100px;
+
+    }
+
+    .infoRight{
+       
+      /*  background:green;*/
+        display:flex;
+        align-items:center;
+        width:300px;
+    }
+
+.tableInfo {
+    border-collapse: separate;
+    border-spacing: 20px 30px;
+    width: 400px;
+}
+
+
+/* Box Descriptif de la transaction */
+
+#description {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.boite {
+    border-radius: 40px;
+    border: 2px solid #dbdbdb;
+    box-shadow: 10px 5px 5px #ADADAD;
+    margin: 30px;
+    width: 100%;
+    /*    background-color: aqua;*/
+    align-items: center;
+}
+
+.intitule {
+    font-weight: 700;
+    font-size: 24px;
+    text-align:center;
+    margin-top:30px;
+    margin-bottom:50px;
+  /*  background-color:blue;*/
+}
+
+.data {
+   /* background-color: purple;*/
+    table-layout: fixed;
+    width: 100%;
+    margin:30px;
+}
+
+.bouton {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    padding-left: 100px;
+}
+
+button {
+    width: 318px;
+    height: 132px;
+    border-radius: 40px;
+    box-shadow: 10px 5px 5px #ADADAD;
+    background-color: white;
+    align-items: center;
+    margin: 100px;
+}
+
+    button.valider:hover {
+        background-color: #A1E8BB;
+    }
+    button.annuler:hover {
+        background-color: #FF7B7B;
+    }
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e1e1e1;
+    border: 31px none #ffffff;
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #a1a1a1;
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        background: #a3a3a3;
+    }
+
+::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-track:hover {
+        background: #f2f2f2;
+    }
+
+    ::-webkit-scrollbar-track:active {
+        background: #f5f5f5;
+    }
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}

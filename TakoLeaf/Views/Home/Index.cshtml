@@ -30,9 +30,14 @@
 
         <div class="menu">
             <ul>
-                <li>@Html.ActionLink("Inscription","Inscription","Login",new {@class= "actionlink" })</li>
+                <li>@Html.ActionLink("Actus", "Actualites", "Home", new { @class = "actionlink" })</li>
+                <li>@Html.ActionLink("Inscription", "Inscription", "Login", new { @class = "actionlink" })</li>
                 <li>@Html.ActionLink("Connexion", "Connexion", "Login", new { @class = "actionlink" })</li>
                 <li class="actionlink"><a href="#">FAQ</a></li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("Espace Admin", "GestionComptes", "Admin", new { @class = "actionlink" })</li>
+                }
             </ul>
         </div>
 

@@ -7,26 +7,75 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-        <meta name="viewport" content="width=device-width" />
-        <title>NouveauMessage</title>
-    </head>
+<head>
+    <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>NouveauMessage</title>
+</head>
     <body>
         <h3>Nouveau Message</h3>
         @using (Html.BeginForm())
          {
-            
-         }
-        <script>tinymce.init({
-                selector: '.mytextarea',
-                plugins: ['image', 'lists code emoticons'],
-                toolbar: 'undo redo | styleselect | bold italic | ' +
-                    'alignleft aligncenter alignright alignjustify | ' +
-                    'outdent indent | numlist bullist | emoticons',
-                a11y_advanced_options: true,
-                min_height: 300,
-                statusbar: false
-            });</script>
+            <select name="Destinataire">
+                <option selected="true" disabled="disabled">Choisir un destinataire</option>
+                @foreach (var adh in ViewBag.AdhList)
+                {
+                    <option value=@adh.Id>@adh.Prenom @adh.Nom</option>
+                }
+            </select>
+            <div style="border: solid 1px; width:100%; height:20px; margin-top:0; padding-top:0;">
+                <label for="Objet" style="display: inline-block; margin-top:0; padding-top: 0;">Objet:</label>
+                <h4 class="tinymce-title" id="Objet" style="display: inline-block; width: 90%; margin-top: 0; padding-top: 0;" name="Objet"></h4>
+            </div>
+            <textarea class="tinymce-body" style="border: solid 1px;" name="Message"></textarea>
+            <button type="submit">Valider</button>}
+        
+        <script>
+            var emailTitleConfig = {
+                selector: '.tinymce-title',
+                menubar: false,
+                toolbar: false,
+                statusbar: false,
+                inline: true,
+                plugins: [
+                    'lists',
+                    'powerpaste',
+                    'autolink',
+                    'table'
+                ],
+                valid_elements: 'strong,em,span[style],a[href]',
+                valid_styles: {
+                    '*': 'font-size,font-family,color,text-decoration,text-align'
+                },
+                powerpaste_word_import: 'clean',
+                powerpaste_html_import: 'clean',
+            };
+
+            var emailBodyConfig = {
+                selector: '.tinymce-body',
+                statusbar: false,
+                plugins: [
+                    'link',
+                    'lists',
+                    'powerpaste',
+                    'autolink',
+                    'tinymcespellchecker'
+                ],
+                toolbar: [
+                    'undo redo | bold italic underline | fontselect fontsizeselect',
+                    'forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist outdent indent'
+                ],
+                valid_elements: 'p[style],strong,em,span[style],a[href],ul,ol,li',
+                valid_styles: {
+                    '*': 'font-size,font-family,color,text-decoration,text-align'
+                },
+                powerpaste_word_import: 'clean',
+                powerpaste_html_import: 'clean',
+            };
+
+            tinymce.init(emailTitleConfig);
+            tinymce.init(emailBodyConfig);
+        </script>
+        <script src="~/jquery-3.6.0.js"></script>
     </body>
 </html>

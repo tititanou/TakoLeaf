@@ -165,6 +165,16 @@ namespace TakoLeaf.Models
                     Departement = 64,
                     Ville = "Lyon"
 
+                },
+
+                new Adresse
+                {
+                    Id = 10,
+                    Rue = "25 Rue de la Feuille",
+                    CodePostal = 85000,
+                    Departement = 85,
+                    Ville = "Konoha"
+
                 }
                 );
 
@@ -702,7 +712,7 @@ namespace TakoLeaf.Models
                 new Ressource
                 {
                     Intitule = "Cle à molette",
-                    Adresse = "124 Rue Hoche",
+                    AdresseId = 1,
                     Categorie = CateRessource.OUTIL,
                     Disponible = true,
                     TarifJournalier = 15,
@@ -712,7 +722,7 @@ namespace TakoLeaf.Models
                   new Ressource
                   {
                       Intitule = "Vidangeuse",
-                      Adresse = "1 Rue Boucher",
+                      AdresseId = 5,
                       Categorie = CateRessource.OUTIL_SPECIALISE,
                       Disponible = true,
                       TarifJournalier = 40,
@@ -723,7 +733,7 @@ namespace TakoLeaf.Models
 
                   {
                       Intitule = "Garage TakoLef",
-                      Adresse = "25 Rue de la Feuille, 85000, Konoha",
+                      AdresseId = 10,
                       Categorie = CateRessource.LOCAL_GARAGE,
                       Disponible = true,
                       TarifJournalier = 100,
@@ -733,7 +743,7 @@ namespace TakoLeaf.Models
                   new Ressource
                   {
                       Intitule = "Remorque 3m^3",
-                      Adresse = "1 Rue Boucher",
+                      AdresseId = 5,
                       Categorie = CateRessource.REMORQUE,
                       Disponible = true,
                       TarifJournalier = 55,
@@ -756,7 +766,7 @@ namespace TakoLeaf.Models
                     Titre = "Lancement d'une plateforme révolutionnaire en TakoLeaf' !",
                     DateRedaction = new DateTime(2021, 10, 19),
                     DatePublication = new DateTime(2021, 10, 24),
-                    Texte = "Marre de payer trop cher pour votre voiture adorée ? Alors vous êtes tombé au bon endroit ! Bon vous allez payer quand même certes... mais sur HTML codé main !",
+                    Texte = "Soleo saepe ante oculos ponere, idque libenter crebris usurpare sermonibus, omnis nostrorum imperatorum, omnis exterarum gentium potentissimorumque populorum, omnis clarissimorum regum res gestas, cum tuis nec contentionum magnitudine nec numero proeliorum nec varietate regionum nec celeritate conficiendi nec dissimilitudine bellorum posse conferri; nec vero disiunctissimas terras citius passibus cuiusquam potuisse peragrari, quam tuis non dicam cursibus, sed victoriis lustratae sunt.",
                     Public = true
                 },
 
@@ -766,17 +776,17 @@ namespace TakoLeaf.Models
                      Titre = "Flash Spécial !",
                      DateRedaction = new DateTime(2021, 10, 22),
                      DatePublication = new DateTime(2021, 10, 23),
-                     Texte = "M.ABRATE Alexis, codeur de son état aurait été aperçu chez lui, tenant des propos choquants sur la bonne moralité de la maman de sa DropDownList !",
+                     Texte = "Intellectum est enim mihi quidem in multis, et maxime in me ipso, sed paulo ante in omnibus, cum M. Marcellum senatui reique publicae concessisti, commemoratis praesertim offensionibus, te auctoritatem huius ordinis dignitatemque rei publicae tuis vel doloribus vel suspicionibus anteferre. Ille quidem fructum omnis ante actae vitae hodierno die maximum cepit, cum summo consensu senatus, tum iudicio tuo gravissimo et maximo. Ex quo profecto intellegis quanta in dato beneficio sit laus, cum in accepto sit tanta gloria.",
                      Public = true
                  },
 
                   new Article
                   {
                       AdminId = "Admin",
-                      Titre = "Bientôt un peu moins moche ?",
+                      Titre = "Attention les poulpes, il y a du nouveau !",
                       DateRedaction = new DateTime(2021, 10, 20),
                       DatePublication = new DateTime(2021, 10, 21),
-                      Texte = "Les dernières rumeurs suggèrent que notre spécialiste du Front, M.ZAWARTOSKI Valentin serai sur le point de révolutionner le CSS !",
+                      Texte = "Intellectum est enim mihi quidem in multis, et maxime in me ipso, sed paulo ante in omnibus, cum M. Marcellum senatui reique publicae concessisti, commemoratis praesertim offensionibus, te auctoritatem huius ordinis dignitatemque rei publicae tuis vel doloribus vel suspicionibus anteferre. Ille quidem fructum omnis ante actae vitae hodierno die maximum cepit, cum summo consensu senatus, tum iudicio tuo gravissimo et maximo. Ex quo profecto intellegis quanta in dato beneficio sit laus, cum in accepto sit tanta gloria.",
                       Public = false
                   }
                 );
@@ -944,7 +954,7 @@ namespace TakoLeaf.Models
                 Id = 1,
                 Date = DateTime.Now.ToShortDateString(),
                 Vu = false,
-                Message = "Ouais, ce con a osé dire que Renault c'était pourri",
+                Message = "Je souhaite signaler ce compte",
                 AdherentSignaleId = 1,
                 AdherentSignalantId =2,
                 PostId = 1

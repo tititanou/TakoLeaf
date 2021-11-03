@@ -41,25 +41,26 @@
     <section class="PAGEMID">
 
 
-        <nav>
-            <div class="menu">
-                <ul>
-                    <li><a>@Html.ActionLink("Dashboard", "dashboard", "admin")</a></li>
-                    <li> <a href="#">messages</a></li>
-                    <li>@Html.ActionLink("Comptes", "gestioncomptes", "admin")</li>
-                    <li> <a href="#">@Html.ActionLink("Transaction", "AfficherTransactions", "Admin")</a></li>
-                    <li><a>@Html.ActionLink("Articles", "gestionarticles", "admin")</a></li>
-                </ul>
-            </div>
-            <div class="menuIMG">
-                <img src="~/IMG/ICONE ADMIN/Group.png">
-                <img src="~/IMG/ICONE ADMIN/Envelope Closed.png">
-                <img src="~/IMG/ICONE ADMIN/Person.png">
-                <img src="~/IMG/ICONE ADMIN/Bar Chart.png">
-                <img src="~/IMG/ICONE ADMIN/Pencil 2.png">
 
-            </div>
-        </nav>
+        <div class="menu">
+            <ul>
+                <li><a>@Html.ActionLink("Dashboard", "dashboard", "admin")</a></li>
+                <li> <a href="#">messages</a></li>
+                <li>@Html.ActionLink("Comptes", "gestioncomptes", "admin")</li>
+                <li> <a href="#">@Html.ActionLink("Transaction", "AfficherTransactions", "Admin")</a></li>
+                <li><a>@Html.ActionLink("Articles", "gestionarticles", "admin")</a></li>
+                <li><a>@Html.ActionLink("Home", "Index", "Home")</a></li>
+            </ul>
+        </div>
+        <div class="menuIMG">
+            <img src="~/IMG/ICONE ADMIN/Group.png">
+            <img src="~/IMG/ICONE ADMIN/Envelope Closed.png">
+            <img src="~/IMG/ICONE ADMIN/Person.png">
+            <img src="~/IMG/ICONE ADMIN/Bar Chart.png">
+            <img src="~/IMG/ICONE ADMIN/Pencil 2.png">
+
+        </div>
+
 
         @RenderBody()
 

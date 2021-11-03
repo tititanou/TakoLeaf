@@ -1,0 +1,67 @@
+﻿* {
+    color: #2f4858;
+}
+
+.box {
+    box-sizing: content-box;
+    margin-left:300px;
+    position: static;
+    right: 10px;
+}
+
+.ad {
+    /*box-sizing: content-box;*/
+    text-align: center;
+    width: 80%;
+    right: 0px;
+    table-layout: fixed;
+}
+
+.tableauH {
+    height: 50px;
+    font-size: 20px;
+    
+    width:200px;
+}
+
+.etat, .delete {
+    width: 25px;
+    height: 25px;
+}
+
+.etatAt {
+    width: 30px;
+    height: 30px;
+}
+
+.donnees {
+    background-color: white;
+    height: 100px;
+    width: 100%
+}
+
+tr.donnees:hover {
+    background-color: #F5F5F5;
+}
+
+.laink{
+    text-decoration:none;
+    color:black;
+}
+
+    .donnees td {
+        border-bottom: solid #A1E1AF 2px;
+    }
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    clip-path: ellipse(50% 50%);
+}
+
+h1.titre{
+    text-align: center;
+    padding: 30px;
+    vertical-align:central;
+    margin-left:300px;
+}

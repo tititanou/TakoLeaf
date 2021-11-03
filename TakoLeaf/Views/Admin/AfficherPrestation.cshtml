@@ -9,36 +9,84 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/CSS/AffichageTransactionAdmin.css" />
     <title>AfficherPrestation</title>
 </head>
 <body>
 
-    <div class="box">
-        <titre>Fiche Information</titre>
+    <h1 class="entete">Affichage Prestation</h1>
 
-       
-        
-            <image>@Model.CompteUserProvider.Avatar</image>
-            <titre>Nom</titre> <info>@Model.Presta.Provider.Adherent.Nom</info>
-            <titre>Prénom</titre> <info>@Model.Presta.Provider.Adherent.Prenom</info>
-            <titre>Email</titre> <info>@Model.CompteUserProvider.Mail</info>
-            <titre>RIB</titre> <info>@Model.ProviderRib.Rib.Iban</info>
+    <div id="info">
+        <div id="boxProvider">
+            <div class="infoLeft">
+                <h3 class="fiche">Fiche Information</h3>
+                @if (Model.CompteUserProvider.Avatar != null)
+                {
+                    <img class="avatar" src="@Model.CompteUserProvider.Avatar">
+                }
+                else
+                {
+                    <img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png">
+                }
 
-       
+                <h4>Provider</h4>
+            </div>
+            <div class="infoRight">
 
+                <table class="tableInfo">
+                    <tr>
+                        <th>Nom</th>
+                        <td>@Model.Presta.Provider.Adherent.Nom</td>
+                    </tr>
+                    <tr>
+                        <th>Prénom</th>
+                        <td>@Model.Presta.Provider.Adherent.Prenom</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>@Model.CompteUserProvider.Mail</td>
+                    </tr>
+                    <tr>
+                        <th>RIB</th>
+                        <td>@Model.ProviderRib.Rib.Iban</td>
+                    </tr>
+                </table>
+            </div>
+
+
+        </div>
+
+        <div id="boxConsumer">
+            <div class="infoLeft">
+                <h3 class="fiche">Fiche Information</h3>
+                @if (Model.CompteUserConsumer.Avatar != null)
+                {
+                    <img class="avatar" src="@Model.CompteUserConsumer.Avatar">
+                }
+                else
+                {
+                    <img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png">
+                }
+                <h4>Consumer</h4>
+            </div>
+            <div class="infoRight">
+                <table class="tableInfo">
+                    <tr>
+                        <th>Nom</th>
+                        <td>@Model.Presta.Consumer.Adherent.Nom</td>
+                    </tr>
+                    <tr>
+                        <th>Prénom</th>
+                        <td>@Model.Presta.Consumer.Adherent.Prenom</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>@Model.CompteUserProvider.Mail</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <div class="box">
-        <titre>Fiche Information</titre>
-
-       
-            <image>@Model.CompteUserConsumer.Avatar</image>
-            <titre>Nom</titre> <info>@Model.Presta.Consumer.Adherent.Nom</info>
-            <titre>Prénom</titre> <info>@Model.Presta.Consumer.Adherent.Prenom</info>
-            <titre>Email</titre> <info>@Model.CompteUserConsumer.Mail</info>
-        
-    </div>
-
 
     @*Voir pièces justificatives*@
 
@@ -55,49 +103,72 @@
         </div>*@
 
 
-    <div class="box">
-        <titre>Description de la transaction</titre>
+    <div id="description">
+        <div class="boite">
+            <h3 class="intitule">Description de la transaction</h3>
 
-        <table>
-            <tr>
-                <th>ID Transaction</th>
-                <th>Date</th>
-                <th>Montant</th>
-                <th>Prestation effectuée</th>
-            </tr>
-            <tr>
-                <td>@Model.Presta.Id</td>
-                <td>@Model.Presta.DateDebut</td>
-                <td>@Model.Presta.Prix euros</td>
+            <table class="data">
+                <tr>
+                    <th>ID Transaction</th>
+                    <th>Date</th>
+                    <th>Montant</th>
+                    <th>Numéro Devis</th>
+                </tr>
+                <tr>
+                    <td>@Model.Presta.Id</td>
+                    <td>@Model.Presta.DateDebut.ToShortDateString()</td>
+                    <td>@Model.Presta.Prix euros</td>
 
-                @*@if (@Model.Presta.Devis.CompetenceL != null)
-                {
-
-                    @foreach (var item in @Model.Presta.Devis.CompetenceL)
+                    @if (@Model.Presta.NumeroDevis == null)
                     {
 
-                        <td>@item</td>
 
+                        <td>---</td>
                     }
-                }
-
-                else
-                {
-
-                    @foreach (var item in @Model.Presta.Devis.RessourceL)
+                    else
                     {
-
-                        <td>@item</td>
-
+                        <td>@Model.Presta.NumeroDevis</td>
                     }
-                };*@
+                   
 
-            </tr>
-        </table>
+                </tr>
+            </table>
+        </div>
     </div>
 
-    <button>Valider transaction</button>
-    <button>Annuler transaction</button>
+    <div id="description">
+        <div class="boite">
+            <h3 class="intitule">Document(s) associé(s)</h3>
+            <div class="documents">
+                @*@if (@Model.Presta.Devis.CompetenceL != null)
+                    {
 
+                        @foreach (var item in @Model.Presta.Devis.CompetenceL)
+                        {
+
+                            <td>@item</td>
+
+                        }
+                    }
+
+                    else
+                    {
+
+                        @foreach (var item in @Model.Presta.Devis.RessourceL)
+                        {
+
+                            <td>@item</td>
+
+                        }
+                    };*@
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bouton">
+        <button class="valider">Valider transaction</button>
+        <button class="annuler">Annuler transaction</button>
+    </div>
 </body>
 </html>

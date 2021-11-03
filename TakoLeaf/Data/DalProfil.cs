@@ -193,11 +193,13 @@ namespace TakoLeaf.Data
 
         }
 
-        public void ModifierRessource (int id, string intitule, CateRessource categorie, double tarif, string adresse)
+        public void ModifierRessource (int id, string intitule, CateRessource categorie, double tarif, string rue, int code, string ville)
         {
             Ressource ressource = _bddContext.Ressources.Find(id);
             ressource.Intitule = intitule;
-            ressource.Adresse = adresse;
+            ressource.Adresse.Rue = rue;
+            ressource.Adresse.CodePostal = code;
+            ressource.Adresse.Ville = ville;
             ressource.Categorie = categorie;
             ressource.TarifJournalier = tarif;
             _bddContext.SaveChanges();
@@ -215,9 +217,9 @@ namespace TakoLeaf.Data
         }
         // AJOUT
 
-        public Ressource AjouterRessource(int providerId, string intitule, CateRessource categorie, double tarif, string adresse)
+        public Ressource AjouterRessource(int providerId, string intitule, CateRessource categorie, double tarif, int adresseId)
         {
-            Ressource ressource = new Ressource { Intitule = intitule, Adresse = adresse, Categorie = categorie, Disponible = true, ProviderId = providerId, TarifJournalier = tarif };
+            Ressource ressource = new Ressource { Intitule = intitule, AdresseId = adresseId, Categorie = categorie, Disponible = true, ProviderId = providerId, TarifJournalier = tarif };
             _bddContext.Ressources.Add(ressource);
             _bddContext.SaveChanges();
             return ressource;

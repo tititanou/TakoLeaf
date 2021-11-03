@@ -20,9 +20,9 @@ namespace TakoLeaf.Data
         void ModifierInfosAdherent(int id, string nom, string prenom, DateTime date, string telephone);
         void ModifierCompteUser(string mail, string mdp, string avatar, string description);
         void ModifierCompetence(int id, double tarif);
-        Ressource AjouterRessource(int providerId,string intitule, CateRessource categorie, double tafif, string adresse);
+        Ressource AjouterRessource(int providerId,string intitule, CateRessource categorie, double tafif, int adresseId);
         void ModifierVoiture(int id, string imma, string titulaire, Carburant carburant, int annee, int idmodele);
-        void ModifierRessource(int id, string intitule, CateRessource categorie, double tarif, string adresse);
+        void ModifierRessource(int id, string intitule, CateRessource categorie, double tarif, string rue, int code, string ville);
         void ModifierCarte(int id, string titulaire, string numeroCarte, string date, int crypto);
         void SupprimerVoiture(Voiture voiture);
         void SupprimerCompetence(Competence competence);

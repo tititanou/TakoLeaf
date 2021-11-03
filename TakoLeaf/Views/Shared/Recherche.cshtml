@@ -6,11 +6,11 @@
     <script src="https://kit.fontawesome.com/1ca99e9622.js" crossorigin="anonymous"></script>
 </head>
 <div style="display:inline-block">
-    @Html.DropDownList("choix1", (SelectList)ViewBag.Choix1, "Que recherchez-vous?", new { id = "choix1", onchange = "choix()", @style = "display:inline-block;" })
-</div>
-<div style="display:inline-block">
-    @using (Html.BeginForm())
+ @using (Html.BeginForm())
     {
+    <div style="display:inline-block">
+        @Html.DropDownList("Choix", (SelectList)ViewBag.Choix, "Que recherchez-vous?", new { id = "Choix", onchange = "choix()", @style = "display:inline-block;" })
+    </div>
     <div id="adresses" style="display:none">
         @Html.DropDownList("Adresse", Model.CodePostauxList, "Choisir Lieu", new { @class = "form-control" })
     </div>
@@ -31,18 +31,20 @@
         </datalist>
     </div>
     <div id="service" style="display:none">
-        @Html.DropDownList("Competence", Model.SsCateList, "Choisir Competence", new { @class = "form-control" })
+        @Html.DropDownList("Competence", Model.SsCateList, "Choisir Competence", new { @class = "form-control"})
     </div>
     <div id="ressource" style="display:none">
-        @Html.DropDownList("ressource",(SelectList)ViewBag.Ressources)
-        @Html.TextBox("input")
+        @Html.DropDownList("Ressource",(SelectList)ViewBag.Ressources, "Choisir Ressource", new { @class = "form-control", onchange = "ress()" })
+        <div id="inp" style="display:none">
+            @Html.TextBox("Input")
+        </div>
     </div>
         <button type="submit"><i class="fas fa-search"></i></button>
     }
 </div>
 <script>function choix() {
         document.getElementById("adresses").style.display = "inline-block";
-        var choix1 = document.getElementById("choix1").value;
+        var choix1 = document.getElementById("Choix").value;
         switch (choix1) {
             case "Un utilisateur":
                 document.getElementById("utilisateur").style.display = "inline-block";
@@ -75,4 +77,8 @@
         var dep = document.getElementById("departement").value;
 
 
-    }</script>
+    }
+    function ress() {
+        document.getElementById("inp").style.display = "inline-block";
+    }
+    </script>

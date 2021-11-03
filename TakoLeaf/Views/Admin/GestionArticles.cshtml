@@ -11,94 +11,30 @@
     <meta name="viewport" content="width=device-width" />
     <title>GestionArticles</title>
     <script src="https://kit.fontawesome.com/1cc7c2dd80.js" crossorigin="anonymous"></script>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-radius: 10px;
-            padding:5px;
-        }
+    <link rel="stylesheet" href="~/CSS/GestionArticles.css" />
 
-        .visible {
-            background-color: green;
-        }
-
-        .invisible {
-            background-color: red;
-        }
-
-        /*   body{
-            margin:0;
-            padding:0;
-            background: #e84118;
-        }*/
-        .search-box {
-            position: absolute;
-            top: 10%;
-            right: 50%;
-            /*transform: translate(-50%, -50%);*/
-            background: #2f3640;
-            height: 40px;
-            border-radius: 40px;
-            padding: 10px;
-        }
-
-            .search-box:hover > .search-txt {
-                width: 240px;
-                padding: 0 6px;
-            }
-
-            .search-box:hover > .search-btn {
-                background: white;
-            }
-
-        .search-btn {
-            color: #e84118;
-            float: right;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #2f3640;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: 0.4s;
-        }
-
-        .search-txt {
-            border: none;
-            background: none;
-            outline: none;
-            float: left;
-            padding: 0;
-            color: white;
-            font-size: 16px;
-            transition: 0.4s;
-            line-height: 40px;
-            width: 0px;
-        }
-    </style>
 </head>
 <body>
-
-    <h1 style="text-align:center; font-family:sans-serif">Gestion des articles</h1>
-
-
-    <div class="search-box">
-        <input class="search-txt" name="" placeholder="Type to search" />
-        <a class="search-btn" href="#">
-            <i class="fas fa-search"></i>
-        </a>
-    </div>
-
-
-
-
     @{int count = Model.Count();}
-    <div>
-        <fieldset style="display:inline-block">
-            <legend>Nombre d'article : @count</legend>
+    <h1 class="title">Gestion des articles</h1>
 
-            <table>
+
+
+    @*<div class="search-box">
+            <input class="search-txt" name="" placeholder="Type to search" />
+            <a class="search-btn" href="#">
+                <i class="fas fa-search"></i>
+            </a>
+        </div>*@
+
+
+
+
+
+    <div id="box">
+        <fieldset class="contenu">
+            <h3>Articles(s) : @count</h3>
+            <table class="donnees">
 
                 <tr>
                     <th>Titre</th>
@@ -110,27 +46,38 @@
                 {
 
                     <tr>
-                        <td><button>@Html.ActionLink(item.Titre, "ModifierArticle", "Admin", new { id = item.Id })</button></td>
+                        <td>@Html.ActionLink(item.Titre, "ModifierArticle", "Admin", new { id = item.Id })</td>
 
 
                         @if (item.Public)
                         {
                             <td>Publié le : @item.DatePublication.ToShortDateString() à @item.DatePublication.ToShortTimeString()</td>
-                            <td class="visible"><button>@Html.ActionLink("Visible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
+                            <td class="visible">@Html.ActionLink("Oui", "ModificationVisibilite", "Admin", new { id = item.Id })</td>
                         }
                         else
                         {
                             <td>Rédigé le : @item.DateRedaction.ToShortDateString() à @item.DateRedaction.ToShortTimeString()</td>
-                            <td class="invisible"><button>@Html.ActionLink("Invisible", "ModificationVisibilite", "Admin", new { id = item.Id })</button></td>
+                            <td class="invi">@Html.ActionLink("Non", "ModificationVisibilite", "Admin", new { id = item.Id })</td>
                         }
-                        <td><button>@Html.ActionLink("Supprimer Article", "SuppressionArticle", "Admin", new { id = item.Id })</button></td>
+                    <td>@Html.ActionLink("", "SuppressionArticle", "Admin", new { id = item.Id })<img class="delete" src="~/IMG/ICONE ADMIN/DeleteIcon.png" /></td>
                     </tr>
+
+                    @*@{string editLink = "/Admin/SupprimerCompte?id=" + item.AdherentId; }
+
+                    <td><a href="@editLink"><img class="delete" src="~/IMG/ICONE ADMIN/DeleteIcon.png" /></a></td>*@
+
+
                 }
             </table>
         </fieldset>
     </div>
 
-    <fieldset style="display:inline-block">
+    <div class="bouton">
+        <button>@Html.ActionLink("Créer un article", "PublicationArticle", "Admin")</button>
+    </div>
+
+
+    @*<fieldset style="display:inline-block">
         <legend>Mes articles invisibles</legend>
 
         @{ count = 0; }
@@ -159,10 +106,7 @@
 
         <h2>Articles non publics : @count</h2>
 
-    </fieldset>
-
-
-
+    </fieldset>*@
 
 
 

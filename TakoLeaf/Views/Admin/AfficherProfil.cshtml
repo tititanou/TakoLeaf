@@ -9,8 +9,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>AfficherProfil</title>
     <link rel="stylesheet" href="~/CSS/AfficherProfilAdminStyle.css" />
+    <title>AfficherProfil</title>
 </head>
 <body>
 
@@ -21,11 +21,11 @@
 
                 @if (Model.Compte.Avatar != null)
                 {
-                    <avatar><img src="@Model.Compte.Avatar" /> Avatar</avatar><br />
+                    <img class="avatar" src="@Model.Compte.Avatar" />
                 }
                 else
                 {
-                    <avatar><img src="~/IMG/AVATAR ADMIN/Anonyme.png" /></avatar><br />
+                    <img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" />
                 }
 
                 <div class="titre">Adhérent(e)</div>
@@ -82,39 +82,121 @@
     <div id="box2">
         <div class="intitule">Informations complémentaires</div>
         <div class="infoComp">
-            <table>
+            <table class="tableInfo">
                 <tr>
                     <th>Rôle</th>
                     <td>@Model.Compte.Role</td>
                 </tr>
+
                 <tr>
                     <th>Adresse</th>
-                    @*<td>@Model.Compte.Adherent.Adresse.Rue</td>*@
-                    @*<td>@Model.Compte.Adherent.Adresse.CodePostal</td>
-                    <td>@Model.Compte.Adherent.Adresse.Ville</td>*@
+                    @*@if (@Model.Compte.Adherent.Adresse.Rue == null)
+                    {
+                        <td>-</td>
+                    }
+                    else
+                    {
+                        <td>@Model.Compte.Adherent.Adresse.Rue</td>
+                        <td>@Model.Compte.Adherent.Adresse.CodePostal</td>
+                        <td>@Model.Compte.Adherent.Adresse.Ville</td>
+                    }*@
+
                 </tr>
+
+                @if (Model.Compte.Role.Equals("Provider"))
+                {
+                    if (@Model.InfoProvider.Rib.Iban != null)
+                    {
+                        <tr>
+                            <th>RIB</th>
+                            <td>@Model.InfoProvider.Rib.Iban</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <th>RIB</th>
+                            <td>Aucune information</td>
+                        </tr>
+                    }
+
+                    if (@Model.InfoProvider.Note != 0)
+                    {
+                        <tr>
+                            <th>Note</th>
+                            <td>@Model.InfoProvider.Note</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <th>Note</th>
+                            <td>-</td>
+                        </tr>
+                    }
+
+                    if (@Model.InfoProvider.Rang == TakoLeaf.Models.Rang.POULPE_AMATEUR)
+                    {
+                        <tr>
+                            <th>Rang</th>
+                            <td><img class="rang" src="~/IMG/RANG/PoulpeAmateur.png" /> </td>
+                        </tr>
+                    }
+                    else if (@Model.InfoProvider.Rang == TakoLeaf.Models.Rang.CALAMAR_RAVALEUR)
+                    {
+                        <tr>
+                            <th>Rang</th>
+                            <td><img class="rang" src="~/IMG/RANG/CalamarRavaleur.png" /> </td>
+                        </tr>
+                    }
+                    else if (@Model.InfoProvider.Rang == TakoLeaf.Models.Rang.PIEUVRE_HABILE)
+                    {
+                        <tr>
+                            <th>Rang</th>
+                            <td><img class="rang" src="~/IMG/RANG/PieuvreHabile.png" /> </td>
+                        </tr>
+                    }
+                    else if (@Model.InfoProvider.Rang == TakoLeaf.Models.Rang.POULPE_BRICOLEUR)
+                    {
+                        <tr>
+                            <th>Rang</th>
+                            <td><img class="rang" src="~/IMG/RANG/PoulpeBricoleur.png" /> </td>
+                        </tr>
+                    }
+                    else if (@Model.InfoProvider.Rang == TakoLeaf.Models.Rang.PIEUVRE_RAFISTOLEUR)
+                    {
+                        <tr>
+                            <th>Rang</th>
+                            <td><img class="rang" src="~/IMG/RANG/PievureRafistoleur.png" /> </td>
+                        </tr>
+                    }
+                    else if (@Model.InfoProvider.Rang == TakoLeaf.Models.Rang.MAITRE_KRAKEN)
+                    {
+                        <tr>
+                            <th>Rang</th>
+                            <td><img class="rang" src="~/IMG/RANG/MaitreKraken.png" /> </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>-</td>
+                        </tr>
+                    }
+
+                }
+                else if (Model.Compte.Role.Equals("Consumer"))
+                {
+
+                }
+
 
             </table>
         </div>
 
     </div>
 
-    @*<div id="box2">
-            <div class="intitule">Pièce(s) justificative(s)</div>
 
-            @if (Model.PieceJusti == null)
-            {
-                <p>Aucune pièce justificative n'a été déclarée</p>
-            }
-            else
-            {
-                foreach (var item in Model.PieceJusti)
-                {
-                    <div class="pc">@item</div>
-                }
-            }
-
-        </div>*@
 
     <div id="box3">
 
@@ -129,15 +211,42 @@
 
         @if (Model.Compte.EtatProfil != TakoLeaf.Models.EtatProfil.COMPTE_BLOQUE)
         {
-            <div class="lien"> @Html.ActionLink("Suspendre le profil", "BloquerProfil", "Admin", new { id = Model.Compte.AdherentId })</div>
+            <div class="lien"> @Html.ActionLink("Bloquer le compte", "BloquerProfil", "Admin", new { id = Model.Compte.AdherentId, @class="delete"})</div>
         }
         else
         {
-            <div class="lien"> @Html.ActionLink("Débloquer le compte", "DebloquerProfil", "Admin", new { id = Model.Compte.AdherentId })</div>
+            <div class="lien"> @Html.ActionLink("Débloquer le compte", "DebloquerProfil", "Admin", new { id = Model.Compte.AdherentId, @class="bloquer"})</div>
         }
 
     </div>
 
+    <div id="box4">
+        <div class="intitule2">Pièce(s) justificative(s)</div>
+        <div class="fichier">
+            @if (Model.PieceJusti == null)
+            {
+                <p>Aucune pièce justificative n'a été déclarée</p>
+            }
+            else
+            {
+                foreach (var item in Model.PieceJusti)
+                {
+                    <div class="pc">@item</div>
+                }
+            }
+
+        </div>
+    </div>
+
+
+    <div id="box5">
+        <div class="zinfo">
+            <h3 class="titre5">Description</h3>
+            <div class="arlo">
+                <p>@Model.Compte.Description</p>
+            </div>
+        </div>
+    </div>
 
 
 </body>

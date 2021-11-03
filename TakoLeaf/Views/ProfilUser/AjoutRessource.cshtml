@@ -13,8 +13,14 @@
     @Html.LabelFor(m => m.Ressource.Intitule)
     @Html.TextBoxFor(m => m.Ressource.Intitule)
 
-    @Html.LabelFor(m => m.Ressource.Adresse)
-    @Html.TextBoxFor(m => m.Ressource.Adresse)
+    @Html.LabelFor(m => m.Ressource.Adresse.Rue)
+    @Html.TextBoxFor(m => m.Ressource.Adresse.Rue)
+
+    @Html.LabelFor(m => m.Ressource.Adresse.CodePostal)
+    @Html.TextBoxFor(m => m.Ressource.Adresse.CodePostal)
+
+    @Html.LabelFor(m => m.Ressource.Adresse.Ville)
+    @Html.TextBoxFor(m => m.Ressource.Adresse.Ville)
 
     @Html.LabelFor(m => m.Ressource.TarifJournalier)
     @Html.TextBoxFor(m => m.Ressource.TarifJournalier)

@@ -1,6 +1,7 @@
 ﻿@model TakoLeaf.Models.Article
 @{
-    Layout = null;
+    Layout = "_LayoutAdmin";
+    ViewBag.Title = "Modification article";
 }
 
 <!DOCTYPE html>
@@ -9,9 +10,10 @@
 <head>
     <script src="https://cdn.tiny.cloud/1/yd36gh7ryo0g33xjyre47fcstapvpntex6lummgys933q1k6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    @*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">*@
+    <link rel="stylesheet" href="~/CSS/ModificationArticleAdmin.css" />
 
-    <title>ModifierArticle</title>
+    <title>Modification article</title>
     <style>
 
 
@@ -163,80 +165,85 @@
 </head>
 <body>
 
-    @using (Html.BeginForm())
-    {
-        <center>
-            <fieldset style="display:inline-block">
-                <legend>Vous êtes inspirés ?</legend>
+    <h1 class="test">Modification Article</h1>
 
-                <div class="form-floating mb-3">
+    <div id="box">
+        <div class="contenu">
+            @using (Html.BeginForm())
+            {
+
+                <h3 class="test">Une petite modif' ?'</h3>
+
+                <div class="titre">
                     @Html.LabelFor(model => model.Titre)
-                    @Html.TextBoxFor(m => m.Titre, new { size = "50" })
+                    @Html.TextBoxFor(m => m.Titre, new { size = "100" })
                     @Html.ValidationMessageFor(model => model.Titre)
                 </div>
 
-                <div class="form-floating mb-3">
-                    @Html.LabelFor(model => model.Texte)
+                <div class="article">
+                    @*@Html.LabelFor(model => model.Texte)*@
                     @Html.TextAreaFor(m => m.Texte, new { rows = 20, cols = 150, @class = "mytextarea" })
                     @Html.ValidationMessageFor(model => model.Texte)
                 </div>
 
-                <div class="form-floating mb-3">
-                    @Html.LabelFor(model => model.Image)
-                    @Html.TextBoxFor(model => model.Image)
-                    @Html.ValidationMessageFor(model => model.Image)
+                @*<div class="form-floating mb-3">
+                        @Html.LabelFor(model => model.Image)
+                        @Html.TextBoxFor(model => model.Image)
+                        @Html.ValidationMessageFor(model => model.Image)
+                    </div>*@
+                <div class="bouton">
+                    <button type="submit" @*onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black"*@>Publier</button>
                 </div>
-                <button type="button" onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Publier</button> 
-            </fieldset>
 
-            @*<div id="postForm" style="visibility:hidden">
-                    test
-                    <button type="submit">Valider</button>
+                @*<div id="postForm" style="visibility:hidden">
+                        test
+                        <button type="submit">Valider</button>
+                    </div>*@
+
+
+
+
+
+
+
+                @*<div id="id01" class="modal">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <form class="modal-content" action="/action_page.php">
+                            <div class="container">
+                                <h1>Delete Account</h1>
+                                <p>Are you sure you want to delete your account?</p>
+
+                                <div class="clearfix">
+                                    <button type="submit" class="cancelbtn">Yes</button>
+                                    <button type="button" class="deletebtn" onclick="document.getElementById('id01').style.display='none'">No</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>*@
+
+                @*<div id="id01" class="w3-modal">
+                    <div class="w3-modal-content">
+                        <header class="w3-container w3-teal">
+                            <span onclick="document.getElementById('id01').style.display='none'"
+                                  class="w3-button w3-display-topright">&times;</span>
+                            <h2>Attention @User.Identity.Name !</h2>
+                        </header>
+                        <div class="w3-container">
+                            <p>Confirmer la publication de l'article sur le site ?</p>
+                            <button type="submit" class="cancelbtn">Let's go !</button>
+                            <button type="button" class="deletebtn" onclick="document.getElementById('id01').style.display='none'">Finalement...</button>
+                        </div>
+                        <footer class="w3-container w3-teal">
+                            <p>TakoLeaf.inc</p>
+                        </footer>
+                    </div>
                 </div>*@
 
-        </center>
 
 
-
-
-
-        @*<div id="id01" class="modal">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content" action="/action_page.php">
-                    <div class="container">
-                        <h1>Delete Account</h1>
-                        <p>Are you sure you want to delete your account?</p>
-
-                        <div class="clearfix">
-                            <button type="submit" class="cancelbtn">Yes</button>
-                            <button type="button" class="deletebtn" onclick="document.getElementById('id01').style.display='none'">No</button>
-                        </div>
-                    </div>
-                </form>
-            </div>*@
-
-        <div id="id01" class="w3-modal">
-            <div class="w3-modal-content">
-                <header class="w3-container w3-teal">
-                    <span onclick="document.getElementById('id01').style.display='none'"
-                          class="w3-button w3-display-topright">&times;</span>
-                    <h2>Attention @User.Identity.Name !</h2>
-                </header>
-                <div class="w3-container">
-                    <p>Confirmer la publication de l'article sur le site ?</p>
-                    <button type="submit" class="cancelbtn">Let's go !</button>
-                    <button type="button" class="deletebtn" onclick="document.getElementById('id01').style.display='none'">Finalement...</button>
-                </div>
-                <footer class="w3-container w3-teal">
-                    <p>TakoLeaf.inc</p>
-                </footer>
-            </div>
+            }
         </div>
-
-
-
-    }
-
+    </div>
 
 
     <script>
