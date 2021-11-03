@@ -84,10 +84,10 @@ namespace TakoLeaf.Models
                 new Adresse
                 {
                     Id = 1,
-                    Rue = "124 Rue Hoche",
-                    CodePostal = 93100,
-                    Departement = 93,
-                    Ville = "Montreuil"
+                    Rue = "14 Rue Bannier",
+                    CodePostal = 45000,
+                    Departement = 45,
+                    Ville = "Orleans"
                 },
 
                 new Adresse
@@ -182,8 +182,8 @@ namespace TakoLeaf.Models
                 new Adherent
                 {
                     Id = 1,
-                    Nom = "ABRATE",
-                    Prenom = "Alexis",
+                    Nom = "GIGOT",
+                    Prenom = "Loic",
                     Date_naissance = new DateTime(1990, 10, 23),
                     AdresseId = 1,
                     Telephone = "0658423947"
@@ -406,7 +406,7 @@ namespace TakoLeaf.Models
                 new Provider
                 {
                     Id = 1,
-                    Note = 0,
+                    Note = 4.5,
                     RibId = 1,
                     AdherentId = 1,
                     Rang = Rang.MAITRE_KRAKEN
@@ -448,7 +448,7 @@ namespace TakoLeaf.Models
                 new Carte
                 {
                     Id = 2,
-                    Titulaire = "MR DEMAIZIEUX",
+                    Titulaire = "MR ZAWARTOSKI",
                     NumeroCarte = "1234567891012023",
                     ExpirDate = "10/2023",
                     Crypto = 246,
@@ -458,7 +458,7 @@ namespace TakoLeaf.Models
                 new Carte
                 {
                     Id = 3,
-                    Titulaire = "MR NAYMAR",
+                    Titulaire = "MR SOULARD",
                     NumeroCarte = "1415242536359695",
                     ExpirDate = "01/2024",
                     Crypto = 666,
@@ -508,21 +508,68 @@ namespace TakoLeaf.Models
                     Carburant = Carburant.DIESEL,
                     ConsumerId = 1,
                     Immatriculation = "CA-175-AA",
-                    Titulaire = "MR SOULARD",
+                    Titulaire = "MME TANIA ROJAS",
                     ModeleId = 2
 
                 },
+
+                 new Voiture
+                 {
+                     Id = 5,
+                     Annee = 2018,
+                     Carburant = Carburant.DIESEL,
+                     ConsumerId = 1,
+                     Immatriculation = "SE-185-BB",
+                     Titulaire = "MME TANIA ROJAS",
+                     ModeleId = 3
+
+                 },
+
+                  new Voiture
+                  {
+                      Id = 6,
+                      Annee = 2015,
+                      Carburant = Carburant.DIESEL,
+                      ConsumerId = 1,
+                      Immatriculation = "DD-455-FR",
+                      Titulaire = "MME TANIA ROJAS",
+                      ModeleId = 6
+
+                  },
+
 
                 new Voiture
                 {
                     Id = 2,
                     Annee = 2017,
                     Carburant = Carburant.SP98,
-                    ConsumerId = 1,
+                    ConsumerId = 2,
                     Immatriculation = "BB-585-DF",
-                    Titulaire = "MME SOULARD",
+                    Titulaire = "MR VALENTIN ZAWARTOSKI",
                     ModeleId = 5
                 },
+
+                  new Voiture
+                  {
+                      Id = 7,
+                      Annee = 2010,
+                      Carburant = Carburant.DIESEL,
+                      ConsumerId = 2,
+                      Immatriculation = "CE-255-SE",
+                      Titulaire = "MR VALENTIN ZAWARTOSKI",
+                      ModeleId = 7
+                  },
+
+                  new Voiture
+                  {
+                        Id = 8,
+                        Annee = 2007,
+                        Carburant = Carburant.SP98,
+                        ConsumerId = 2,
+                        Immatriculation = "QZ-111-DF",
+                        Titulaire = "MR VALENTIN ZAWARTOSKI",
+                        ModeleId = 9
+                  },
 
                 new Voiture
                 {
@@ -531,10 +578,31 @@ namespace TakoLeaf.Models
                     Carburant = Carburant.DIESEL,
                     ConsumerId = 3,
                     Immatriculation = "BD-524-AV",
-                    Titulaire = "MR NEYMAR",
+                    Titulaire = "MR SOULARD",
                     ModeleId = 5
                 },
 
+                new Voiture
+                {
+                    Id = 9,
+                    Annee = 2020,
+                    Carburant = Carburant.DIESEL,
+                    ConsumerId = 3,
+                    Immatriculation = "CC-174-GF",
+                    Titulaire = "MR SOULARD",
+                    ModeleId = 15
+                },
+
+                new Voiture
+                {
+                    Id = 10,
+                    Annee = 2018,
+                    Carburant = Carburant.DIESEL,
+                    ConsumerId = 3,
+                    Immatriculation = "CC-484-CD",
+                    Titulaire = "MME SOULARD",
+                    ModeleId = 17
+                },
                 new Voiture
                 {
                     Id = 4,
@@ -609,19 +677,57 @@ namespace TakoLeaf.Models
                 new Marque { Nom = "Audi" },
                 new Marque { Nom = "Nissan" },
                 new Marque { Nom = "Citroen" },
-                new Marque { Nom = "Seat" }
+                new Marque { Nom = "Alpha Romeo" },
+                new Marque { Nom = "BMW" },
+                new Marque { Nom = "Chevrolet" },
+                new Marque { Nom = "Dacia" },
+                new Marque { Nom = "Fiat" },
+                new Marque { Nom = "KIA" },
+                new Marque { Nom = "Opel" },
+                new Marque { Nom = "Renault" },
+                new Marque { Nom = "Skoda" },
+                new Marque { Nom = "Toyota" },
+                new Marque { Nom = "Volvo" },
+                new Marque { Nom = "Mercedes" }
                 );
 
             this.Modeles.AddRange(
                 new Modele { Nom = "Polo", MarqueId = 1 },
                 new Modele { Nom = "Golf", MarqueId = 1 },
+                new Modele { Nom = "Passat", MarqueId = 1 },
+                new Modele { Nom = "Tiguan", MarqueId = 1 },
+                new Modele { Nom = "Touran", MarqueId = 1 },
+                new Modele { Nom = "T-Roc", MarqueId = 1 },
+                new Modele { Nom = "Touareg", MarqueId = 1 },
+
+                new Modele { Nom = "106", MarqueId = 2 },
+                new Modele { Nom = "108", MarqueId = 2 },
                 new Modele { Nom = "206", MarqueId = 2 },
-                new Modele { Nom = "607", MarqueId = 2 },
+                new Modele { Nom = "206", MarqueId = 2 },
+                new Modele { Nom = "207", MarqueId = 2 },
+                new Modele { Nom = "208", MarqueId = 2 },
+                new Modele { Nom = "306", MarqueId = 2 },
+                new Modele { Nom = "307", MarqueId = 2 },
+                new Modele { Nom = "308", MarqueId = 2 },
+                new Modele { Nom = "1007", MarqueId = 2 },
+                new Modele { Nom = "1008", MarqueId = 2 },
+                new Modele { Nom = "2008", MarqueId = 2 },
+                new Modele { Nom = "3008", MarqueId = 2 },
+                new Modele { Nom = "5008", MarqueId = 2 },
+               
+                new Modele { Nom = "A1", MarqueId = 3 },
                 new Modele { Nom = "A2", MarqueId = 3 },
+                new Modele { Nom = "A3", MarqueId = 3 },
                 new Modele { Nom = "A4", MarqueId = 3 },
+                new Modele { Nom = "A5", MarqueId = 3 },
+                new Modele { Nom = "TT", MarqueId = 3 },
+             
+
                 new Modele { Nom = "Qashquai", MarqueId = 4 },
+
                 new Modele { Nom = "Picasso", MarqueId = 5 },
                 new Modele { Nom = "C4", MarqueId = 5 },
+
                 new Modele { Nom = "Ibiza", MarqueId = 6 },
                 new Modele { Nom = "Leon", MarqueId = 6 }
                 );
@@ -691,19 +797,19 @@ namespace TakoLeaf.Models
                 new Competence { Id = 3, ProviderId = 1, SsCateCompetenceId = 2, NomSsCate = "Remplacement demarreur", TarifHoraire = 17 },
                 new Competence { Id = 4, ProviderId = 1, SsCateCompetenceId = 14, NomSsCate = "Remplacement de catalyseur", TarifHoraire = 44 },
 
-                new Competence { Id = 5, ProviderId = 2, SsCateCompetenceId = 1, NomSsCate = "Changer la distribution", TarifHoraire = 42 },
-                new Competence { Id = 6, ProviderId = 2, SsCateCompetenceId = 3, NomSsCate = "Changer la distribution", TarifHoraire = 46 },
-                new Competence { Id = 7, ProviderId = 2, SsCateCompetenceId = 9, NomSsCate = "Changer la distribution", TarifHoraire = 48 },
-                new Competence { Id = 8, ProviderId = 2, SsCateCompetenceId = 6, NomSsCate = "Changer la distribution", TarifHoraire = 31 },
-                new Competence { Id = 9, ProviderId = 2, SsCateCompetenceId = 15, NomSsCate = "Changer la distribution", TarifHoraire = 58 },
-                new Competence { Id = 10, ProviderId = 2, SsCateCompetenceId = 20, NomSsCate = "Changer la distribution", TarifHoraire = 14 },
+                new Competence { Id = 5, ProviderId = 2, SsCateCompetenceId = 1, NomSsCate = "Remplacement alternateur", TarifHoraire = 42 },
+                new Competence { Id = 6, ProviderId = 2, SsCateCompetenceId = 3, NomSsCate = "Remplacement de la batterie", TarifHoraire = 46 },
+                new Competence { Id = 7, ProviderId = 2, SsCateCompetenceId = 9, NomSsCate = "Remplacement du filtre habitaclen", TarifHoraire = 48 },
+                new Competence { Id = 8, ProviderId = 2, SsCateCompetenceId = 6, NomSsCate = "Changer Roue", TarifHoraire = 31 },
+                new Competence { Id = 9, ProviderId = 2, SsCateCompetenceId = 15, NomSsCate = "Remplacement de vanne EGR", TarifHoraire = 58 },
+                new Competence { Id = 10, ProviderId = 2, SsCateCompetenceId = 20, NomSsCate = "Remplacement volant moteur", TarifHoraire = 14 },
 
                 new Competence { Id = 11, ProviderId = 3, SsCateCompetenceId = 2, NomSsCate = "Changer la distribution", TarifHoraire = 19 },
-                new Competence { Id = 12, ProviderId = 3, SsCateCompetenceId = 6, NomSsCate = "Changer la distribution", TarifHoraire = 32 },
-                new Competence { Id = 13, ProviderId = 3, SsCateCompetenceId = 1, NomSsCate = "Changer la distribution", TarifHoraire = 40 },
-                new Competence { Id = 14, ProviderId = 3, SsCateCompetenceId = 14, NomSsCate = "Changer la distribution", TarifHoraire = 31 },
-                new Competence { Id = 15, ProviderId = 3, SsCateCompetenceId = 16, NomSsCate = "Changer la distribution", TarifHoraire = 67 },
-                new Competence { Id = 16, ProviderId = 3, SsCateCompetenceId = 22, NomSsCate = "Changer la distribution", TarifHoraire = 55 }
+                new Competence { Id = 12, ProviderId = 3, SsCateCompetenceId = 6, NomSsCate = "Changer Roue", TarifHoraire = 32 },
+                new Competence { Id = 13, ProviderId = 3, SsCateCompetenceId = 1, NomSsCate = "Remplacement alternateur", TarifHoraire = 40 },
+                new Competence { Id = 14, ProviderId = 3, SsCateCompetenceId = 14, NomSsCate = "Remplacement de catalyseur", TarifHoraire = 31 },
+                new Competence { Id = 15, ProviderId = 3, SsCateCompetenceId = 16, NomSsCate = "Remplacement du filtre a particules", TarifHoraire = 67 },
+                new Competence { Id = 16, ProviderId = 3, SsCateCompetenceId = 22, NomSsCate = "Remplacement des bougies", TarifHoraire = 55 }
 
                 );
 
@@ -791,54 +897,7 @@ namespace TakoLeaf.Models
                   }
                 );
 
-            this.Prestations.AddRange(
-                new Prestation
-                {
-                    DateDebut = new DateTime(2021, 10, 25),
-                    Prix = 100,
-                    ProviderId = 1,
-                    ConsumerId = 1,
-                    VoitureId = 1,
-                    NumeroDevis = "18644537",
-                    EtatPresta = Prestation.Etat.Valide
-
-                },
-
-                 new Prestation
-                 {
-                     DateDebut = new DateTime(2021, 10, 30),
-                     Prix = 300,
-                     ProviderId = 1,
-                     ConsumerId = 1,
-                     VoitureId = 1,
-                     NumeroDevis = "15975364",
-                     EtatPresta = Prestation.Etat.En_cours
-                 },
-
-                 new Prestation
-                 {
-                     DateDebut = new DateTime(2021, 10, 15),
-                     Prix = 150,
-                     ProviderId = 2,
-                     ConsumerId = 3,
-                     VoitureId = 3,
-                     NumeroDevis = "51535957",
-                     EtatPresta = Prestation.Etat.Valide
-                 },
-
-                 new Prestation
-                 {
-                     DateDebut = new DateTime(2021, 10, 29),
-                     Prix = 100,
-                     ProviderId = 2,
-                     ConsumerId = 2,
-                     VoitureId = 4,
-                     NumeroDevis = "84868785",
-                     EtatPresta = Prestation.Etat.En_cours
-                 }
-
-                );
-
+           
             //this.Devis.AddRange(
 
             //    //new Devis
@@ -962,86 +1021,10 @@ namespace TakoLeaf.Models
             );
 
 
-            this.DemandeDevis.AddRange(
-                new DemandeDevis
-                {
-                    Id = 1,
-                    DateDemande = new DateTime(2021, 10, 31),
-                    DateDebutVoulue = new DateTime(2021, 11, 7),
-                    Message = "Bonjour c'est moi",
-                    ConsumerId = 3,
-                    ProviderId = 1,
-                    VoitureId = 3
-                },
-
-                new DemandeDevis
-                {
-                    Id = 2,
-                    DateDemande = new DateTime(2021, 10, 31),
-                    DateDebutVoulue = new DateTime(2021, 11, 19),
-                    Message = "Bonjour c'est moi",
-                    ConsumerId = 3,
-                    ProviderId = 1,
-                    VoitureId = 3
-                }
-
-                );
+            
 
 
-            this.DemandesDevisListeCompetence.AddRange(
-
-                new DemandeDevisListeCompetence
-                {
-                    Id = 1,
-                    CompetenceId = 1,
-                    DemandeDevisId = 1
-
-                },
-
-                new DemandeDevisListeCompetence
-                {
-                     Id = 2,
-                     CompetenceId = 2,
-                     DemandeDevisId = 1
-
-                },
-
-                 new DemandeDevisListeCompetence
-                 {
-                     Id = 3,
-                     CompetenceId = 3,
-                     DemandeDevisId = 2
-
-                 },
-
-                new DemandeDevisListeCompetence
-                {
-                    Id = 4,
-                    CompetenceId =4,
-                    DemandeDevisId = 2
-
-                }
-
-                );
-
-            this.DemandesDevisListeRessource.AddRange(
-                new DemandeDevisListeRessource
-                {
-                    Id = 1,
-                    RessourceId = 4,
-                    DemandeDevisId = 1
-
-                },
-
-                new DemandeDevisListeRessource
-                {
-                    Id = 2,
-                    RessourceId = 4,
-                    DemandeDevisId = 2
-
-                }
-
-                );
+           
 
             this.MessageRecus.AddRange(
                 new MessageRecu
@@ -1079,6 +1062,258 @@ namespace TakoLeaf.Models
                     ExpediteurId = 5,
                     DestinataireId = 2
                 });
+
+
+
+
+            this.DemandeDevis.AddRange(
+                new DemandeDevis
+                {
+                    Id = 1,
+                    DateDemande = new DateTime(2021, 10, 31),
+                    DateDebutVoulue = new DateTime(2021, 11, 7),
+                    Message = "Bonjour je suis la demande 1 Provider 1",
+                    ConsumerId = 3,
+                    ProviderId = 1,
+                    VoitureId = 3
+                },
+
+                 new DemandeDevis
+                 {
+                     Id = 2,
+                     DateDemande = new DateTime(2021, 08, 18),
+                     DateDebutVoulue = new DateTime(2021, 08, 24),
+                     Message = "Bonjour je suis la demande 1 Provider 2",
+                     ConsumerId = 3,
+                     ProviderId = 2,
+                     VoitureId = 9
+                 },
+
+
+                new DemandeDevis
+                {
+                    Id = 3,
+                    DateDemande = new DateTime(2021, 10, 31),
+                    DateDebutVoulue = new DateTime(2021, 11, 19),
+                    Message = "Bonjour je suis la demande 2 Provider 1",
+                    ConsumerId = 1,
+                    ProviderId = 1,
+                    VoitureId = 5
+                }
+
+
+
+                );
+
+            this.DemandesDevisListeCompetence.AddRange(
+
+               new DemandeDevisListeCompetence
+               {
+                   Id = 1,
+                   CompetenceId = 1,
+                   DemandeDevisId = 1
+
+               },
+
+               new DemandeDevisListeCompetence
+               {
+                   Id = 2,
+                   CompetenceId = 4,
+                   DemandeDevisId = 1
+
+               },
+
+                new DemandeDevisListeCompetence
+                {
+                    Id = 3,
+                    CompetenceId = 2,
+                    DemandeDevisId = 1
+
+                },
+
+                new DemandeDevisListeCompetence
+                {
+                    Id = 4,
+                    CompetenceId = 6,
+                    DemandeDevisId = 2
+
+                },
+
+                new DemandeDevisListeCompetence
+                {
+                    Id = 5,
+                    CompetenceId = 5,
+                    DemandeDevisId = 2
+
+                },
+
+               new DemandeDevisListeCompetence
+               {
+                   Id = 6,
+                   CompetenceId = 1,
+                   DemandeDevisId = 3
+
+               }
+
+               );
+
+            this.DemandesDevisListeRessource.AddRange(
+                new DemandeDevisListeRessource
+                {
+                    Id = 1,
+                    RessourceId = 4,
+                    DemandeDevisId = 1
+
+                },
+
+                new DemandeDevisListeRessource
+                {
+                    Id = 2,
+                    RessourceId = 4,
+                    DemandeDevisId = 2
+
+                }
+
+                );
+
+
+            this.Prestations.AddRange(
+               new Prestation
+               {
+                   Id=1,
+                   DateDebut = new DateTime(2020, 07, 25),
+                   Prix = 100,
+                   ProviderId = 1,
+                   ConsumerId = 3,
+                   VoitureId = 5,
+                   NumeroDevis = "18644537",
+                   EtatPresta = Prestation.Etat.Valide
+
+               },
+
+                new Prestation
+                {
+                    Id=2,
+                    DateDebut = new DateTime(2021, 10, 30),
+                    Prix = 300,
+                    ProviderId = 1,
+                    ConsumerId = 3,
+                    VoitureId = 9,
+                    NumeroDevis = "15975364",
+                    EtatPresta = Prestation.Etat.Valide
+                },
+
+                new Prestation
+                {
+                    Id=3,
+                    DateDebut = new DateTime(2021, 10, 15),
+                    Prix = 150,
+                    ProviderId = 2,
+                    ConsumerId = 3,
+                    VoitureId = 3,
+                    NumeroDevis = "51535957",
+                    EtatPresta = Prestation.Etat.Valide
+                },
+
+                new Prestation
+                {
+                    Id=4,
+                    DateDebut = new DateTime(2021, 10, 29),
+                    Prix = 100,
+                    ProviderId = 2,
+                    ConsumerId = 2,
+                    VoitureId = 4,
+                    NumeroDevis = "84868785",
+                    EtatPresta = Prestation.Etat.En_cours
+                }
+
+               );
+
+            this.HistoriquePrestas.AddRange(
+                new HistoriquePresta
+                {
+                    Id = 1,
+                    HistoriqueId = 6,
+                    PrestationId = 1
+                },
+
+                new HistoriquePresta
+                {
+                    Id = 2,
+                    HistoriqueId = 6,
+                    PrestationId = 2
+                },
+                new HistoriquePresta
+                {
+                    Id = 3,
+                    HistoriqueId = 6,
+                    PrestationId = 3
+                },
+
+                 new HistoriquePresta
+                 {
+                     Id = 4,
+                     HistoriqueId = 1,
+                     PrestationId = 1
+                 },
+
+                new HistoriquePresta
+                {
+                    Id = 5,
+                    HistoriqueId = 1,
+                    PrestationId = 2
+                },
+                new HistoriquePresta
+                {
+                    Id = 6,
+                    HistoriqueId = 5,
+                    PrestationId = 3
+                }
+                );
+
+            this.Avis.AddRange(
+
+
+                new Avis
+                {
+                    Id = 1,
+                    ConsumerId = 3,
+                    PrestationId = 1,
+                    ProviderId = 1,
+                    DateCreation = new DateTime(2020, 07, 28),
+                    Note = 4,
+                    Contenu = "Très bon boulot et personne très agréable"
+
+                },
+
+                new Avis
+                {
+                    Id = 2,
+                    ConsumerId = 3,
+                    PrestationId = 2,
+                    ProviderId = 1,
+                    DateCreation = new DateTime(2020, 11, 01),
+                    Note = 5,
+                    Contenu = "De nouveau du très bon boulot et tres efficace"
+
+                },
+
+                new Avis
+                {
+                    Id = 3,
+                    ConsumerId = 3,
+                    PrestationId = 3,
+                    ProviderId = 2,
+                    DateCreation = new DateTime(2020, 10, 17),
+                    Note = 3,
+                    Contenu = "Bon boulot et mais pas très agréable"
+
+                }
+
+                );
+
+
+            
 
             this.SaveChanges();
         }

@@ -30,14 +30,27 @@
 
         <div class="menu">
             <ul>
-                <li>@Html.ActionLink("Actus", "Actualites", "Home", new { @class = "actionlink" })</li>
-                <li>@Html.ActionLink("Inscription", "Inscription", "Login", new { @class = "actionlink" })</li>
-                <li>@Html.ActionLink("Connexion", "Connexion", "Login", new { @class = "actionlink" })</li>
-                <li class="actionlink"><a href="#">FAQ</a></li>
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li><a href="@Url.Action("Actualites", "Home")">Fil d'actu</a></li>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li><a href="@Url.Action("Inscription", "Login")">Inscription</a></li>
+                    <li><a href="@Url.Action("Connexion", "Login")">Connexion</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("VoirProfil", "ProfilUser")">Profil</a></li>
+                    <li><a href="@Url.Action("MessagesRecus", "Messagerie")">Messagerie</a></li>
+                    <li><a href="@Url.Action("Sujets", "Forum")">Forum</a></li>
+                    <li><a href="@Url.Action("Deconnexion", "Login")">Deconnexion</a></li>
+                }
+
                 @if (User.IsInRole("Admin"))
                 {
-                    <li>@Html.ActionLink("Espace Admin", "GestionComptes", "Admin", new { @class = "actionlink" })</li>
+                    <a href="/Admin/GestionComptes">Espace Admin</a>
                 }
+                <li><a href="@Url.Action("Recherche", "Recherche")">Recherche</a></li>
+                <li><a href="#">FAQ</a></li>
             </ul>
         </div>
 

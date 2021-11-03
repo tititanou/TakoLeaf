@@ -194,7 +194,7 @@
 
 <div class="profile_provider">
     <div class="tarif">
-        <p>@Model.Provider.Note</p>
+        <p>Note : @Model.Provider.Note / 5</p>
     </div>
 
   
@@ -219,6 +219,22 @@
     <p class="Prenom-Provider">@Model.Adherent.Prenom</p>
 </div>
 
+<div class="container_Avis">
+
+    @if (Model.Avis.Count == 0)
+    {
+        <p>Pas d'avis laissé</p>
+    }
+    else
+    {
+        @for (int i = 0; i < Model.Avis.Count; i++)
+        {
+            <p>Avis laissé par  @Model.Avis[i].Consumer.Adherent.Nom @Model.Avis[i].Consumer.Adherent.Prenom le @Model.Avis[i].DateCreation.ToShortDateString() : @Model.Avis[i].Contenu</p>
+
+        }
+    }
+
+</div>
 
 <div class="img-localisation">
     <img src="IMG/Localisation/Drawing Pin Filled.png" alt="">
@@ -252,7 +268,9 @@
     }
 </div>
 
+<div class="map">
 
+</div>
 
 <div class="container_Presentation">
     <p>@Model.CompteUser.Description</p>

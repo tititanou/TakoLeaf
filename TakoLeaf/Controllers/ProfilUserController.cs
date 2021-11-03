@@ -72,8 +72,9 @@ namespace TakoLeaf.Controllers
             Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.AdherentId == id);
             List<Competence> competence = dal.ObtenirCompetences().Where(c => c.ProviderId == provider.Id).ToList();
             List<Ressource> ressources = dal.ObtenirRessources().Where(r => r.ProviderId == provider.Id).ToList();
+            List<Avis> avis = dal.ObtenirAvis().Where(a => a.ProviderId == provider.Id).ToList();
 
-            ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, Competence = competence, Provider = provider, Ressources = ressources };
+            ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, Competence = competence, Provider = provider, Ressources = ressources, Avis = avis };
 
             return View(pvm);
         }    
