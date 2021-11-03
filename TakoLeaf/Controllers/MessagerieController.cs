@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TakoLeaf.Data;
 using TakoLeaf.Models;
+using TakoLeaf.ViewModels;
 
 namespace TakoLeaf.Controllers
 {
@@ -26,15 +27,21 @@ namespace TakoLeaf.Controllers
         public ActionResult MessagesEnvoyes()
         {
             userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            List<Message> messages = this.dalMessagerie.GetMessageEnvoyes(userId).ToList();
-            return View(messages);
+            MessagerieViewModel mvm = new MessagerieViewModel()
+            {
+                MessagesList = this.dalMessagerie.GetMessageEnvoyes(userId).ToList()
+            };
+            return View(mvm);
         }
 
         public ActionResult MessagesRecus()
         {
             userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            List<Message> messages = this.dalMessagerie.GetMessageRecus(userId).ToList();
-            return View(messages);
+            MessagerieViewModel mvm = new MessagerieViewModel()
+            {
+                MessagesList = this.dalMessagerie.GetMessageRecus(userId).ToList()
+            };
+            return View(mvm);
         }
 
         [HttpPost]
@@ -104,8 +111,11 @@ namespace TakoLeaf.Controllers
 
         public ActionResult Message(int id)
         {
-            Message message = this.dalMessagerie.GetMessage(id);
-            return View(message);
+            MessagerieViewModel mvm = new MessagerieViewModel()
+            {
+                Message = this.dalMessagerie.GetMessage(id)
+            };
+            return View(mvm);
         }
 
         public ActionResult NouveauMessage()
@@ -119,22 +129,30 @@ namespace TakoLeaf.Controllers
         public ActionResult NouveauMessage(int Destinataire, string Objet, string Message)
         {
             userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            Message message = new Message
+            MessagerieViewModel mvm = new MessagerieViewModel()
             {
-                AdherentExpId = userId,
-                Date = DateTime.Now,
-                Lu = false,
-                AdherentDestId = Destinataire,
-                Titre = Objet,
-                Msg = Message
-            };
+                Message = new Message
+                {
+                    AdherentExpId = userId,
+                    Date = DateTime.Now,
+                    Lu = false,
+                    AdherentDestId = Destinataire,
+                    Titre = Objet,
+                    Msg = Message
+                }
+        };
             
-            if (ModelState.IsValid)
+            
+            if (this.dalMessagerie.CreationMessage(mvm.Message))
             {
-                this.dalMessagerie.CreationMessage(message);
                 return RedirectToAction("MessagesRecus");
             }
-            return View(message);
+            else
+            {
+                return View(mvm);
+            }
+                
+          
         }
     }
 }

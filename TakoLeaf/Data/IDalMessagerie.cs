@@ -6,7 +6,7 @@ namespace TakoLeaf.Data
 {
     public interface IDalMessagerie : IDisposable
     {
-        public void CreationMessage(Message message);
+        public bool CreationMessage(Message message);
 
         public List<Message> GetMessageRecus(int id);
 

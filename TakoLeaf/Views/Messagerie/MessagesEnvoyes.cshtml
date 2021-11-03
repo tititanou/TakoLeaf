@@ -1,6 +1,6 @@
-@model List<TakoLeaf.Models.Message>
+@model TakoLeaf.ViewModels.MessagerieViewModel
 @{
-    Layout = null;
+    Layout = "_Layout";
 
 }
 
@@ -12,29 +12,40 @@
     <meta name="viewport" content="width=device-width" />
     <title>MessagesEnvoyes</title>
 </head>
-    <body>
-        <h3>Messages Envoyés</h3>
-        @using (@Html.BeginForm("SupprimerMessages","Messagerie"))
-         {
-            <table>
-                 <thead>
-                    <th>@Html.CheckBox("IsChecked", new { id = "all" })</th>
-                    <th><label for="del"><i class="far fa-trash-alt"></i></label><input type="submit" aria-hidden="true" style="display:none" id="del" /></th>
-                </thead>
-                <tbody>
-                    @foreach (var message in Model)
-                     {
-                        <tr>
-                            @{ string goTo = "/Messagerie/Message?id=" + message.Id; }
-                            <td><input class="messCB" id="IsChecked" name="MessageList" type="checkbox" value="@message.Id"></td>
-                            <td><a href=@goTo style="text-decoration: none;color: black;">@message.AdherentDest.Prenom @message.AdherentDest.Nom</a></td>
-                            <td><a href=@goTo style="text-decoration: none; color: black;">@message.Titre</a></td>
-                        </tr>
-                     }
-                </tbody>
-            </table>
-         }
-        <script src="~/jquery-3.6.0.js"></script>
-        <script src="~/js/Messagerie-script.js"> </script>
-    </body>
+<body>
+    <div class="container">
+        <div class="card mx-auto" style="width:80%">
+            <div class="card-header  text-center">
+                    <h3>Messages Envoyés</h3>
+            </div>
+            <div class="card-body">
+                @using (@Html.BeginForm("SupprimerMessages", "Messagerie"))
+                 {
+                    <table class="table">
+                        <thead>
+                            <th>@Html.CheckBox("IsChecked", new { id = "all" })</th>
+                            <th><label for="del"><i class="far fa-trash-alt"></i></label><input type="submit" aria-hidden="true" style="display:none" id="del" /></th>
+                        </thead>
+                        <tbody>
+                            @foreach (var message in Model.MessagesList)
+                             {
+                                <tr>
+                                    @{ string goTo = "/Messagerie/Message?id=" + message.Id; }
+                                    <td><input class="messCB" id="IsChecked" name="MessageList" type="checkbox" value="@message.Id"></td>
+                                    <td><a href=@goTo style="text-decoration: none;color: black;">@message.AdherentDest.Prenom @message.AdherentDest.Nom</a></td>
+                                    <td><a href=@goTo style="text-decoration: none; color: black;">@message.Titre</a></td>
+                                </tr>
+                             }
+                        </tbody>
+                    </table>
+                 }
+            </div>
+            <div class="card-footer text-center">
+                 <div style="display:inline"><button type="button" onclick="window.location.href = '@Url.Action("MessagesRecus", "Messagerie")'" class="btn btn-outline-info">Messages Reçus</button><button type="button" onclick="window.location.href = '@Url.Action("NouveauMessage", "Messagerie")'" class="btn btn-outline-info">NouveauMessage</button></div>
+            </div>
+        </div>
+    </div>
+    <script src="~/jquery-3.6.0.js"></script>
+    <script src="~/js/Messagerie-script.js"></script>
+</body>
 </html>
