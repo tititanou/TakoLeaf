@@ -4,56 +4,75 @@
     ViewBag.Title = "Modifier Carte";
 }
 
+<link rel="stylesheet" href="~/CSS/Zoutils.css" />
 
-    <h1 class="text-center"> Indiquer les informations des cartes à modifier </h1>
-    @using (Html.BeginForm())
-    {
+<h1 class="text-center"> Indiquer les informations des cartes à modifier </h1>
+@using (Html.BeginForm())
+{
 
-<div class="container">
-    <table>
+    <div class="container">
+        <div class="row">
+            <table>
 
-        <tr>
-            <th>Titulaire</th>
-            <th>Numero de Carte</th>
-            <th>Date Expiration</th>
-            <th>Cryptogramme</th>
-            <th>Action</th>
-        </tr>
-
-
-        @for (int i = 0; i < Model.Cartes.Count; i++)
-        {
-
-            <tr>
-                <td>@Html.TextBoxFor(model => model.Cartes[i].Titulaire, new { @class = "form-control" })</td>
-                <td>@Html.TextBoxFor(model => model.Cartes[i].NumeroCarte, new { @class = "form-control" })</td>
-                <td>@Html.TextBoxFor(model => model.Cartes[i].ExpirDate, new { @class = "form-control" })</td>
-                <td>@Html.TextBoxFor(model => model.Cartes[i].Crypto, new { @class = "form-control" })</td>
-                <td><button>@Html.ActionLink("Supprimer la carte", "SupprimerCarte", "ProfilUser", new { id = Model.Cartes[i].Id })</button></td>
-            </tr>
-
-
-            @Html.HiddenFor(m => m.Consumer.Id)
-            @Html.HiddenFor(m => m.Cartes[i].Id)
-        }
+                <tr>
+                    <th>Titulaire</th>
+                    <th>Numero de Carte</th>
+                    <th>Date Expiration</th>
+                    <th>Cryptogramme</th>
+                    <th>Action</th>
+                </tr>
 
 
 
-    </table>
-</div>
-        
-        <br />
-        <button>@Html.ActionLink("Ajouter une carte", "AjouterCarte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+                @for (int i = 0; i < Model.Cartes.Count; i++)
+                {
 
-        <br />
-        <button class="btn btn-primary btn-xl" type="submit">Modifier Cartes</button>
+                    <tr>
+                        <td>@Html.TextBoxFor(model => model.Cartes[i].Titulaire, new { @class = "textbox" })</td>
+                        <td>@Html.TextBoxFor(model => model.Cartes[i].NumeroCarte, new { @class = "textbox" })</td>
+                        <td>@Html.TextBoxFor(model => model.Cartes[i].ExpirDate, new { @class = "textbox" })</td>
+                        <td>@Html.TextBoxFor(model => model.Cartes[i].Crypto, new { @class = "textbox" })</td>
+                        <td><button>@Html.ActionLink("Supprimer la carte", "SupprimerCarte", "ProfilUser", new { @class = "valider", id = Model.Cartes[i].Id })</button></td>
+                    </tr>
 
-        <br />
-        <button>@Html.ActionLink("Retour au modification de compte", "ModifCompte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+
+                    @Html.HiddenFor(m => m.Consumer.Id)
+                    @Html.HiddenFor(m => m.Cartes[i].Id)
+                }
+
+            </table>
+        </div>
+    </div>
 
 
 
 
-    }
+
+    <div class="raw">
+        <button class="valider">@Html.ActionLink("Ajouter une carte", "AjouterCarte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+    </div>
+
+
+    <br />
+    <div class="row">
+        <button class="valider" type="submit">Modifier Cartes</button>
+    </div>
+    
+    <br />
+
+    <div class="row">
+        <button class="valider">@Html.ActionLink("Retour au modification de compte", "ModifCompte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+    </div>
+    <br />
+    
+
+
+    <br />
+
+
+
+
+
+}
 
 

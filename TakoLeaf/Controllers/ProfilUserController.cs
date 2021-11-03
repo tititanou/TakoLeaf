@@ -539,6 +539,41 @@ namespace TakoLeaf.Controllers
 
         // HISTORIQUE
 
+        public IActionResult Modif(int id)
+        {
+            Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == id);
+            List<Carte> cartes = dal.ObtenirCartes().Where(c => c.ConsumerId == consumer.Id).ToList();
+            List<Voiture> voitures = dal.ObtenirVoiture().Where(v => v.ConsumerId == consumer.Id).OrderBy(v => v.Id).ToList();
+            // Liste de carburants
+            List<Carburant> carburants = new List<Carburant>();
+            foreach (Carburant item in Enum.GetValues(typeof(Carburant)))
+            {
+                carburants.Add(item);
+            }
+            ViewBag.SelectList = new SelectList(carburants);
+
+            // Liste de modeles
+            List<string> modeles = new List<string>();
+            foreach (Modele item in dal.ObtenirModeles().ToList().OrderBy(p => p.Nom))
+            {
+
+                modeles.Add(item.Nom);
+            }
+            ViewBag.Modele = new SelectList(modeles);
+
+            // Liste de marques
+            List<string> marques = new List<string>();
+            foreach (Marque item in dal.ObtenirMarques().ToList().OrderBy(p => p.Nom))
+            {
+                marques.Add(item.Nom);
+            }
+            ViewBag.Marques = new SelectList(marques);
+
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Consumer = consumer,Adherent = adherent, Cartes = cartes, Voitures = voitures };
+
+            return View(uvm);
+        }
        
     }   
 }

@@ -1,0 +1,194 @@
+@model TakoLeaf.ViewModels.UtilisateurViewModel
+@{
+    Layout = "_LayoutConnecte";
+    ViewBag.Title = "Modifier Carte";
+}
+
+<link rel="stylesheet" href="~/CSS/Zoutils.css" />
+
+<section>
+    <div class="row">
+        <div class="col-6">
+            <div class="conteneur">
+                @using (Html.BeginForm())
+                {
+
+                   
+                        @Html.TextBoxFor(model => model.Adherent.Prenom, new { @class = "textbox" })
+
+                        @Html.ValidationMessageFor(model => model.Adherent.Prenom)
+                    
+
+                   
+                        @Html.TextBoxFor(model => model.Adherent.Nom, new { @class = "textbox" })
+
+                        @Html.ValidationMessageFor(model => model.Adherent.Nom)
+               
+                    
+                        @Html.TextBoxFor(model => model.Adherent.Date_naissance, new { @type = "date", @class = "textbox" })
+
+                        @Html.ValidationMessageFor(model => model.Adherent.Date_naissance)
+                  
+
+                
+                        @Html.TextBoxFor(model => model.Adherent.Adresse.Rue, new { @class = "textbox" })
+
+                        @Html.ValidationMessageFor(model => model.Adherent.Adresse.Rue)
+                 
+
+                   
+                        @Html.TextBoxFor(model => model.Adherent.Adresse.CodePostal, new { @class = "textbox" })
+
+                        @Html.ValidationMessageFor(model => model.Adherent.Adresse.CodePostal)
+              
+
+              
+                        @Html.TextBoxFor(model => model.Adherent.Adresse.Ville, new { @class = "textbox" })
+
+                        @Html.ValidationMessageFor(model => model.Adresse.Ville)
+                  
+
+                  
+                        @Html.TextBoxFor(model => model.Adherent.Telephone, new { @type = "tel", @class = "textbox" })
+
+                        @Html.ValidationMessageFor(model => model.Adherent.Telephone)
+               
+
+                    @Html.HiddenFor(model => model.Adherent.Adresse.Id)
+                    @Html.HiddenFor(model => model.Adherent.AdresseId)
+                    <!-- Submit Button-->
+
+                    <button class="valider" type="submit">Modifier</button>
+                }
+            </div>
+        </div>
+
+        <div class="col-6">
+            <h1 class="text-center"> Indiquer les informations des cartes à modifier </h1>
+            <div class="conteneur">
+
+                @using (Html.BeginForm("ModifierCarte"))
+                {
+
+                <div class="container">
+                    <div class="row">
+                        <table>
+
+                            <tr>
+                                <th>Titulaire</th>
+                                <th>Numero de Carte</th>
+                                <th>Date Expiration</th>
+                                <th>Cryptogramme</th>
+                                <th>Action</th>
+                            </tr>
+
+
+
+                            @for (int i = 0; i < Model.Cartes.Count; i++)
+                            {
+
+                            <tr>
+                                <td>@Html.TextBoxFor(model => model.Cartes[i].Titulaire, new { @class = "textbox" })</td>
+                                <td>@Html.TextBoxFor(model => model.Cartes[i].NumeroCarte, new { @class = "textbox" })</td>
+                                <td>@Html.TextBoxFor(model => model.Cartes[i].ExpirDate, new { @class = "textbox" })</td>
+                                <td>@Html.TextBoxFor(model => model.Cartes[i].Crypto, new { @class = "textbox" })</td>
+                                <td><button>@Html.ActionLink("Supprimer la carte", "SupprimerCarte", "ProfilUser", new { @class = "valider",id = Model.Cartes[i].Id })</button></td>
+                            </tr>
+
+
+                            @Html.HiddenFor(m => m.Consumer.Id)
+                            @Html.HiddenFor(m => m.Cartes[i].Id)
+                            }
+
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="raw">
+                    <button class="valider">@Html.ActionLink("Ajouter une carte", "AjouterCarte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+                </div>
+
+
+                <br />
+                <div class="row">
+                    <button class="valider" type="submit">Modifier Cartes</button>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <button class="valider">@Html.ActionLink("Retour au modification de compte", "ModifCompte", "ProfilUser", new { id = Model.Consumer.AdherentId })</button>
+                </div>
+                <br />
+
+                }
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            @using (Html.BeginForm("ModifVoiture"))
+            {
+                @for (int i = 0; i < Model.Voitures.Count; i++)
+                {
+                    <div class="col">
+                        <h2>Voiture n°@(i + 1)</h2>
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.Voitures[i].Immatriculation, new { @readonly = "readonly", @class = "form-control", placeholder = "Plaque Immatriculation" })
+                            @Html.LabelFor(model => model.Voitures[i].Immatriculation)
+                            @Html.ValidationMessageFor(model => model.Voitures[i].Immatriculation)
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.Voitures[i].Titulaire, new { @class = "form-control", placeholder = "Titulaire" })
+                            @Html.LabelFor(model => model.Voitures[i].Titulaire)
+                            @Html.ValidationMessageFor(model => model.Voitures[i].Titulaire)
+                        </div>
+
+                        <div>
+                            @Html.DropDownListFor(model => model.Voitures[i].Carburant, (SelectList)ViewBag.SelectList)
+                            @Html.LabelFor(model => model.Voitures[i].Carburant)
+                        </div>
+
+                        <div>
+                            @Html.TextBoxFor(model => model.Voitures[i].Annee, new { @class = "form-control", placeholder = "Annee" })
+                            @Html.LabelFor(model => model.Voitures[i].Annee)
+                            @Html.ValidationMessageFor(model => model.Voitures[i].Annee)
+                        </div>
+
+                        <div>
+                            @Html.DropDownListFor(model => model.Marques[i], (SelectList)ViewBag.Marques)
+                            @Html.LabelFor(model => model.Marque.Nom)
+                        </div>
+
+                        <div>
+                            @Html.DropDownListFor(model => model.Modeles[i], (SelectList)ViewBag.Modele)
+                            @Html.LabelFor(model => model.Modele.Nom)
+                        </div>
+
+                        @Html.HiddenFor(v => v.Voitures[i].Id)
+                        <button>@Html.ActionLink("Supprimer la voiture", "SuppressionVoiture", "ProfilUser", new { id = Model.Voitures[i].Id })</button>
+                        <br />
+                        <br />
+
+                        <button class="valider" type="submit">Modifier véhicules</button>
+                    </div>
+
+                    @Html.HiddenFor(m => m.Consumer.Id)
+
+
+
+                }
+            }
+        </div>
+    </div>
+
+
+</section>
