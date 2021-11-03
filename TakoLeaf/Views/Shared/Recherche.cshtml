@@ -5,61 +5,64 @@
 <head>
     <script src="https://kit.fontawesome.com/1ca99e9622.js" crossorigin="anonymous"></script>
 </head>
-<div style="display:inline-block">
+<div style="display:block">
  @using (Html.BeginForm())
     {
-    <div style="display:inline-block">
-        @Html.DropDownList("Choix", (SelectList)ViewBag.Choix, "Que recherchez-vous?", new { id = "Choix", onchange = "choix()", @style = "display:inline-block;" })
+    <div style="display:block">
+        @Html.DropDownList("Choix", Model.Choix, "Que recherchez-vous?", new { id = "Choix", onchange = "choix()", @style = "display:block;", @class = "form-control" })
     </div>
     <div id="adresses" style="display:none">
         @Html.DropDownList("Adresse", Model.CodePostauxList, "Choisir Lieu", new { @class = "form-control" })
     </div>
     <div id="utilisateur" style="display:none">
-        <input list="prenoms" name="Prenom" />
-        <datalist id="prenoms">
-            @foreach (var prenom in @ViewBag.Prenoms)
-            {
-                <option value=@prenom></option>
-            }
-        </datalist>
-        <input list="noms" name="Nom" />
-        <datalist id="noms">
-            @foreach (var nom in @ViewBag.Noms)
-            {
-                <option value=@nom></option>
-            }
-        </datalist>
+        <div>
+            <input list="prenoms" name="Prenom" class="form-control" placeholder="Prénom" />
+            <datalist id="prenoms">
+                    @foreach (var prenom in Model.Prenoms)
+                    {
+            <option value=@prenom></option>
+}
+                </datalist>
+        </div>
+        <div>
+            <input list="noms" name="Nom" class="form-control" placeholder="Nom" />
+            <datalist id="noms">
+                @foreach (var nom in Model.Noms)
+                {
+                    <option value=@nom></option>}
+            </datalist>
+        </div>
     </div>
     <div id="service" style="display:none">
         @Html.DropDownList("Competence", Model.SsCateList, "Choisir Competence", new { @class = "form-control"})
     </div>
     <div id="ressource" style="display:none">
-        @Html.DropDownList("Ressource",(SelectList)ViewBag.Ressources, "Choisir Ressource", new { @class = "form-control", onchange = "ress()" })
+        @Html.DropDownList("Ressource",Model.Ressources, "Choisir Ressource", new { @class = "form-control", onchange = "ress()" })
         <div id="inp" style="display:none">
-            @Html.TextBox("Input")
+            @Html.TextBox("Input", "Que recherchez-vous précisement?", new { @class = "form-control" })
         </div>
     </div>
-        <button type="submit"><i class="fas fa-search"></i></button>
+        <button type="submit" class="Valider"><i class="fas fa-search"></i></button>
     }
 </div>
 <script>function choix() {
-        document.getElementById("adresses").style.display = "inline-block";
+        document.getElementById("adresses").style.display = "block";
         var choix1 = document.getElementById("Choix").value;
         switch (choix1) {
             case "Un utilisateur":
-                document.getElementById("utilisateur").style.display = "inline-block";
+                document.getElementById("utilisateur").style.display = "block";
                 document.getElementById("service").style.display = "none";
                 document.getElementById("ressource").style.display = "none";
                 break;
 
             case "Un service":
-                document.getElementById("service").style.display = "inline-block";
+                document.getElementById("service").style.display = "block";
                 document.getElementById("utilisateur").style.display = "none";
                 document.getElementById("ressource").style.display = "none";
                 break;
 
             case "Une ressource":
-                document.getElementById("ressource").style.display = "inline-block";
+                document.getElementById("ressource").style.display = "block";
                 document.getElementById("utilisateur").style.display = "none";
                 document.getElementById("service").style.display = "none";
                 break;
