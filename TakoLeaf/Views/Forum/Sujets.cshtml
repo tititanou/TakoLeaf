@@ -11,14 +11,24 @@
     <title>Sujets</title>
 </head>
 <body>
-    <h3> Tous les sujets</h3>
-    @foreach(var item in Model)
-            {
-                <h6>@item.Titre</h6>
-                <em>@item.Date</em>
-                @Html.ActionLink(item.Titre, "Sujet", "Forum", new { id = item.Id })
-                <hr />
-            }
-<button onclick="location.href='@Url.Action("NouveauSujet", "Forum")'">Nouveau sujet</button>
+    <div class="container">
+        <div class="card mx-auto" style="width:80%">
+            <div class="card-header  text-center">
+                <h3> Tous les sujets</h3>
+            </div>
+            <div class="card-body">
+                @foreach (var item in Model)
+                 {
+                    <h6>@item.Titre</h6>
+                    <em>@item.Date</em>
+                    <button class="btn btn-outline-primary float-end mt-0" onclick="location.href='@Url.Action("Sujet", "Forum", new { id = item.Id })'">Voir le sujet</button>
+                    <hr />
+                 }
+            </div>
+            <div class="card-footer text-center">
+                <button class="btn btn-outline-info" onclick="location.href='@Url.Action("NouveauSujet", "Forum")'">Nouveau sujet</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

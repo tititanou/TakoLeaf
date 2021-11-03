@@ -29,5 +29,10 @@ namespace TakoLeaf.Controllers
             }
             
         }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
     }
 }
