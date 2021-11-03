@@ -130,10 +130,10 @@ namespace TakoLeaf.Models
                 new Adresse
                 {
                     Id = 6,
-                    Rue = "5 Chemin Susanne Joseph",
-                    CodePostal = 13177,
-                    Departement = 13,
-                    Ville = "Leroux"
+                    Rue = "15 Rue Pierre Nobel",
+                    CodePostal = 45700,
+                    Departement = 45,
+                    Ville = "Villmandeur"
 
                 },
 

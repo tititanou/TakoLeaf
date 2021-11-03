@@ -1,6 +1,6 @@
 ﻿@model TakoLeaf.ViewModels.ProviderViewModel
 @{
-    Layout = "_LayoutProfil";
+    Layout = "_LayoutProfilProvider";
     ViewBag.Title = "Profil";
 }
 
@@ -98,39 +98,131 @@
 
 
 
-<div class="container_Location">
-    @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville
-</div>
-
-<div class="container_Competences">
-    <table border="1">
-        <tr>
-            <th>Competence</th>
-            <th>Tarif Horaire</th>
-        </tr>
-
-        @for (int i = 0; i < Model.Competence.Count; i++)
-        {
-            <tr>
-                <td>@Model.Competence[i].NomSsCate</td>
-                <td>@Model.Competence[i].TarifHoraire</td>
-            </tr>
-        }
-    </table>
-</div>
-
-<div class="container_Presentation">
-    @Model.CompteUser.Description
-</div>
-
-<div class="container_RS">
-
-    <div class="icones_RS">
-        <a href="#"><img src="IMG/RS PROFILE/entypo-social_facebook-with-circle.png" alt=""></a>
-        <a href="#"><img src="IMG/RS PROFILE/entypo-social_instagram-with-circle.png" alt=""></a>
-        <a href="#"><img src="IMG/RS PROFILE/entypo-social_twitter-with-circle.png" alt=""> </a>
-
+@*<div class="container_Location">
+        @Model.Adherent.Adresse.Rue , @Model.Adherent.Adresse.CodePostal , @Model.Adherent.Adresse.Ville
     </div>
+
+    <div class="container_Competences">
+        <table border="1">
+            <tr>
+                <th>Competence</th>
+                <th>Tarif Horaire</th>
+            </tr>
+
+            @for (int i = 0; i < Model.Competence.Count; i++)
+            {
+                <tr>
+                    <td>@Model.Competence[i].NomSsCate</td>
+                    <td>@Model.Competence[i].TarifHoraire</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div class="container_Presentation">
+        @Model.CompteUser.Description
+    </div>
+
+    <div class="container_RS">
+
+        <div class="icones_RS">
+            <a href="#"><img src="IMG/RS PROFILE/entypo-social_facebook-with-circle.png" alt=""></a>
+            <a href="#"><img src="IMG/RS PROFILE/entypo-social_instagram-with-circle.png" alt=""></a>
+            <a href="#"><img src="IMG/RS PROFILE/entypo-social_twitter-with-circle.png" alt=""> </a>
+
+        </div>
+    </div>
+
+    <div class="niveau">
+        @if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_AMATEUR)
+        {
+            <img src="~/IMG/RANG/PoulpeAmateur.png" title="Poulpe Amateur" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.POULPE_BRICOLEUR)
+        {
+            <img src="~/IMG/RANG/PoulpeBricoleur.png" title="Poulpe Bricoleur" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_HABILE)
+        {
+            <img src="~/IMG/RANG/PieuvreHabile.png" title="Pieuvre Habile" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.PIEUVRE_RAFISTOLEUR)
+        {
+            <img src="~/IMG/RANG/PievureRafistoleur.png" title="Pieuvre Rafistoleur" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.CALAMAR_RAVALEUR)
+        {
+            <img src="~/IMG/RANG/CalamarRavaleur.png" title="Calamar Ravaleur" />
+        }
+        else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.MAITRE_KRAKEN)
+        {
+            <img src="~/IMG/RANG/MaitreKraken.png" title="Maitre Krakenr" />
+        }
+    </div>
+
+    <div class="profile_provider">
+        <div class="tarif">
+            <p>Tarif</p>
+        </div>
+        <div class="follow">
+            <button></button>
+
+        </div>
+        <div class="contacter">
+            <div class="elements">
+                <p>Contacter</p>
+                <a href="#"> <img src="IMG/Localisation/Envelope Open.png" alt="">  </a>
+            </div>
+        </div>
+        <p class="Nom-Provider">Nom</p>
+        <p class="Prenom-Provider">Prenom</p>
+    </div>
+
+    <div class="img-localisation">
+        <img src="IMG/Localisation/Drawing Pin Filled.png" alt="">
+        <p>Localisé(e) à <br />@Model.Adherent.Adresse.Rue <br />@Model.Adherent.Adresse.CodePostal @Model.Adherent.Adresse.Ville</p>
+    </div>
+
+    <div class="pp_Provider">
+        <div class="pp_providerImage">
+
+            <img src="/IMG/AVATAR ADMIN/AVATAR-ADMIN.png" />
+        </div>
+        <img src="IMG/Localisation/bi_check-circle-fill.png" class="Checked" alt="">
+        <img src="IMG/Localisation/Notes.png" alt="" class="notes">
+    </div>*@
+
+<div class="profile_provider">
+    <div class="tarif">
+        <p>@Model.Provider.Note</p>
+    </div>
+
+  
+    <div class="pp_Provider">
+        <div class="pp_providerImage">
+            @{ string image = Model.CompteUser.Avatar;}
+            <img src=@image alt="">
+        </div>
+        <img src="IMG/Localisation/bi_check-circle-fill.png" class="Checked" alt="">
+    </div>
+
+
+    <div class="contacter">
+        <div class="elements">
+            <p>Contacter</p>
+            <a href="#"> <img src="~/IMG/Localisation/Envelope Open.png" alt="">  </a>
+        </div>
+    </div>
+
+
+    <p class="Nom-Provider">@Model.Adherent.Nom</p>
+    <p class="Prenom-Provider">@Model.Adherent.Prenom</p>
+</div>
+
+
+<div class="img-localisation">
+    <img src="IMG/Localisation/Drawing Pin Filled.png" alt="">
+    <p>Localisé(e) à <br />@Model.Adherent.Adresse.Rue <br />@Model.Adherent.Adresse.CodePostal @Model.Adherent.Adresse.Ville</p>
 </div>
 
 <div class="niveau">
@@ -156,38 +248,86 @@
     }
     else if (@Model.Provider.Rang == TakoLeaf.Models.Rang.MAITRE_KRAKEN)
     {
-        <img src="~/IMG/RANG/MaitreKraken.png" title="Maitre Krakenr" />
+        <img src="~/IMG/RANG/MaitreKraken.png" title="Maitre Kraken" />
     }
 </div>
 
-<div class="profile_provider">
-    <div class="tarif">
-        <p>Tarif</p>
-    </div>
-    <div class="follow"> 
-        <button></button>
 
-    </div>
-    <div class="contacter">
-        <div class="elements">
-            <p>Contacter</p>
-            <a href="#"> <img src="IMG/Localisation/Envelope Open.png" alt="">  </a>
-        </div>
-    </div>
-    <p class="Nom-Provider">Nom</p>
-    <p class="Prenom-Provider">Prenom</p>
+
+<div class="container_Presentation">
+    <p>@Model.CompteUser.Description</p>
 </div>
 
-<div class="img-localisation">
-    <img src="IMG/Localisation/Drawing Pin Filled.png" alt="">
-    <p>Localisé(e) à <br />@Model.Adherent.Adresse.Rue <br />@Model.Adherent.Adresse.CodePostal @Model.Adherent.Adresse.Ville</p>
+<div class="container_Competences">
+
+    <div>
+        <table class="data">
+            <tr>
+                <th>Nom de la compétence</th>
+                <th>Tarif horaire</th>
+            </tr>
+
+            @for (int i = 0; i < Model.Competence.Count; i++)
+            {
+                <tr>
+                    <td>@Model.Competence[i].SsCateCompetence.Intitule</td>
+                    <td>@Model.Competence[i].TarifHoraire €</td>
+                </tr>
+            }
+        </table>
+    </div>
 </div>
 
-<div class="pp_Provider">
-    <div class="pp_providerImage">
 
-        <img src="/IMG/AVATAR ADMIN/AVATAR-ADMIN.png" />
+
+
+<div class="container_Location">
+    <div>
+
+        <table class="data">
+            <tr>
+                <th>Nom de la Ressource</th>
+                <th>Categorie</th>
+                <th>Tarif Journalier</th>
+            </tr>
+
+            @for (int i = 0; i < Model.Ressources.Count; i++)
+            {
+                <tr>
+                    <td>@Model.Ressources[i].Intitule</td>
+                    <td>@Model.Ressources[i].Categorie</td>
+                    <td>@Model.Competence[i].TarifHoraire €</td>
+                </tr>
+            }
+        </table>
     </div>
-    <img src="IMG/Localisation/bi_check-circle-fill.png" class="Checked" alt="">
-    <img src="IMG/Localisation/Notes.png" alt="" class="notes">
+</div>
+
+@*<div class="container_Avis">
+
+    @if (Model.Avis.Count == 0)
+    {
+        <p>Pas d'avis laissé</p>
+    }
+    else
+    {
+        @for (int i = 0; i < Model.Avis.Count; i++)
+        {
+            <p>Avis laissé par  @Model.Avis[i].Consumer.Adherent.Nom @Model.Avis[i].Consumer.Adherent.Prenom le @Model.Avis[i].DateCreation.ToShortDateString() : @Model.Avis[i].Contenu</p>
+
+        }
+    }
+
+</div>*@
+
+<div class="container_RS">
+
+
+    <div class="icones_RS">
+        <a href="#"><img src="~/IMG/RS PROFILE/entypo-social_instagram-with-circle.png" alt=""></a>
+        <a href="#"><img src="~/IMG/RS PROFILE/entypo-social_facebook-with-circle.png" alt=""></a>
+        <a href="#"><img src="~/IMG/RS PROFILE/entypo-social_twitter-with-circle.png" alt=""> </a>
+
+    </div>
+
 </div>

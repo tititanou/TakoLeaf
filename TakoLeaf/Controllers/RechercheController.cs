@@ -165,11 +165,12 @@ namespace TakoLeaf.Controllers
             int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             DalRecherche dalR = new DalRecherche();
             bool res = dalR.EstAmi(id, idA2);
-           
-       
+            List<Avis> avis = dal.ObtenirAvis().Where(a => a.ConsumerId == consumer.Id).ToList();
+
+
             //int idmodele = voiture.ModeleId;
             //Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
-            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Voitures = voitures, Consumer = consumer, Modeles = modeles, Marques = marques, Amis = res };
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, Avis = avis, CompteUser = compteUser, Voitures = voitures, Consumer = consumer, Modeles = modeles, Marques = marques, Amis = res };
 
                 return View(uvm);
         }

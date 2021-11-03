@@ -238,13 +238,36 @@
 
 
 <div class="container_Presentation">
-    @Model.CompteUser.Description
+    <p>@Model.CompteUser.Description</p>
 </div>
 
 <div class="container_Competences">
 
     <div>
-        <ul>
+
+
+
+
+        <table class="data">
+            <tr>
+                <th>Nom de la compétence</th>
+                <th>Tarif horaire</th>
+            </tr>
+
+            @for(int i=0; i< Model.Competence.Count;i++)
+            {
+                <tr>
+                    <td>@Model.Competence[i].SsCateCompetence.Intitule</td>
+                    <td>@Model.Competence[i].TarifHoraire €</td>
+                </tr>
+            }
+
+
+
+
+
+        </table>
+        @*<ul>
             @for (int i = 0; i < Model.Competence.Count; i++)
             {
                 <li>
@@ -252,22 +275,30 @@
                 </li>
 
             }
-        </ul>
+        </ul>*@
     </div>
 
 </div>
 
 <div class="container_Location">
     <div>
-        <ul>
+
+        <table class="data">
+            <tr>
+                <th>Nom de la Ressource</th>
+                <th>Categorie</th>
+                <th>Tarif Journalier</th>
+            </tr>
+
             @for (int i = 0; i < Model.Ressources.Count; i++)
             {
-                <li>
-                    @Model.Ressources[i].Intitule     @Model.Ressources[i].TarifJournalier €
-                </li>
-
+                <tr>
+                    <td>@Model.Ressources[i].Intitule</td>
+                    <td>@Model.Ressources[i].Categorie</td>
+                    <td>@Model.Competence[i].TarifHoraire €</td>
+                </tr>
             }
-        </ul>
+        </table>
     </div>
 </div>
 
@@ -281,7 +312,7 @@
     {
         @for (int i = 0; i < Model.Avis.Count; i++)
         {
-            <p>@Model.Avis[i].Contenu</p>
+<p>Avis laissé par  @Model.Avis[i].Consumer.Adherent.Nom @Model.Avis[i].Consumer.Adherent.Prenom le @Model.Avis[i].DateCreation.ToShortDateString() : @Model.Avis[i].Contenu</p>          
 
         }
     }

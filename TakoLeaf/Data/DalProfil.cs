@@ -32,7 +32,7 @@ namespace TakoLeaf.Data
 
         public List<Avis> ObtenirAvis()
         {
-            List<Avis> liste = _bddContext.Avis.Include(a => a.Prestation).Include(a => a.Provider).Include(a => a.Prestation).ToList();
+            List<Avis> liste = _bddContext.Avis.Include(a => a.Prestation).ThenInclude(a => a.Consumer).ThenInclude(a => a.Adherent).Include(a => a.Prestation).ToList();
             return liste;
         }
 
@@ -102,7 +102,7 @@ namespace TakoLeaf.Data
 
         public List<Competence> ObtenirCompetences()
         {
-            List<Competence> liste = _bddContext.Competences.Include(c => c.Provider).ThenInclude(c => c.Adherent).ToList();
+            List<Competence> liste = _bddContext.Competences.Include(c => c.SsCateCompetence).Include(c => c.Provider).ThenInclude(c => c.Adherent).ToList();
             return liste;
         }
         public List<SsCateCompetence> ObtenirSSCompetences()
