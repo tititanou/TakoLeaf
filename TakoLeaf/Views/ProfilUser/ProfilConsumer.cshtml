@@ -172,9 +172,12 @@
         <p>Localisé(e) à.. <br />@Model.Adherent.Adresse.Rue <br />@Model.Adherent.Adresse.CodePostal @Model.Adherent.Adresse.Ville</p>
     </div>
 
+    @{ 
+        string img = Model.CompteUser.Avatar;
+    }
     <div class="pp_Provider">
         <div class="pp_providerImage">
-
+            <img  src=@img>
         </div>
         <img src="IMG/Localisation/bi_check-circle-fill.png" class="Checked" alt="">
 

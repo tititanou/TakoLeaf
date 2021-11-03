@@ -355,7 +355,7 @@ namespace TakoLeaf.Models
                        EtatProfil = EtatProfil.NON_VALIDE,
                        AdherentId = 6,
                        Role = "Consumer",
-                       Avatar = "AVATAR-ADMIN.png"
+                       Avatar = "soulard.png"
                    },
 
                    new CompteUser
