@@ -252,9 +252,9 @@ namespace TakoLeaf.Models
                     Date_naissance = new DateTime(1990, 07, 05),
                     AdresseId = 7,
                     Telephone = "0699885544"
-                },
+                }
 
-                  new Adherent
+                  /*new Adherent
                   {
                       Id = 8,
                       Nom = "Jean",
@@ -275,7 +275,7 @@ namespace TakoLeaf.Models
                       Telephone = "0699885544"
 
 
-                  }
+                  }*/
 
                 );
 
@@ -287,9 +287,9 @@ namespace TakoLeaf.Models
                 new Historique { Id = 4, AdherentId = 4 },
                 new Historique { Id = 5, AdherentId = 5 },
                 new Historique { Id = 6, AdherentId = 6 },
-                new Historique { Id = 7, AdherentId = 7 },
-                new Historique { Id = 8, AdherentId = 8 },
-                new Historique { Id = 9, AdherentId = 9 }
+                new Historique { Id = 7, AdherentId = 7 }
+                //new Historique { Id = 8, AdherentId = 8 },
+                //new Historique { Id = 9, AdherentId = 9 }
 
                 );
 

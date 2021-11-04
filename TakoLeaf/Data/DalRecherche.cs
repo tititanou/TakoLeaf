@@ -147,17 +147,10 @@ namespace TakoLeaf.Data
                             }
                         }
                     }
-                    else
-                    {
-                        List<Provider> providers = this._bddContext.Providers.Include(p => p.Adherent).Where(p => p.Adherent.Adresse.CodePostal == code).ToList();
-                        foreach(Provider provider in providers)
-                        {
-                            adherents.Add(provider.Adherent);
-                        }
-                    }
+                    
                 }
             }
-            else if (code == 0)
+            else
             {
                 if (nom != null && !nom.Equals(""))
                 {
@@ -246,9 +239,9 @@ namespace TakoLeaf.Data
                    
                 }
             }
-            else
+            if(adherents.Count() == 0)
             {
-                adherents = null;
+                adherents = this._bddContext.Adherents.ToList();
             }
             return adherents;
         }
@@ -294,6 +287,11 @@ namespace TakoLeaf.Data
                 }
             }
             return Dico;
+        }
+
+        public CompteUser GetCompteUser(int id)
+        {
+            return this._bddContext.CompteUsers.Include(u => u.Adherent).ThenInclude(a => a.Adresse).FirstOrDefault(u => u.AdherentId == id);
         }
     }
 }

@@ -585,9 +585,18 @@ header h1{
 }
 
 
+    .pp_providerImage img {
+        border: solid 1px;
+        border-radius: 40px;
+        border-color: #dbdbdb;
+        width: 100%;
+        height: 100%;
+    }
 
-.Nom-Provider{
-    font-weight: 600px;
+
+
+.Nom-Provider {
+    font-weight: 600;
     position: absolute;
     top: 40px;
     left: 300px;
@@ -595,7 +604,7 @@ header h1{
 }
 
 .Prenom-Provider{
-    font-weight: 600px;
+    font-weight: 600;
     position: absolute;
     top: 90px;
     left: 300px;

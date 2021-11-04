@@ -4,6 +4,7 @@
     ViewBag.Title = "Modification Ressource";
 }
 
+<link rel="stylesheet" href="~/CSS/Zoutils.css" />
 
     <h2 class="text-center"> Modification des Ressources</h2>
     <div class="container">
@@ -20,16 +21,16 @@
 
                 @for (int i = 0; i < Model.Ressources.Count; i++)
                 {
-            <tr>
-                <td>@Html.TextBoxFor(m => m.Ressources[i].Intitule)</td>
-                <td>@Html.TextBoxFor(m => m.Ressources[i].Adresse.Rue)</td>
-                <td>@Html.TextBoxFor(m => m.Ressources[i].Adresse.CodePostal)</td>
-                <td>@Html.TextBoxFor(m => m.Ressources[i].Adresse.Ville)</td>
-                <td>@Html.TextBoxFor(m => m.Ressources[i].TarifJournalier) </td>
-                <td>@Html.DropDownListFor(m => m.Ressources[i].Categorie, (SelectList)ViewBag.Cate)</td>
-                <td><button>@Html.ActionLink("Supprimer la ressource", "SupprimerRessource", "ProfilUser", new { id = Model.Ressources[i].Id })</button></td>
+                    <tr>
+                        <td>@Html.TextBoxFor(m => m.Ressources[i].Intitule, new { @class = "textbox" })</td>
+                        <td>@Html.TextBoxFor(m => m.Ressources[i].Adresse.Rue, new { @class = "textbox" })</td>
+                        <td>@Html.TextBoxFor(m => m.Ressources[i].Adresse.CodePostal, new { @class = "textbox" })</td>
+                        <td>@Html.TextBoxFor(m => m.Ressources[i].Adresse.Ville, new { @class = "textbox" })</td>
+                        <td>@Html.TextBoxFor(m => m.Ressources[i].TarifJournalier, new { @class = "textbox" }) </td>
+                        <td>@Html.DropDownListFor(m => m.Ressources[i].Categorie, (SelectList)ViewBag.Cate)</td>
+                        <td><button class="supprimer" style="width:auto;font-size : 12px;">@Html.ActionLink("Supprimer la ressource", "SupprimerRessource", "ProfilUser", new { id = Model.Ressources[i].Id })</button></td>
 
-            </tr>
+                    </tr>
 
 
                     @Html.HiddenFor(m => m.Ressources[i].Id)
@@ -62,11 +63,11 @@
             @Html.HiddenFor(m => m.Provider.Id)
 
 
-            <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
-
+            <button class="valider" type="submit">Modifier</button>
+            <button class="valider">@Html.ActionLink("Retour au profil", "ProfilProvider", "ProfilUser", new { id = Model.Provider.AdherentId })</button>
         }
         <br />
-        <button>@Html.ActionLink("Retour au profil", "ProfilProvider", "ProfilUser", new { id = Model.Provider.AdherentId })</button>
+
 
     </div>
 
