@@ -33,6 +33,11 @@
         <div class="menu">
             <ul>
                 <li>@Html.ActionLink("Se deconnecter", "Deconnexion", "Login", new { id = Model.Adherent.Id })</li>
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li><a href="@Url.Action("Actualites", "Home")">Fil d'actu</a></li>
+                <li><a href="@Url.Action("Recherche", "Recherche")">Recherche</a></li>
+                <li><a href="@Url.Action("MessagesRecus", "Messagerie")">Messagerie</a></li>
+                <li><a href="@Url.Action("Sujets", "Forum")">Forum</a></li>
                 <li>@Html.ActionLink("Voir Profil", "VoirProfil", "ProfilUser")</li>
                 <li>@Html.ActionLink("Modifier information adherent", "ModifInfosAdherent", "ProfilUser", new { id = Model.Adherent.Id })</li>
                 <li>@Html.ActionLink("Modifier information compte", "ModifCompte", "ProfilUser", new { id = Model.Adherent.Id })</li>

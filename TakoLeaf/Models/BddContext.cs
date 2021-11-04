@@ -733,61 +733,61 @@ namespace TakoLeaf.Models
                 );
 
             this.CateCompetences.AddRange(
-                new CateCompetence { Intitule = "Batterie" },
-                new CateCompetence { Intitule = "Carrosserie" },
-                new CateCompetence { Intitule = "Climatisation & chauffage" },
-                new CateCompetence { Intitule = "Diagnostic" },
-                new CateCompetence { Intitule = "Direction" },
-                new CateCompetence { Intitule = "Echappement" },
-                new CateCompetence { Intitule = "Embrayage" },
-                new CateCompetence { Intitule = "Freinage" },
-                new CateCompetence { Intitule = "Moteur" },
-                new CateCompetence { Intitule = "Pneu" }
+                new CateCompetence { Id = 1, Intitule = "Batterie" },
+                new CateCompetence { Id = 2, Intitule = "Carrosserie" },
+                new CateCompetence { Id = 3, Intitule = "Climatisation & chauffage" },
+                new CateCompetence { Id = 4, Intitule = "Diagnostic" },
+                new CateCompetence { Id = 5, Intitule = "Direction" },
+                new CateCompetence { Id = 6, Intitule = "Echappement" },
+                new CateCompetence { Id = 7, Intitule = "Embrayage" },
+                new CateCompetence { Id = 8, Intitule = "Freinage" },
+                new CateCompetence { Id = 9, Intitule = "Moteur" },
+                new CateCompetence { Id = 10, Intitule = "Pneu" }
 
                 );
 
             this.SsCateCompetences.AddRange(
-                new SsCateCompetence { Intitule = "Remplacement alternateur", CateCompetenceId = 1 },
-                new SsCateCompetence { Intitule = "Remplacement demarreur", CateCompetenceId = 1 },
-                new SsCateCompetence { Intitule = "Remplacement de la batterie", CateCompetenceId = 1 },
+                new SsCateCompetence { Id=1, Intitule = "Remplacement alternateur", CateCompetenceId = 1 },
+                new SsCateCompetence { Id = 2, Intitule = "Remplacement demarreur", CateCompetenceId = 1 },
+                new SsCateCompetence { Id = 3, Intitule = "Remplacement de la batterie", CateCompetenceId = 1 },
 
-                new SsCateCompetence { Intitule = "Changement d'aile", CateCompetenceId = 2 },
-                new SsCateCompetence { Intitule = "Reparation pare choc", CateCompetenceId = 2 },
+                new SsCateCompetence { Id = 4, Intitule = "Changement d'aile", CateCompetenceId = 2 },
+                new SsCateCompetence { Id = 5, Intitule = "Reparation pare choc", CateCompetenceId = 2 },
 
-                new SsCateCompetence { Intitule = "Entretien de la climatisation", CateCompetenceId = 3 },
-                new SsCateCompetence { Intitule = "Probleme de chauffage", CateCompetenceId = 3 },
-                new SsCateCompetence { Intitule = "Entretien et recharge de clim", CateCompetenceId = 3 },
-                new SsCateCompetence { Intitule = "Remplacement du filtre habitacle", CateCompetenceId = 3 },
+                new SsCateCompetence { Id = 6, Intitule = "Entretien de la climatisation", CateCompetenceId = 3 },
+                new SsCateCompetence { Id = 7, Intitule = "Probleme de chauffage", CateCompetenceId = 3 },
+                new SsCateCompetence { Id = 8, Intitule = "Entretien et recharge de clim", CateCompetenceId = 3 },
+                new SsCateCompetence { Id = 9, Intitule = "Remplacement du filtre habitacle", CateCompetenceId = 3 },
 
-                new SsCateCompetence { Intitule = "Diagnostique electronique auto", CateCompetenceId = 4 },
+                new SsCateCompetence { Id = 10, Intitule = "Diagnostique electronique auto", CateCompetenceId = 4 },
 
-                new SsCateCompetence { Intitule = "Remplacement des biellettes", CateCompetenceId = 5 },
-                new SsCateCompetence { Intitule = "Remplacement de cadran", CateCompetenceId = 5 },
-                new SsCateCompetence { Intitule = "Remplacement des rotules directions", CateCompetenceId = 5 },
+                new SsCateCompetence { Id = 11, Intitule = "Remplacement des biellettes", CateCompetenceId = 5 },
+                new SsCateCompetence { Id = 12, Intitule = "Remplacement de cadran", CateCompetenceId = 5 },
+                new SsCateCompetence { Id = 13, Intitule = "Remplacement des rotules directions", CateCompetenceId = 5 },
 
-                new SsCateCompetence { Intitule = "Remplacement de catalyseur", CateCompetenceId = 6 },
-                new SsCateCompetence { Intitule = "Remplacement de vanne EGR", CateCompetenceId = 6 },
-                new SsCateCompetence { Intitule = "Remplacement du filtre a particules", CateCompetenceId = 6 },
-                new SsCateCompetence { Intitule = "Remplacement Silencieux arriere", CateCompetenceId = 6 },
+                new SsCateCompetence { Id = 14, Intitule = "Remplacement de catalyseur", CateCompetenceId = 6 },
+                new SsCateCompetence { Id = 15, Intitule = "Remplacement de vanne EGR", CateCompetenceId = 6 },
+                new SsCateCompetence { Id = 16, Intitule = "Remplacement du filtre a particules", CateCompetenceId = 6 },
+                new SsCateCompetence { Id = 17, Intitule = "Remplacement Silencieux arriere", CateCompetenceId = 6 },
 
-                new SsCateCompetence { Intitule = "Remplacement Kit Embrayage", CateCompetenceId = 7 },
-                new SsCateCompetence { Intitule = "Probleme embrayage", CateCompetenceId = 7 },
-                new SsCateCompetence { Intitule = "Remplacement volant moteur", CateCompetenceId = 7 },
+                new SsCateCompetence { Id = 18, Intitule = "Remplacement Kit Embrayage", CateCompetenceId = 7 },
+                new SsCateCompetence { Id = 19, Intitule = "Probleme embrayage", CateCompetenceId = 7 },
+                new SsCateCompetence { Id = 20, Intitule = "Remplacement volant moteur", CateCompetenceId = 7 },
 
-                new SsCateCompetence { Intitule = "Remplacement de cable", CateCompetenceId = 8 },
-                new SsCateCompetence { Intitule = "Remplacement du liquide de frein", CateCompetenceId = 8 },
+                new SsCateCompetence { Id = 21, Intitule = "Remplacement de cable", CateCompetenceId = 8 },
+                new SsCateCompetence { Id = 22, Intitule = "Remplacement du liquide de frein", CateCompetenceId = 8 },
 
 
-                new SsCateCompetence { Intitule = "Remplacement des injecteurs", CateCompetenceId = 9 },
-                new SsCateCompetence { Intitule = "Remplacement filtre à air", CateCompetenceId = 9 },
-                new SsCateCompetence { Intitule = "Décalaminage moteur", CateCompetenceId = 9 },
-                new SsCateCompetence { Intitule = "Probleme d’allumage du moteur", CateCompetenceId = 9 },
-                new SsCateCompetence { Intitule = "Remplacement des bougies", CateCompetenceId = 9 },
-                new SsCateCompetence { Intitule = "Remplacement liquide de refroidissement", CateCompetenceId = 9 },
+                new SsCateCompetence { Id = 23, Intitule = "Remplacement des injecteurs", CateCompetenceId = 9 },
+                new SsCateCompetence { Id = 24, Intitule = "Remplacement filtre à air", CateCompetenceId = 9 },
+                new SsCateCompetence { Id = 25, Intitule = "Décalaminage moteur", CateCompetenceId = 9 },
+                new SsCateCompetence { Id = 26, Intitule = "Probleme d’allumage du moteur", CateCompetenceId = 9 },
+                new SsCateCompetence { Id = 27, Intitule = "Remplacement des bougies", CateCompetenceId = 9 },
+                new SsCateCompetence { Id = 28, Intitule = "Remplacement liquide de refroidissement", CateCompetenceId = 9 },
 
-                new SsCateCompetence { Intitule = "Equilibrage", CateCompetenceId = 10 },
-                new SsCateCompetence { Intitule = "Changer Roue", CateCompetenceId = 10 },
-                new SsCateCompetence { Intitule = "Changer Pneu", CateCompetenceId = 10 }
+                new SsCateCompetence { Id = 29, Intitule = "Equilibrage", CateCompetenceId = 10 },
+                new SsCateCompetence { Id = 30, Intitule = "Changer Roue", CateCompetenceId = 10 },
+                new SsCateCompetence { Id = 31, Intitule = "Changer Pneu", CateCompetenceId = 10 }
 
 
                 );
