@@ -10,96 +10,137 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="~/CSS/AfficherProfilAdminStyle.css" />
+    <link rel="stylesheet" href="~/CSS/InscriPro.css" />
     <title>Dashboard</title>
 
     <style>
 
+        /*
+                th {
+                    text-align: left;
+                    background-color: #2F4858;
+                    color: white;
+                    border-radius: 10px;
+                }
 
-        th {
-            text-align: left;
-            background-color: #2F4858;
-            color: white;
-            border-radius: 10px;
-        }
 
+                table, th, td {
+                    text-align: center;
+                    font-family: 'Roboto';
+                    padding: 10px;
+                }
 
-        table, th, td {
-            text-align: center;
-            font-family: 'Roboto';
-            padding: 10px;
-        }
+                tr:nth-child(even) {
+                    background-color: #A1E1AF;
+                    border-radius: 10px;
+                    color: white;
+                }
 
-        tr:nth-child(even) {
-            background-color: #A1E1AF;
-            border-radius: 10px;
-            color: white;
-        }
+                #text {
+                    text-align: center;
+                }
 
-        #text {
-            text-align: center;
-        }
+                .boite {
+                    padding-left: 200px;
+                    padding-bottom: 100px;
+                    padding-top: 50px;
+                    display: inline-block;
+                    float: left;
+                }
 
-        .boite {
-            padding-left: 200px;
-            padding-bottom: 100px;
-            padding-top: 50px;
-            display: inline-block;
-            float: left;
-        }
+                .box {
+                    padding-left: 200px;
+                    padding-bottom: 100px;
+                    padding-top: 50px;
+                    text-align: center;
+                    font-family: sans-serif;
+                    font-size: 50px;
+                    display: inline-block;
+                    float: left;
+                    clear: right;
+                }
 
-        .box {
-            padding-left: 200px;
-            padding-bottom: 100px;
-            padding-top: 50px;
-            text-align: center;
-            font-family: sans-serif;
-            font-size: 50px;
-            display: inline-block;
-            float: left;
-            clear: right;
-        }
+                .conteneur {
+                    padding: 10px;
+                    clear: left;
+                }
 
-        .conteneur {
-            padding: 10px;
-            clear: left;
-        }
-
-        fieldset {
-            padding: 30px;
-            display: inline-block;
-            border: 5px solid #FFF8ED;
-            background-color: #FFF8ED;
-            border-radius: 10px;
-            box-shadow: 10px 5px 5px grey;
-        }
+                fieldset {
+                    padding: 30px;
+                    display: inline-block;
+                    border: 5px solid #FFF8ED;
+                    background-color: #FFF8ED;
+                    border-radius: 10px;
+                    box-shadow: 10px 5px 5px grey;
+                }*/
 
         /*legend {
-    font-family: sans-serif;
-    font-size: 30px;
-    font-weight: bolder;
-    font-style: italic;
-    background-color: #A1E1AF;
-    color: white;
-    padding: 50px;
-    border-radius: 10px 100px / 120px;
-}*/
+            font-family: sans-serif;
+            font-size: 30px;
+            font-weight: bolder;
+            font-style: italic;
+            background-color: #A1E1AF;
+            color: white;
+            padding: 50px;
+            border-radius: 10px 100px / 120px;
+        }*/
 
 
 
     </style>
-    
+
 </head>
 
 <body>
 
-    <h1>-- Dashboard --</h1>
+    <h1 class="titreP">Dashboard</h1>
 
 
+    @{ int refus = 0;
+        int valide = 0;
+        int enCours = 0;
+        int cloture = 0;}
+    
 
-    <div class="boite">
-        <fieldset>
-            <legend>Vos dernières transactions</legend>
+
+    @foreach (var item in Model.ListePrestations)
+    {
+        if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Refuse)
+        {
+            refus++;
+        }
+        else if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.En_cours)
+        {
+            enCours++;
+        }
+        else if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Valide)
+        {
+            valide++;
+        }
+        else
+        {
+            cloture++;
+        }
+    }
+
+    <div class="box">
+        <div class="contenu">
+            <div class="row">
+                <h3>Transaction(s) </h3>
+                <ul>
+                    <li>Refusée(s) : @refus</li>
+                    <li>En cours : @enCours</li>
+                    <li>Validée(s) : @valide</li>
+                    <li>Clôturée : @cloture</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box">
+        <div class="contenu">
+            <h3>Vos dernières transactions</h3>
             <table>
                 <tr>
                     <th>Consumer</th>
@@ -111,7 +152,6 @@
 
                 @foreach (var item in Model.ListePrestations)
                 {
-                   
                     <tr>
                         <td>@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
                         <td>@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
@@ -136,13 +176,14 @@
                 }
 
             </table>
-        </fieldset>
+        </div>
+
     </div>
     <br />
 
     <div class="box">
-        <fieldset>
-            <legend>Vos gains</legend>
+        <div class="contenu">
+            <h3>Argent récolté</h3>
 
             @{double count = 0; }
 
@@ -155,14 +196,14 @@
             }
 
             <div>@count €</div>
-
-        </fieldset>
+        </div>
+        
     </div>
 
 
-    <div class="boite">
-        <fieldset>
-            <legend>Vos derniers adhérants</legend>
+    <div class="box">
+        <div class="contenu">
+            <h3>Vos derniers adhérants</h3>
             <table>
                 <tr>
                     <th>Adhérent</th>
@@ -172,34 +213,25 @@
 
                 @foreach (var item in Model.ListeCompte)
                 {
-                    if(item.Role != "Admin")
-                {
+                    if (item.Role != "Admin")
+                    {
 
-               
-                    <tr>
-                        <td>@item.Adherent.Nom @item.Adherent.Prenom</td>
-                        <td>@item.Mail</td>
-                        <td>@item.Role</td>
 
-                    </tr>
+                        <tr>
+                            <td>@item.Adherent.Nom @item.Adherent.Prenom</td>
+                            <td>@item.Mail</td>
+                            <td>@item.Role</td>
+
+                        </tr>
                     }
                 }
 
             </table>
-        </fieldset>
+        </div>
     </div>
 
 
-    <div class="box">
-        <fieldset>
-            <legend>Total Adhérents</legend>
-
-            @{int count2 = Model.ListeAdherents.Count;}
-
-            <div>@count2</div>
-
-        </fieldset>
-    </div>
+    <
 
 </body>
 </html>

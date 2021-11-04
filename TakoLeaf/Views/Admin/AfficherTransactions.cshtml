@@ -42,6 +42,12 @@
 
                 string editLink = "/Admin/AfficherPrestation?id=" + item.Id.ToString();
                 <tr class="donnees">
+
+                    @*@foreach (var item2 in Model.ListePrestations)
+                    {
+
+                    }*@
+
                     <td><img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /> <img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /></td>
                     <td><a class="laink" href="@editLink">@item.Id</a></td>
                     <td href="@editLink">@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>

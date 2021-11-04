@@ -95,7 +95,7 @@ h3.fiche {
     border: 2px solid #dbdbdb;
     box-shadow: 10px 5px 5px #ADADAD;
     margin: 30px;
-    width: 100%;
+    width: 1210px;
     /*    background-color: aqua;*/
     align-items: center;
 }
@@ -123,22 +123,35 @@ h3.fiche {
     padding-left: 100px;
 }
 
-button {
-    width: 318px;
-    height: 132px;
-    border-radius: 40px;
-    box-shadow: 10px 5px 5px #ADADAD;
-    background-color: white;
-    align-items: center;
-    margin: 100px;
+button.valider {
+    color: white;
+    height: 60px;
+    width: 240px;
+    background-color: #54A49D;
+    border-radius: 3rem;
+    border: solid;
+    font-size: 25px;
+    font-family: "Roboto",sans-serif;
 }
 
+button.annuler {
+    color: red;
+    height: 60px;
+    width: 240px;
+    background-color: #FF7B7B;
+    border-radius: 3rem;
+    border: solid;
+    font-size: 25px;
+    font-family: "Roboto",sans-serif;
+}
+
+
     button.valider:hover {
-        background-color: #A1E8BB;
+        background-color: #498983;
     }
-    button.annuler:hover {
-        background-color: #FF7B7B;
-    }
+button.annuler:hover {
+    background-color: #BEBEBE;
+}
 
 ::-webkit-scrollbar {
     width: 5px;

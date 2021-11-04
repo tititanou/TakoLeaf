@@ -36,7 +36,9 @@ namespace TakoLeaf.Models
         {
             Refuse,
             En_cours,
-            Valide
+            Valide,
+            Cloture
+
         }
 
     }

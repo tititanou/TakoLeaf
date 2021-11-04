@@ -45,9 +45,18 @@ namespace TakoLeaf.Controllers
             }
 
             DashViewModel dash = new DashViewModel();
-            dash.ListePrestations = dal.ObtenirToutesLesPrestations();
+
+            List<Prestation> presta = dal.ObtenirToutesLesPrestations();
+            presta.OrderBy(p => p.DateDebut);
+            List<Prestation> presta2 = presta;
+
+            List<CompteUser> adherents = dal.ObtenirAdherentsEtComptes();
+            adherents.OrderBy(a => a.Adherent.DateInscription);
+
+
+            dash.ListePrestations = presta2;
             dash.ListeAdherents = dal.ObtenirTousLesAdherents();
-            dash.ListeCompte = dal.ObtenirAdherentsEtComptes();
+            dash.ListeCompte = adherents;
 
             return View(dash);
         }

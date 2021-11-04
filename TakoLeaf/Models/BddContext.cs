@@ -869,7 +869,7 @@ namespace TakoLeaf.Models
                 new Article
                 {
                     AdminId = "Admin",
-                    Titre = "Lancement d'une plateforme révolutionnaire en TakoLeaf' !",
+                    Titre = "Lancement de TakoLeaf!",
                     DateRedaction = new DateTime(2021, 10, 19),
                     DatePublication = new DateTime(2021, 10, 24),
                     Texte = "Soleo saepe ante oculos ponere, idque libenter crebris usurpare sermonibus, omnis nostrorum imperatorum, omnis exterarum gentium potentissimorumque populorum, omnis clarissimorum regum res gestas, cum tuis nec contentionum magnitudine nec numero proeliorum nec varietate regionum nec celeritate conficiendi nec dissimilitudine bellorum posse conferri; nec vero disiunctissimas terras citius passibus cuiusquam potuisse peragrari, quam tuis non dicam cursibus, sed victoriis lustratae sunt.",
@@ -1013,7 +1013,7 @@ namespace TakoLeaf.Models
                 Id = 1,
                 Date = DateTime.Now.ToShortDateString(),
                 Vu = false,
-                Message = "Je souhaite signaler ce compte",
+                Message = "Je souhaite signaler ce compte car il me semble inapproprié",
                 AdherentSignaleId = 1,
                 AdherentSignalantId =2,
                 PostId = 1
