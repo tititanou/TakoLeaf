@@ -301,7 +301,7 @@ namespace TakoLeaf.Models
                      Description = "Aime les fleurs et les voitures de collection",
                      EtatProfil = EtatProfil.VALIDE,
                      AdherentId = 1,
-                     Avatar ="cv.png",
+                     Avatar ="5561859.jpg",
                      Role = "Provider"
 
                  },
@@ -351,11 +351,11 @@ namespace TakoLeaf.Models
                    {
                        Mail = "consumer@gmail.com",
                        MotDePasse = dal.EncodeMD5("123"),
-                       Description = "C'est moi le consumer Test",
+                       Description = "Bonjour a tous je suis Andre Soulard et je ne suis pas un fleche en informatique mais ce site simple m'a rasuré. Je fais maintenant parti de la famille TakoLeaf et ai hate d'echanger avec vous sur le domaine de l'automodbile",
                        EtatProfil = EtatProfil.ATTENTE_VALIDATION,
                        AdherentId = 6,
                        Role = "Consumer",
-                       Avatar = "soulard.png"
+                       Avatar = "soulard.jpg"
                    },
 
                    new CompteUser

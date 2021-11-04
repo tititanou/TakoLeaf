@@ -177,7 +177,8 @@
     }
     <div class="pp_Provider">
         <div class="pp_providerImage">
-            <img  src="~/Avatar/soulard.jpg">
+            @{ string image = Model.CompteUser.Avatar;}
+            <img src="~/Avatar/@image">
         </div>
         <img src="IMG/Localisation/bi_check-circle-fill.png" class="Checked" alt="">
 
