@@ -58,16 +58,19 @@
     </div> }
                 else
                 {
-                    <div  class="raw d-block w-100">
-                        <h3>Résultat de la recherche</h3>
-                    </div>
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <h3>Résultat de la recherche</h3>
+                        </div>
                     
-                    <br />
-                    <div class="raw w-100 d-flex flex-wrap">
-                        @foreach (var item in Model.CompteUsers)
-                        {
-                            <div class="card text-center w-25">
-                                <img class="card-img-top" src="@item.Avatar" alt="Avatar">
+                        <div class="card-body p-auto">
+                            <div class="raw w-100 d-flex flex-wrap justify-content-center">
+
+                                @foreach (var item in Model.CompteUsers)
+                                {
+                        <div class="col-3 m-1">
+                            <div class="card">
+                                <img class="card-img-top" src="~/IMG/Anonyme.png" alt="Avatar">
                                 <div class="card-body">
                                     <h5 class="card-title">@item.Adherent.Prenom @item.Adherent.Nom</h5>
                                     <p class="card-text text-truncate">@item.Description</p>
@@ -77,8 +80,10 @@
                                     <button class="btn btn-outline-info" onclick="window.location.href = '@Url.Action("VisiteProfil", "Recherche", new { id = item.AdherentId })'">Voir le profil</button>
                                 </div>
                             </div>
-                         }
-                   </div>
+                        </div>}
+                            </div>
+                        </div>
+                        </div>
                 }
 
 
