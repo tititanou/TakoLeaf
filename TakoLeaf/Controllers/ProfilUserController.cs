@@ -60,7 +60,15 @@ namespace TakoLeaf.Controllers
             //int idmodele = voiture.ModeleId;
             //Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
             List<Avis> avis = dal.ObtenirAvis().Where(a => a.ConsumerId == consumer.Id).ToList();
-            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Avis =avis, Voitures = voitures, Consumer = consumer, Modeles = modeles , Marques = marques };
+            //
+            List<Provider> providers = new List<Provider>();
+            foreach (Avis avi in avis)
+            {
+                Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.Id == avi.ProviderId);
+                providers.Add(provider);
+            }
+           //
+            UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, CompteUser = compteUser, Avis =avis, Voitures = voitures, Consumer = consumer, Modeles = modeles , Marques = marques, Providers = providers };
 
             return View(uvm);
         }

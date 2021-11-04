@@ -672,23 +672,23 @@ namespace TakoLeaf.Models
                 );
 
             this.Marques.AddRange(
-                new Marque { Nom = "Volkswagen" },
-                new Marque { Nom = "Peugeot" },
-                new Marque { Nom = "Audi" },
-                new Marque { Nom = "Nissan" },
-                new Marque { Nom = "Citroen" },
-                new Marque { Nom = "Alpha Romeo" },
-                new Marque { Nom = "BMW" },
-                new Marque { Nom = "Chevrolet" },
-                new Marque { Nom = "Dacia" },
-                new Marque { Nom = "Fiat" },
-                new Marque { Nom = "KIA" },
-                new Marque { Nom = "Opel" },
-                new Marque { Nom = "Renault" },
-                new Marque { Nom = "Skoda" },
-                new Marque { Nom = "Toyota" },
-                new Marque { Nom = "Volvo" },
-                new Marque { Nom = "Mercedes" }
+                new Marque { Id = 1, Nom = "Volkswagen" },
+                new Marque { Id = 2, Nom = "Peugeot" },
+                new Marque { Id = 3, Nom = "Audi" },
+                new Marque { Id = 4, Nom = "Nissan" },
+                new Marque { Id = 5, Nom = "Citroen" },
+                new Marque { Id = 6, Nom = "Alpha Romeo" },
+                new Marque { Id = 7, Nom = "BMW" },
+                new Marque { Id = 8, Nom = "Chevrolet" },
+                new Marque { Id = 9, Nom = "Dacia" },
+                new Marque { Id = 10, Nom = "Fiat" },
+                new Marque { Id = 11, Nom = "KIA" },
+                new Marque { Id = 12, Nom = "Opel" },
+                new Marque { Id = 13, Nom = "Renault" },
+                new Marque { Id = 14, Nom = "Skoda" },
+                new Marque { Id = 15, Nom = "Toyota" },
+                new Marque { Id = 16, Nom = "Volvo" },
+                new Marque { Id = 17, Nom = "Mercedes" }
                 );
 
             this.Modeles.AddRange(

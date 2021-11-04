@@ -33,28 +33,9 @@ $("#ddlmarques").change(function () {
             $.each(data, function (index) {
                 mySelect.append(
                     $('<option></option>').val(data[index]['nom']).html(data[index]['nom'])
-            );
-        });
+                );
+            });
         }
     });
-
-
-
-
-    if (valueSelected == "Audi") {
-        var myOptions = {
-            val1: 'A2',
-            val2: 'A4'
-        };
-        var mySelect = $('#ddlmodeles');
-        mySelect.find('option').remove().end();
-        $.each(myOptions, function (val, text) {
-            mySelect.append(
-                $('<option></option>').val(val).html(text)
-            );
-        });
-
-
-    }
 
 });
