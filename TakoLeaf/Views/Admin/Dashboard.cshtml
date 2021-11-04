@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="~/CSS/InscriPro.css" />
+    <link rel="stylesheet" href="~/CSS/Dashboard.css" />
     <title>Dashboard</title>
 
     <style>
@@ -93,14 +93,14 @@
 
 <body>
 
-    <h1 class="titreP">Dashboard</h1>
+    <h1 class="text-xxl-center" id="titreP">Dashboard</h1>
 
 
     @{ int refus = 0;
         int valide = 0;
         int enCours = 0;
         int cloture = 0;}
-    
+
 
 
     @foreach (var item in Model.ListePrestations)
@@ -123,10 +123,45 @@
         }
     }
 
-    <div class="box">
-        <div class="contenu">
-            <div class="row">
-                <h3>Transaction(s) </h3>
+    @{
+        int adherent = 0;
+        int consumer = 0;
+        int provider = 0;
+        int enAttVal = 0;
+
+    }
+
+    @foreach (var item in Model.ListeCompte)
+    {
+        if (item.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
+        {
+            enAttVal++;
+        }
+
+        if (item.Role == "Provider")
+        {
+            provider++;
+        }
+
+        if (item.Role == "Consumer")
+        {
+            consumer++;
+        }
+
+        if (item.Role != "Admin")
+        {
+            adherent++;
+        }
+
+
+    }
+
+    <div class="container" id="leTout">
+
+        <div class="container" id="info">
+            <div class="contenu">
+
+                <h3>Transaction(s)</h3>
                 <ul>
                     <li>Refusée(s) : @refus</li>
                     <li>En cours : @enCours</li>
@@ -134,104 +169,132 @@
                     <li>Clôturée : @cloture</li>
                 </ul>
             </div>
+
+            <div class="container">
+                <div class="contenu" id="tresorerie">
+                    <h3>Trésorerie</h3>
+
+                    @{double count = 0; }
+
+                    @foreach (var item in Model.ListePrestations)
+                    {
+                        if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Cloture)
+                        {
+                            count += item.Prix;
+                        }
+                    }
+
+                    <div class="argent">@count €</div>
+                </div>
+
+            </div>
+
+            <div class="container">
+                <div class="contenu">
+                    <h3>Adhérent(s)</h3>
+                    <ul>
+                        <li>Total : @adherent</li>
+                        <li>Consumer(s) : @consumer</li>
+                        <li>Provider(s) : @provider</li>
+                        <li>En attente de validation : @enAttVal</li>
+                    </ul>
+                </div>
+
+            </div>
+
+
         </div>
-    </div>
 
 
-    <div class="box">
-        <div class="contenu">
-            <h3>Vos dernières transactions</h3>
-            <table>
-                <tr>
-                    <th>Consumer</th>
-                    <th>Provider</th>
-                    <th>Date</th>
-                    <th>Etat de la prestation</th>
-                    <th>Prix</th>
-                </tr>
-
-                @foreach (var item in Model.ListePrestations)
-                {
+        <div class="box">
+            <div class="contenu">
+                <h3>Transaction(s) en attente</h3>
+                <table class="tableInfo">
                     <tr>
-                        <td>@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
-                        <td>@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
-                        <td>@item.DateDebut.ToShortDateString()</td>
-
-                        @if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Refuse)
-                        {
-                            <td text="text" style="background-color:darkred; color:white">Annulé</td>
-                        }
-                        else if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.En_cours)
-                        {
-                            <td text="text" style="background-color:orange; color:white">En cours</td>
-                        }
-                        else
-                        {
-                            <td text="text" style="background-color:green; color:white">Terminée</td>
-                        }
-
-                        <td>@item.Prix €</td>
-
+                        <th>Id transaction</th>
+                        <th>Consumer</th>
+                        <th>Provider</th>
+                        <th>Date</th>
+                        <th>Prix</th>
                     </tr>
-                }
 
-            </table>
-        </div>
-
-    </div>
-    <br />
-
-    <div class="box">
-        <div class="contenu">
-            <h3>Argent récolté</h3>
-
-            @{double count = 0; }
-
-            @foreach (var item in Model.ListePrestations)
-            {
-                if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Valide)
-                {
-                    count += item.Prix;
-                }
-            }
-
-            <div>@count €</div>
-        </div>
-        
-    </div>
-
-
-    <div class="box">
-        <div class="contenu">
-            <h3>Vos derniers adhérants</h3>
-            <table>
-                <tr>
-                    <th>Adhérent</th>
-                    <th>Mail</th>
-                    <th>role</th>
-                </tr>
-
-                @foreach (var item in Model.ListeCompte)
-                {
-                    if (item.Role != "Admin")
+                    @foreach (var item in Model.ListePrestations)
                     {
 
+                        if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Valide)
+                        {
 
-                        <tr>
-                            <td>@item.Adherent.Nom @item.Adherent.Prenom</td>
-                            <td>@item.Mail</td>
-                            <td>@item.Role</td>
+                            string editLink = "/Admin/AfficherPrestation?id=" + item.Id.ToString();
 
-                        </tr>
+                            <tr>
+                                <td><a class="laink" href="@editLink">@item.Id</a></td>
+                                <td>@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
+                                <td>@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
+                                <td>@item.DateDebut.ToShortDateString()</td>
+                                <td>@item.Prix €</td>
+                            </tr>
+                        }
+
                     }
-                }
 
-            </table>
+                </table>
+            </div>
+
         </div>
-    </div>
+        <br />
 
 
-    <
 
-</body>
+
+        <div class="box">
+            <div class="contenu">
+                <h3>Dernier(s) Inscrit(s)</h3>
+                <table class="tableInfo">
+                    <tr>
+                        <th>Adhérent</th>
+                        <th>Mail</th>
+                        <th>Rôle</th>
+                        <th>Date d'inscription</th>
+                        <th>Etat</th>
+                    </tr>
+
+                    @foreach (var item in Model.ListeCompte)
+                    {
+                        if (item.Role != "Admin")
+                        {
+                            string editLink2 = "/Admin/AfficherProfil?id=" + item.AdherentId.ToString();
+
+                            <tr>
+
+                                <td><a class="laink" href="@editLink2">@item.Adherent.Nom @item.Adherent.Prenom</a></td>
+                                <td>@item.Mail</td>
+                                <td>@item.Role</td>
+                                <td>@item.Adherent.DateInscription.ToShortDateString()</td>
+
+                                @if (item.EtatProfil == TakoLeaf.Models.EtatProfil.VALIDE)
+                                {
+                                    <td><img class="etat" src="~/IMG/ICONE ADMIN/EtatValide.png"></td>
+                                }
+                                else if (item.EtatProfil == TakoLeaf.Models.EtatProfil.ATTENTE_VALIDATION)
+                                {
+                                    <td><img class="etatAt" src="~/IMG/ICONE ADMIN/Glyph_.png"></td>
+
+                                }
+                                else if (item.EtatProfil == TakoLeaf.Models.EtatProfil.COMPTE_BLOQUE)
+                                {
+                                    <td> <img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png"></td>
+                                }
+
+                            </tr>
+
+                        }
+                    }
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+    </body>
 </html>

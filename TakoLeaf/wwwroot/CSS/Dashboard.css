@@ -1,0 +1,105 @@
+﻿* {
+    color: #2f4858;
+}
+
+#titreP{
+
+    padding-top:30px;
+}
+
+#leTout {
+   margin-left:320px;
+   max-height:1700px;
+   overflow:auto;
+}
+#info{
+    display:flex;
+}
+#tresorerie{
+    height:236px;
+    text-align:center;
+
+}
+
+.tableInfo{
+    width:100%;
+    border-collapse:separate;
+    table-layout:fixed;
+    text-align:center;
+}
+.argent{
+    padding-top:10px;
+    font-size:50px;
+}
+
+.laink {
+    text-decoration: none;
+    color: #2f4858;
+}
+
+th {
+    font-size: 25px;
+}
+
+td {
+    height: 70px;
+}
+
+
+h3 {
+    padding-left: 30px;
+    padding-right:30px;
+    padding-bottom: 20px;;
+    text-align:center;
+}
+
+.contenu {
+    border-radius: 40px;
+    border: 2px solid #dbdbdb;
+    margin: 30px;
+    padding:30px;
+    box-shadow: 10px 5px 5px #ADADAD;
+    align-content:center;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e1e1e1;
+    border: 31px none #ffffff;
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #a1a1a1;
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        background: #a3a3a3;
+    }
+
+::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-track:hover {
+        background: #f2f2f2;
+    }
+
+    ::-webkit-scrollbar-track:active {
+        background: #f5f5f5;
+    }
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}

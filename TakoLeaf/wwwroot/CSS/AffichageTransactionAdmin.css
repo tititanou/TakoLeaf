@@ -145,6 +145,16 @@ button.annuler {
     font-family: "Roboto",sans-serif;
 }
 
+button.valider a {
+    text-decoration: none;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
 
     button.valider:hover {
         background-color: #498983;

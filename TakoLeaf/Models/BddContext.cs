@@ -298,7 +298,7 @@ namespace TakoLeaf.Models
                  {
                      Mail = "al@gmail.com",
                      MotDePasse = dal.EncodeMD5("123"),
-                     Description = "gaebnfbgnoez nofiejog aeo ngfoaegnen goaeogae jaeg ae g aepmkgpaej pgeamt poa gm,aekp tjpa, gmae,pot apam, pt,ae t,ae t",
+                     Description = "Aime les fleurs et les voitures de collection",
                      EtatProfil = EtatProfil.VALIDE,
                      AdherentId = 1,
                      Avatar ="cv.png",
@@ -310,7 +310,7 @@ namespace TakoLeaf.Models
                   {
                       Mail = "Rojas.Tania@gmail.com",
                       MotDePasse = dal.EncodeMD5("LaMama"),
-                      Description = "MacPowa",
+                      Description = "Passionée de majorette",
                       EtatProfil = EtatProfil.ATTENTE_VALIDATION,
                       AdherentId = 2,
                       Role = "Consumer"
@@ -320,7 +320,7 @@ namespace TakoLeaf.Models
                   {
                       Mail = "Zawartoski.Valentin@gmail.com",
                       MotDePasse = dal.EncodeMD5("ZeFrontiste"),
-                      Description = "Ma RAM rame...",
+                      Description = "Passioné de moto",
                       EtatProfil = EtatProfil.ATTENTE_VALIDATION,
                       AdherentId = 3,
                       Role = "Consumer"
@@ -329,8 +329,8 @@ namespace TakoLeaf.Models
                    {
                        Mail = "Anthony.Dauphin@gmail.com",
                        MotDePasse = dal.EncodeMD5("ElBrutos"),
-                       Description = "I HAVE NO IDEA WHAT I'M DOING",
-                       EtatProfil = EtatProfil.ATTENTE_VALIDATION,
+                       Description = "Veille au grain",
+                       EtatProfil = EtatProfil.VALIDE,
                        AdherentId = 4,
                        Role = "Admin"
 
@@ -352,7 +352,7 @@ namespace TakoLeaf.Models
                        Mail = "consumer@gmail.com",
                        MotDePasse = dal.EncodeMD5("123"),
                        Description = "C'est moi le consumer Test",
-                       EtatProfil = EtatProfil.NON_VALIDE,
+                       EtatProfil = EtatProfil.ATTENTE_VALIDATION,
                        AdherentId = 6,
                        Role = "Consumer",
                        Avatar = "soulard.png"
@@ -1311,9 +1311,6 @@ namespace TakoLeaf.Models
                 }
 
                 );
-
-
-            
 
             this.SaveChanges();
         }

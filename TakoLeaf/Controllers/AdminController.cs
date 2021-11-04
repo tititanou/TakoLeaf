@@ -239,6 +239,10 @@ namespace TakoLeaf.Controllers
 
         public ActionResult AfficherProfil(int id)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             AdherentViewModel Adherent = new AdherentViewModel
             {
                 Compte = dal.ObtenirAdherentEtCompte(id),
@@ -252,12 +256,20 @@ namespace TakoLeaf.Controllers
 
         public ActionResult AfficherPostsSignales()
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
             List<PostSignale> liste = dal.ObtenirLesPostesSignales();
             return View(liste);
         }
 
         public ActionResult AfficherTransactions()
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return Redirect("/Home/Index");
+            }
 
             DashViewModel dash = new DashViewModel();
             dash.ListePrestations = dal.ObtenirToutesLesPrestations();
@@ -267,6 +279,10 @@ namespace TakoLeaf.Controllers
             return View(dash);
         }
 
-
+        public ActionResult ValiderTransaction(int id)
+        {
+            dal.ValiderTransaction(id);
+            return Redirect("/Admin/AfficherTransactions");
+        } 
     }
 }

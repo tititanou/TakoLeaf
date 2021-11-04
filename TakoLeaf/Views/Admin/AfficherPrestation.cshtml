@@ -129,7 +129,7 @@
                     {
                         <td>@Model.Presta.NumeroDevis</td>
                     }
-                   
+
 
                 </tr>
             </table>
@@ -164,10 +164,13 @@
             </div>
         </div>
     </div>
-
-
     <div class="bouton">
-        <button class="valider">Clôturer transaction</button>
+
+        @if (Model.Presta.EtatPresta == TakoLeaf.Models.Prestation.Etat.Valide)
+        {
+            <button class="valider" style="text-decoration: none;">@Html.ActionLink("Clôturer", "ValiderTransaction", new { id = Model.Presta.Id })</button>
+        }
+
         <button class="annuler">Annuler transaction</button>
     </div>
 </body>

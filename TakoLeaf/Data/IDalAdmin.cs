@@ -32,10 +32,10 @@ namespace TakoLeaf.Data
         Prestation ObtenirPrestation(int idPrestation);
         CompteUser ObtenirCompteUser(int idAdherent);
         Provider ObtenirRib(int adherentId);
-        //void ValiderTransaction(int idPrestation);
         CompteUser ObtenirAdherentEtCompte(int idAdherent);
         List<PieceJustificative> ObtenirPieceJustificative(int IdAdherent);
         List<PostSignale> ObtenirLesPostesSignales();
         Provider ObtenirProvider(int id);
+        void ValiderTransaction(int id);
     }
 }

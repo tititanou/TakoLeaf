@@ -41,32 +41,36 @@
                 </tr>*@
 
                 string editLink = "/Admin/AfficherPrestation?id=" + item.Id.ToString();
-                <tr class="donnees">
+        <tr class="donnees">
 
-                    @*@foreach (var item2 in Model.ListePrestations)
-                    {
+            @*@foreach (var item2 in Model.ListePrestations)
+        {
 
-                    }*@
+        }*@
 
-                    <td><img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /> <img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /></td>
-                    <td><a class="laink" href="@editLink">@item.Id</a></td>
-                    <td href="@editLink">@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
-                    <td href="@editLink">@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
-                    <td href="@editLink">@item.DateDebut.ToShortDateString()</td>
+            <td><img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /> <img class="avatar" src="~/IMG/AVATAR ADMIN/Anonyme.png" /></td>
+            <td><a class="laink" href="@editLink">@item.Id</a></td>
+            <td href="@editLink">@item.Consumer.Adherent.Nom @item.Consumer.Adherent.Prenom</td>
+            <td href="@editLink">@item.Provider.Adherent.Nom @item.Provider.Adherent.Prenom</td>
+            <td href="@editLink">@item.DateDebut.ToShortDateString()</td>
 
-                    @if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Refuse)
-                    {
-                        <td><img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png" /></td>
-                    }
-                    else if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.En_cours)
-                    {
-                        <td><img class="etat" src="~/IMG/ICONE ADMIN/Glyph_.png" /></td>
-                    }
-                    else
-                    {
-                        <td><img class="etat" src="~/IMG/ICONE ADMIN/EtatValide.png" /></td>
-                    }
-                </tr>
+            @if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Refuse)
+            {
+                <td><img class="etat" src="~/IMG/ICONE ADMIN/VectorEtatInvalide.png" /></td>
+            }
+            else if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.En_cours)
+            {
+                <td><img class="etat" src="~/IMG/ICONE ADMIN/Glyph_.png" /></td>
+            }
+            else if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Valide)
+            {
+                <td><img class="etat" src="~/IMG/ICONE ADMIN/EtatValide.png" /></td>
+            }
+            else if (item.EtatPresta == TakoLeaf.Models.Prestation.Etat.Cloture)
+            {
+                <td><img class="etat" src="~/IMG/ICONE ADMIN/Cloture.png" /></td>
+            }
+        </tr>
 
 
 

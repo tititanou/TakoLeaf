@@ -281,7 +281,12 @@ namespace TakoLeaf.Data
 
         }
 
-
+        public void ValiderTransaction(int id)
+        {
+            Prestation prestation = this._bddContext.Prestations.Find(id);
+            prestation.EtatPresta = Prestation.Etat.Cloture;
+            this._bddContext.SaveChanges();
+        }
 
     }
 }
