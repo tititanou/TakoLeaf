@@ -58,19 +58,20 @@
     </div> }
                 else
                 {
-                    <div class="card">
+                    <div class="card mt-5">
                         <div class="card-header text-center">
                             <h3>Résultat de la recherche</h3>
                         </div>
                     
-                        <div class="card-body p-auto">
-                            <div class="raw w-100 d-flex flex-wrap justify-content-center">
+                        <div class="card-body p-auto" style="height:1000px; overflow-y: scroll">
+                            <div data-bs-spy="scroll" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+                                <div class="raw w-100 d-flex flex-wrap justify-content-center">
 
-                                @foreach (var item in Model.CompteUsers)
-                                {
+                                    @foreach (var item in Model.CompteUsers)
+                                    {
                         <div class="col-3 m-1">
                             <div class="card">
-                                <img class="card-img-top" src="~/IMG/Anonyme.png" alt="Avatar">
+                                <img class="card-img-top" src="~/IMG/AVATAR ADMIN/Anonyme.png" alt="Avatar">
                                 <div class="card-body">
                                     <h5 class="card-title">@item.Adherent.Prenom @item.Adherent.Nom</h5>
                                     <p class="card-text text-truncate">@item.Description</p>
@@ -81,6 +82,7 @@
                                 </div>
                             </div>
                         </div>}
+                                </div>
                             </div>
                         </div>
                         </div>
