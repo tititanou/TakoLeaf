@@ -58,13 +58,15 @@
     </div> }
                 else
                 {
-                    <h3>Résultat de la recherche</h3>
+                    <div  class="raw d-block w-100">
+                        <h3>Résultat de la recherche</h3>
+                    </div>
+                    
                     <br />
-                    <div class="card-deck text-center">
-
+                    <div class="raw w-100 d-flex flex-wrap">
                         @foreach (var item in Model.CompteUsers)
                         {
-                            <div class="card text-center w-33 p-1 m-1">
+                            <div class="card text-center w-25">
                                 <img class="card-img-top" src="@item.Avatar" alt="Avatar">
                                 <div class="card-body">
                                     <h5 class="card-title">@item.Adherent.Prenom @item.Adherent.Nom</h5>
@@ -76,7 +78,7 @@
                                 </div>
                             </div>
                          }
-                    </div>
+                   </div>
                 }
 
 
