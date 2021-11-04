@@ -7,55 +7,81 @@
 </head>
 <body>
     <div class="container">
-        <div class="card mx-auto text-center" style="width:80%">
-            <div class="card-header">
-                <h3>Recherche</h3>
-            </div>
-            <div class="card-body">
-                <div style="display:block">
-                    @using (Html.BeginForm())
-                     {
-                        <div style="display:block">
-                            @Html.DropDownList("Choix", (SelectList)ViewBag.Choix, "Que recherchez-vous?", new { id = "Choix", onchange = "choix()", @style = "display:block;", @class = "form-control" })
-                        </div>
+        @if (Model.Adherents == null)
+        {
+    <div class="card mx-auto text-center" style="width:80%">
+        <div class="card-header">
+            <h3>Recherche</h3>
+        </div>
+        <div class="card-body">
+            <div style="display:block">
+                @using (Html.BeginForm())
+                {
+    <div style="display:block">
+        @Html.DropDownList("Choix", (SelectList)ViewBag.Choix, "Que recherchez-vous?", new { id = "Choix", onchange = "choix()", @style = "display:block;", @class = "form-control" })
+    </div>
                         <div id="adresses" style="display:none">
                             @Html.DropDownList("Adresse", Model.CodePostauxList, "Choisir Lieu", new { @class = "form-control" })
                         </div>
-                        <div id="utilisateur" style="display:none">
-                            <div>
-                                <input list="prenoms" name="Prenom" class="form-control" placeholder="Prénom" />
-                                <datalist id="prenoms">
-                                    @foreach (var prenom in ViewBag.Prenoms)
-                                     {
-                                        <option value=@prenom></option>
-                                     }
-                                </datalist>
-                            </div>
-                            <div>
-                                <input list="noms" name="Nom" class="form-control" placeholder="Nom" />
-                                <datalist id="noms">
-                                    @foreach (var nom in ViewBag.Noms)
-                                     {
-                                        <option value=@nom></option>
-                                     }
-                                </datalist>
-                            </div>
-                        </div>
-                        <div id="service" style="display:none">
-                            @Html.DropDownList("Competence", Model.SsCateList, "Choisir Competence", new { @class = "form-control" })
-                        </div>
-                        <div id="ressource" style="display:none">
-                            @Html.DropDownList("Ressource", (SelectList)ViewBag.Ressources, "Choisir Ressource", new { @class = "form-control", onchange = "ress()" })
-                            <div id="inp" style="display:none">
-                                @Html.TextBox("Input", "Que recherchez-vous précisément?", new {@class = "form-control"})
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-outline-success btn-lg mt-2"><i class="fas fa-search"></i>Rechercher</button>
-                     }
-                </div>
+                                            <div id="utilisateur" style="display:none">
+                                                <div>
+                                                    <input list="prenoms" name="Prenom" class="form-control" placeholder="Prénom" />
+                                                    <datalist id="prenoms">
+                                                        @foreach (var prenom in ViewBag.Prenoms)
+                                                        {
+                                    <option value=@prenom></option>
+}
+                                                    </datalist>
+                                                </div>
+                                                <div>
+                                                    <input list="noms" name="Nom" class="form-control" placeholder="Nom" />
+                                                    <datalist id="noms">
+                                                        @foreach (var nom in ViewBag.Noms)
+                                                        {
+                                    <option value=@nom></option>
+}
+                                                    </datalist>
+                                                </div>
+                                            </div>
+                                                                <div id="service" style="display:none">
+                                                                    @Html.DropDownList("Competence", Model.SsCateList, "Choisir Competence", new { @class = "form-control" })
+                                                                </div>
+                                                                                    <div id="ressource" style="display:none">
+                                                                                        @Html.DropDownList("Ressource", (SelectList)ViewBag.Ressources, "Choisir Ressource", new { @class = "form-control", onchange = "ress()" })
+                                                                                        <div id="inp" style="display:none">
+                                                                                            @Html.TextBox("Input", "Que recherchez-vous précisément?", new { @class = "form-control" })
+                                                                                        </div>
+                                                                                    </div>
+                                                                                                        <button type="submit" class="btn btn-outline-success btn-lg mt-2"><i class="fas fa-search"></i>Rechercher</button>}
             </div>
-         </div>
+        </div>
+    </div> }
+                else
+                {
+                    <h3>Résultat de la recherche</h3>
+                    <br />
+                    <div class="card-deck text-center">
+
+                        @foreach (var item in Model.CompteUsers)
+                        {
+                            <div class="card text-center w-33 p-1 m-1">
+                                <img class="card-img-top" src="@item.Avatar" alt="Avatar">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Adherent.Prenom @item.Adherent.Nom</h5>
+                                    <p class="card-text text-truncate">@item.Description</p>
+                                    <p class="card-text"><small class="text-muted">@item.Adherent.Adresse.CodePostal</small></p>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-outline-info" onclick="window.location.href = '@Url.Action("VisiteProfil", "Recherche", new { id = item.AdherentId })'">Voir le profil</button>
+                                </div>
+                            </div>
+                         }
+                    </div>
+                }
+
+
     </div>
+
     <script>
         function choix() {
             document.getElementById("adresses").style.display = "block";

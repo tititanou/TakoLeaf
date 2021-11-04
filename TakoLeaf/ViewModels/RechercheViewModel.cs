@@ -14,5 +14,7 @@ namespace TakoLeaf.ViewModels
         public int AdresseId { get; set; }
         public IList<SelectListItem> CodePostauxList { get; set; }
         public CateRessource CateRessource { get; set; }
+        public List<Adherent> Adherents { get; set; }
+        public List<CompteUser> CompteUsers { get; set; }
     }
 }

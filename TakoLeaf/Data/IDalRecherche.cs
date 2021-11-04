@@ -12,5 +12,6 @@ namespace TakoLeaf.Data
         List<Adherent> RechercheAdherent(string choix, int code, string nom, string prenom, int competence, string ressource, string input);
         Dictionary<string, List<SsCateCompetence>> RechercheCompetence();
         Dictionary<string, List<int>> RechercheCodePostal();
+        CompteUser GetCompteUser(int id);
     }
 }

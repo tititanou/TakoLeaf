@@ -13,7 +13,7 @@ using TakoLeaf.ViewModels;
 
 namespace TakoLeaf.Controllers
 {
-    
+
     public class RechercheController : Controller
     {
 
@@ -29,7 +29,7 @@ namespace TakoLeaf.Controllers
         }
 
 
-        public IActionResult Recherche()
+        public IActionResult Recherche(RechercheViewModel? rvm)
         {
             List<string> choix = new List<string>() { "Un utilisateur", "Un service", "Une ressource" };
             ViewBag.Choix = new SelectList(choix);
@@ -44,9 +44,9 @@ namespace TakoLeaf.Controllers
             List<Adherent> adherents = this.dal.ObtenirAdherents();
             List<string> prenoms = new List<string>();
             List<string> noms = new List<string>();
-            foreach(Adherent adherent in adherents)
+            foreach (Adherent adherent in adherents)
             {
-                if(prenoms.Count() == 0)
+                if (prenoms.Count() == 0)
                 {
                     prenoms.Add(adherent.Prenom);
                 }
@@ -107,7 +107,17 @@ namespace TakoLeaf.Controllers
         public ActionResult Recherche(string Choix, int Adresse, string Prenom, string Nom, int Competence, string Ressource, string Input)
         {
             List<Adherent> resultats = this.dalRecherche.RechercheAdherent(Choix, Adresse, Nom, Prenom, Competence, Ressource, Input);
-            return View("AfficherProfils", resultats);
+            List<CompteUser> users = new List<CompteUser>();
+            foreach(Adherent adherent in resultats)
+            {
+                users.Add(this.dalRecherche.GetCompteUser(adherent.Id));
+            }
+            RechercheViewModel rvm = new RechercheViewModel
+            {
+                Adherents = resultats,
+                CompteUsers = users
+            };
+            return View(rvm);
         }
 
         public ActionResult AfficherProfils(List<Adherent> Adhs)
@@ -141,27 +151,27 @@ namespace TakoLeaf.Controllers
         {
             Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
             CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(a => a.AdherentId == adherent.Id);
-           
-                Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == id);
-                List<Voiture> voitures = dal.ObtenirVoiture().Where(v => v.ConsumerId == consumer.Id).OrderBy(v => v.Id).ToList();
-                //int idcarte = consumer.CarteId;
-                //Carte carte = dal.ObtenirCartes().FirstOrDefault(c => c.Id == idcarte);
 
-                List<string> modeles = new List<string>();
-                for (int i = 0; i < voitures.Count; i++)
-                {
-                    int idMo = voitures[i].ModeleId;
-                    modeles.Add(dal.ObtenirModeles().FirstOrDefault(m => m.Id == idMo).Nom);
-                }
+            Consumer consumer = dal.ObtenirConsumers().FirstOrDefault(c => c.AdherentId == id);
+            List<Voiture> voitures = dal.ObtenirVoiture().Where(v => v.ConsumerId == consumer.Id).OrderBy(v => v.Id).ToList();
+            //int idcarte = consumer.CarteId;
+            //Carte carte = dal.ObtenirCartes().FirstOrDefault(c => c.Id == idcarte);
 
-                List<string> marques = new List<string>();
-                for (int i = 0; i < modeles.Count; i++)
-                {
-                    int idM = dal.ObtenirModeles().Where(m => m.Nom.Equals(modeles[i])).FirstOrDefault().MarqueId;
-                    marques.Add(dal.ObtenirMarques().Where(m => m.Id == idM).FirstOrDefault().Nom);
-                }
+            List<string> modeles = new List<string>();
+            for (int i = 0; i < voitures.Count; i++)
+            {
+                int idMo = voitures[i].ModeleId;
+                modeles.Add(dal.ObtenirModeles().FirstOrDefault(m => m.Id == idMo).Nom);
+            }
 
-            
+            List<string> marques = new List<string>();
+            for (int i = 0; i < modeles.Count; i++)
+            {
+                int idM = dal.ObtenirModeles().Where(m => m.Nom.Equals(modeles[i])).FirstOrDefault().MarqueId;
+                marques.Add(dal.ObtenirMarques().Where(m => m.Id == idM).FirstOrDefault().Nom);
+            }
+
+
             int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             DalRecherche dalR = new DalRecherche();
             bool res = dalR.EstAmi(id, idA2);
@@ -172,28 +182,26 @@ namespace TakoLeaf.Controllers
             //Modele modele = dal.ObtenirModeles().FirstOrDefault(m => m.Id == idmodele);
             UtilisateurViewModel uvm = new UtilisateurViewModel { Adherent = adherent, Avis = avis, CompteUser = compteUser, Voitures = voitures, Consumer = consumer, Modeles = modeles, Marques = marques, Amis = res };
 
-                return View(uvm);
+            return View(uvm);
         }
 
         public IActionResult VisiteProfilProvider(int id)
         {
-                Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
-                CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(a => a.AdherentId == adherent.Id);
+            Adherent adherent = dal.ObtenirAdherents().FirstOrDefault(a => a.Id == id);
+            CompteUser compteUser = dal.ObtenirCompteUser().FirstOrDefault(a => a.AdherentId == adherent.Id);
 
-                Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.AdherentId == id);
-                List<Competence> competence = dal.ObtenirCompetences().Where(c => c.ProviderId == provider.Id).ToList();
-                List<Ressource> ressources = dal.ObtenirRessources().Where(r => r.ProviderId == provider.Id).ToList();
-                List<Avis> avis = dal.ObtenirAvis().Where(a => a.Provider.AdherentId == adherent.Id).ToList();
-                int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-                DalRecherche dalR = new DalRecherche();
-                bool res = dalR.EstAmi(id, idA2);
+            Provider provider = dal.ObtenirProviders().FirstOrDefault(p => p.AdherentId == id);
+            List<Competence> competence = dal.ObtenirCompetences().Where(c => c.ProviderId == provider.Id).ToList();
+            List<Ressource> ressources = dal.ObtenirRessources().Where(r => r.ProviderId == provider.Id).ToList();
+            List<Avis> avis = dal.ObtenirAvis().Where(a => a.Provider.AdherentId == adherent.Id).ToList();
+            int idA2 = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            DalRecherche dalR = new DalRecherche();
+            bool res = dalR.EstAmi(id, idA2);
 
             ProviderViewModel pvm = new ProviderViewModel { Adherent = adherent, CompteUser = compteUser, Competence = competence, Provider = provider, Ressources = ressources, Amis = res, Avis = avis };
-            
+
             return View(pvm);
         }
-
-
     }
 }
     
